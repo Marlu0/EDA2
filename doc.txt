@@ -1,2 +1,33 @@
-como esya la maftre de marcekeelelelelejá f0nj
-wesrxdctfvygbhnjhbugyvftc
+On the floor of a bathroom in the suburbs of LA, a junkie had left a magic pill for our hero to find it. 
+The small lizard ate it thinking it was a fly, and stared at himself in a mirror on the wall, asking himself:
+
+Who am I?
+
+
+
+                       )/_
+             _.--..---"-,--c_       ▓▓
+        \L..'           ._O__)_     ░░
+,-.     _.+  _  \..--( /           
+  `\.-''__.-' \ (     \_      
+    `'''       `\__   /\
+                ')
+
+
+
+*Player selection starts*
+
+CHOOSE YOUR NAME:
+
+*insert name*
+
+You have 10 points to use in skills
+Check with a counter if it is exceeded
+
+Insert skill values in the array separing them by spaces
+
+HP (Health)
+MP (Mana)
+ATK (Attack multiplier)
+DEF (Defense multiplier)
+LUC (Critical luck)
