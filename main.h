@@ -23,7 +23,7 @@ typedef struct{
 typedef struct{
     char title[10];                 // Name of the scenario
     char description[30];           // Self explanatory
-    Decision decision[2]           // Decision list
+    Decision decision[2];           // Decision list
 }Scenario;
 
 typedef struct{
