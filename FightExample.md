@@ -16,9 +16,7 @@ Decision example:
 
 GECKO: Aye friend, you're not from here are you?
 
-.____________________________________________________.
-|A                       |B                          |
-|                        |                           |
-|    K I L L  H I M  :)  | I COULD USE SOME FRIENDS  |
-|                        |                           |
-.________________________|___________________________. 
+A. I reckon it ain't none of your damn business
+B. I ain't. I could use some help tho
+C. *draw your gun* 
+D. *stay silent*
