@@ -9,4 +9,4 @@ Group members:
 Project design:
 #put project design here
 
-hola, como estas? mi nombre es brian
+hola, como estas?
