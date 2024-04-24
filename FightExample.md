@@ -18,12 +18,12 @@ GECKO: Aye friend, you're not from here are you?
 
 CHOICES:
 
-A. I reckon it ain't none of your damn business
+1. I reckon it ain't none of your damn business // Lowers a bit of reputation
 
-B. I ain't. I could use some help tho
+2. I ain't. I could use some help tho // Raises a bit of reputation
 
-C. *draw your gun* 
+3. *draw your gun swiftly* // This could make you always shoot first, but lowers reputation a lot and makes enemies stronger at long-term
 
-D. *stay silent*
+4. *stay silent* // Neutral reputation, output depends on enemy's mood
 
-*chose C*
+*chose C*, starts fight function and adjusts reputation depending on choice
