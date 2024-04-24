@@ -21,4 +21,4 @@ GECKO: Aye friend, you're not from here are you?
 |                        |                           |
 |    K I L L  H I M  :)  | I COULD USE SOME FRIENDS  |
 |                        |                           |
-.________________________|___________________________.
+.________________________|___________________________. 
