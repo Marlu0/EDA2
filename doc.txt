@@ -17,7 +17,7 @@ Who am I?
 
 *Player selection starts*
 
-CHOOSE YOUR NAME:
+Choose your name:
 
 *insert name*
 
@@ -31,3 +31,38 @@ MP (Mana)
 ATK (Attack multiplier)
 DEF (Defense multiplier)
 LUC (Critical luck)
+
+*values inserted*
+
+Are you sure about your choices?
+
+*yes/no*
+
+*Cinematic with character falling asleep and then waking up in wild west*
+
+*TITLE*
+
+1st SCENARIO: 
+
+2nd SCENARIO:
+
+3rd SCENARIO:
+
+4th SCENARIO:
+
+
+Ideas for scenarios:
+
+- Entrance to town
+    - Coffin Shop
+    - Townhall
+- Saloon
+    - Room for sleeping (if you earn it from Saloon NPC)
+    - Moonshine basement (mission in saloon)
+- Sheriff's office
+    - Jail
+- Casino
+    - Boss' room
+    - Blackjack
+    - Dice
+    - Roulette
