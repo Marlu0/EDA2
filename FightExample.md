@@ -17,7 +17,7 @@ Decision example:
 GECKO: Aye friend, you're not from here are you?
 
 .____________________________________________________.
-|                        |                           |
+|A                       |B                          |
 |                        |                           |
 |    K I L L  H I M  :)  | I COULD USE SOME FRIENDS  |
 |                        |                           |
