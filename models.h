@@ -1,17 +1,52 @@
-/*             _____
-              |     |
-            \_|_____|_/     /|
-             .'()..()`.    / /
-            ( `-.__.-' )  ( (    
-             \        /    \ \
-              \      /      ) )        
-            .' -.__.- `.-.-'_.'
-          .'  /-____-\  `.-'       
-          \  /-.____.-\  /-.
-           \ \`-.__.-'/ /\|\|     
-          .'  `.    .'  `.
-          |/\/\|    |/\/\|
+/*notes about the art. they need to be roughly the same size and style. first style is prob the easiest
+make sure to name all the arts in a similar way the first one is named so that we can just type the name to use it.
+we only need 4 enemy types and our character model.
+there should be the close up duel model and the far away world map model.
+tmbn cada vez k hay una \ en el string tienes k pone doble.
+to find out implentation fo the dictionary
+*/
 
+/*IDEAS:
+we will need a function that displaces a certain drawing to the left or right by adding tabs and spaces to the front.
+*/
+
+
+#include <stdio.h>
+#include <string>
+
+#define DRAWING_LEN 1000 //we can change this is we want the drawings bigger,
+#define NAME_LEN 20
+
+//might also want to create a dictionary that stores all models.
+
+typedef struct //structure of the drawings.
+{
+  char name[NAME_LEN];
+  char drawing[DRAWING_LEN];
+  //we might also want to include ATK points and other such in here.
+}Model;
+
+Model lizard = {"Cowboy Lizard","               _____\n                        |     |\n           \\_|_____|_/     /|\n            .'()..()`.    / /\n           ( `-.__.-' )  ( (\n            \\        /    \\ \\n             \\      /      ) )\n           .' -.__.- `.-.-'_.'\n         .'  /-____-\\  `.-'\n         \\  /-.____.-\\  /-.\n          \\ \\`-.__.-'/ /\\|\\|\n         .'  `.    .'  `.\n         |/\\/\\|    |/\\/\\|\n\n"};
+/*            _____           
+             |     |
+           \_|_____|_/     /|
+            .'()..()`.    / /
+           ( `-.__.-' )  ( ( 
+            \        /    \ \
+             \      /      ) )
+           .' -.__.- `.-.-'_.'
+         .'  /-____-\  `.-'    
+         \  /-.____.-\  /-.
+          \ \`-.__.-'/ /\|\|   
+         .'  `.    .'  `.
+         |/\/\|    |/\/\|
+*/
+Model box = {"Box", "┌─────────┐\n│         │\n└─────────┘\n"}
+
+/*┌─────────┐
+  │         │
+  └─────────┘ */
+/*
            _____
           |$    |
         \_|_____|_/
@@ -19,19 +54,16 @@
          _|__|  O|
 \/     /~     \_/ \
  \____|__________/  \
-        \_______      \
-                `\     \                 \
-                  |     |                  \
-                 /      /                    \
-                /     /                       \\
-              /      /                         \ \
-             /     /                            \  \
-           /     /             _----_            \   \
-          /     /           _-~      ~-_         |   |
-         (      (        _-~    _--_    ~-_     _/   |
-          \      ~-____-~    _-~    ~-_    ~-_-~    /
-            ~-_           _-~          ~-_       _-~
-               ~--______-~                ~-___-~
+        \_______     \
+                `\    \                    \
+                 /     )                    \
+                /     /                      \\
+             /     /                          \ \
+           /     /             _------_         \  \
+         (      (        _-~    _--_    ~-_    _/  |
+          \      ~-____-~    _-~    ~-_    ~-_-~   /
+            ~-_           _-~          ~-_      _-~
+               ~--______-~                ~-__-~
 
 _______________________________________________________________________________
                           .-|-|----------------|-|-.
