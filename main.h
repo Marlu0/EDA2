@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "common.h"
 
 typedef struct{
     char name[10];                  // Ex: Rampage

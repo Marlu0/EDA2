@@ -11,8 +11,7 @@ we will need a function that displaces a certain drawing to the left or right by
 */
 
 
-#include <stdio.h>
-#include <string.h>
+#include "common.h"
 
 #define DRAWING_LEN 1000 //we can change this is we want the drawings bigger,
 #define NAME_LEN 20
