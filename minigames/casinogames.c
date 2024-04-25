@@ -10,32 +10,62 @@ int roll_dice() {
     return rand() % 6 + 1; // Returns a random number between 1 and 6
 }
 
-int play_dice() {
+int play_dice(int balance) {            // If we implement the casino, Character should have Character.balance and func work with pointer
     int previousRoll, currentRoll;
     char guess;
+    int bet;
 
-    srand(time(NULL)); // Seed the random number generator
+    srand(time(NULL));
 
     printf("Welcome to the Dice Game!\n\n");
     printf("Guess whether the next roll will be higher (H) or lower (L) than the previous roll.\n");
+    printf("Stakes are 1.25 to 1\n");
+    printf("Your current balance is $%d\n\n", balance);
 
-    previousRoll = roll_dice();
-    printf("The previous roll was: %d\n", previousRoll);
+    while (balance > 0) {
+        printf("Enter your bet (0 to quit): ");
+        scanf("%d", &bet);
 
-    printf("Enter your guess (H/L): ");
-    scanf(" %c", &guess);
+        if (balance<200){
+            printf("You've played enough dice, haven't you?\nYou better leave the table if you don't want trouble!\n");
+            break;
+        }
 
-    currentRoll = roll_dice();
-    printf("The current roll is: %d\n", currentRoll);
+        if (bet == 0) {
+            printf("Thanks for playing!\n");
+            break;
+        }
 
-    if ((guess == 'H' && currentRoll > previousRoll) || (guess == 'L' && currentRoll < previousRoll)) {
-        printf("Congratulations! You won!\n");
-    } else {
-        printf("You lost :)\n");
+        if (bet > balance) {
+            printf("Insufficient balance. Please enter a smaller bet.\n");
+            continue;
+        }
+
+        printf("Enter your guess (H/L): ");
+        scanf(" %c", &guess);
+
+        previousRoll = roll_dice();
+        printf("The previous roll was: %d\n", previousRoll);
+
+        currentRoll = roll_dice();
+        printf("The current roll is: %d\n", currentRoll);
+
+        if ((guess == 'H' && currentRoll > previousRoll) || (guess == 'L' && currentRoll < previousRoll)) {
+            printf("Congratulations! You won $%d!\n", (int)(bet * 1.5));
+            balance += (int)ceil(bet * 2);
+        } else {
+            printf("You lost $%d :)\n", bet);
+            balance -= bet;
+        }
+
+        printf("Your current balance is $%d\n\n", balance);
     }
+
+    printf("Game over!\n");
 
     return 0;
 }
+
 /*----------------
 |  SLOT MACHINE  |
 ----------------*/
@@ -46,9 +76,8 @@ char getRandomSymbol() {
     return symbols[randomIndex]; // Return the symbol at the random index
 }
 
-int play_slotmachine() {
+int play_slotmachine(int balance) {
     char symbol1, symbol2, symbol3;
-    int balance = 100; // Initial balance
     int bet;
 
     srand(time(NULL)); // Seed the random number generator
