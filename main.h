@@ -34,7 +34,7 @@ typedef struct{
 typedef struct{
     char choice[20];            // Spit on his boot
     char outcome[30];           // Example: "I ain't gonna let you cheat on my casino!"
-    int reputation;                 // Maybe we can create a function that changes CPU's atk and def depending on your reputation
+    int reputation;             // Maybe we can create a function that changes CPU's atk and def depending on your reputation
 }Option;
 
 /* Maybe we can do the decisions like
