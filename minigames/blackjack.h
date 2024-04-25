@@ -1,6 +1,3 @@
-#ifndef BLACKJACK_H
-#define BLACKJACK_H
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -29,5 +26,3 @@ int calculate_hand_value(Card hand[], int hand_size);
 void display_game_state(Player *player, Player *dealer, int show_dealer_hand);
 
 void play_game(Player *player, Player *dealer);
-
-#endif
