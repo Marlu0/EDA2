@@ -19,15 +19,10 @@ we will need a function that displaces a certain drawing to the left or right by
 
 //might also want to create a dictionary that stores all models.
 
-typedef struct //structure of the drawings.
-{
-  char name[NAME_LEN];
-  char drawing[DRAWING_LEN];
-  //we might also want to include ATK points and other such in here.
-}Model;
+typedef char drawing[DRAWING_LEN] Model;
 
 //lizard works
-Model lizard = {"Cowboy Lizard","               _____\n              |     |\n            \\_|_____|_/     /|\n            .'()..()`.    / /\n           ( `-.__.-' )  ( (\n            \\        /    \\ \\\n             \\      /      ) )\n           .' -.__.- `.-.-'_.'\n         .'  /-____-\\  `.-'\n         \\  /-.____.-\\  /-.\n          \\ \\`-.__.-'/ /\\|\\|\n         .'  `.    .'  `.\n         |/\\/\\|    |/\\/\\|\n\n"};
+Model lizard = {"               _____\n              |     |\n            \\_|_____|_/     /|\n            .'()..()`.    / /\n           ( `-.__.-' )  ( (\n            \\        /    \\ \\\n             \\      /      ) )\n           .' -.__.- `.-.-'_.'\n         .'  /-____-\\  `.-'\n         \\  /-.____.-\\  /-.\n          \\ \\`-.__.-'/ /\\|\\|\n         .'  `.    .'  `.\n         |/\\/\\|    |/\\/\\|\n\n"};
 /*            _____           
              |     |
            \_|_____|_/     /|
@@ -42,11 +37,13 @@ Model lizard = {"Cowboy Lizard","               _____\n              |     |\n  
          .'  `.    .'  `.
          |/\/\|    |/\/\|
 */
-Model box = {"Box", "┌─────────┐\n│         │\n└─────────┘\n"}
+Model box = {"┌─────────┐\n│         │\n└─────────┘\n"}
 
 /*┌─────────┐
   │         │
-  └─────────┘ */
+  └─────────┘
+*/
+Model snake = {"           _____\n          |$    |\n        \\_|_____|_/\n           /^\\/^\\\n         _|__|  O|\n\\/     /~     \\_/ \\\n \\____|__________/  \\\n        \\_______     \\\n                `\\    \\                    \\\n                 /     )                    \\\n                /     /                      \\n             /     /                          \\ \\\n           /     /             _------_         \\  \\\n         (      (        _-~    _--_    ~-_    _/  |\n          \\      ~-____-~    _-~    ~-_    ~-_-~   /\n            ~-_           _-~          ~-_      _-~\n               ~--______-~                ~-__-~\n\n"}
 /*
            _____
           |$    |
