@@ -12,7 +12,7 @@ Decision example:
           \  /-.____.-\  /-.
            \ \`-.__.-'/ /\|\|     
           .'  `.    .'  `.
-          |/\/\|    |/\/\|
+          |/\/\|    |/\/\| 
 
 GECKO: Aye friend, you're not from here are you?
 
