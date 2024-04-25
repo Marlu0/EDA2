@@ -2,18 +2,22 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc.exe build active file",
+            "label": "C/C++: gcc build active file",
             "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
             "args": [
                 "-fdiagnostics-color=always",
                 "-Wall",
                 "-g",
-                "${file}", //organising this better alter is going to be essential
+                "${fileDirname}/utils.c",
+                "${fileDirname}/game.c",
+                "${fileDirname}/sequence.c",
+                "${fileDirname}/session.c",
+                "${fileDirname}/main.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
-                "cwd": "C:\\msys64\\ucrt64\\bin"
+                "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
