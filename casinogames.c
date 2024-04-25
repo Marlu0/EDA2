@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include "game.h"
 
 /*----------
 |   DICE   |
@@ -120,6 +118,86 @@ int play_slotmachine(int balance) {
     }
 
     printf("Game over!\n");
+
+    return 0;
+}
+
+/*-----------------
+|  SHOT ROULETTE  |
+-----------------*/
+
+int play_shotroulette(int balance, Character player){
+    int bet;
+    int dealer_hp = 100; // Initial dealer HP
+    srand(time(NULL)); // Seed the random number generator
+
+    printf("Welcome to shot roulette!\n");
+    printf("Your initial balance is $%d\n\n", balance);
+
+    while (balance > 0 && dealer_hp > 0 && player.hp > 10) {
+        printf("Enter your bet (0 to quit): ");
+        scanf("%d", &bet);
+
+        if (bet == 0) {
+            printf("Thanks for playing!\n");
+            printf("Your hp is now %d\n", player.hp);
+            break;
+        }
+
+        if (bet > balance) {
+            printf("Insufficient balance. Please enter a smaller bet.\n");
+            continue;
+        }
+
+        // Spin the revolver's cylinder
+        printf("Spinning...\n");
+        int bulletposition = rand() % 6;
+        int bulletshot = rand() % 6;
+
+        printf("Choose who'll take the shot (1 for player, 2 for dealer): ");
+        int choice;
+        scanf("%d", &choice);
+
+        // Check if player takes the shot
+        if (choice == 1) {
+            if (bulletshot == bulletposition) {
+                printf("You were shot! You lose $%d\n", bet);
+                balance -= bet;
+                player.hp -= 10;
+            } else {
+                printf("You dodged the bullet! No change in bet.\n");
+            }
+        }
+        // Check if dealer takes the shot
+        else if (choice == 2) {
+            if (bulletshot == bulletposition) {
+                printf("The dealer was shot! You win $%d\n", bet * 10);
+                balance += bet * 10;
+                dealer_hp -= 10;
+                if (dealer_hp <= 0) {
+                    return 1; // Return 1 if dealer reaches 0 HP
+                }
+            } else {
+                printf("The dealer dodged the bullet! No change in bet.\n");
+            }
+        } else {
+            printf("Invalid choice! Please choose 1 for player or 2 for dealer.\n");
+            continue;
+        }
+
+        printf("Your current balance is $%d\n", balance);
+        printf("Your hp is now %d\n", player.hp);
+        printf("Dealer's hp is now %d\n\n", dealer_hp);
+    }
+
+    if (player.hp <= 10) {
+        printf("Your health is too low to continue playing. Game over!\n");
+    } else if (dealer_hp <= 0) {
+        printf("The dealer has no more HP. You win!\n");
+        return 1; // Return 1 if dealer reaches 0 HP. This could let us change storyline and reputation if you kill the dealer
+    } else {
+        printf("Game over!\n");
+    }
 
     return 0;
 }
