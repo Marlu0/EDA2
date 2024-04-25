@@ -12,7 +12,7 @@ we will need a function that displaces a certain drawing to the left or right by
 
 
 #include <stdio.h>
-#include <string>
+#include <string.h>
 
 #define DRAWING_LEN 1000 //we can change this is we want the drawings bigger,
 #define NAME_LEN 20
@@ -26,7 +26,8 @@ typedef struct //structure of the drawings.
   //we might also want to include ATK points and other such in here.
 }Model;
 
-Model lizard = {"Cowboy Lizard","               _____\n                        |     |\n           \\_|_____|_/     /|\n            .'()..()`.    / /\n           ( `-.__.-' )  ( (\n            \\        /    \\ \\n             \\      /      ) )\n           .' -.__.- `.-.-'_.'\n         .'  /-____-\\  `.-'\n         \\  /-.____.-\\  /-.\n          \\ \\`-.__.-'/ /\\|\\|\n         .'  `.    .'  `.\n         |/\\/\\|    |/\\/\\|\n\n"};
+//lizard works
+Model lizard = {"Cowboy Lizard","               _____\n              |     |\n            \\_|_____|_/     /|\n            .'()..()`.    / /\n           ( `-.__.-' )  ( (\n            \\        /    \\ \\\n             \\      /      ) )\n           .' -.__.- `.-.-'_.'\n         .'  /-____-\\  `.-'\n         \\  /-.____.-\\  /-.\n          \\ \\`-.__.-'/ /\\|\\|\n         .'  `.    .'  `.\n         |/\\/\\|    |/\\/\\|\n\n"};
 /*            _____           
              |     |
            \_|_____|_/     /|
