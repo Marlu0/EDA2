@@ -1,4 +1,4 @@
-# EDA2
+# EDA2 Project: Choice and turn combat based RPG
 
 Group members:
 - Marcel Manzano u231726
