@@ -95,10 +95,4 @@ void deal_card(Card deck[], Player *player){
 
 int calculate_hand_value(Card hand[], int hand_size);
 void display_game_state(Player *player, Player *dealer, int show_dealer_hand);
-void play_game(Player *player, Player *dealer){
-    int bet;
-    while (balance > 0) {
-    
-    }
-    printf("Game Over!\n")
-}
+void play_game(Player *player, Player *dealer);
