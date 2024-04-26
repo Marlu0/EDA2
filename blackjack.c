@@ -1,11 +1,11 @@
 #include "blackjack.h"
 
-int main() {
+int play_blackjack(int balance) {
     int choice;
 
     do {
         // Print menu options
-        printf("Menu:\n");
+        printf("Welcome to the BlackJack table!\n");
         printf("1. Play!\n");
         printf("2. Exit table\n");
         printf("Enter your choice: ");
@@ -16,20 +16,20 @@ int main() {
         // Check the choice and perform corresponding action
         switch(choice) {
             case 1:
-                printf("Playing!\n");
-                Player player = {0};
+                if (balance>0){
+                    printf("Playing!\n");
+                Player player = {balance};
                 Player dealer = {0};
                 Card deck[DECKSIZE];
 
                 initialize_deck(deck);
                 shuffle_deck(deck);
-                printf("Shuffled deck:\n");
-                for (int i = 0; i < DECKSIZE; i++) {
-                    printf("Card %d: Rank = %d, Suit = %d\n", i + 1, deck[i].rank, deck[i].suit);
-                }
+                printf("Deck shuffled:\n");
+                
                 // Start the game
                 play_game(&player, &dealer);
-
+                }
+                else printf("Insufficient balance!");
                 break;
             case 2:
                 printf("Exiting table. Goodbye!\n");
@@ -70,7 +70,35 @@ void shuffle_deck(Card deck[]){
     }
 }
 
-void deal_card(Card deck[], Player *player);
+void deal_card(Card deck[], Player *player){
+    // Check if player's hand is full
+    if (player->handsize >= 10) {
+        printf("Cannot deal card. Hand is full.\n");
+        return;
+    }
+
+    // Deal a card from the deck to the player's hand
+    player->hand[player->handsize] = deck[0]; // Deal the top card from the deck
+    player->handsize++; // Increment the hand size
+
+    // Shift the remaining cards in the deck to remove the dealt card
+    for (int i = 0; i < DECKSIZE - 1; i++) {
+        deck[i] = deck[i + 1];
+    }
+
+    // Clear the last card in the deck
+    deck[DECKSIZE - 1].rank = 0;
+    deck[DECKSIZE - 1].suit = 0;
+
+    printf("Card dealt.\n");
+}
+
 int calculate_hand_value(Card hand[], int hand_size);
 void display_game_state(Player *player, Player *dealer, int show_dealer_hand);
-void play_game(Player *player, Player *dealer);
+void play_game(Player *player, Player *dealer){
+    int bet;
+    while (balance > 0) {
+    
+    }
+    printf("Game Over!\n")
+}
