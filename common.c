@@ -31,7 +31,7 @@ int get_selection(const char *strings[]) {
         /* Getting the selection */
         printf("Enter your selection (1-%d): ", n);
         
-        if (scanf("%d", &selection) != 1) {
+        if (scanf(" %d", &selection) != 1) {
             printf("Invalid input. Please enter a number.\n");
             /* Flush the input buffer to clear all characters but the first */
             while (getchar() != '\n');

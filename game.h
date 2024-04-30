@@ -30,7 +30,7 @@ typedef struct{
 
 /* STATS: Health, maná, attack, defense, luck*/
 typedef struct{
-    int hp, mp, atk, def, luc
+    int hp, mp, atk, def, luc;
 }Stats;
 
 /* CHARACTER:
