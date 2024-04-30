@@ -2,6 +2,14 @@
 
 #include "common.h"
 
+/*  
+This function recieves: 
+    - An array of strings, the last element MUST be NULL. 
+It does:
+    - Prints the strings as enumerated options and correctly scans the selection
+Returns:
+    - The selection (int)
+*/
 int get_selection(const char *strings[]) {
     int selection;
     int n = 0;
@@ -38,4 +46,20 @@ int get_selection(const char *strings[]) {
     };
     
     return selection;
+}
+
+void print_main_title() {
+    printf("_____________________________________________________________________________________\n");
+    printf("    _        _     _      _       _                 _                  \n");
+    printf("   / \\   ___(_) __| |    / \\   __| |_   _____ _ __ | |_ _   _ _ __ ___ \n");
+    printf("  / _ \\ / __| |/ _` |   / _ \\ / _` \\ \\ / / _ \\ '_ \\| __| | | | '__/ _ \\\n");
+    printf(" / ___ \\ (__| | (_| |  / ___ \\ (_| |\\ V /  __/ | | | |_| |_| | | |  __/\n");
+    printf("/_/   \\_\\___|_|\\__,_| /_/   \\_\\__,_| \\_/ \\___|_| |_|\\__|\\__,_|_|  \\___|\n");
+    printf("(_)_ __   | |_| |__   ___                                             \n");
+    printf("| | '_ \\  | __| '_ \\ / _ \\   ▄▄▌ ▐ ▄▌▪  ▄▄▌  ·▄▄▄▄      ▄▄▌ ▐ ▄▌▄▄▄ ..▄▄ · ▄▄▄▄▄                                        \n");
+    printf("| | | | | | |_| | | |  __/   ██· █▌▐███ ██•  ██▪ ██     ██· █▌▐█▀▄.▀·▐█ ▀. •██                                          \n");
+    printf("|_|_| |_|  \\__|_| |_|\\___|   ██▪▐█▐▐▌▐█·██▪  ▐█· ▐█▌    ██▪▐█▐▐▌▐▀▀▪▄▄▀▀▀█▄ ▐█.▪                                        \n");
+    printf("                             ▐█▌██▐█▌▐█▌▐█▌▐▌██. ██     ▐█▌██▐█▌▐█▄▄▌▐█▄▪▐█ ▐█▌·\n");
+    printf("                              ▀▀▀▀ ▀▪▀▀▀.▀▀▀ ▀▀▀▀▀•      ▀▀▀▀ ▀▪ ▀▀▀  ▀▀▀▀  ▀▀▀ \n");
+    printf("_____________________________________________________________________________________\n\n");
 }
