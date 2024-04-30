@@ -47,7 +47,14 @@ int get_selection(const char *strings[]) {
     
     return selection;
 }
-
+/*
+This function recieves: 
+    - Nothing. 
+It does:
+    - Prints the main title
+Returns:
+    - Nothing
+*/
 void print_main_title() {
     printf("_____________________________________________________________________________________\n");
     printf("    _        _     _      _       _                 _                  \n");

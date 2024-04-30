@@ -45,6 +45,8 @@ typedef struct{
 typedef struct{
     char name[MAX_STRING_LEN];
     int reputation;
+    int health;
+    int mana;
     Stats stats;
     Skill skills[MAX_SKILLS];
     Modifier active_modifier[MAX_MODIFIERS];
