@@ -19,3 +19,7 @@ Tasklist:
     - Dialogs
     - Cutscenes
     - Selection menus
+
+Reputation idea:
+    The decisions you make influence your reputation. The ending depends on your reputation (bad/neutral/good)
+    It also modifies atk and def of enemies

@@ -5,6 +5,8 @@
 #define MAX_MODIFIERS 4
 #define MAX_STRING_LEN 50
 #define MAX_DESCRIPTION_LEN 100
+#define MAX_OPTIONS 2
+#define MAX_DECISIONS 2
 
 /* MODIFIER: 
     This will help us with combat calculations like:
@@ -56,33 +58,50 @@ typedef struct{
     Has name, stats and an array of skills
     Example:
         - name = "Sheriff Roach"
-        - stats = {90, 60, 5, 15, 25}
+        - stats = {2, 1, 5, 5, 2}
         - skills = [Shell armor, Intimidate, Play Dead]
 */
 typedef struct{
     char name[MAX_STRING_LEN];
-    Stats stats;      // Health, maná, attack, defense, luck
-    Skill skills[MAX_SKILLS];                // 4 slots for skills
+    Stats stats;
+    Skill skills[MAX_SKILLS];
 }Enemy;
 
+/* OPTION:
+    Has choice string which displays the choice, its outcome and the change in reputation
+    Example:
+        - choice = "Spit on his boot"
+        - outcome = "Don't you disrespect me young lad!"
+        - reputation = -1
+*/
 typedef struct{
-    char choice[20];            // Spit on his boot
-    char outcome[30];           // Example: "I ain't gonna let you cheat on my casino!"
-    int reputation;             // Maybe we can create a function that changes CPU's atk and def depending on your reputation
+    char choice[20];
+    char outcome[30];
+    int reputation;
 }Option;
 
+/* DECISION:
+    Has a description of the decision to make and MAX_OPTIONS options
+    Example:
+        - "You find a snake, it is looking at you in a menacing way, what do you do?"
+        - ["Fight", "Flee"]
+*/
 typedef struct{
-    Option option[2];
-    char description[30];
+    char description[MAX_DESCRIPTION_LEN];
+    Option option[MAX_OPTIONS];
 }Decision;
 
 /* SCENARIO:
     Has title, description and an array of decisions
+    Example:
+        - title = "Casino"
+        - description = "A place to unleash yourself"
+        - decision = [play_blackjack, play_shot-roulette]
 */
 typedef struct{
-    char title[MAX_STRING_LEN];                 // Name of the scenario
-    char description[MAX_DESCRIPTION_LEN];           // Self explanatory
-    Decision decision[];           // Decision list
+    char title[MAX_STRING_LEN];
+    char description[MAX_DESCRIPTION_LEN];
+    Decision decision[MAX_DECISIONS];
 }Scenario;
 
 /* Maybe we can do the decisions like
