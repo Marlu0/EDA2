@@ -47,6 +47,7 @@ int get_selection(const char *strings[]) {
     
     return selection;
 }
+
 /*
 This function recieves: 
     - Nothing. 
@@ -69,4 +70,20 @@ void print_main_title() {
     printf("                             ▐█▌██▐█▌▐█▌▐█▌▐▌██. ██     ▐█▌██▐█▌▐█▄▄▌▐█▄▪▐█ ▐█▌·\n");
     printf("                              ▀▀▀▀ ▀▪▀▀▀.▀▀▀ ▀▀▀▀▀•      ▀▀▀▀ ▀▪ ▀▀▀  ▀▀▀▀  ▀▀▀ \n");
     printf("_____________________________________________________________________________________\n\n");
+}
+
+/*
+This function recieves:
+    - Nothing
+It does:
+    - Prints the main menu
+Returns:
+    - Nothing
+*/
+void print_main_menu(){
+    
+    /* First we print the main title */
+    print_main_title();
+
+    /* Then we use the get_selection function to display and recieve the */
 }
