@@ -1,5 +1,8 @@
 // Main code
 
+#include "common.h"
+#include "common.c"
+
 /*
 This function recieves:
     - Nothing
