@@ -1,1 +1,1 @@
-// Import necessary libraries, and define the functions used in main.c
+void init_game();
