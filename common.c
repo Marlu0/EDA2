@@ -1,13 +1,14 @@
 /* common.c contains the most used functions to optimise their use in other files */
-/*  
-This function recieves: 
-    - An array of strings, the last element MUST be NULL. 
-It does:
-    - Prints the strings as enumerated options and correctly scans the selection
-Returns:
-    - The selection (int)
-*/
+#include "common.h"
 
+/*
+This function recieves:
+    - Nothing
+It does:
+    - Print Credits
+Returns:
+    - Nothing
+*/
 void print_credits(){
     printf("\nGame Producers:\n");
     printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
@@ -30,6 +31,15 @@ void print_credits(){
     printf("Everything Else");
     printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
 }
+
+/*  
+This function recieves: 
+    - An array of strings, the last element MUST be NULL. 
+It does:
+    - Prints the strings as enumerated options and correctly scans the selection
+Returns:
+    - The selection (int)
+*/
 int get_selection(const char *strings[]) {
     int selection;
     int n = 0;

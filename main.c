@@ -1,4 +1,4 @@
-// Main code
+/* Main code */
 
 #include "common.h"
 #include "game.h"

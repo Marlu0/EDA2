@@ -10,7 +10,6 @@ to find out implentation fo the dictionary
 we will need a function that displaces a certain drawing to the left or right by adding tabs and spaces to the front.
 */
 
-
 #include "common.h"
 
 #define DRAWING_LEN 1000 //we can change this is we want the drawings bigger,

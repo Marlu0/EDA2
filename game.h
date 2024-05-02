@@ -105,6 +105,14 @@ typedef struct{
     Decision decision[MAX_DECISIONS];
 }Scenario;
 
+void name_character(Character *character);
+
+void reset_character_stats(Character *character);
+
+void assign_points(int *stat, int *statpts, const char *stat_name);
+
+Character create_character();
+
 /* Maybe we can do the decisions like
 
 print (all i in Scenario.decisions[choice].option[i])

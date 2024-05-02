@@ -6,5 +6,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+void print_credits();
+
 int get_selection();
+
 void print_main_title();
