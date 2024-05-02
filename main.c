@@ -1,22 +1,72 @@
 // Main code
 
 #include "common.h"
-#include "common.c"
+#include "game.h"
+#include "models.h"
 
-/*
-This function recieves:
-    - Nothing
-It does:
-    - Prints the main menu
-Returns:
-    - Integer that represents selection
-*/
-int main_menu(){
-    
-    /* First we print the main title */
+
+int start_menu(){
     print_main_title();
+    printf("\n"); //It looks nicer with an extra line
+    clock_t start_time = clock();
+    int delay = 2;
+    
 
-    /* Then we use the get_selection function to display the options and manage the selection */
-    const char *options[] = {"New Game","Create Character","Credits","Exit",NULL /* NULL terminator to mark the end of the array */};
-    return get_selection(options);
+    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
+    printf("JUEGAZO DE GRUPO 4!\n\n");
+    start_time = clock();
+
+    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
+    printf("VAMOS YA!!\n\n");
+    start_time = clock();
+
+
+    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
+
+    const char options[] = {"New Game","save game", "load game", "Customize Character","Credits","Exit",NULL /* NULL terminator to mark the end of the array */};
+    return get_selection(&options);
+    
+}
+
+void init_game(){
+    int option = start_menu();
+
+    switch (option)
+    {
+    case 1:
+        start_game();
+        break;
+
+    case 2:
+        char name[20];
+        printf("max name length 20"); //find a better way to do the error check on this
+        printf("name of save file?\n");
+        scanf("%s", name)
+        save_game(name); //implement this later
+        break;
+    
+    case 3:
+        char name[20];
+        printf("what file do you want to load?\n"); //this too
+        printf("%s", name)
+        load_game(name);
+        break;
+
+    case 4:
+        customize_character(Character *character, game); //we need to break the character creation in 2 function. like the modifiers and such that are not part of the customization and then the things that you can customise in a fucntion called "character customization"
+        break; /*you should be able to customize your character if it is the first time that you are playing. thus it also has to take in as game state function that says whether there is a game to play.*/
+    
+    case 5:
+        print_credits();
+        break;
+    default:
+        printf("Error");
+        break;
+    }
+
+}
+
+int main(){
+    init_game();
+    return 0;
 }

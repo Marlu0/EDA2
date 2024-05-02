@@ -6,26 +6,22 @@
 #define NUMRANKS 13
 #define NUMSUITS 4
 
+int play_blackjack(int balance);
+void initialize_deck(Card deck[]);
+void shuffle_deck(Card deck[]);
+void deal_card(Card deck[], Player *player);
+int calculate_hand_value(Card hand[], int hand_size);
+void display_game_state(Player *player, Player *dealer, int show_dealer_hand);
+void play_game(Player *player, Player *dealer);
+
 typedef struct{
     int rank, suit;
 }Card;
 
 typedef struct{
     int balance, handsize;
-    Card hand[1];
+    Card hand[2];
 }Player;
-
-void initialize_deck(Card deck[]);
-
-void shuffle_deck(Card deck[]);
-
-void deal_card(Card deck[], Player *player);
-
-int calculate_hand_value(Card hand[], int hand_size);
-
-void display_game_state(Player *player, Player *dealer, int show_dealer_hand);
-
-void play_game(Player *player, Player *dealer);
 
 /*
 Initialize deck of cards

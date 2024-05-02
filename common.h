@@ -5,3 +5,6 @@
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
+
+int get_selection();
+void print_main_title();

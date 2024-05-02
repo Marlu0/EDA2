@@ -49,6 +49,7 @@ typedef struct{
     int reputation;
     int health;
     int mana;
+    int balance; //money
     Stats stats;
     Skill skills[MAX_SKILLS];
     Modifier active_modifier[MAX_MODIFIERS];

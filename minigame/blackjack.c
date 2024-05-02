@@ -1,6 +1,6 @@
 #include "blackjack.h"
 
-int play_blackjack(int balance) {
+int play_blackjack(int balance) { //we will need a balance variable as well stored in character
     int choice;
 
     do {
@@ -17,7 +17,7 @@ int play_blackjack(int balance) {
         switch(choice) {
             case 1:
                 if (balance>0){
-                    printf("Playing!\n");
+                    printf("Playing!\n"); //COM BACK HERE LATER!!
                 Player player = {balance};
                 Player dealer = {0};
                 Card deck[DECKSIZE];
@@ -93,6 +93,11 @@ void deal_card(Card deck[], Player *player){
     printf("Card dealt.\n");
 }
 
-int calculate_hand_value(Card hand[], int hand_size);
+int calculate_hand_value(Card hand[], int hand_size){
+    int sum = 0;
+    for(int i; i < hand_size; i++){
+        hand[i].
+    }
+}
 void display_game_state(Player *player, Player *dealer, int show_dealer_hand);
 void play_game(Player *player, Player *dealer);

@@ -1,7 +1,4 @@
 /* common.c contains the most used functions to optimise their use in other files */
-
-#include "common.h"
-
 /*  
 This function recieves: 
     - An array of strings, the last element MUST be NULL. 
@@ -10,6 +7,29 @@ It does:
 Returns:
     - The selection (int)
 */
+
+void print_credits(){
+    printf("\nGame Producers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+
+    printf("\nGame Directors:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+    
+    printf("\nSenior programmers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+    
+    printf("\nJunior programmers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+
+    printf("\nGraphic Designers");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+
+    printf("\nStory Boarders\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+
+    printf("Everything Else");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+}
 int get_selection(const char *strings[]) {
     int selection;
     int n = 0;
