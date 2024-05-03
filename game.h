@@ -72,8 +72,8 @@ typedef struct{
         - reputation = -1
 */
 typedef struct{
-    char choice[20];
-    char outcome[30];
+    char choice[MAX_STRING_LEN];
+    char outcome[MAX_STRING_LEN];
     int reputation;
 }Option;
 
