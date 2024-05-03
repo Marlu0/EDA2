@@ -86,7 +86,7 @@ Returns:
     - character of type Character 
 */
 Character create_character() {
-    printf("Welcome to Character Creation!\n");
+    printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
 
     /* Character initialization */
     Character character;

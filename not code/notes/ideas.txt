@@ -8,4 +8,4 @@ Marcel 2/7/24
 
 Ideas for main: The cases are New game, Save game, Load Game, Create Character, Credits and Exit.
 New Game and save game can't be selected unless the character is initialised. Load Game should copy the information from a save file into the character strucutre
-Create character should erase the existing character and 
+Create character should erase the existing character and initialize one.

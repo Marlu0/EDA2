@@ -1,5 +1,4 @@
 #include "common.h"
-#include "common.c"
 
 #define MAX_SKILLS 4
 #define MAX_MODIFIERS 4
