@@ -1,4 +1,5 @@
 /* common.c contains the most used functions to optimise their use in other files */
+
 #include "common.h"
 
 /*

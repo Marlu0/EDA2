@@ -8,10 +8,7 @@
 #define MAX_OPTIONS 2
 #define MAX_DECISIONS 2
 
-/* MODIFIER: 
-    This will help us with combat calculations like:
-    damage = atk + tempatk 
-*/
+/* MODIFIER: This will help us with combat calculations like: damage = atk + tempatk */
 typedef struct{
     int tempatk, tempdef, templuc;
 }Modifier;
@@ -112,25 +109,3 @@ void reset_character_stats(Character *character);
 void assign_points(int *stat, int *statpts, const char *stat_name);
 
 Character create_character();
-
-/* Maybe we can do the decisions like
-
-print (all i in Scenario.decisions[choice].option[i])
-1.option good
-2.option evil
-print draw weapon
-3. *draw weapon*
-print stay silent
-4. *stay silent*
-
-This way we don't have to print the last two options each time
-*/
-
-// Then in a fight we could access like 
-/*
-
-If option[FIGHT]
-    int winner = 0
-    int fight(Enemy enemy, int winner)
-    if (winner==1) VICTORY else death()
-*/

@@ -2,3 +2,10 @@ we need to write the program at the same time as we do this
 just so that we are not annoyed with it all later
 we also need get together and organise our code better. discuss how to strucutre and who does what.
 vamos con retraso asi k oops.
+
+
+Marcel 2/7/24
+
+Ideas for main: The cases are New game, Save game, Load Game, Create Character, Credits and Exit.
+New Game and save game can't be selected unless the character is initialised. Load Game should copy the information from a save file into the character strucutre
+Create character should erase the existing character and 
