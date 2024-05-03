@@ -101,6 +101,8 @@ typedef struct{
     Decision decision[MAX_DECISIONS];
 }Scenario;
 
+/* FUNCTION DECLARATIONS */
+
 void name_character(Character *character);
 
 void reset_character_stats(Character *character);

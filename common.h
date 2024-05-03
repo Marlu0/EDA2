@@ -6,6 +6,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+/* FUNCTION DECLARATIONS */
+
 void print_credits();
 
 int get_selection(const char *strings[]);
