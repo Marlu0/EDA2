@@ -8,6 +8,6 @@
 
 void print_credits();
 
-int get_selection();
+int get_selection(const char *strings[]);
 
 void print_main_title();

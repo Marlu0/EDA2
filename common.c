@@ -12,25 +12,25 @@ Returns:
 */
 void print_credits(){
     printf("\nGame Producers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
 
     printf("\nGame Directors:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
     
     printf("\nSenior programmers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
     
     printf("\nJunior programmers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
 
-    printf("\nGraphic Designers");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+    printf("\nGraphic Designers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
 
-    printf("\nStory Boarders\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+    printf("\nStory Boarders:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
 
-    printf("Everything Else");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\n Ricardo Ortega\n\n");
+    printf("\nEverything Else:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
 }
 
 /*  
@@ -66,7 +66,8 @@ int get_selection(const char *strings[]) {
             printf("Invalid input. Please enter a number.\n");
             /* Flush the input buffer to clear all characters but the first */
             while (getchar() != '\n');
-        } else {
+        } 
+        else {
             valid_input = true;
         }
 
