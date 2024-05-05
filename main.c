@@ -47,7 +47,7 @@ void init_game(){
     case 3:
         char name[20];
         printf("what file do you want to load?\n"); //this too
-        printf("%s", name)
+        printf("%s", name);
         load_game(name);
         break;
 
