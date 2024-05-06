@@ -27,10 +27,14 @@ typedef struct{
     Modifier skill_modifier;
 }Skill;
 
+
+
 /* STATS: Health, maná, attack, defense, luck*/
 typedef struct{
     int hp, mp, atk, def, luc;
 }Stats;
+
+//we also need to make a weapon structure
 
 /* CHARACTER:
     Has name, reputation, Stats, an array of skills and an array of active modifiers
@@ -43,13 +47,13 @@ typedef struct{
 */
 typedef struct{
     char name[MAX_STRING_LEN];
-    int reputation;
     int health;
-    int mana;
+    int bullets;
     int balance; //money
     Stats stats;
     Skill skills[MAX_SKILLS];
     Modifier active_modifier[MAX_MODIFIERS];
+    /*Arma arma (the skills and modifier should be in this struct.), and a name.*/
 }Character;
 
 /* ENEMY:

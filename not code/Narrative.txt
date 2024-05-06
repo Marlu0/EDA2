@@ -66,3 +66,16 @@ Ideas for scenarios:
     - Blackjack
     - Dice
     - Roulette
+
+
+
+narrative:
+
+you start in a desert and are mugged by some dude. it is an impossible battle by design
+he accidentally drops a chip which says that you should go to the casino.
+you see him running to the next town over.
+
+you either talk to the sheriff or the coffinshop the (good/bad endings.) they tell you to
+take out the other person. after doing that they tell you that they guy that robbed you is the casino boss.
+you have to play minigames to get enough money to get to the vip room where he isand then you ebat him and get your stuff Blackjack
+(good ending would be pacifist i have no enemies vibe.) you had shit on you.

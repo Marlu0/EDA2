@@ -13,3 +13,33 @@ Create character should erase the existing character and
 Darcy 3/05/24
 
 bro tenemos k trabajar con esto ya de ya.
+
+Darcy 06/05/2024
+
+finish with a reference to the good the band and the ugly
+
+we could add the mini games. in which you need to win in order to continue in the narrative. you end
+in the casino in where you can then play the mini games.
+
+main character vaya lagarto
+-----
+basic story line:
+
+new game -> in which you can also customize the character.
+a human leaves behind a pill and then you the lizard eat it and then turn into a cowboy in los angeles.
+
+title. 
+
+character creation.
+
+--dialogue tone--
+you are a lizard you is trying to find meaning in newfound consiouness and you are absurdist in your methods.
+you go to the casino to try and find.
+
+--------
+things that we need to do:
+we need to add in an inventory class. this will have to be a dynamic double array of strings.
+you can change guns here.
+
+we need to create a stack of the time attack which keeps in account all the recent move that you have made.
+this will have to be both the array and then an undpated integer that indicates the array size.
