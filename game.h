@@ -73,7 +73,7 @@ typedef struct{
 typedef struct{
     char choice[MAX_STRING_LEN];
     char outcome[MAX_STRING_LEN];
-    int reputation;
+
 }Option;
 
 /* DECISION:
@@ -99,6 +99,15 @@ typedef struct{
     char description[MAX_DESCRIPTION_LEN];
     Decision decision[MAX_DECISIONS];
 }Scenario;
+
+
+
+typedef struct{
+    char name[MAX_STRING_LEN];
+    char description[MAX_STRING_LEN];
+    Skill skill_1;
+    Skill skill_2;
+}Weapon;
 
 /* FUNCTION DECLARATIONS */
 
