@@ -1,19 +1,9 @@
-/*notes about the art. they need to be roughly the same size and style. first style is prob the easiest
-make sure to name all the arts in a similar way the first one is named so that we can just type the name to use it.
-we only need 4 enemy types and our character model.
-there should be the close up duel model and the far away world map model.
-tmbn cada vez k hay una \ en el string tienes k pone doble.
-to find out implentation fo the dictionary
+/*Cada vez k hay una \ en el string tienes k pone doble.
 */
-
-/*IDEAS:
-we will need a function that displaces a certain drawing to the left or right by adding tabs and spaces to the front.
-*/
-
 #include "common.h"
 
-#define DRAWING_LEN 1000 //we can change this is we want the drawings bigger,
-#define NAME_LEN 20
+#define SIZE_Y //we can change this is we want the drawings bigger,
+#define MAX_STRING_LEN
 
 //might also want to create a dictionary that stores all models.
 

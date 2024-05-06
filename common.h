@@ -6,6 +6,15 @@
 #include <string.h>
 #include <stdbool.h>
 
+/* Global variables */
+
+#define MAX_SKILLS 4
+#define MAX_MODIFIERS 4
+#define MAX_STRING_LEN 50
+#define MAX_DESCRIPTION_LEN 100
+#define MAX_OPTIONS 2
+#define MAX_DECISIONS 2
+
 /* FUNCTION DECLARATIONS */
 
 void print_credits();

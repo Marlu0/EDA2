@@ -1,12 +1,5 @@
 #include "common.h"
 
-#define MAX_SKILLS 4
-#define MAX_MODIFIERS 4
-#define MAX_STRING_LEN 50
-#define MAX_DESCRIPTION_LEN 100
-#define MAX_OPTIONS 2
-#define MAX_DECISIONS 2
-
 /* MODIFIER: This will help us with combat calculations like: damage = atk + tempatk */
 typedef struct{
     int tempatk, tempdef, templuc;
