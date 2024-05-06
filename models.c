@@ -2,7 +2,7 @@
 */
 #include "common.h"
 
-#define SIZE_Y 100 //we can change this is we want the drawings bigger,
+#define SIZE_Y 1000 //we can change this is we want the drawings bigger,
 
 //might also want to create a dictionary that stores all models.
 
@@ -186,7 +186,7 @@ void print_ascii_2() {
 }
 
 void print_ascii_3() {
-    printf("@@@@@@@###################@@*********+++++++++++++++++@@=@@#############@@@@@@@\n");
+    printf("@@@@@@@###################@@*********+++++++++++++++++@@=@@##############@@@@@@@\n");
     printf("@@@@@@@#++++++++++++++++++@@=======:::::::::::::::::::@@.#@%%++++++++++++#@@@@@@@\n");
     printf("@@@@@@@#++++++++++++++++++@@======-:::::::::::::::::::@@.#@@++++++++++++#@@@@@@@\n");
     printf("@@@@@@@#++++++++++++++++++@@+=====:::::::::::::::::::-@@.#@@++++++++++++#@@@@@@@\n");
