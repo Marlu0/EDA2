@@ -43,7 +43,7 @@ typedef struct{
 typedef struct{
     char name[MAX_STRING_LEN];
     int health;
-    int mana;
+    int bullets;
     int balance; //money
     Stats stats;
     Skill skills[MAX_SKILLS];
