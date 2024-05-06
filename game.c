@@ -46,7 +46,7 @@ Returns:
 */
 void reset_character_stats(Character *character) {
     character->stats.hp = 0;
-    character->stats.mp = 0;
+    character->stats.bp = 0;
     character->stats.atk = 0;
     character->stats.def = 0;
     character->stats.luc = 0;
