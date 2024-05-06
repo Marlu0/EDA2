@@ -3,6 +3,14 @@
 #include "common.h"
 #include "game.h"
 
+/*
+this function receives:
+    -nothing
+Does:
+    -calls print_main_meu and does the opening menu
+Returns:
+    - the selection of the user.
+*/
 int start_menu(){
     print_main_title();
     printf("\n"); //It looks nicer with an extra line
@@ -21,12 +29,18 @@ int start_menu(){
     while(clock() < start_time + CLOCKS_PER_SEC * delay){}
 
     const char *options[] = {"New Game", "Save game", "Load game", "Customize Character", "Credits", "Exit", NULL};
-    int selection = get_selection(options);
 
-    return selection;
+    return get_selection(options);
     
 }
-
+/*
+this funtion receives:
+    -nothing
+it does: 
+    -calls start_menu and uses the option with a switch to direct the user option
+it returns:
+    -nothing
+*/
 void init_game(){
     int option = start_menu();
 
@@ -37,35 +51,30 @@ void init_game(){
         break;
 
     case 2:
-        char name[20];
-        printf("max name length 20"); //find a better way to do the error check on this
-        printf("name of save file?\n");
-        scanf("%s", name)
-        //save_game(name); //implement this later
+        save_game(character, scenario);
         break;
     
     case 3:
-        char name[20];
-        printf("what file do you want to load?\n"); //this too
-        printf("%s", name);
-        load_game(name);
+        load_game(filename);
         break;
 
     case 4:
-        customize_character(Character *character, game); //we need to break the character creation in 2 function. like the modifiers and such that are not part of the customization and then the things that you can customise in a fucntion called "character customization"
-        break; /*you should be able to customize your character if it is the first time that you are playing. thus it also has to take in as game state function that says whether there is a game to play.*/
-    
+        customize_character(Character *character /*dont code this untill you ask whats up.*/); //we need to break the character creation in 2 function. like the modifiers and such that are not part of the customization and then the things that you can customise in a fucntion called "character customization"
+        break;    
     case 5:
         print_credits();
         break;
+    case 6:
+        exit()
     default:
         printf("Error");
         break;
     }
 
 }
-
+/*main*/
 int main(){
     init_game();
+
     return 0;
 }
