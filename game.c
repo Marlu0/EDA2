@@ -119,7 +119,7 @@ Character create_character() {
                     assign_points(&character.stats.hp, &statpts, "HP (Health points)");
                     break;
                 case 2:
-                    assign_points(&character.stats.mp, &statpts, "MP (Mana Points)");
+                    assign_points(&character.stats.bp, &statpts, "BP (Bullet Points)");
                     break;
                 case 3:
                     assign_points(&character.stats.atk, &statpts, "ATK (Attack)");
@@ -139,7 +139,7 @@ Character create_character() {
             printf("You've spent all the stat points!\n");
             printf("This was your selection:\n");
             printf("· HP: %d\n", character.stats.hp);
-            printf("· MP: %d\n", character.stats.mp);
+            printf("· BP: %d\n", character.stats.bp);
             printf("· ATK: %d\n", character.stats.atk);
             printf("· DEF: %d\n", character.stats.def);
             printf("· LUC: %d\n", character.stats.luc);
@@ -161,9 +161,7 @@ Character create_character() {
             }
         }
     }
-    /* Initialise reputation */
-    character.reputation = 0;
-    
+
     /* Initialize skills array with empty values */
     for (int i = 0; i < MAX_SKILLS; i++) {
         strcpy(character.skills[i].name, "");
@@ -181,8 +179,8 @@ Character create_character() {
     }
     
     /* We initialise health and mana in function of hp and mp stats */
-    character.health = 50 + (10*(character.stats.hp));
-    character.mana = 10 + (2*(character.stats.mp));
+    character.health = 199 + (10*(character.stats.hp));
+    character.bullets = 100 + (10*(character.stats.bp));
 
     return character;
 }

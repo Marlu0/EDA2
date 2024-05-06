@@ -23,7 +23,7 @@ typedef struct{
 
 /* STATS: Health, maná, attack, defense, luck*/
 typedef struct{
-    int hp, mp, atk, def, luc;
+    int hp, bp, atk, def, luc;
 }Stats;
 
 //we also need to make a weapon structure
