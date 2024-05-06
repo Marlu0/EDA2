@@ -86,7 +86,7 @@ Returns:
     - character of type Character 
 */
 Character create_character() {
-    printf("Welcome to Character Creation!\n");
+    printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
 
     /* Character initialization */
     Character character;
@@ -113,7 +113,7 @@ Character create_character() {
             /* Get user's selection */
             int selected_stat = get_selection(list_of_stats);
 
-            /* Handle selected stat */
+            /* Handle selected stat and assign the respective points */
             switch (selected_stat) {
                 case 1:
                     assign_points(&character.stats.hp, &statpts, "HP (Health points)");
@@ -134,7 +134,7 @@ Character create_character() {
                     printf("Invalid selection. Please try again.\n");
             }
         }
-        /* If all points are allocated or the player chooses to proceed with their selection */
+        /* If all points are allocated the selection is displayed */
         if (statpts == 0) {
             printf("You've spent all the stat points!\n");
             printf("This was your selection:\n");
@@ -144,7 +144,7 @@ Character create_character() {
             printf("· DEF: %d\n", character.stats.def);
             printf("· LUC: %d\n", character.stats.luc);
 
-            // Ask for confirmation
+            /* Confirmation is asked in case the user wants to change their selection */
             printf("Are you sure about your stat selection? (yes/no): ");
             char answer[MAX_STRING_LEN];
             fgets(answer, MAX_STRING_LEN, stdin);
@@ -161,10 +161,10 @@ Character create_character() {
             }
         }
     }
-    /* We initialise reputation, skills,  */
+    /* Initialise reputation */
     character.reputation = 0;
     
-    // Initialize skills array with empty values
+    /* Initialize skills array with empty values */
     for (int i = 0; i < MAX_SKILLS; i++) {
         strcpy(character.skills[i].name, "");
         strcpy(character.skills[i].description, "");
@@ -173,14 +173,14 @@ Character create_character() {
         character.skills[i].skill_modifier.templuc = 0;
     }
 
-    // Initialize active modifier to default values
+    /* Initialize active modifier to default values */
     for (int i = 0; i < MAX_MODIFIERS; i++) {
         character.active_modifier[i].tempatk = 0;
         character.active_modifier[i].tempdef = 0;
         character.active_modifier[i].templuc = 0;
     }
     
-    /* We initialise health in function of hp stat */
+    /* We initialise health and mana in function of hp and mp stats */
     character.health = 50 + (10*(character.stats.hp));
     character.mana = 10 + (2*(character.stats.mp));
 

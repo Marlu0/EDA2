@@ -1,5 +1,4 @@
 #include "common.h"
-#include "common.c"
 
 #define MAX_SKILLS 4
 #define MAX_MODIFIERS 4
@@ -77,8 +76,8 @@ typedef struct{
         - reputation = -1
 */
 typedef struct{
-    char choice[20];
-    char outcome[30];
+    char choice[MAX_STRING_LEN];
+    char outcome[MAX_STRING_LEN];
     int reputation;
 }Option;
 
@@ -106,6 +105,8 @@ typedef struct{
     Decision decision[MAX_DECISIONS];
 }Scenario;
 
+/* FUNCTION DECLARATIONS */
+
 void name_character(Character *character);
 
 void reset_character_stats(Character *character);
@@ -113,3 +114,13 @@ void reset_character_stats(Character *character);
 void assign_points(int *stat, int *statpts, const char *stat_name);
 
 Character create_character();
+
+
+
+
+
+
+
+
+
+

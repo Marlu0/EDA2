@@ -2,8 +2,6 @@
 
 #include "common.h"
 #include "game.h"
-#include "models.h"
-
 
 int start_menu(){
     print_main_title();
@@ -13,18 +11,19 @@ int start_menu(){
     
 
     while(clock() < start_time + CLOCKS_PER_SEC * delay){}
-    printf("JUEGAZO DE GRUPO 4!\n\n");
+    printf("JUEGAZO DEL GRUPO 4!\n\n");
     start_time = clock();
 
     while(clock() < start_time + CLOCKS_PER_SEC * delay){}
     printf("VAMOS YA!!\n\n");
     start_time = clock();
 
-
     while(clock() < start_time + CLOCKS_PER_SEC * delay){}
 
-    const char options[] = {"New Game","save game", "load game", "Customize Character","Credits","Exit",NULL /* NULL terminator to mark the end of the array */};
-    return get_selection(&options);
+    const char *options[] = {"New Game", "Save game", "Load game", "Customize Character", "Credits", "Exit", NULL};
+    int selection = get_selection(options);
+
+    return selection;
     
 }
 
@@ -42,13 +41,13 @@ void init_game(){
         printf("max name length 20"); //find a better way to do the error check on this
         printf("name of save file?\n");
         scanf("%s", name)
-        save_game(name); //implement this later
+        //save_game(name); //implement this later
         break;
     
     case 3:
         char name[20];
         printf("what file do you want to load?\n"); //this too
-        printf("%s", name)
+        printf("%s", name);
         load_game(name);
         break;
 
