@@ -109,3 +109,13 @@ void reset_character_stats(Character *character);
 void assign_points(int *stat, int *statpts, const char *stat_name);
 
 Character create_character();
+
+
+
+
+
+
+
+
+
+
