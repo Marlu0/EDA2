@@ -42,7 +42,6 @@ typedef struct{
 */
 typedef struct{
     char name[MAX_STRING_LEN];
-    int reputation;
     int health;
     int mana;
     int balance; //money
