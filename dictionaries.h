@@ -1,4 +1,5 @@
 #include <common.h>
+#include <game.h>
 
 Skill skills[10]{
     /*0*/("The Hermit", "Increases defense a 15%", (1, 1.15, 1)),
