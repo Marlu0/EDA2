@@ -179,7 +179,7 @@ Character create_character() {
     }
     
     /* We initialise health and mana in function of hp and mp stats */
-    character.health = 199 + (10*(character.stats.hp));
+    character.health = 100 + (10*(character.stats.hp));
     character.bullets = 100 + (10*(character.stats.bp));
 
     return character;

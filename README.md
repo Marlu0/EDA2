@@ -7,19 +7,10 @@ Group members:
 - Jan Pol Obrador 
 
 Project design:
-#put project design here
+#we are meking a western style open world turn based RPG with a compelling storyline fully written in c.
 
-Tasklist:
+we need to make sure to update this later as this is the cover for what people see. i will have a loot at other gits to see what the general vibe is.
 
-- Decide Scenarios and Narrative
-- Implement a Menu with UI that lets the user:
-    - Start New Game
-    - Create Character
-- Structure of game without scenario navigation:
-    - Dialogs
-    - Cutscenes
-    - Selection menus
-
-Reputation idea:
-    The decisions you make influence your reputation. The ending depends on your reputation (bad/neutral/good)
-    It also modifies atk and def of enemies
+report:
+   https://docs.google.com/document/d/1S7uqcrvHWaVe3GClY3P9TMedqHKXG_G967SsvjSKLxY/edit
+ 
