@@ -28,6 +28,11 @@ Model box = {"┌─────────┐\n│         │\n└───�
 
 /*
 
+ _____,__  
+"--==.__ \ 
+      '-)#\
+        '-'
+
 IDEA PARA EL ASCII ART:
 
 SOLO DIBUJAR LA PARTE DE ARRIBA. NO PRINTEAR OPCIONES, SOLO EL NPC O ENTORNO. NPC TIENE DIBUJO DE CONVERSACION Y DE ATAQUE
@@ -96,12 +101,137 @@ You see someone standing on your door in the middle of the night...
 FISH GOON: I took your water, and you better run or I'll take your life!
 
 1. Why steal from me?
+    FISH GOON: If you're in this part of the desert, you gots to pay a tax to El Pescado.
 2. You're dead!
+    FISH GOON: No, YOU are dead. *draws and starts fight*
 3. Draw weapon
+    FISH GOON: WOW! Now I gotta kill you. *You start a fight*
 4. Say nothing
+    FISH GOON: Are you just gonna stand there or will you draw, you chicken?
+
+@@@@@@@*================================================================*@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                              .:=++*+=:.                        =@@@@@@@
+@@@@@@@=                           .-*+=..   .=**-.                     =@@@@@@@
+@@@@@@@=                          .++.          .-*+:.                  =@@@@@@@
+@@@@@@@=                         .+*.              :*+.                 =@@@@@@@
+@@@@@@@=                        .**:*-              .+*.                =@@@@@@@
+@@@@@@@=                        -*: .+=               -*.               =@@@@@@@
+@@@@@@@=                       .*+.  .*-              .++               =@@@@@@@
+@@@@@@@=                       -*:    :-.              :*-              =@@@@@@@
+@@@@@@@=                       ++                  .@# .++              =@@@@@@@
+@@@@@@@=                      -*-                 .=*@@-:*:..           =@@@@@@@
+@@@@@@@=                     .**.                 -+.*@@=+**:     ..    =@@@@@@@
+@@@@@@@=    _____,__        .:*=                  :*=-*%+=**++******=.  =@@@@@@@
+@@@@@@@=   "--==.__ \       ***:                   .::.  -***********:  =@@@@@@@
+@@@@@@@=         '-)#\      .*+.                         .***********-  =@@@@@@@
+@@@@@@@=       -:..'-'..-==.=*.                           =+*+==--:.    =@@@@@@@
+@@@@@@@=       ..-==-::-.=--++.                           .*+*.         =@@@@@@@
+@@@@@@@=         ...+--=+=:=*.           ++-.              -*..         =@@@@@@@
+@@@@@@@=             ....-:*-            :+-=+**+=-::::::=+.=+.         =@@@@@@@
+@@@@@@@=                 .:*.            ..+**=..........:**.*:         =@@@@@@@
+@@@@@@@=                  =+                 .-**********:   =+         =@@@@@@@
+@@@@@@@=                  +=                                 =+         =@@@@@@@
+@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@
+
+|   "YOUR NAME"    |   "GOON FISH"   |
+|  HP=100  BP=120  |  HP=140  BP=100 |
+
+1. Shoot (0 bp)
+2. Skill 1 (n bp)
+3. Skill 2 (m bp)
+4. Time Strike (40 bp)
+
+*skill 1, fish goon hp = 0*
+
+@@@@@@@*================================================================*@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                              ..=*-..                           =@@@@@@@
+@@@@@@@=                              *@@@@@@@=                         =@@@@@@@
+@@@@@@@=                             :@@@@@*.                           =@@@@@@@
+@@@@@@@=                           .+@@@@@@%.                           =@@@@@@@
+@@@@@@@=                           .=%@@@@@%=                           =@@@@@@@
+@@@@@@@=                            .%@@@@@-                            =@@@@@@@
+@@@@@@@=                            :@@@@@@.                            =@@@@@@@
+@@@@@@@=                          -@@@-:%@:                             =@@@@@@@
+@@@@@@@=                          *@%. -@@*.                            =@@@@@@@
+@@@@@@@=                         =@@#    =@@:                           =@@@@@@@
+@@@@@@@=                          =*.                                   =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@=                                                                =@@@@@@@
+@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@
+
+FISH GOON HAS RUN AWAY
+
+You run behind him but he's too fast. Running out of breath, you arrive to a small town.
+Looks like there's some indications written on a wooden sign:
+
+1. <--- COFFIN SHOP
+2. SHERIFF'S OFFICE --->
 
 */
 
+/* COFFIN SHOP
+
+@@@@@@@*================================================================*@@@@@@@
+@@@@@@@=                   ....       .:*%#%%@#                         =@@@@@@@
+@@@@@@@=                  .%*#@+. .:*#: ..=@@*.                         =@@@@@@@
+@@@@@@@=                 .%+   :#@@+ .:#@*.                             =@@@@@@@
+@@@@@@@=               .%@-        .+@#.                                =@@@@@@@
+@@@@@@@=               .@-      .:%@=-*#+:..                            =@@@@@@@
+@@@@@@@=               .%*    .=@@-.  ==.:=##-.                         =@@@@@@@
+@@@@@@@=             .#-#+  .#@#: +*@=%**++==+%%=                       =@@@@@@@
+@@@@@@@=           :%:    :%@=.   .+-..*#*#%#+-:.      .##**=--::.::... =@@@@@@@
+@@@@@@@=          #:    .%@:.          :+.            :@:....::::----=@:=@@@@@@@
+@@@@@@@=        ==.   =@@%.           :*.            -@-.     .:      .@@@@@@@@@
+@@@@@@@=       +- -@@@- =-            +.           .@%.      *@@#       +@@@@@@@
+@@@@@@@=       :=-..   .*            .*            -@.        #:        =@@@@@@@
+@@@@@@@=              .+:            .+            :@:       .@.        =@@@@@@@
+@@@@@@@=              -+.            .+             %=                  =@@@@@@@
+@@@@@@@=             .*      ...      =.            #*                  =@@@@@@@
+@@@@@@@=            :*. .:*#*=-=#+.   :*            +#                  =@@@@@@@
+@@@@@@@=          .+=.:#+:.      :+   .%.           +%                 .@@@@@@@@
+@@@@@@@=         .*.  .           *:  .#.           +%                .@#@@@@@@@
+@@@@@@@=       .*-.       ..      *:   #.           +%                *#=@@@@@@@
+@@@@@@@=      -*.         .#.     *.  .%.           *#               =@.=@@@@@@@
+@@@@@@@=    .*..           .+     #.  -=            **              .%+ =@@@@@@@
+@@@@@@@=  .-*               +.   .+   +.            #+              +%  =@@@@@@@
+@@@@@@@= .%.       .+=.     +.  .#:  .*             @-             :@:  =@@@@@@@
+@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@
+
+CROW SHOPKEEPER: Aye friend, how ya doin'? Do ya need a box for some dead fella?
+I got all prices, from pine wood to shoebox.
+
+1. Sure, how much?
+2. No thanks
+    CROW SHOPKEEPER: Also, if you're interested, I need a hand with some nosy folk, if ya get me...
+    1. Tell me more
+    CROW SHOPKEEPER: Well, now that I tell ya you're already in, so... You gots to help me kill the sheriff.
+    Why? Because he's getting too pushy with a friend of mine, El Pescado.
+    Oh, you know him already! After finishing your job, you should go down to his casino and tell him.
+    *conversation ends and when entering the room again from another place, only the coffin will be shown and a message "no one here, it seems..."
+    2. No thanks
+    CROW SHOPKEEPER: Ok, no problem
+3. Stay silent
+    CROW SHOPKEEPER: I can help you choose if you tell me their size and their number of legs, arms or wings.
+4. *Leave shop*
+    If you return, shopkeeper will say
+    CROW SHOKEEPER: You again! Have ya decided? *Stay silent doesn't appear anymore*
+*/
+
+/* SHERIFF'S OFFICE
+
+*/
 
 /*┌─────────┐
   │         │
