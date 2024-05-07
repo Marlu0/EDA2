@@ -1,7 +1,6 @@
 #include <common.h>
 #include <game.h>
 
-
 Skill skills[10]{
     /*0*/("The Hermit", "Increases defense a 15%", (1, 1.15, 1)),
     /*1*/("The Chariot", "Increases defence a 30%", (1, 1.3, 1)),
@@ -22,4 +21,12 @@ Weapon weapons[6] = {
     ("Gun & Barrel", "A gun in a barrel", skills[1], skills[2]),
     ("Cactus Thrower", "Ouch..", skills[7], skills[8]),
     ("Gatling Gun", "RATATATTATATA", skills[6], skills[5]) 
+};
+
+Enemy enemies[5] = {
+    ("Crow", (300, 50, 100, 80, 50)),
+    ("Sherrif Bull"),
+    ("Jack the Rabbit"),
+    ("Roach Goonie"),
+    ("Fishy O.Sullivan")
 };
