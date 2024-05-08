@@ -195,5 +195,10 @@ Returns:
     - Character
 */
 Character do_combat(Character *character, Enemy enemy[]){
+    /*
+    Initializes enemies
+    Initializes bulletpoints
+    Starts the queue to choose order of the fight
     
+    */
 }
