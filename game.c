@@ -205,12 +205,15 @@ Character do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_o
     int n = rand() % 11 + 10;
 
     /* We initialise the queue */
-    
+    Queue *turnQueue = createQueue(n*(number_of_enemies+1));
 
-    for (int i=0; i<=(number_of_enemies*n); ++i){
-        
+    srand(time(NULL));
+    int firstTurn = rand() % (number_of_enemies+1);
+
+    for (int i=firstTurn; i<((number_of_enemies+1)*n); ++i){
+        enqueue(turnQueue, i%(number_of_enemies+1));
     }
-    
+
     /*
     Queue
     Bulletpoints
