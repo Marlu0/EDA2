@@ -2,37 +2,6 @@
 
 #include "common.h"
 
-/*
-This function recieves:
-    - Nothing
-It does:
-    - Print Credits
-Returns:
-    - Nothing
-*/
-void print_credits(){
-    printf("\nGame Producers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-
-    printf("\nGame Directors:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-    
-    printf("\nSenior programmers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-    
-    printf("\nJunior programmers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-
-    printf("\nGraphic Designers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-
-    printf("\nStory Boarders:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-
-    printf("\nEverything Else:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-}
-
 /*  
 This function recieves: 
     - An array of strings, the last element MUST be NULL. 

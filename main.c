@@ -4,6 +4,38 @@
 #include "game.h"
 
 /*
+This function recieves:
+    - Nothing
+It does:
+    - Print Credits
+Returns:
+    - Nothing
+*/
+void print_credits(){
+    printf("\nGame Producers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+
+    printf("\nGame Directors:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+    
+    printf("\nSenior programmers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+    
+    printf("\nJunior programmers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+
+    printf("\nGraphic Designers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+
+    printf("\nStory Boarders:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+
+    printf("\nEverything Else:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+}
+
+
+/*
 this function receives:
     -nothing
 Does:
@@ -11,7 +43,7 @@ Does:
 Returns:
     - the selection of the user.
 */
-int start_menu(){
+int start_menu(bool first_game){
     print_main_title();
     printf("\n"); //It looks nicer with an extra line
     clock_t start_time = clock();
@@ -28,10 +60,16 @@ int start_menu(){
 
     while(clock() < start_time + CLOCKS_PER_SEC * delay){}
 
-    const char *options[] = {"New Game", "Save game", "Load game", "Customize Character", "Credits", "Exit", NULL};
+    int option;
+    do{
+        const char *options[] = {"New Game", "Save game", "Load game", "Customize Character", "Credits", "Exit", NULL};
+        option = get_selection(options);
+        if ((option == 2) && (first_game = true)){
+            printf("You have to first play a game before you can save anything");
+        };
 
-    return get_selection(options);
-    
+    }while((first_game == true) && (option == 2));
+    return option;
 }
 /*
 this funtion receives:
@@ -41,12 +79,13 @@ it does:
 it returns:
     -nothing
 */
-void init_game(){
-    int option = start_menu();
+void init_game(bool first_game){
+    int option = start_menu(first_game);
 
     switch (option)
     {
     case 1:
+        first_game = false;
         start_game();
         break;
 
@@ -59,13 +98,13 @@ void init_game(){
         break;
 
     case 4:
-        customize_character(Character *character /*dont code this untill you ask whats up.*/); //we need to break the character creation in 2 function. like the modifiers and such that are not part of the customization and then the things that you can customise in a fucntion called "character customization"
+        customize_character(Character *character) // you need to create this function
         break;    
     case 5:
         print_credits();
         break;
     case 6:
-        exit()
+        exit(0);
     default:
         printf("Error");
         break;
@@ -74,7 +113,8 @@ void init_game(){
 }
 /*main*/
 int main(){
-    init_game();
+    bool first_game = true;
+    init_game(first_game);
 
     return 0;
 }

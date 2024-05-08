@@ -8,6 +8,7 @@ It does:
 Returns:
     - Nothing
 */
+
 void name_character(Character *character) {
     /* Flag to track validity of input */
     int sure = 0;
@@ -85,11 +86,14 @@ It does:
 Returns:
     - character of type Character 
 */
-Character create_character() { "character create";
+Character create_character() {
     printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
 
     /* Character initialization */
     Character character;
+
+    character.active_weapon = weapons[0];
+    character.weapon_inventory[0] = weapons[0];
 
     /* We name our character */
     name_character(&character);
@@ -202,4 +206,8 @@ Character do_combat(Character *character, Enemy enemy[]){
     Starts the queue to choose order of the fight
     
     */
+}
+
+Character customize_character(Character *character){
+
 }
