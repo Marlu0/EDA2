@@ -22,11 +22,3 @@ Weapon weapons[6] = {
     ("Cactus Thrower", "Ouch..", skills[7], skills[8]),
     ("Gatling Gun", "RATATATTATATA", skills[6], skills[5]) 
 };
-
-Enemy enemies[5] = {
-    ("Crow", (300, 50, 100, 80, 50)),
-    ("Sherrif Bull"),
-    ("Jack the Rabbit"),
-    ("Roach Goonie"),
-    ("Fishy O.Sullivan")
-};

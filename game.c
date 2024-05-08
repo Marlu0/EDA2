@@ -85,7 +85,7 @@ It does:
 Returns:
     - character of type Character 
 */
-Character create_character() {
+Character create_character() { "character create";
     printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
 
     /* Character initialization */
