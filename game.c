@@ -194,7 +194,7 @@ It does:
 Returns:
     - Character
 */
-Character do_combat(Character *character, Enemy enemy[]){
+Character do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_enemies){
     printf("You've started a combat with ");
     
     /*
