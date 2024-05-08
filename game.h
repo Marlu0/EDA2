@@ -117,6 +117,8 @@ void assign_points(int *stat, int *statpts, const char *stat_name);
 
 Character create_character();
 
+Character do_combat(Character *character, Enemy enemy[]);
+
 
 
 

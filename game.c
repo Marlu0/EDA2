@@ -195,6 +195,7 @@ Returns:
     - Character
 */
 Character do_combat(Character *character, Enemy enemy[]){
+    
     /*
     Initializes enemies
     Initializes bulletpoints
