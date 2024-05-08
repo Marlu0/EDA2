@@ -196,6 +196,14 @@ Returns:
 */
 Character do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_enemies){
     printf("You've started a combat with ");
+    for (int i=0; i<MAX_ENEMIES; ++i){
+        printf("% ")
+    }
+
+    srand(time(NULL));
+    for (int i=0; i<=number_of_enemies; ++i){
+
+    }
     
     /*
     Queue

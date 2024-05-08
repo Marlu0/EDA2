@@ -59,6 +59,7 @@ void init_game(){
         break;
 
     case 4:
+        //THIS WILL ONLY BE ACTIVATED IF A GAME HAS BEEN STARTED
         customize_character(Character *character /*dont code this untill you ask whats up.*/); //we need to break the character creation in 2 function. like the modifiers and such that are not part of the customization and then the things that you can customise in a fucntion called "character customization"
         break;    
     case 5:
