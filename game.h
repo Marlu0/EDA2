@@ -139,6 +139,8 @@ Character customize_character();
 
 Character do_combat(Character *character, Enemy enemy[]);
 
+void attack_player(Character *character, Enemy enemies[], int dead_enemies);
+
 
 
 

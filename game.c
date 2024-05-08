@@ -193,6 +193,28 @@ Character create_character() {
 This function recieves:
     - The character (by reference)
     - An array of enemies of size n 
+    - Number of dead enemies 
+It does:
+    - The attack process of the player itself
+Returns:
+    - Nothing
+*/
+
+void attack_player(Character *character, Enemy enemies[MAX_ENEMIES], int dead_enemies){
+    /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
+    /*Do the switch fot the differnt attacks possible*/
+    /*To each switch possibility, relate it with the ability*/
+    /*Add the attack chosen to the attack stack (for the time shot ability)*/
+    /*Use the multiplier and substract the hp points form the baddie*/
+    /*Return the modified abilities to normality*/
+}
+
+
+
+/*
+This function recieves:
+    - The character (by reference)
+    - An array of enemies of size n 
 It does:
     - The fight
 Returns:
@@ -212,12 +234,47 @@ Character do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_o
     Queue *turnQueue = createQueue(n*(number_of_enemies+1));
 
     srand(time(NULL));
+    /*The baddies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be that value, so it is fixed*/
     int firstTurn = rand() % (number_of_enemies+1);
 
-    for (int i=firstTurn; i<((number_of_enemies+1)*n); ++i){
+    for (int i=0; i<((number_of_enemies+1)*n); ++i){
         enqueue(turnQueue, i%(number_of_enemies+1));
     }
-
+    
+    /*Here we set a dead enemy counter and a copy of n to keep track of when the battle ends*/
+    int goodie_index = number_of_enemies;
+    int dead_enemies = 0;
+    int N = n;
+    bool first_turn_done = false;
+    while(dead_enemies != 0 && !isEmpty(turnQueue) && character->health>0){
+        //Here we do the first turn control
+        if(!first_turn_done){
+            if (turnQueue->items[turnQueue->front] = firstTurn){
+                if(turnQueue->items[turnQueue->front] = goodie_index){
+                    attack_player();
+                    dequeue(turnQueue);
+                }else{
+                    attack_enemy();
+                    dequeue(turnQueue);
+                }
+                first_turn_done = true;
+            }else{
+                dequeue(turnQueue);
+            }
+        }else{
+            if(turnQueue->items[turnQueue->front] = goodie_index){
+                    /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
+                    attack_player(character, enemy, dead_enemies);
+                    dequeue(turnQueue);
+                }else{
+                    /*In the enemy attack we pass the enemy in turn and the character*/
+                    /*The enemy shoud be a pointer TALK WITH MARCELINO*/
+                    attack_enemy(enemy[turnQueue->items[turnQueue->front]], character, dead_enemies);
+                    dequeue(turnQueue);
+                }
+            }
+        }
+    }
     /*
     Queue
     Bulletpoints
