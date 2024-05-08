@@ -197,12 +197,18 @@ Returns:
 Character do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_enemies){
     printf("You've started a combat with ");
     for (int i=0; i<MAX_ENEMIES; ++i){
-        printf("% ")
+        printf("%s ", enemy[i].name);
     }
 
+    /* We generate a random value from 10 to 20, that will be the number of turns for each fighter */
     srand(time(NULL));
-    for (int i=0; i<=number_of_enemies; ++i){
+    int n = rand() % 11 + 10;
 
+    /* We initialise the queue */
+    
+
+    for (int i=0; i<=(number_of_enemies*n); ++i){
+        
     }
     
     /*
