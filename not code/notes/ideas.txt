@@ -43,3 +43,15 @@ you can change guns here.
 
 we need to create a stack of the time attack which keeps in account all the recent move that you have made.
 this will have to be both the array and then an undpated integer that indicates the array size.
+
+Marcel 8/5/24
+
+Weapon has:
+Name
+Description
+Modifier[]
+    Passive Modifiers that apply always and DON'T consume bullet points
+Skill[]
+    Active Modifiers that apply temporary and DO consume bullet points
+
+In a battle, the enemy will attack randomly. 

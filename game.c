@@ -184,3 +184,16 @@ Character create_character() {
 
     return character;
 }
+
+/*
+This function recieves:
+    - The character (by reference)
+    - An array of enemies of size n 
+It does:
+    - The fight
+Returns:
+    - Character
+*/
+Character do_combat(Character *character, Enemy enemy[]){
+    
+}
