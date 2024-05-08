@@ -72,3 +72,74 @@ void print_main_title() {
     printf("                              ▀▀▀▀ ▀▪▀▀▀.▀▀▀ ▀▀▀▀▀•      ▀▀▀▀ ▀▪ ▀▀▀  ▀▀▀▀  ▀▀▀ \n");
     printf("_____________________________________________________________________________________\n\n");
 }
+
+/* Functions for Stack */
+
+
+/* Functions for Queue */
+
+// Function to create a new queue with given maximum size
+Queue* createQueue(int maxSize) {
+    Queue* queue = (Queue*)malloc(sizeof(Queue));
+    queue->front = -1;
+    queue->rear = -1;
+    queue->maxSize = maxSize;
+    queue->items = (int*)malloc(maxSize * sizeof(int));
+    return queue;
+}
+
+// Function to check if the queue is empty
+int isEmpty(Queue* queue) {
+    return (queue->rear == -1);
+}
+
+// Function to check if the queue is full
+int isFull(Queue* queue) {
+    return ((queue->rear + 1) % queue->maxSize == queue->front);
+}
+
+// Function to add an element to the rear of the queue
+void enqueue(Queue* queue, int value) {
+    if (isFull(queue)) {
+        printf("Queue is full. Cannot enqueue.\n");
+        return;
+    }
+    if (isEmpty(queue)) {
+        queue->front = 0;
+        queue->rear = 0;
+    } else {
+        queue->rear = (queue->rear + 1) % queue->maxSize;
+    }
+    queue->items[queue->rear] = value;
+}
+
+// Function to remove an element from the front of the queue
+int dequeue(Queue* queue) {
+    if (isEmpty(queue)) {
+        printf("Queue is empty. Cannot dequeue.\n");
+        return -1;
+    }
+    int removedItem = queue->items[queue->front];
+    if (queue->front == queue->rear) {
+        queue->front = -1;
+        queue->rear = -1;
+    } else {
+        queue->front = (queue->front + 1) % queue->maxSize;
+    }
+    return removedItem;
+}
+
+// Function to display the elements in the queue
+void display(Queue* queue) {
+    if (isEmpty(queue)) {
+        printf("Queue is empty.\n");
+        return;
+    }
+    int i = queue->front;
+    printf("Queue elements: ");
+    while (i != queue->rear) {
+        printf("%d ", queue->items[i]);
+        i = (i + 1) % queue->maxSize;
+    }
+    printf("%d\n", queue->items[i]);
+}

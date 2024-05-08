@@ -198,13 +198,31 @@ It does:
 Returns:
     - Character
 */
-Character do_combat(Character *character, Enemy enemy[]){
-    
+Character do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_enemies){
+    printf("You've started a combat with ");
+    for (int i=0; i<MAX_ENEMIES; ++i){
+        printf("%s ", enemy[i].name);
+    }
+
+    /* We generate a random value from 10 to 20, that will be the number of turns for each fighter */
+    srand(time(NULL));
+    int n = rand() % 11 + 10;
+
+    /* We initialise the queue */
+    Queue *turnQueue = createQueue(n*(number_of_enemies+1));
+
+    srand(time(NULL));
+    int firstTurn = rand() % (number_of_enemies+1);
+
+    for (int i=firstTurn; i<((number_of_enemies+1)*n); ++i){
+        enqueue(turnQueue, i%(number_of_enemies+1));
+    }
+
     /*
-    Initializes enemies
-    Initializes bulletpoints
-    Starts the queue to choose order of the fight
-    
+    Queue
+    Bulletpoints
+    Skills
+    Modifiers
     */
 }
 
