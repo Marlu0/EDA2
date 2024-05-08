@@ -23,3 +23,26 @@ void print_credits();
 int get_selection(const char *strings[]);
 
 void print_main_title();
+
+/* Stack definitions */
+
+/* Queue definitions */
+
+typedef struct {
+    int *items;
+    int front;
+    int rear;
+    int maxSize;
+} Queue;
+
+Queue* createQueue(int maxSize);
+
+int isEmpty(Queue* queue);
+
+int isFull(Queue* queue);
+
+void enqueue(Queue* queue, int value);
+
+int dequeue(Queue* queue);
+
+void display(Queue* queue);
