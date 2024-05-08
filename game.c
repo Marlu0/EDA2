@@ -195,11 +195,12 @@ Returns:
     - Character
 */
 Character do_combat(Character *character, Enemy enemy[]){
+    printf("You've started a combat with ");
     
     /*
-    Initializes enemies
-    Initializes bulletpoints
-    Starts the queue to choose order of the fight
-    
+    Queue
+    Bulletpoints
+    Skills
+    Modifiers
     */
 }
