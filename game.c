@@ -220,7 +220,7 @@ It does:
 Returns:
     - Character
 */
-Character do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_enemies){
+void do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_enemies){
     printf("You've started a combat with ");
     for (int i=0; i<MAX_ENEMIES; ++i){
         printf("%s ", enemy[i].name);
@@ -281,7 +281,7 @@ Character do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_o
     Skills
     Modifiers
     */
-}
+};
 
 Character customize_character(Character *character){
 
