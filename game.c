@@ -261,7 +261,8 @@ void do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_ene
             }else{
                 dequeue(turnQueue);
             }
-        }else{
+        }
+        else{
             if(turnQueue->items[turnQueue->front] = goodie_index){
                     /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
                     attack_player(character, enemy, dead_enemies);
@@ -272,15 +273,9 @@ void do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_ene
                     attack_enemy(enemy[turnQueue->items[turnQueue->front]], character, dead_enemies);
                     dequeue(turnQueue);
                 }
-            }
         }
-    };
-    /*
-    Queue
-    Bulletpoints
-    Skills
-    Modifiers
-    */
+    }
+}
 
 Character customize_character(Character *character){
 
