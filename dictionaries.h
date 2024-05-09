@@ -21,4 +21,4 @@ Weapon weapons[6] = {
     {"Gun & Barrel", "A gun in a barrel", skills[1], skills[2]},
     {"Cactus Thrower", "Ouch..", skills[7], skills[8]},
     {"Gatling Gun", "RATATATTATATA", skills[6], skills[5]} 
-}
+};
