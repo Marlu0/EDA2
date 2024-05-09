@@ -278,5 +278,5 @@ void do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_ene
 }
 
 Character customize_character(Character *character){
-
+    
 }

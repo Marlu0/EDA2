@@ -137,7 +137,7 @@ Character create_character();
 
 Character customize_character();
 
-Character do_combat(Character *character, Enemy enemy[]);
+Character do_combat(Character *character, Enemy enemy[], int number_of_enemies);
 
 void attack_player(Character *character, Enemy enemies[], int dead_enemies);
 
