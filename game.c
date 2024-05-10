@@ -230,7 +230,25 @@ void attack_player(Character *character, Enemy *enemies, int dead_enemies){
     /*Return the modified abilities to normality*/
 }
 
+int selectEnemy(Enemy *enemies, int numEnemies) {
+    printf("Available enemies:\n");
+    for (int i = 0; i < numEnemies; ++i) {
+        if (enemies[i].health > 0) {
+            printf("%d. %s\n", (i + 1), enemies[i].name);
+        }
+    }
 
+    int choice;
+    do {
+        printf("Choose an enemy (1-%d): ", numEnemies);
+        scanf("%d", &choice);
+        if (choice < 1 || choice > numEnemies || enemies[choice - 1].health <= 0) {
+            printf("Invalid choice. Please choose a valid enemy.\n");
+        }
+    } while (choice < 1 || choice > numEnemies || enemies[choice - 1].health <= 0);
+
+    return choice - 1; // Return index of selected enemy
+}
 
 /*
 This function recieves:
