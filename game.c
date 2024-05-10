@@ -239,7 +239,7 @@ This function recieves:
 It does:
     - The fight
 Returns:
-    - Character
+    - Nothing
 */
 void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
     printf("You've started a combat with:\n ");
@@ -288,14 +288,12 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
         else{
             if(turnQueue->items[turnQueue->front] = goodie_index){
                     /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
-                    printf("Your turn to attack! \n");
-                    attack_player(character, enemy, dead_enemies);
+                    attack_player(character, enemies, dead_enemies);
                     dequeue(turnQueue);
                 }else{
                     /*In the enemy attack we pass the enemy in turn and the character*/
                     /*The enemy shoud be a pointer TALK WITH MARCELINO*/
-                    printf("%s is now attacking!\n", enemy[turnQueue->items[turnQueue->front]].name);
-                    attack_enemy(enemy[turnQueue->items[turnQueue->front]], character, dead_enemies);
+                    attack_enemy(enemies[turnQueue->items[turnQueue->front]], character, dead_enemies);
                     dequeue(turnQueue);
                 }
         }
