@@ -10,6 +10,17 @@ It does:
 Returns:
     - The selection (int)
 */
+
+/* Example of definition of array:
+
+const char *array[] = {
+        "Option 1",
+        "Option 2",
+        "Option 3",
+        "Option 4",
+        NULL // NULL terminator to indicate end of array
+    };
+*/
 int get_selection(const char *strings[]) {
     int selection;
     int n = 0;
