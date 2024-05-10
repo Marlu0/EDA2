@@ -32,6 +32,22 @@ typedef struct {
     int capacity;
 } Stack;
 
+Stack* createStack(int capacity);
+
+int isEmptyStack(Stack* stack);
+
+int isFullStack(Stack* stack);
+
+void pushStack(Stack* stack, int item);
+
+int popStack(Stack* stack);
+
+int peekStack(Stack* stack);
+
+void printStack(Stack* stack);
+
+void freeStack(Stack* stack);
+
 /* Queue definitions */
 
 typedef struct {
