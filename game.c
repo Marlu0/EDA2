@@ -208,8 +208,8 @@ Returns:
 
 void attack_player(Character *character, Enemy enemies[MAX_ENEMIES], int dead_enemies){
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
-    
-    int tipo_ataque = get_selection("Attack", "Skills", NULL);
+    const char *options1[] = {"Attack", "Skills", NULL};
+    int tipo_ataque = get_selection(options1);
     if (tipo_ataque == 0){
         int enemigo = funcion_de_marcel(a que enemigo le quieres zurrar);
         reducir vida del enemigo con las bhgv
