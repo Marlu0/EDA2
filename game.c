@@ -232,10 +232,10 @@ It does:
 Returns:
     - Character
 */
-void do_combat(Character *character, Enemy enemy[MAX_ENEMIES], int number_of_enemies){
-    printf("You've started a combat with ");
+void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
+    printf("You've started a combat with:\n ");
     for (int i=0; i<MAX_ENEMIES; ++i){
-        printf("%s ", enemy[i].name);
+        printf("%s ", enemies[i].name);
     }
 
     /* We generate a random value from 10 to 20, that will be the number of turns for each fighter */
