@@ -87,6 +87,7 @@ typedef struct{
     int health;
     Stats stats;
     Skill skill1,skill2;
+    Modifier modifier;
 }Enemy;
 
 /* OPTION:

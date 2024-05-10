@@ -206,16 +206,36 @@ Returns:
     - Nothing
 */
 
+int select_skill(Character *character){
+    printf("Available skills:\n");
+    for (int i = 0; i < numEnemies; ++i) {
+        if (enemies[i].health > 0) {
+            printf("%d. %s\n", (i + 1), enemies[i].name);
+        }
+    }
+
+    int choice;
+    do {
+        printf("Choose an enemy (1-%d): ", numEnemies);
+        scanf("%d", &choice);
+        if (choice < 1 || choice > numEnemies || enemies[choice - 1].health <= 0) {
+            printf("Invalid choice. Please choose a valid enemy.\n");
+        }
+    } while (choice < 1 || choice > numEnemies || enemies[choice - 1].health <= 0);
+
+    return choice - 1; // Return index of selected enemy
+}
+
 void attack_player(Character *character, Enemy *enemies, int numEnemies){
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
     const char *options1[] = {"Attack", "Skills", NULL};
     int tipo_ataque = get_selection(options1);
     if (tipo_ataque == 0){
         int enemigo = selectEnemy(enemies, numEnemies);
-        reducir vida del enemigo con las bhgv
-
-    }else{
-        int ability = funcion_de_marcel(que habilidad hacer);
+        enemies[enemigo].health -= (10*(character->stats.atk+character->active_modifier->tempatk))/(enemies[enemigo].stats.def+enemies[enemigo].modifier.tempdef);
+    }
+    else{
+        int skill = funcion_de_marcel(que habilidad hacer);
         aplicamos modificador
         int enemigo = funcion_de_marcel(a que enemigo le quieres zurrar);
         reducir vida del enemigo con las bhgv
