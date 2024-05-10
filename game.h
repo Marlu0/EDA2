@@ -17,6 +17,7 @@ typedef struct{
     char name[MAX_STRING_LEN];                  
     char description[MAX_STRING_LEN];           
     Modifier skill_modifier;
+    int healing;
 }Skill;
 
 typedef struct{
