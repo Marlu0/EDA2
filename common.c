@@ -146,7 +146,6 @@ void freeStack(Stack* stack) {
     free(stack);
 }
 
-
 /* FUNCTIONS FOR QUEUE */
 
 // Function to create a new queue with given maximum size
