@@ -85,7 +85,7 @@ typedef struct{
 typedef struct{
     char name[MAX_STRING_LEN];
     Stats stats;
-    Skill skills[MAX_SKILLS];
+    Skill skill1,skill2;
 }Enemy;
 
 /* OPTION:
@@ -98,7 +98,6 @@ typedef struct{
 typedef struct{
     char choice[MAX_STRING_LEN];
     char outcome[MAX_STRING_LEN];
-
 }Option;
 
 /* DECISION:
