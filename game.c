@@ -186,7 +186,7 @@ Character create_character() {
     character.balance = 0;
 
     /* We add the initial weapon */
-    character.active_weapon = 
+    character.active_weapon = weapons[0];
 
     /* We initialise health and mana in function of hp and mp stats */
     character.health = 100 + (10*(character.stats.hp));
