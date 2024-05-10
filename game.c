@@ -208,10 +208,19 @@ Returns:
 
 void attack_player(Character *character, Enemy enemies[MAX_ENEMIES], int dead_enemies){
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
-    int tipo_ataque = funcion_de_marcel(para elegir entre abililty o attack);
+    
+    int tipo_ataque = get_selection("Attack", "Skills", NULL);
     if (tipo_ataque == 0){
         int enemigo = funcion_de_marcel(a que enemigo le quieres zurrar);
-        reducir vida del enemigo con las 
+        reducir vida del enemigo con las bhgv
+
+    }else{
+        int ability = funcion_de_marcel(que habilidad hacer);
+        aplicamos modificador
+        int enemigo = funcion_de_marcel(a que enemigo le quieres zurrar);
+        reducir vida del enemigo con las bhgv
+
+    
     }
 
     /*Do the switch fot the differnt attacks possible*/
