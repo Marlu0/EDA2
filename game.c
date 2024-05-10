@@ -230,7 +230,7 @@ This function recieves:
 It does:
     - The fight
 Returns:
-    - Character
+    - Nothing
 */
 void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
     printf("You've started a combat with:\n ");
