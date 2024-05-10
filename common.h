@@ -26,10 +26,16 @@ void print_main_title();
 
 /* Stack definitions */
 
+typedef struct {
+    int *arr;
+    int top;
+    int capacity;
+} Stack;
+
 /* Queue definitions */
 
 typedef struct {
-    int *items;
+    int *items; 
     int front;
     int rear;
     int maxSize;
