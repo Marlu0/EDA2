@@ -49,7 +49,6 @@ Weapon weapons[6] = {
     {"Gatling Gun", "RATATATTATATA", skills[6], skills[5]} 
 };
 
-
 /* STATS: Health, maná, attack, defense, luck*/
 typedef struct{
     int hp, bp, atk, def, luc;
@@ -69,7 +68,6 @@ typedef struct{
     int health;
     int bullets;
     int balance; //money
-    Weapon weapon_inventory[10];
     Stats stats;
     Skill skills[MAX_SKILLS];
     Modifier active_modifier[MAX_MODIFIERS];

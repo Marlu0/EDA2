@@ -182,6 +182,12 @@ Character create_character() {
         character.active_modifier[i].templuc = 0;
     }
     
+    /* We initialize balance */
+    character.balance = 0;
+
+    /* We add the initial weapon */
+    character.active_weapon = 
+
     /* We initialise health and mana in function of hp and mp stats */
     character.health = 100 + (10*(character.stats.hp));
     character.bullets = 100 + (10*(character.stats.bp));
