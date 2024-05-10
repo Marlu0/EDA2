@@ -206,7 +206,7 @@ Returns:
     - Nothing
 */
 
-void attack_player(Character *character, Enemy enemies[MAX_ENEMIES], int dead_enemies){
+void attack_player(Character *character, Enemy *enemies, int dead_enemies){
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
     const char *options1[] = {"Attack", "Skills", NULL};
     int tipo_ataque = get_selection(options1);
