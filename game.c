@@ -208,6 +208,12 @@ Returns:
 
 void attack_player(Character *character, Enemy enemies[MAX_ENEMIES], int dead_enemies){
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
+    int tipo_ataque = funcion_de_marcel(para elegir entre abililty o attack);
+    if (tipo_ataque == 0){
+        int enemigo = funcion_de_marcel(a que enemigo le quieres zurrar);
+        reducir vida del enemigo con las 
+    }
+
     /*Do the switch fot the differnt attacks possible*/
     /*To each switch possibility, relate it with the ability*/
     /*Add the attack chosen to the attack stack (for the time shot ability)*/
@@ -257,9 +263,11 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
         if(!first_turn_done){
             if (turnQueue->items[turnQueue->front] = firstTurn){
                 if(turnQueue->items[turnQueue->front] = goodie_index){
+                    printf("Your turn to attack! \n");
                     attack_player();
                     dequeue(turnQueue);
                 }else{
+                    printf("%s is now attacking!\n", enemy[turnQueue->items[turnQueue->front]].name);
                     attack_enemy();
                     dequeue(turnQueue);
                 }
@@ -271,12 +279,12 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
         else{
             if(turnQueue->items[turnQueue->front] = goodie_index){
                     /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
-                    attack_player(character, enemies, dead_enemies);
+                    attack_player(character, enemy, dead_enemies);
                     dequeue(turnQueue);
                 }else{
                     /*In the enemy attack we pass the enemy in turn and the character*/
                     /*The enemy shoud be a pointer TALK WITH MARCELINO*/
-                    attack_enemy(enemies[turnQueue->items[turnQueue->front]], character, dead_enemies);
+                    attack_enemy(enemy[turnQueue->items[turnQueue->front]], character, dead_enemies);
                     dequeue(turnQueue);
                 }
         }
