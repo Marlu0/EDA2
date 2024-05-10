@@ -63,12 +63,13 @@ void print_main_title() {
     printf("|  _ \\| | | |/ _` / __|/| '_ \\  | |  _| | | | '_ \\/ __| | | '_ \\       \n");
     printf("| |_) | |_| | (_| \\__ \\ | | | | | |_| | |_| | | | \\__ \\ | | | | |      \n");
     printf("|____/ \\__,_|\\__, |___/ |_| |_|  \\____|\\__,_|_| |_|___/ |_|_| |_|      \n");
-    printf("| |_| |__   _|___/                                                     \n");
+    printf(" _   _                                                                \n");
+    printf("| |_| |__   ___                                                     \n");
     printf("| __| '_ \\ / _ \\   ▄▄▌ ▐ ▄▌▪  ▄▄▌  ·▄▄▄▄      ▄▄▌ ▐ ▄▌▄▄▄ ..▄▄ · ▄▄▄▄▄ \n");
     printf("| |_| | | |  __/   ██· █▌▐███ ██•  ██▪ ██     ██· █▌▐█▀▄.▀·▐█ ▀. •██   \n");
-    printf("\\__|_| |_|\\___|   ██▪▐█▐▐▌▐█·██▪  ▐█· ▐█▌    ██▪▐█▐▐▌▐▀▀▪▄▄▀▀▀█▄ ▐█.▪ \n");
-    printf("               ▐█▌██▐█▌▐█▌▐█▌▐▌██. ██     ▐█▌██▐█▌▐█▄▄▌▐█▄▪▐█ ▐█▌·  \n");
-    printf("                ▀▀▀▀ ▀▪▀▀▀.▀▀▀ ▀▀▀▀▀•      ▀▀▀▀ ▀▪ ▀▀▀  ▀▀▀▀  ▀▀▀   \n");
+    printf(" \\__|_| |_|\\___|   ██▪▐█▐▐▌▐█·██▪  ▐█· ▐█▌    ██▪▐█▐▐▌▐▀▀▪▄▄▀▀▀█▄ ▐█.▪ \n");
+    printf("                   ▐█▌██▐█▌▐█▌▐█▌▐▌██. ██     ▐█▌██▐█▌▐█▄▄▌▐█▄▪▐█ ▐█▌· \n");
+    printf("                    ▀▀▀▀ ▀▪▀▀▀.▀▀▀ ▀▀▀▀▀•      ▀▀▀▀ ▀▪ ▀▀▀  ▀▀▀▀  ▀▀▀   \n");
 }
 
 /* FUNCTIONS FOR STACK */
@@ -94,7 +95,7 @@ int isFullStack(Stack* stack) {
 
 // Function to push an element onto the stack
 void pushStack(Stack* stack, int item) {
-    if (isFull(stack)) {
+    if (isFullStack(stack)) {
         printf("Stack Overflow\n");
         return;
     }
@@ -103,7 +104,7 @@ void pushStack(Stack* stack, int item) {
 
 // Function to pop an element from the stack
 int popStack(Stack* stack) {
-    if (isEmpty(stack)) {
+    if (isEmptyStack(stack)) {
         printf("Stack Underflow\n");
         return -1; // Return -1 to indicate stack underflow
     }
@@ -112,7 +113,7 @@ int popStack(Stack* stack) {
 
 // Function to get the top element of the stack without removing it
 int peekStack(Stack* stack) {
-    if (isEmpty(stack)) {
+    if (isEmptyStack(stack)) {
         printf("Stack is empty\n");
         return -1; // Return -1 to indicate empty stack
     }
@@ -159,11 +160,11 @@ int isFullQueue(Queue* queue) {
 
 // Function to add an element to the rear of the queue
 void enqueue(Queue* queue, int value) {
-    if (isFull(queue)) {
+    if (isFullQueue(queue)) {
         printf("Queue is full. Cannot enqueue.\n");
         return;
     }
-    if (isEmpty(queue)) {
+    if (isEmptyQueue(queue)) {
         queue->front = 0;
         queue->rear = 0;
     } else {
@@ -174,7 +175,7 @@ void enqueue(Queue* queue, int value) {
 
 // Function to remove an element from the front of the queue
 int dequeue(Queue* queue) {
-    if (isEmpty(queue)) {
+    if (isEmptyQueue(queue)) {
         printf("Queue is empty. Cannot dequeue.\n");
         return -1;
     }
@@ -190,7 +191,7 @@ int dequeue(Queue* queue) {
 
 // Function to display the elements in the queue
 void displayQueue(Queue* queue) {
-    if (isEmpty(queue)) {
+    if (isEmptyQueue(queue)) {
         printf("Queue is empty.\n");
         return;
     }
