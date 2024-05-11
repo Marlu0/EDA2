@@ -10,19 +10,29 @@ Returns:
 */
 Skill *init_skills(){
     Skill skills[10] = {
-        /*0*/{"The Hermit", "Increases +1 defense", {1, 1.15, 1}},
-        /*1*/{"The Chariot", "Increases +2 defense", {1, 1.3, 1}},
-        /*2*/{"The Tower", "Increases +1 attack", {1.15 , 1, 1}},
-        /*3*/{"The Devil", "Increases +2 attack", {1.3,1,1}},
-        /*4*/{"The Hangman", "Reduces to 0 luck", {1,1,0}},
-        /*5*/{"Weel Of Fortune", "Duplicates luck", {1,1,2}},
-        /*6*/{"Death of Theo", "Death is the only way", {0.5, 2, 1}},
-        /*7*/{"The Armadillo", "Nothing like home", {2, 0.5, 1}},
-        /*8*/{"The Fool", "Decreases defense -1, and increase luck a +2", {1, 0.9, 1.3}},
-        /*9*/{"Justice", "Faith will guide you", {1.1,1.1,1.1}}
+        /*0*/{ "The Hermit", "Increases +1 defense", {1.0, 1.15, 1.0}},
+        /*1.0*/{ "The Chariot", "Increases +2 defense", {1.0, 1.3, 1.0}},
+        /*2*/{ "The Tower", "Increases +1 attack", {1.15, 1.0, 1.0}},
+        /*3*/{ "The Devil", "Increases +2 attack", {1.3, 1.0, 1.0}},
+        /*4*/{ "The Hangman", "Reduces to 0 luck", {1.0, 1.0, 0.0}},
+        /*5*/{ "Weel Of Fortune", "Duplicates luck", {1.0, 1.0, 2}},
+        /*6*/{ "Death of Theo", "Death is the only way", {0.5, 2, 1.0}},
+        /*7*/{ "The Armadillo", "Nothing like home", {2, 0.5, 1.0}},
+        /*8*/{ "The Fool", "Decreases defense -1, and increase luck a +2", {1.0, 0.9, 1.3}},
+        /*9*/{ "Justice", "Faith will guide you", {1.1, 1.1, 1.1}}
     };
+    // i need to change this function as hell
     return skills;
 };
+
+Skill *init_skill(char filename[], char name[] /*pull it out on the name*/){
+    FILE *file_pointer = fopen(filename, "w");
+    if(file_pointer == NULL){
+        perror("Error opening file") //this is a boss function use it more often
+    }
+
+    while(strncmp()) //this needs to be finished later
+}
 
 /*
 This function receives:

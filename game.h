@@ -2,7 +2,7 @@
 
 /* MODIFIER: This will help us with combat calculations like: damage = atk + tempatk */
 typedef struct{
-    int tempatk, tempdef, templuc;
+    float tempatk, tempdef, templuc;
 }Modifier;
 
 /* SKILL:
@@ -14,10 +14,11 @@ typedef struct{
         - skill_modifier = {atk, 0, 0} (This will make damage = atk + tempatk = 2*atk)
 */
 typedef struct{
+    int ID;
     char name[MAX_STRING_LEN];                  
     char description[MAX_STRING_LEN];           
     Modifier skill_modifier;
-    int healing;
+    int healing; /*where do we put this in the skills?*///ill add it in later
 }Skill;
 
 typedef struct{
