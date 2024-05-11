@@ -2,7 +2,68 @@
 
 #include "common.h"
 #include "game.h"
+/*
+this fucntion receives:
+    - character and scenario.
+it:
+    - saves the game data in a text file.
+returns:
+    -nothing
+    */
+void save_game(Character *character, Scenario *scenario/*figure this out*/){
+    /*checks that the cahracter has been initilized*/
+    if (character->name[0] == NULL){
+        /*at least like this we know a name exists so the character prob inited.*/
+        printf("Character Does not exist"); /*in order for this to exist we need to have error handling on charcter creation*/
+        return;
+    }
+    printf("Enter save filename: ");
+    char filename[MAX_STRING_LEN]; /*error proof this later*/
 
+    FILE *file_pointer = fopen(filename, "w");
+    if(file_pointer == NULL){
+        printf("Couldn't open file");
+        return;
+    }
+
+    /*here is where you need to do the actual writing.*/
+    for(int i = 0; character->name[i] != NULL; i++){
+        fprintf(file_pointer, "%c", character->name);
+    } fprint(file_pointer, "\n");
+
+    fprintf(file_pointer, "%d\n", character->health); // goes without saying that these should be less than 4 million
+    fprintf(file_pointer, "%d\n", character->bullets);
+    fprintf(file_pointer, "%d\n", character->balance);
+
+
+    fprintf(file_pointer, "%d\n", character->stats.hp);
+    fprintf(file_pointer, "%d\n", character->stats.bp);
+    fprintf(file_pointer, "%d\n", character->stats.atk);
+    fprintf(file_pointer, "%d\n", character->stats.def);
+    fprintf(file_pointer, "%d\n", character->stats.luc);
+
+    fprintf(file_pointer, "%d\n", character->skills); /*NOT COMPLETE*/
+
+    for(int i = 0; i < MAX_MODIFIERS; i++){
+        fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempatk);
+        fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempdef);
+        fprintf(file_pointer, "%d\n", character->active_modifiers[i].templuc);
+        fpirntf(file_pointer, "\n");
+    }
+    
+    /*still need weapon inventory and active modifier. they should be passed by referce or maybe not as the acdress of object might change between saves. you also need to work on the report.*/
+
+}
+/*
+this function receives:
+    -   charcater and scenario
+use:
+    - loads a pervious save froma  text file.
+returns:
+    nothing.*/
+void load_game(Characater *character, Scenario *scenario){
+
+}
 /*
 This function recieves:
     - Nothing
@@ -11,6 +72,8 @@ It does:
 Returns:
     - Nothing
 */
+
+
 void print_credits(){
     printf("\nGame Producers:\n");
     printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
@@ -61,15 +124,8 @@ int start_menu(bool first_game){
     while(clock() < start_time + CLOCKS_PER_SEC * delay){}
 
     int option;
-    do{
-        const char *options[] = {"New Game", "Save game", "Load game", "Customize Character", "Credits", "Exit", NULL};
-        option = get_selection(options);
-        if ((option == 2) && (first_game = true)){
-            printf("You have to first play a game before you can save anything");
-        };
-
-    }while((first_game == true) && (option == 2));
-    return option;
+    const char *options[] = {"New Game", "Load game", "Credits", "Exit", NULL};
+    return option = get_selection(options); // this is just the first menu later menus will have the save game and the customize character.
 }
 /*
 this funtion receives:
@@ -90,22 +146,16 @@ void init_game(bool first_game){
         break;
 
     case 2:
-        save_game(character, scenario);
-        break;
-    
-    case 3:
         load_game(filename);
         break;
 
     case 4:
-        //THIS WILL ONLY BE ACTIVATED IF A GAME HAS BEEN STARTED
-        customize_character(Character *character /*dont code this untill you ask whats up.*/); //we need to break the character creation in 2 function. like the modifiers and such that are not part of the customization and then the things that you can customise in a fucntion called "character customization"
-        break;    
-    case 5:
         print_credits();
         break;
-    case 6:
+
+    case 5:
         exit(0);
+
     default:
         printf("Error");
         break;

@@ -1,6 +1,51 @@
 #include "game.h"
 
 /*
+This function receives:
+    - nothing
+It does:
+    - inits the skills array
+Returns:
+    - pointer to array
+*/
+Skill *init_skills(){
+    Skill skills[10] = {
+        /*0*/{"The Hermit", "Increases +1 defense", {1, 1.15, 1}},
+        /*1*/{"The Chariot", "Increases +2 defense", {1, 1.3, 1}},
+        /*2*/{"The Tower", "Increases +1 attack", {1.15 , 1, 1}},
+        /*3*/{"The Devil", "Increases +2 attack", {1.3,1,1}},
+        /*4*/{"The Hangman", "Reduces to 0 luck", {1,1,0}},
+        /*5*/{"Weel Of Fortune", "Duplicates luck", {1,1,2}},
+        /*6*/{"Death of Theo", "Death is the only way", {0.5, 2, 1}},
+        /*7*/{"The Armadillo", "Nothing like home", {2, 0.5, 1}},
+        /*8*/{"The Fool", "Decreases defense -1, and increase luck a +2", {1, 0.9, 1.3}},
+        /*9*/{"Justice", "Faith will guide you", {1.1,1.1,1.1}}
+    };
+    return skills;
+};
+
+/*
+This function receives:
+    - skills array
+It does:
+    - inits the wepons array
+Returns:
+    - pointer to array.
+*/
+
+Weapon *init_weapons(Skill skills[]){
+    Weapon weapons[6] = {
+        {"Rusty Revolver", "Older that the mountains", skills[0], skills[4]}, //this does not work because items in an arry need to be constant size and these arrays are not
+        {"Linda", "Sweetest kisses in the wild west", skills[2], skills[0]},
+        {"GOAT", "Gun Of Antilope Trilobites ", skills[5], skills[3]},
+        {"Gun & Barrel", "A gun in a barrel", skills[1], skills[2]},
+        {"Cactus Thrower", "Ouch..", skills[7], skills[8]},
+        {"Gatling Gun", "RATATATTATATA", skills[6], skills[5]}
+    };
+    return weapons;
+};
+
+/*
 This function recieves: 
     - Pointer to character of type Character 
 It does:
@@ -177,9 +222,9 @@ Character create_character() {
 
     /* Initialize active modifier to default values */
     for (int i = 0; i < MAX_MODIFIERS; i++) {
-        character.active_modifier[i].tempatk = 0;
-        character.active_modifier[i].tempdef = 0;
-        character.active_modifier[i].templuc = 0;
+        character.active_modifiers[i].tempatk = 0;
+        character.active_modifiers[i].tempdef = 0;
+        character.active_modifiers[i].templuc = 0;
     }
     
     /* We initialize balance */
@@ -232,7 +277,7 @@ void attack_player(Character *character, Enemy *enemies, int numEnemies){
     int tipo_ataque = get_selection(options1);
     if (tipo_ataque == 0){
         int enemigo = selectEnemy(enemies, numEnemies);
-        enemies[enemigo].health -= (10*(character->stats.atk+character->active_modifier->tempatk))/(enemies[enemigo].stats.def+enemies[enemigo].modifier.tempdef);
+        enemies[enemigo].health -= (10*(character->stats.atk+character->active_modifiers->tempatk))/(enemies[enemigo].stats.def+enemies[enemigo].modifier.tempdef);
     }
     else{
         int skill = funcion_de_marcel(que habilidad hacer);

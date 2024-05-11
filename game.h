@@ -24,31 +24,14 @@ typedef struct{
     char name[MAX_STRING_LEN];
     char description[MAX_STRING_LEN];
     Skill skill_1;
-    Skill skill_2;
+    Skill skill_2; //
     Modifier modifier;
 }Weapon;
 
-Skill skills[10] = {
-    /*0*/{"The Hermit", "Increases +1 defense", {1, 1.15, 1}},
-    /*1*/{"The Chariot", "Increases +2 defense", {1, 1.3, 1}},
-    /*2*/{"The Tower", "Increases +1 attack", {1.15 , 1, 1}},
-    /*3*/{"The Devil", "Increases +2 attack", {1.3,1,1}},
-    /*4*/{"The Hangman", "Reduces to 0 luck", {1,1,0}},
-    /*5*/{"Weel Of Fortune", "Duplicates luck", {1,1,2}},
-    /*6*/{"Death of Theo", "Death is the only way", {0.5, 2, 1}},
-    /*7*/{"The Armadillo", "Nothing like home", {2, 0.5, 1}},
-    /*8*/{"The Fool", "Decreases defense -1, and increase luck a +2", {1, 0.9, 1.3}},
-    /*9*/{"Justice", "Faith will guide you", {1.1,1.1,1.1}}
-};
+Skill *init_skills(){};
 
-Weapon weapons[6] = {
-    {"Rusty Revolver", "Older that the mountains", skills[0], skills[4]}, //this does not work because items in an arry need to be constant size and these arrays are not
-    {"Linda", "Sweetest kisses in the wild west", skills[2], skills[0]},
-    {"GOAT", "Gun Of Antilope Trilobites ", skills[5], skills[3]},
-    {"Gun & Barrel", "A gun in a barrel", skills[1], skills[2]},
-    {"Cactus Thrower", "Ouch..", skills[7], skills[8]},
-    {"Gatling Gun", "RATATATTATATA", skills[6], skills[5]} 
-};
+Weapon *init_weapons(Skill skills[]){}; // It has to be in a function so that the array gets created in runtime.
+// if it is created in compilation it doesnt know what to do.
 
 /* STATS: Health, maná, attack, defense, luck*/
 typedef struct{
@@ -62,7 +45,7 @@ typedef struct{
         - reputation = -1
         - stats = {100,50,10,20,5}
         - skills = [Rampage, Time Strike]
-        - active_modifier = []
+        - active_modifiers = []
 */
 typedef struct{
     char name[MAX_STRING_LEN];
@@ -71,7 +54,7 @@ typedef struct{
     int balance; //money
     Stats stats;
     Skill skills[MAX_SKILLS];
-    Modifier active_modifier[MAX_MODIFIERS];
+    Modifier active_modifiers[MAX_MODIFIERS];
     Weapon active_weapon;
 }Character;
 
