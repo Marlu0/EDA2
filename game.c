@@ -25,13 +25,52 @@ Skill *init_skills(){
     return skills;
 };
 
-Skill *init_skill(char filename[], char name[] /*pull it out on the name*/){
-    FILE *file_pointer = fopen(filename, "w");
+void init_skill(char filename[], char skill_name[]){
+    FILE *file_pointer = fopen(filename, "r");
     if(file_pointer == NULL){
-        perror("Error opening file") //this is a boss function use it more often
+        perror("Error opening file!"); //this is a boss function use it more often
     }
+    char skill_name[MAX_STRING_LEN];
+    int equality = strncpm(fgets(skill_name, sizeof(skill_name), file_pointer), skill_name); //maybe newline char?
 
-    while(strncmp()) //this needs to be finished later
+    while(equality == 0){
+            for(int i = 0; i < 3; i++){ // you executre it 4 - 1 times sot aht the last correct one can be the assignemtn too.
+            fgets(skill_name, sizeof(skill_name), file_pointer);
+        }
+    equality = strncpm(fgets(skill_name, sizeof(skill_name), file_pointer), skill_name);
+    }
+}
+/*
+this receives:
+    - character by reference, filename and weapon name
+it does:
+    - find the weapon attributes in the file and assigns it to the character.
+it returns:
+ - nothing (updates character by reference)
+*/
+void init_weapon(Character *character, char filename[], char weapon_name[]){ // puts it in their inventory. and then there should be another one that takes it from your inventory and equips it immidiately. grabbing a weapon can be a combination of these functions.
+    FILE *file_pointer = fopen(filename, "r");
+    if(file_pointer ==  NULL){
+        perror("Error opening file!");
+    }
+    char weapon_name[MAX_STRING_LEN]; //you named the variable the same thing twice!!! fix tommorow
+    int equality = strncpm(fgets(weapon_name, sizeof(weapon_name), file_pointer), weapon_name); //this might need newline char
+
+    while(equality != 0){
+        for(int i = 0; i < 3; i++){ // you executre it 4 - 1 times sot aht the last correct one can be the assignemtn too.
+            fgets(weapon_name, sizeof(weapon_name), file_pointer);
+        }
+    equality = strncpm(fgets(weapon_name, sizeof(weapon_name), file_pointer), weapon_name);
+    }
+    //line below is done just for the shorthand
+    Weapon *weapon_p_shorthand = &(character->inventory.weapons_in_inventory[character->inventory.fill]);
+    
+    strncpy(weapon_p_shorthand->name, weapon_name, MAX_STRING_LEN);
+
+
+    fgets(weapon_p_shorthand->description, sizeof(weapon_description), file_pointer);
+     /*||here is where you put in the code to make it an index of the thang its not that hard but do the other thing first.||*/
+
 }
 
 /*
