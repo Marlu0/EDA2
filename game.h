@@ -25,6 +25,7 @@ typedef struct{
     char description[MAX_STRING_LEN];
     Skill skill_1;
     Skill skill_2;
+    Modifier modifier;
 }Weapon;
 
 Skill skills[10] = { /*ignora k % sea rojo esta bien*/
