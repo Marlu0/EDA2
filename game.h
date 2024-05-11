@@ -28,6 +28,13 @@ typedef struct{
     Modifier modifier;
 }Weapon;
 
+typedef struct{
+    /*weapons array it includes the sixe of the array so that
+    you don't have to pass it in seperatly in fucntions*/
+    Weapon weapons_in_inventory[INVENTORY_SIZE];
+    int fill; //init_character sets the fill equal to 1.
+}Inventory;
+
 Skill *init_skills(){};
 
 Weapon *init_weapons(Skill skills[]){}; // It has to be in a function so that the array gets created in runtime.
@@ -53,7 +60,7 @@ typedef struct{
     int bullets;
     int balance; //money
     Stats stats;
-    Skill skills[MAX_SKILLS];
+    Inventory inventory;
     Modifier active_modifiers[MAX_MODIFIERS];
     Weapon active_weapon;
 }Character;
@@ -108,6 +115,9 @@ typedef struct{
     char description[MAX_DESCRIPTION_LEN];
     Decision decision[MAX_DECISIONS];
 }Scenario;
+
+/*we will need to make a fucntion that inits the linked list of all scenaraios. and then a function that iters
+over them so that the load function can put you back in the correct section.*/
 
 /* FUNCTION DECLARATIONS */
 

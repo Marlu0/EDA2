@@ -11,6 +11,9 @@ returns:
     -nothing
     */
 void save_game(Character *character, Scenario *scenario/*figure this out*/){
+
+    /*||PRINTING CHARACTER INFROMATION||*/
+
     /*checks that the cahracter has been initilized*/
     if (character->name[0] == NULL){
         /*at least like this we know a name exists so the character prob inited.*/
@@ -27,9 +30,7 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/){
     }
 
     /*here is where you need to do the actual writing.*/
-    for(int i = 0; character->name[i] != NULL; i++){
-        fprintf(file_pointer, "%c", character->name);
-    } fprint(file_pointer, "\n");
+    fprintf(file_pointer, "%s\n", character->name);
 
     fprintf(file_pointer, "%d\n", character->health); // goes without saying that these should be less than 4 million
     fprintf(file_pointer, "%d\n", character->bullets);
@@ -42,18 +43,29 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/){
     fprintf(file_pointer, "%d\n", character->stats.def);
     fprintf(file_pointer, "%d\n", character->stats.luc);
 
-    fprintf(file_pointer, "%d\n", character->skills); /*NOT COMPLETE*/
+    int temp_fill = character->inventory.fill;
+    fprintf(file_pointer, "%d\n", temp_fill);
+    for(int i = 0; i < temp_fill; i++){
+        fprintf(file_pointer, "%s\n", character->inventory.weapons_in_inventory[i].name);
+    }
 
-    for(int i = 0; i < MAX_MODIFIERS; i++){
+    for(int i = 0; i < MAX_MODIFIERS; i++){ /*will this not print all the modifiers tahta re active.*/
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempatk);
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempdef);
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].templuc);
         fpirntf(file_pointer, "\n");
     }
-    
-    /*still need weapon inventory and active modifier. they should be passed by referce or maybe not as the acdress of object might change between saves. you also need to work on the report.*/
+    fprintf(file_pointer, "%s\n", character->active_weapon.name);
 
+    fprintf(file_pointer, "\n");
+
+    // ||making this a comment ||
+
+    /*we can say that when you are printing the scenario that you have passed the scenarios before.*/
+    //i think it might be better to orgaise the scenarios as a 
+    fclose(file_pointer);
 }
+
 /*
 this function receives:
     -   charcater and scenario
@@ -146,7 +158,8 @@ void init_game(bool first_game){
         break;
 
     case 2:
-        load_game(filename);
+        /*do the filename things here.*/
+        load_game();
         break;
 
     case 4:

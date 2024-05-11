@@ -15,6 +15,7 @@
 #define MAX_OPTIONS 2
 #define MAX_DECISIONS 2
 #define MAX_ENEMIES 3
+#define INVENTORY_SIZE 7 /*this is the number of weapons including fists.*/
 
 /* FUNCTION DECLARATIONS */
 

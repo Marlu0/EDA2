@@ -131,15 +131,14 @@ It does:
 Returns:
     - character of type Character 
 */
-Character create_character() {
+Character create_character(Weapon weapons[]/*weapons list*/, Skill skills[] /*skills list*/) {
     printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
 
     /* Character initialization */
     Character character;
 
-    character.active_weapon = weapons[0];
-    character.weapon_inventory[0] = weapons[0];
 
+    
     /* We name our character */
     name_character(&character);
     
@@ -211,15 +210,6 @@ Character create_character() {
         }
     }
 
-    /* Initialize skills array with empty values */
-    for (int i = 0; i < MAX_SKILLS; i++) {
-        strcpy(character.skills[i].name, "");
-        strcpy(character.skills[i].description, "");
-        character.skills[i].skill_modifier.tempatk = 0;
-        character.skills[i].skill_modifier.tempdef = 0;
-        character.skills[i].skill_modifier.templuc = 0;
-    }
-
     /* Initialize active modifier to default values */
     for (int i = 0; i < MAX_MODIFIERS; i++) {
         character.active_modifiers[i].tempatk = 0;
@@ -232,6 +222,9 @@ Character create_character() {
 
     /* We add the initial weapon */
     character.active_weapon = weapons[0];
+    character.inventory.weapons_in_inventory[0] = weapons[0];
+    character.inventory.fill = 1;
+
 
     /* We initialise health and mana in function of hp and mp stats */
     character.health = 100 + (10*(character.stats.hp));
@@ -251,7 +244,7 @@ Returns:
     - Nothing
 */
 
-int select_skill(Character *character){
+int select_skill(Character *character){ /*you need to pass sthe numEnemies in here*/
     printf("Available skills:\n");
     for (int i = 0; i < numEnemies; ++i) {
         if (enemies[i].health > 0) {
@@ -385,4 +378,12 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
 
 Character customize_character(Character *character){
     
+}
+void attain_weapon(Character *character, Weapon weapon){
+    int size = character->inventory.fill; /*you need to us a dot on the second as it is by value.*/
+    character->inventory.weapons_in_inventory[size] = weapon;
+    character->inventory.fill++;
+
+    /*realistically this function doesnt need to exist and can just be done at the
+    bottom of the do_fight function*/
 }
