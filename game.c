@@ -362,7 +362,7 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
                     attack_player();
                     dequeue(turnQueue);
                 }else{
-                    printf("%s is now attacking!\n", enemy[turnQueue->items[turnQueue->front]].name);
+                    printf("%s is now attacking!\n", enemies[turnQueue->items[turnQueue->front]].name);
                     attack_enemy();
                     dequeue(turnQueue);
                 }
