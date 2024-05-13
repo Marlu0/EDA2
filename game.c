@@ -222,9 +222,9 @@ Character create_character(Weapon weapons[]/*weapons list*/, Skill skills[] /*sk
 
     /* Initialize active modifier to default values */
     for (int i = 0; i < MAX_MODIFIERS; i++) {
-        character.active_modifiers[i].tempatk = 0;
-        character.active_modifiers[i].tempdef = 0;
-        character.active_modifiers[i].templuc = 0;
+        character.active_modifiers[i].tempatk = 1;
+        character.active_modifiers[i].tempdef = 1;
+        character.active_modifiers[i].templuc = 1;
     }
     
     /* We initialize balance */
@@ -305,11 +305,23 @@ int select_skill(Character *character) {
 void attack_player(Character *character, Enemy *enemies, int numEnemies){
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
     const char *options1[] = {"Attack", "Skills", NULL};
-    int tipo_ataque = get_selection(options1);
-    if (tipo_ataque == 0){
-        int enemigo = selectEnemy(enemies, numEnemies);
-        enemies[enemigo].health -= (10*(character->stats.atk+character->active_modifiers->tempatk))/(enemies[enemigo].stats.def+enemies[enemigo].modifier.tempdef);
+    int atkType = get_selection(options1);
+    switch (atkType){
+        case 1:
+            int enemySelected = selectEnemy(enemies, numEnemies);
+            enemies[enemySelected].health -= (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemySelected].stats.def)*(enemies[enemySelected].modifier.tempdef));
+        case 2:
+            int skillSelected = select_skill(character);
+            character->active_modifiers. = character->active_weapon.skills[skillSelected].skill_modifier.tempatk;
+            character->active_modifiers. = character->active_weapon.skills[skillSelected].skill_modifier.tempdef;
+            character->active_modifiers. = character->active_weapon.skills[skillSelected].skill_modifier.templuc;
+            
+            //Apply healing in case skill heals
+            character->health += character->active_weapon.skills[skillSelected].healing;
+        default:
+            printf("Invalid selection. Please try again.\n");
     }
+
     else{
         int skill = funcion_de_marcel(que habilidad hacer);
         aplicamos modificador
