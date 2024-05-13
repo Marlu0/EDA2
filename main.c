@@ -43,11 +43,15 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/){
     fprintf(file_pointer, "%d\n", character->stats.def);
     fprintf(file_pointer, "%d\n", character->stats.luc);
 
+    fprintf(file_pointer, "%s\n", character->active_weapon.name);
+
+    fprint(file_pointer, "%d\n", character->inventory.fill);
+
     int temp_fill = character->inventory.fill;
     fprintf(file_pointer, "%d\n", temp_fill);
     for(int i = 0; i < temp_fill; i++){
         fprintf(file_pointer, "%s\n", character->inventory.weapons_in_inventory[i].name);
-    }
+    } //here you are just printing the names of all the weapons you have
 
     for(int i = 0; i < MAX_MODIFIERS; i++){ /*will this not print all the modifiers tahta re active.*/
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempatk);
@@ -55,14 +59,19 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/){
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].templuc);
         fpirntf(file_pointer, "\n");
     }
-    fprintf(file_pointer, "%s\n", character->active_weapon.name);
+    fprintf(file_pointer, "%s\n", "END_OF_CHARACTER");
 
-    fprintf(file_pointer, "\n");
+    /*||PRINING SCENARIO INFO||*/
 
-    // ||making this a comment ||
+
+
+    // you still need to do this 
+
+
+
 
     /*we can say that when you are printing the scenario that you have passed the scenarios before.*/
-    //i think it might be better to orgaise the scenarios as a 
+    //i think it might be better to orgaise the scenarios as a linked list.
     fclose(file_pointer);
 }
 

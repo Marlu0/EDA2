@@ -1,5 +1,5 @@
 #include "game.h"
-
+//im keeping the init_skills and init_weapons function just incase.
 /*
 This function receives:
     - nothing
@@ -8,7 +8,7 @@ It does:
 Returns:
     - pointer to array
 */
-Skill *init_skills(){
+Skill *init_skill_list(){
     Skill skills[10] = {
         /*0*/{ "The Hermit", "Increases +1 defense", {1.0, 1.15, 1.0}},
         /*1.0*/{ "The Chariot", "Increases +2 defense", {1.0, 1.3, 1.0}},
@@ -24,21 +24,43 @@ Skill *init_skills(){
     // i need to change this function as hell
     return skills;
 };
-
-void init_skill(char filename[], char skill_name[]){
+/*
+this function receives:
+    - filename and the skill_name
+it does:
+    - loads the skill from the file into a skill struct
+returns:
+    - the skill struct*/
+void init_weapon_skill(Weapon *weapon, char filename[], int index1, int index2){
     FILE *file_pointer = fopen(filename, "r");
     if(file_pointer == NULL){
-        perror("Error opening file!"); //this is a boss function use it more often
+        perror("Error opening file!");
     }
     char skill_name[MAX_STRING_LEN];
-    int equality = strncpm(fgets(skill_name, sizeof(skill_name), file_pointer), skill_name); //maybe newline char?
-
-    while(equality == 0){
-            for(int i = 0; i < 3; i++){ // you executre it 4 - 1 times sot aht the last correct one can be the assignemtn too.
-            fgets(skill_name, sizeof(skill_name), file_pointer);
-        }
-    equality = strncpm(fgets(skill_name, sizeof(skill_name), file_pointer), skill_name);
+    int min, max, difference;
+    if(index1 < index2){
+        min = index1;
+        max = index2;
+    } else {
+        min = index2;
+        max = index1;
     }
+    difference = max - min;
+    if (difference < 1){perror("error indexing weapon skills.");}
+
+    for(int i = 0; i < (min*4 + 1); i++){
+        fgets(weapon->skill_1.name, sizeof(weapon->skill_1.name), file_pointer);
+    }
+    fgets(weapon->skill_1.description, sizeof(weapon->skill_1.description), file_pointer);
+    fscanf(file_pointer, "%d %d %d\n", &(weapon->skill_1.skill_modifier.tempatk), &(weapon->skill_1.skill_modifier.tempdef), &(weapon->skill_1.skill_modifier.templuc));
+
+    for(int i = 0; i < ((difference-1)*4 + 2); i++){
+        fgets(weapon->skill_2.name, sizeof(weapon->skill_2.name), file_pointer);
+    }
+    fgets(weapon->skill_2.description, sizeof(weapon->skill_2.description), file_pointer);
+    fscanf(file_pointer, "%d %d %d\n", &(weapon->skill_2.skill_modifier.tempatk), &(weapon->skill_2.skill_modifier.tempdef), &(weapon->skill_2.skill_modifier.templuc));
+
+    flcose(file_pointer);
 }
 /*
 this receives:
@@ -48,31 +70,35 @@ it does:
 it returns:
  - nothing (updates character by reference)
 */
-void init_weapon(Character *character, char filename[], char weapon_name[]){ // puts it in their inventory. and then there should be another one that takes it from your inventory and equips it immidiately. grabbing a weapon can be a combination of these functions.
-    FILE *file_pointer = fopen(filename, "r");
-    if(file_pointer ==  NULL){
-        perror("Error opening file!");
-    }
-    char weapon_name[MAX_STRING_LEN]; //you named the variable the same thing twice!!! fix tommorow
-    int equality = strncpm(fgets(weapon_name, sizeof(weapon_name), file_pointer), weapon_name); //this might need newline char
+void pick_up_weapon(Character *character, FILE *file_pointer, char search_weapon_name[]){
+    char file_weapon_name[MAX_STRING_LEN];
+    int equality = strncpm(fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer), search_weapon_name); //this might need newline char
 
     while(equality != 0){
         for(int i = 0; i < 3; i++){ // you executre it 4 - 1 times sot aht the last correct one can be the assignemtn too.
-            fgets(weapon_name, sizeof(weapon_name), file_pointer);
+            fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer);
         }
-    equality = strncpm(fgets(weapon_name, sizeof(weapon_name), file_pointer), weapon_name);
+    equality = strncpm(fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer), search_weapon_name);
     }
     //line below is done just for the shorthand
-    Weapon *weapon_p_shorthand = &(character->inventory.weapons_in_inventory[character->inventory.fill]);
+    // Weapon *weapon_p_shorthand = &(character->inventory.weapons_in_inventory[character->inventory.fill]);
+    if(character->inventory.fill >= 7){
+        printf("Inventory Full!");
+        return;
+    }
+    character->inventory.weapons_in_inventory[character->inventory.fill] = character->active_weapon;
+    character->inventory.fill++;
     
-    strncpy(weapon_p_shorthand->name, weapon_name, MAX_STRING_LEN);
+    
+    strncpy(character->active_weapon.name, search_weapon_name, MAX_STRING_LEN);
 
 
-    fgets(weapon_p_shorthand->description, sizeof(weapon_description), file_pointer);
-     /*||here is where you put in the code to make it an index of the thang its not that hard but do the other thing first.||*/
-
+    fgets(character->active_weapon.description, sizeof(character->active_weapon.description), file_pointer);
+    int index1, index2;
+    fgets(&index1, sizeof(int), file_pointer);
+    fgets(&index2, sizeof(int), file_pointer);
+    init_weapon_skill(&(character->active_weapon),file_pointer ,index1 ,index2);
 }
-
 /*
 This function receives:
     - skills array
@@ -81,7 +107,6 @@ It does:
 Returns:
     - pointer to array.
 */
-
 Weapon *init_weapons(Skill skills[]){
     Weapon weapons[6] = {
         {"Rusty Revolver", "Older that the mountains", skills[0], skills[4]}, //this does not work because items in an arry need to be constant size and these arrays are not
@@ -93,7 +118,6 @@ Weapon *init_weapons(Skill skills[]){
     };
     return weapons;
 };
-
 /*
 This function recieves: 
     - Pointer to character of type Character 
@@ -102,7 +126,6 @@ It does:
 Returns:
     - Nothing
 */
-
 void name_character(Character *character) {
     /* Flag to track validity of input */
     int sure = 0;
@@ -130,7 +153,6 @@ void name_character(Character *character) {
         }
     }
 }
-
 /*
 This function recieves: 
     - Pointer to character of type Character
@@ -146,7 +168,6 @@ void reset_character_stats(Character *character) {
     character->stats.def = 0;
     character->stats.luc = 0;
 }
-
 /*
 This function recieves: 
     - Pointer to stat to change, pointer to available statpts and a string containing the stat_name 
@@ -171,7 +192,6 @@ void assign_points(int *stat, int *statpts, const char *stat_name) {
         printf("Invalid number of points. Please enter a number between 0 and %d.\n", *statpts);
     }
 }
-
 /*
 This function recieves: 
     - Nothing
@@ -281,7 +301,6 @@ Character create_character(Weapon weapons[]/*weapons list*/, Skill skills[] /*sk
 
     return character;
 }
-
 /*
 This function recieves:
     - The character (by reference)
@@ -292,7 +311,6 @@ It does:
 Returns:
     - Nothing
 */
-
 int select_skill(Character *character){ /*you need to pass sthe numEnemies in here*/
     printf("Available skills:\n");
     for (int i = 0; i < numEnemies; ++i) {
@@ -312,8 +330,14 @@ int select_skill(Character *character){ /*you need to pass sthe numEnemies in he
 
     return choice - 1; // Return index of selected enemy
 }
-
-void attack_player(Character *character, Enemy *enemies, int numEnemies){
+/*
+this function receives:
+    - character, enemies array and integer for number of arrays.
+it does:
+    - select enemy to attack and then does the attack
+returns:
+    - nothing*/
+void attack_player(Character *character, Enemy enemies[], int numEnemies){
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
     const char *options1[] = {"Attack", "Skills", NULL};
     int tipo_ataque = get_selection(options1);
@@ -426,13 +450,46 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
 }
 
 Character customize_character(Character *character){
+    printf("1. change weapon");
+    /*other customization options might be added later*/
+    int option;
+    do{
+        printf("option: ");
+        scanf("%d\n", &option);
+        if(option < 1 || option > 2){
+            printf("Invalid option, try again\n");
+        }
+    }while(option < 1 || option > 2);
     
 }
-void attain_weapon(Character *character, Weapon weapon){
-    int size = character->inventory.fill; /*you need to us a dot on the second as it is by value.*/
-    character->inventory.weapons_in_inventory[size] = weapon;
-    character->inventory.fill++;
+// yo im watching this movie "Evan Almighty" its is litteraly just christian propaganda omg.
+/*
+This function receives:
+    - a character pointer and a weapon
+it does:
+    - 
+*/
+void weapon_select(Character *character){ //yuo reach into inventory and select a weapon (this is the customize character function)
 
-    /*realistically this function doesnt need to exist and can just be done at the
-    bottom of the do_fight function*/
+    for(int i = 0; i < character->inventory.fill; i++){
+        printf("%d. %s\n", i, character->inventory.weapons_in_inventory[i].name);
+    } printf("\n");
+
+    int i;
+
+    do{
+        printf("Select weapon number: ");
+        scanf("%d\n", &i);
+        if(i > 8 || i < 1){
+            printf("Invalid number, try again.\n");
+        }
+    }while(i > 8 || i < 1);
+
+    Weapon *temp_weapon = (Weapon *)malloc(sizeof(Weapon));
+    *temp_weapon = character->active_weapon;
+ 
+    character->active_weapon = character->inventory.weapons_in_inventory[i];
+    character->inventory.weapons_in_inventory[i] = *temp_weapon;
+
+    free(temp_weapon);
 }
