@@ -24,8 +24,7 @@ typedef struct{
 typedef struct{
     char name[MAX_STRING_LEN];
     char description[MAX_STRING_LEN];
-    Skill skills[NUM_SKILLS];
-    Modifier modifier;
+    Skill **skills;
 }Weapon;
 
 typedef struct{

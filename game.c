@@ -244,16 +244,7 @@ Character create_character(Weapon weapons[]/*weapons list*/, Skill skills[] /*sk
 }
 
 /*
-This function recieves:
-    - The character (by reference)
-    - An array of enemies of size n 
-    - Number of dead enemies 
-It does:
-    - The attack process of the player itself
-Returns:
-    - Nothing
 */
-
 int select_skill(Character *character) {
     int bullets = character->bullets;
     int available_skills[NUM_SKILLS]; // Array to store indices of available skills
@@ -278,6 +269,7 @@ int select_skill(Character *character) {
         int index = available_skills[i];
         printf("%d. %s, Cost: %d\n", i + 1, character->active_weapon.skills[index].name, character->active_weapon.skills[index].bulletcost);
     }
+    
 
     int selection;
     while (1) {
@@ -302,42 +294,15 @@ int select_skill(Character *character) {
     return available_skills[selection - 1];
 }
 
-void attack_player(Character *character, Enemy *enemies, int numEnemies){
-    /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
-    const char *options1[] = {"Attack", "Skills", NULL};
-    int atkType = get_selection(options1);
-    switch (atkType){
-        case 1:
-            int enemySelected = selectEnemy(enemies, numEnemies);
-            enemies[enemySelected].health -= (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemySelected].stats.def)*(enemies[enemySelected].modifier.tempdef));
-        case 2:
-            int skillSelected = select_skill(character);
-            character->active_modifiers. = character->active_weapon.skills[skillSelected].skill_modifier.tempatk;
-            character->active_modifiers. = character->active_weapon.skills[skillSelected].skill_modifier.tempdef;
-            character->active_modifiers. = character->active_weapon.skills[skillSelected].skill_modifier.templuc;
-            
-            //Apply healing in case skill heals
-            character->health += character->active_weapon.skills[skillSelected].healing;
-        default:
-            printf("Invalid selection. Please try again.\n");
-    }
-
-    else{
-        int skill = funcion_de_marcel(que habilidad hacer);
-        aplicamos modificador
-        int enemigo = funcion_de_marcel(a que enemigo le quieres zurrar);
-        reducir vida del enemigo con las bhgv
-
-    
-    }
-
-    /*Do the switch fot the differnt attacks possible*/
-    /*To each switch possibility, relate it with the ability*/
-    /*Add the attack chosen to the attack stack (for the time shot ability)*/
-    /*Use the multiplier and substract the hp points form the baddie*/
-    /*Return the modified abilities to normality*/
-}
-
+/*
+This function recieves:
+    - An array of enemies in form of pointer
+    - An int numEnemies
+It does:
+    - Select an enemy with hp>0
+Returns:
+    - Selected enemy's index in array
+*/
 int selectEnemy(Enemy *enemies, int numEnemies) {
     printf("Available enemies:\n");
     for (int i = 0; i < numEnemies; ++i) {
@@ -358,6 +323,63 @@ int selectEnemy(Enemy *enemies, int numEnemies) {
     return choice - 1; // Return index of selected enemy
 }
 
+void turn_player(Character *character, Enemy *enemies, int numEnemies, Stack* attackStack, int attacksDone){
+    /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
+    const char *options1[] = {"Attack", "Skills", NULL};
+    int atkType = get_selection(options1);
+    switch (atkType){
+        case 1:
+            int enemySelected = selectEnemy(enemies, numEnemies);
+            enemies[enemySelected].health -= (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemySelected].stats.def)*(enemies[enemySelected].modifier.tempdef));
+        
+        case 2:
+            int skillSelected = select_skill(character);
+
+            // Special skill, Time Strike
+            if (character->active_weapon.skills[skillSelected]->name == "Time Strike"){
+                //Generate a random number n between 1 and attacksDone and pop n times
+                srand(time(NULL));
+                int n = rand() % attacksDone + 1;
+                int pastDamage = 0;
+                for (int i=0; i<n; ++i){
+                    pastDamage = popStack(attackStack);
+                }
+                int totalDamage = 2*pastDamage;
+                int enemySelected = selectEnemy(enemies, numEnemies);
+                enemies[enemySelected].health -= totalDamage;
+                printf("You've used Time Strike and have given %d damage to %s\n",totalDamage, enemies[enemySelected].name);
+            }
+
+            else {
+            //Apply modifiers to character
+            character->active_modifiers->tempatk += character->active_weapon.skills[skillSelected]->skill_modifier.tempatk;
+            character->active_modifiers->tempdef += character->active_weapon.skills[skillSelected]->skill_modifier.tempdef;
+            character->active_modifiers->templuc += character->active_weapon.skills[skillSelected]->skill_modifier.templuc;
+            
+            //Apply healing in case skill heals
+            character->health += character->active_weapon.skills[skillSelected]->healing;
+            printf("You've healed %d health points", character->active_weapon.skills[skillSelected]->healing);
+
+            //Do the attack part
+            int enemySelected = selectEnemy(enemies, numEnemies);
+            int totalDamage = (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemySelected].stats.def)*(enemies[enemySelected].modifier.tempdef));    
+            enemies[enemySelected].health -= totalDamage;
+            printf("You've used %s and have given %d damage to %s", character->active_weapon.skills[skillSelected]->name, totalDamage, enemies[enemySelected].name);
+
+            pushStack(attackStack, totalDamage);
+
+            ++attacksDone;
+            }
+        
+        default:
+            printf("Invalid selection. Please try again.\n");
+    }
+    /*Do the switch fot the differnt attacks possible*/
+    /*To each switch possibility, relate it with the ability*/
+    /*Add the attack chosen to the attack stack (for the time shot ability)*/
+    /*Use the multiplier and substract the hp points form the baddie*/
+    /*Return the modified abilities to normality*/
+}
 /*
 This function recieves:
     - The character (by reference)
@@ -399,11 +421,11 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
             if (turnQueue->items[turnQueue->front] = firstTurn){
                 if(turnQueue->items[turnQueue->front] = goodie_index){
                     printf("Your turn to attack! \n");
-                    attack_player();
+                    turn_player();
                     dequeue(turnQueue);
                 }else{
                     printf("%s is now attacking!\n", enemies[turnQueue->items[turnQueue->front]].name);
-                    attack_enemy();
+                    turn_enemy();
                     dequeue(turnQueue);
                 }
                 first_turn_done = true;
