@@ -24,7 +24,7 @@ typedef struct{
 typedef struct{
     char name[MAX_STRING_LEN];
     char description[MAX_STRING_LEN];
-    Skill **skills;
+    Skill **skills; //Size of the array = NUM_SKILLS
 }Weapon;
 
 typedef struct{
