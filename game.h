@@ -14,6 +14,7 @@ typedef struct{
         - skill_modifier = {atk, 0, 0} (This will make damage = atk + tempatk = 2*atk)
 */
 typedef struct{
+    int bulletcost;
     char name[MAX_STRING_LEN];                  
     char description[MAX_STRING_LEN];           
     Modifier skill_modifier;
@@ -23,8 +24,7 @@ typedef struct{
 typedef struct{
     char name[MAX_STRING_LEN];
     char description[MAX_STRING_LEN];
-    Skill *skill_1;
-    Skill *skill_2; 
+    Skill skills[NUM_SKILLS];
     Modifier modifier;
 }Weapon;
 

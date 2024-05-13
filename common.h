@@ -8,7 +8,7 @@
 
 /* Global variables */
 
-#define MAX_SKILLS 4
+#define NUM_SKILLS 2
 #define MAX_MODIFIERS 4
 #define MAX_STRING_LEN 50
 #define MAX_DESCRIPTION_LEN 100

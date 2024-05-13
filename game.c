@@ -254,24 +254,52 @@ Returns:
     - Nothing
 */
 
-int select_skill(Character *character){ /*you need to pass sthe numEnemies in here*/
-    printf("Available skills:\n");
-    for (int i = 0; i < numEnemies; ++i) {
-        if (enemies[i].health > 0) {
-            printf("%d. %s\n", (i + 1), enemies[i].name);
+int select_skill(Character *character) {
+    int bullets = character->bullets;
+    int available_skills[NUM_SKILLS]; // Array to store indices of available skills
+    int num_available_skills = 0; // Counter for available skills
+
+    // Check available skills and store their indices
+    for (int i = 0; i < NUM_SKILLS; ++i) {
+        if (bullets >= character->active_weapon.skills[i].bulletcost) {
+            available_skills[num_available_skills++] = i;
         }
     }
 
-    int choice;
-    do {
-        printf("Choose an enemy (1-%d): ", numEnemies);
-        scanf("%d", &choice);
-        if (choice < 1 || choice > numEnemies || enemies[choice - 1].health <= 0) {
-            printf("Invalid choice. Please choose a valid enemy.\n");
-        }
-    } while (choice < 1 || choice > numEnemies || enemies[choice - 1].health <= 0);
+    // If no available skills, return -1
+    if (num_available_skills == 0) {
+        printf("No available skills with current bullets.\n");
+        return -1;
+    }
 
-    return choice - 1; // Return index of selected enemy
+    // Print available skills with their costs
+    printf("Available Skills:\n");
+    for (int i = 0; i < num_available_skills; ++i) {
+        int index = available_skills[i];
+        printf("%d. %s, Cost: %d\n", i + 1, character->active_weapon.skills[index].name, character->active_weapon.skills[index].bulletcost);
+    }
+
+    int selection;
+    while (1) {
+        // Scan the selection
+        printf("Select a skill (1-%d): ", num_available_skills);
+        if (scanf("%d", &selection) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+            while (getchar() != '\n'); // Clear input buffer
+            continue; // Skip the rest of the loop and ask again for input
+        }
+
+        // Validate the selection
+        if (selection < 1 || selection > num_available_skills) {
+            printf("Invalid selection. Please select a skill between 1 and %d.\n", num_available_skills);
+            continue; // Skip the rest of the loop and ask again for input
+        }
+
+        break; // Break out of the loop if the input is valid
+    }
+
+    // Return the selected skill index
+    return available_skills[selection - 1];
 }
 
 void attack_player(Character *character, Enemy *enemies, int numEnemies){
@@ -389,6 +417,7 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
 Character customize_character(Character *character){
     
 }
+
 void attain_weapon(Character *character, Weapon weapon){
     int size = character->inventory.fill; /*you need to us a dot on the second as it is by value.*/
     character->inventory.weapons_in_inventory[size] = weapon;
