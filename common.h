@@ -59,7 +59,7 @@ typedef struct {
     int front;
     int rear;
     int maxSize;
-} Queue;
+}Queue;
 
 Queue* create_queue(int maxSize);
 

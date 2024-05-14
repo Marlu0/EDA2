@@ -1,4 +1,5 @@
 #include "game.h"
+#include "dictionaries.h"
 
 /*
 This function receives:
@@ -141,13 +142,11 @@ It does:
 Returns:
     - character of type Character 
 */
-Character create_character(Weapon weapons[]/*weapons list*/, Skill skills[] /*skills list*/) {
+Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */) {
     printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
 
     /* Character initialization */
     Character character;
-
-
     
     /* We name our character */
     name_character(&character);
@@ -230,11 +229,10 @@ Character create_character(Weapon weapons[]/*weapons list*/, Skill skills[] /*sk
     /* We initialize balance */
     character.balance = 0;
 
-    /* We add the initial weapon */
-    character.active_weapon = weapons[0];
-    character.inventory.weapons_in_inventory[0] = weapons[0];
+    /* We add the initial weapon and initialise the inventory */
+    character.active_weapon = weapons_dictionary[0];
+    character.inventory.weapons_in_inventory[0] = weapons_dictionary[0];
     character.inventory.fill = 1;
-
 
     /* We initialise health and mana in function of hp and mp stats */
     character.health = 100 + (10*(character.stats.hp));
@@ -452,7 +450,7 @@ Character customize_character(Character *character){
     
 }
 
-void attain_weapon(Character *character, Weapon weapon){
+void obtain_weapon(Character *character, Weapon weapon){
     int size = character->inventory.fill; /*you need to us a dot on the second as it is by value.*/
     character->inventory.weapons_in_inventory[size] = weapon;
     character->inventory.fill++;

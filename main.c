@@ -121,19 +121,22 @@ Returns:
 int start_menu(bool first_game){
     print_main_title();
     printf("\n"); //It looks nicer with an extra line
-    clock_t start_time = clock();
-    int delay = 2;
     
+    if (first_game){
+        clock_t start_time = clock();
+        int delay = 2;
+        
 
-    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
-    printf("JUEGAZO DEL GRUPO 4!\n\n");
-    start_time = clock();
+        while(clock() < start_time + CLOCKS_PER_SEC * delay){}
+        printf("JUEGAZO DEL GRUPO 4!\n\n");
+        start_time = clock();
 
-    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
-    printf("VAMOS YA!!\n\n");
-    start_time = clock();
+        while(clock() < start_time + CLOCKS_PER_SEC * delay){}
+        printf("VAMOS YA!!\n\n");
+        start_time = clock();
 
-    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
+        while(clock() < start_time + CLOCKS_PER_SEC * delay){}
+    }
 
     int option;
     const char *options[] = {"New Game", "Load game", "Credits", "Exit", NULL};

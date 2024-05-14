@@ -1,7 +1,9 @@
 #include "common.h"
 #include "game.h"
 
-Skill skills[11] = {
+/* Here we define the skills and weapons, hard coded as a .h to make adjustments to the playability easier */
+
+Skill skills_dictionary[11] = {
     {10, "The Hermit", "Increases defense a 15%", {1, 1.15, 1}, 0},
     {10, "The Chariot", "Increases defense a 30%", {1, 1.3, 1}, 0},
     {10, "The Tower", "Increases attack a 15%", {1.15 , 1, 1}, 0},
@@ -15,11 +17,11 @@ Skill skills[11] = {
     {100, "Time Strike", "Repeat a random previous attack and double its damage", {1,1,1}, 0}
 };
 
-Weapon weapons[6] = {
-    {"Rusty Revolver", "Older than the mountains", {&skills[0], &skills[4]}},
-    {"Linda", "Sweetest kisses in the wild west", {&skills[2], &skills[0]}},
-    {"GOAT", "Gun Of Antilope Trilobites", {&skills[5]}, {&skills[3]}},
-    {"Gun & Barrel", "A gun in a barrel", {&skills[1]}, {&skills[2]}},
-    {"Cactus Thrower", "Ouch..", {&skills[7]}, {&skills[8]},},
-    {"Gatling Gun", "RATATATTATATA", {&skills[6]}, {&skills[5]}}
+Weapon weapons_dictionary[6] = {
+    {"Rusty Revolver", "Older than the mountains", {&skills_dictionary[0], &skills_dictionary[4]}},
+    {"Linda", "Sweetest kisses in the wild west", {&skills_dictionary[2], &skills_dictionary[0]}},
+    {"GOAT", "Gun Of Antilope Trilobites", {&skills_dictionary[5]}, {&skills_dictionary[3]}},
+    {"Gun & Barrel", "A gun in a barrel", {&skills_dictionary[1]}, {&skills_dictionary[2]}},
+    {"Cactus Thrower", "Ouch..", {&skills_dictionary[7]}, {&skills_dictionary[8]},},
+    {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6]}, {&skills_dictionary[5]}}
 };
