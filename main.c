@@ -73,7 +73,7 @@ use:
     - loads a pervious save froma  text file.
 returns:
     nothing.*/
-void load_game(Characater *character, Scenario *scenario){
+void load_game(Character *character, Scenario *scenario){
 
 }
 /*

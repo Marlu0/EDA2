@@ -1,3 +1,6 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include "common.h"
 
 /* MODIFIER: This will help us with combat calculations like: damage = atk + tempatk */
@@ -33,8 +36,6 @@ typedef struct{
     Weapon weapons_in_inventory[INVENTORY_SIZE];
     int fill; //init_character sets the fill equal to 1.
 }Inventory;
-
-Skill *init_skills(){};
 
 Weapon *init_weapons(Skill skills[]){}; // It has to be in a function so that the array gets created in runtime.
 // if it is created in compilation it doesnt know what to do.
@@ -134,12 +135,4 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies);
 
 void attack_player(Character *character, Enemy *enemies, int dead_enemies);
 
-
-
-
-
-
-
-
-
-
+#endif /* COMMON_H */

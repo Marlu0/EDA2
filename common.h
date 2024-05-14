@@ -1,3 +1,6 @@
+#ifndef COMMON_H
+#define COMMON_H
+
 /* common.h contains the most used libraries to reduce #includes in other files */
 
 #include <stdio.h>
@@ -6,7 +9,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-/* Global variables */
+/* MACROS */
 
 #define NUM_SKILLS 2
 #define MAX_MODIFIERS 4
@@ -31,23 +34,23 @@ typedef struct {
     int *arr;
     int top;
     int capacity;
-} Stack;
+}Stack;
 
-Stack* createStack(int capacity);
+Stack* create_stack(int capacity);
 
-int isEmptyStack(Stack* stack);
+int is_empty_stack(Stack* stack);
 
-int isFullStack(Stack* stack);
+int is_full_stack(Stack* stack);
 
-void pushStack(Stack* stack, int item);
+void push_stack(Stack* stack, int item);
 
-int popStack(Stack* stack);
+int pop_stack(Stack* stack);
 
-int peekStack(Stack* stack);
+int peek_stack(Stack* stack);
 
-void printStack(Stack* stack);
+void print_stack(Stack* stack);
 
-void freeStack(Stack* stack);
+void free_stack(Stack* stack);
 
 /* Queue definitions */
 
@@ -58,14 +61,16 @@ typedef struct {
     int maxSize;
 } Queue;
 
-Queue* createQueue(int maxSize);
+Queue* create_queue(int maxSize);
 
-int isEmpty(Queue* queue);
+int is_empty_queue(Queue* queue);
 
-int isFull(Queue* queue);
+int is_full_queue(Queue* queue);
 
 void enqueue(Queue* queue, int value);
 
 int dequeue(Queue* queue);
 
-void display(Queue* queue);
+void display_queue(Queue* queue);
+
+#endif // COMMON_H

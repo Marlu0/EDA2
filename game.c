@@ -342,7 +342,7 @@ void turn_player(Character *character, Enemy *enemies, int numEnemies, Stack* at
                 int n = rand() % attacksDone + 1;
                 int pastDamage = 0;
                 for (int i=0; i<n; ++i){
-                    pastDamage = popStack(attackStack);
+                    pastDamage = pop_stack(attackStack);
                 }
                 int totalDamage = 2*pastDamage;
                 int enemySelected = selectEnemy(enemies, numEnemies);
@@ -366,7 +366,7 @@ void turn_player(Character *character, Enemy *enemies, int numEnemies, Stack* at
             enemies[enemySelected].health -= totalDamage;
             printf("You've used %s and have given %d damage to %s", character->active_weapon.skills[skillSelected]->name, totalDamage, enemies[enemySelected].name);
 
-            pushStack(attackStack, totalDamage);
+            push_stack(attackStack, totalDamage);
 
             ++attacksDone;
             }
@@ -400,7 +400,7 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
     int n = rand() % 11 + 10;
 
     /* We initialise the queue */
-    Queue *turnQueue = createQueue(n*(number_of_enemies+1));
+    Queue *turnQueue = create_queue(n*(number_of_enemies+1));
 
     srand(time(NULL));
     /*The baddies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be that value, so it is fixed*/
