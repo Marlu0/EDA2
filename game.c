@@ -103,11 +103,11 @@ Returns:
     - Nothing
 */
 void reset_character_stats(Character *character) {
-    character->stats.hp = 0;
-    character->stats.bp = 0;
-    character->stats.atk = 0;
-    character->stats.def = 0;
-    character->stats.luc = 0;
+    character->stats.hp = 1;
+    character->stats.bp = 1;
+    character->stats.atk = 1;
+    character->stats.def = 1;
+    character->stats.luc = 1;
 }
 
 /* ASSIGN POINTS
@@ -157,6 +157,9 @@ Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */)
     /* Flag to track validity of input */
     int done = 0;
     int statpts = 15;  /* Initialize stat points to 15 outside the loop */
+    
+    printf("Base level of all stats: 1\n");
+    /* Initialize character stats to 1 */
     reset_character_stats(&character);
 
     /* Outer loop in case of re-doing stats */
@@ -230,14 +233,14 @@ Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */)
     /* We initialize balance */
     character.balance = 0;
 
-    /* We add the initial weapon and initialise the inventory */
+    /* We add the initial weapon (fists) and initialise the inventory */
     character.active_weapon = weapons_dictionary[0];
     character.inventory.weapons_in_inventory[0] = weapons_dictionary[0];
     character.inventory.fill = 1;
 
     /* We initialise health and mana in function of hp and mp stats */
-    character.health = 100 + (10*(character.stats.hp));
-    character.bullets = 100 + (10*(character.stats.bp));
+    character.health = 100+(20*(character.stats.hp-1));
+    character.bullets = 100+(10*(character.stats.bp-1));
 
     return character;
 }
@@ -472,6 +475,47 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
     /*Add the attack chosen to the attack stack (for the time shot ability)*/
     /*Use the multiplier and substract the hp points form the baddie*/
     /*Return the modified abilities to normality*/
+}
+
+/* TURN ENEMY 
+This function recieves:
+    - Pointers for a character and an enemy
+Does:
+    - The pattern of attack of the enemies
+Returns:
+    - Nothing
+*/
+void turn_enemy(Character *character, Enemy *enemy) {
+
+    int character_health = character->health;
+    int enemy_health = enemy->health;
+    float aggressiveness = character_health/enemy_health; // This can make the enemy more aggressive as its health goes down
+
+    /* Initialize chance of types of attack */
+    int base_attack_chance;
+    int skill_chance;
+    int miss_chance;
+
+    /* Set base chances for the fight in function of character's luck */
+    int luck = character->stats.luc;  
+    base_attack_chance = luck * 4;
+    skill_chance = 100-base_attack_chance;
+    miss_chance = luck;
+
+    /* Adjust chances if enemy is in disadvantage */
+    if (aggressiveness > AGGRESSIVE_MODE_ACTIVATOR) {
+        base_attack_chance += 10; // Example adjustment, you can modify this as needed
+        skill_chance -= 10; // Example adjustment, you can modify this as needed
+        miss_chance = 100 - (base_attack_chance + skill_chance); // Recalculate miss chance
+    }
+    /* Seed a random number generator */
+    srand(time(NULL));
+
+    /* Generate a random number between 1 and 100 */
+    int n = rand() % 100 + 1;
+
+    /* Depending on the number and chances, do one thing or another */
+
 }
 
 /* DO COMBAT

@@ -88,8 +88,8 @@ typedef struct{
     char name[MAX_STRING_LEN];
     int health;
     Stats stats;
-    Skill skill1,skill2;
-    Modifier modifier;
+    Weapon weapon;
+    Modifier active_modifiers[NUM_MODIFIERS];
 }Enemy;
 
 /* OPTION:
