@@ -419,7 +419,7 @@ It does:
 Returns:
     - Nothing
 */
-void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done) {
+void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done, bool time_strike_done) {
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
     const char *options1[] = {"Attack", "Skills", NULL};
     int atkType = get_selection(options1);
@@ -432,7 +432,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             int skill_selected = select_skill(character, attacks_done);
 
             // Special skill, Time Strike
-            if (character->active_weapon.skills[skill_selected].name == "Time Strike") {
+            if ((character->active_weapon.skills[skill_selected].name == "Time Strike") && (!time_strike_done)) {
                 //Generate a random number n between 1 and attacks_done and pop n times
                 srand(time(NULL));
                 int n = rand() % attacks_done + 1;
@@ -444,8 +444,8 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 int enemy_selected = select_enemy(enemies, number_of_enemies);
                 enemies[enemy_selected].health -= total_damage;
                 printf("You've used Time Strike and have given %d damage to %s\n",total_damage, enemies[enemy_selected].name);
+                time_strike_done = true;
             }
-
             else {
             //Apply modifiers to character
             character->active_modifiers->tempatk += character->active_weapon.skills[skill_selected].skill_modifier.tempatk;
@@ -573,6 +573,9 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
     
     /* We initialise the stack of size n turns */
     Stack *attack_stack = create_stack(n);
+    
+    /* We initialise a flag to limit Time Strike to 1 use per fight */
+    bool time_strike_done = false;
 
     /* Here we set a dead enemy counter, a copy of n to keep track of when the battle ends and a counter for number of attacks done by us */
     int goodie_index = number_of_enemies;
