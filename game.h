@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+/* TYPE DEFINITIONS */
+
 /* STATS: 
 Health, maná, attack, defense, luck*/
 typedef struct{
@@ -42,7 +44,7 @@ typedef struct{
 typedef struct{
     char name[MAX_STRING_LEN];
     char description[MAX_STRING_LEN];
-    Skill **skills; //Size of the array = NUM_SKILLS
+    Skill *skills; //Size of the array = NUM_SKILLS
 }Weapon;
 
 /* INVENTORY:
@@ -133,13 +135,13 @@ over them so that the load function can put you back in the correct section.*/
 
 /* Functions for character creation and customization */
 
-Character create_character();
-
 void name_character(Character *character);
 
 void reset_character_stats(Character *character);
 
 void assign_points(int *stat, int *statpts, const char *stat_name);
+
+Character create_character();
 
 Character customize_character();
 
@@ -147,10 +149,11 @@ Character customize_character();
 
 void obtain_weapon(Character *character, Weapon weapon);
 
-void change_weapon(Character *character, Weapon weapon);
-
+void change_weapon(Character *character);
 
 /* Functions for combat */
+
+int select_skill(Character *character);
 
 void do_combat(Character *character, Enemy *enemies, int number_of_enemies);
 

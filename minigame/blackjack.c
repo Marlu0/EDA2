@@ -16,7 +16,7 @@ int play_blackjack(int balance) { //we will need a balance variable as well stor
         // Check the choice and perform corresponding action
         switch(choice) {
             case 1:
-                if (balance>0){
+                if (balance>0) {
                     printf("Playing!\n"); //COM BACK HERE LATER!!
                 Player player = {balance};
                 Player dealer = {0};
@@ -37,12 +37,12 @@ int play_blackjack(int balance) { //we will need a balance variable as well stor
             default:
                 printf("Invalid choice! Please enter a valid option.\n");
         }
-    } while(choice != 2); // Continue looping until user chooses to exit (option 2)
+    } while (choice != 2); // Continue looping until user chooses to exit (option 2)
 
     return 0;
 }
 
-void initialize_deck(Card deck[]){
+void initialize_deck(Card deck[]) {
     int index = 0;
     // Loop through each suit
     for (int i = 0; i < NUMSUITS; i++) {
@@ -55,7 +55,7 @@ void initialize_deck(Card deck[]){
     }
 }
 
-void shuffle_deck(Card deck[]){
+void shuffle_deck(Card deck[]) {
     srand(time(NULL)); // Seed the random number generator
 
     // Perform Fisher-Yates shuffle algorithm
@@ -70,7 +70,7 @@ void shuffle_deck(Card deck[]){
     }
 }
 
-void deal_card(Card deck[], Player *player){
+void deal_card(Card deck[], Player *player) {
     // Check if player's hand is full
     if (player->handsize >= 10) {
         printf("Cannot deal card. Hand is full.\n");
@@ -93,9 +93,9 @@ void deal_card(Card deck[], Player *player){
     printf("Card dealt.\n");
 }
 
-int calculate_hand_value(Card hand[], int hand_size){
+int calculate_hand_value(Card hand[], int hand_size) {
     int sum = 0;
-    for(int i; i < hand_size; i++){
+    for (int i; i < hand_size; i++) {
         hand[i].
     }
 }

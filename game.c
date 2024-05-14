@@ -9,7 +9,7 @@ It does:
 Returns:
     - pointer to array
 */
-Skill *init_skills(){
+Skill *init_skills() {
     Skill skills[10] = {
         /*0*/{ "The Hermit", "Increases +1 defense", {1.0, 1.15, 1.0}},
         /*1.0*/{ "The Chariot", "Increases +2 defense", {1.0, 1.3, 1.0}},
@@ -26,13 +26,13 @@ Skill *init_skills(){
     return skills;
 };
 
-Skill *init_skill(char filename[], char name[] /*pull it out on the name*/){
+Skill *init_skill(char filename[], char name[] /*pull it out on the name*/) {
     FILE *file_pointer = fopen(filename, "w");
-    if(file_pointer == NULL){
+    if (file_pointer == NULL) {
         perror("Error opening file") //this is a boss function use it more often
     }
 
-    while(strncmp()) //this needs to be finished later
+    while (strncmp()) //this needs to be finished later
 }
 
 /*
@@ -44,7 +44,7 @@ Returns:
     - pointer to array.
 */
 
-Weapon *init_weapons(Skill skills[]){
+Weapon *init_weapons(Skill skills[]) {
     Weapon weapons[6] = {
         {"Rusty Revolver", "Older that the mountains", skills[0], skills[4]}, //this does not work because items in an arry need to be constant size and these arrays are not
         {"Linda", "Sweetest kisses in the wild west", skills[2], skills[0]},
@@ -56,7 +56,9 @@ Weapon *init_weapons(Skill skills[]){
     return weapons;
 };
 
-/*
+/* Functions for character creation and customization*/
+
+/* NAME CHARACTER
 This function recieves: 
     - Pointer to character of type Character 
 It does:
@@ -64,7 +66,6 @@ It does:
 Returns:
     - Nothing
 */
-
 void name_character(Character *character) {
     /* Flag to track validity of input */
     int sure = 0;
@@ -93,7 +94,7 @@ void name_character(Character *character) {
     }
 }
 
-/*
+/* RESET CHARACTER STATS
 This function recieves: 
     - Pointer to character of type Character
 It does:
@@ -109,7 +110,7 @@ void reset_character_stats(Character *character) {
     character->stats.luc = 0;
 }
 
-/*
+/* ASSIGN POINTS
 This function recieves: 
     - Pointer to stat to change, pointer to available statpts and a string containing the stat_name 
 It does:
@@ -134,9 +135,9 @@ void assign_points(int *stat, int *statpts, const char *stat_name) {
     }
 }
 
-/*
+/* CREATE CHARACTER
 This function recieves: 
-    - Nothing
+    - weapons_dictionary array from dictionaries.h
 It does:
     - Creates a character, initializes its values and assigns name and stats depending on input
 Returns:
@@ -159,7 +160,7 @@ Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */)
     reset_character_stats(&character);
 
     /* Outer loop in case of re-doing stats */
-    while (!done){
+    while (!done) {
         /* Loop until sure is true and there are stat points remaining */
         while (statpts > 0) {
             printf("Select stat to assign: (Current points: %d)\n", statpts);
@@ -241,7 +242,46 @@ Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */)
     return character;
 }
 
-/*
+/* Functions for inventory*/
+
+/* OBTAIN WEAPON
+This function recieves:
+    - Pointer to character
+It does:
+    - Adds weapon to character's inventory
+Returns:
+    - Nothing
+*/
+void obtain_weapon(Character *character, Weapon weapon) {
+    int size = character->inventory.fill; /*you need to us a dot on the second as it is by value.*/
+    character->inventory.weapons_in_inventory[size] = weapon;
+    character->inventory.fill++;
+
+    /*realistically this function doesnt need to exist and can just be done at the
+    bottom of the do_fight function*/
+}
+
+/* CHANGE WEAPON 
+This function recieves:
+    - Pointer to character
+Does:
+    - Changes active_weapon in character's inventory
+Returns:
+    - Nothing
+*/
+void change_weapon(Character *character) {
+    int inventory_full = character->inventory.fill;
+    printf("Select a weapon from your inventory (1-%d): \n",inventory_full);
+    for (int i=0; i<inventory_full; ++i) {
+        printf("%d. %s: %s\n",i+1,character->inventory.weapons_in_inventory[i].name,character->inventory.weapons_in_inventory[i].description);
+    }
+    
+}
+
+/* Functions for combat */
+
+/* SELECT SKILL
+This function recieves
 */
 int select_skill(Character *character) {
     int bullets = character->bullets;
@@ -295,15 +335,15 @@ int select_skill(Character *character) {
 /*
 This function recieves:
     - An array of enemies in form of pointer
-    - An int numEnemies
+    - An int number_of_enemies
 It does:
     - Select an enemy with hp>0
 Returns:
     - Selected enemy's index in array
 */
-int selectEnemy(Enemy *enemies, int numEnemies) {
+int select_enemy(Enemy *enemies, int number_of_enemies) {
     printf("Available enemies:\n");
-    for (int i = 0; i < numEnemies; ++i) {
+    for (int i = 0; i < number_of_enemies; ++i) {
         if (enemies[i].health > 0) {
             printf("%d. %s\n", (i + 1), enemies[i].name);
         }
@@ -311,62 +351,62 @@ int selectEnemy(Enemy *enemies, int numEnemies) {
 
     int choice;
     do {
-        printf("Choose an enemy (1-%d): ", numEnemies);
+        printf("Choose an enemy (1-%d): ", number_of_enemies);
         scanf("%d", &choice);
-        if (choice < 1 || choice > numEnemies || enemies[choice - 1].health <= 0) {
+        if (choice < 1 || choice > number_of_enemies || enemies[choice - 1].health <= 0) {
             printf("Invalid choice. Please choose a valid enemy.\n");
         }
-    } while (choice < 1 || choice > numEnemies || enemies[choice - 1].health <= 0);
+    } while (choice < 1 || choice > number_of_enemies || enemies[choice - 1].health <= 0);
 
     return choice - 1; // Return index of selected enemy
 }
 
-void turn_player(Character *character, Enemy *enemies, int numEnemies, Stack* attackStack, int attacksDone){
+void turn_player(Character *character, Enemy *enemies, int number_of_enemies, Stack* attack_stack, int attacks_done) {
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
     const char *options1[] = {"Attack", "Skills", NULL};
     int atkType = get_selection(options1);
-    switch (atkType){
+    switch (atkType) {
         case 1:
-            int enemySelected = selectEnemy(enemies, numEnemies);
-            enemies[enemySelected].health -= (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemySelected].stats.def)*(enemies[enemySelected].modifier.tempdef));
+            int enemy_selected = select_enemy(enemies, number_of_enemies);
+            enemies[enemy_selected].health -= (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemy_selected].stats.def)*(enemies[enemy_selected].modifier.tempdef));
         
         case 2:
-            int skillSelected = select_skill(character);
+            int skill_selected = select_skill(character);
 
             // Special skill, Time Strike
-            if (character->active_weapon.skills[skillSelected]->name == "Time Strike"){
-                //Generate a random number n between 1 and attacksDone and pop n times
+            if (character->active_weapon.skills[skill_selected].name == "Time Strike") {
+                //Generate a random number n between 1 and attacks_done and pop n times
                 srand(time(NULL));
-                int n = rand() % attacksDone + 1;
-                int pastDamage = 0;
-                for (int i=0; i<n; ++i){
-                    pastDamage = pop_stack(attackStack);
+                int n = rand() % attacks_done + 1;
+                int past_damage = 0;
+                for (int i=0; i<n; ++i) {
+                    past_damage = pop_stack(attack_stack);
                 }
-                int totalDamage = 2*pastDamage;
-                int enemySelected = selectEnemy(enemies, numEnemies);
-                enemies[enemySelected].health -= totalDamage;
-                printf("You've used Time Strike and have given %d damage to %s\n",totalDamage, enemies[enemySelected].name);
+                int total_damage = 2*past_damage;
+                int enemy_selected = select_enemy(enemies, number_of_enemies);
+                enemies[enemy_selected].health -= total_damage;
+                printf("You've used Time Strike and have given %d damage to %s\n",total_damage, enemies[enemy_selected].name);
             }
 
             else {
             //Apply modifiers to character
-            character->active_modifiers->tempatk += character->active_weapon.skills[skillSelected]->skill_modifier.tempatk;
-            character->active_modifiers->tempdef += character->active_weapon.skills[skillSelected]->skill_modifier.tempdef;
-            character->active_modifiers->templuc += character->active_weapon.skills[skillSelected]->skill_modifier.templuc;
+            character->active_modifiers->tempatk += character->active_weapon.skills[skill_selected].skill_modifier.tempatk;
+            character->active_modifiers->tempdef += character->active_weapon.skills[skill_selected].skill_modifier.tempdef;
+            character->active_modifiers->templuc += character->active_weapon.skills[skill_selected].skill_modifier.templuc;
             
             //Apply healing in case skill heals
-            character->health += character->active_weapon.skills[skillSelected]->healing;
-            printf("You've healed %d health points", character->active_weapon.skills[skillSelected]->healing);
+            character->health += character->active_weapon.skills[skill_selected].healing;
+            printf("You've healed %d health points", character->active_weapon.skills[skill_selected].healing);
 
             //Do the attack part
-            int enemySelected = selectEnemy(enemies, numEnemies);
-            int totalDamage = (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemySelected].stats.def)*(enemies[enemySelected].modifier.tempdef));    
-            enemies[enemySelected].health -= totalDamage;
-            printf("You've used %s and have given %d damage to %s", character->active_weapon.skills[skillSelected]->name, totalDamage, enemies[enemySelected].name);
+            int enemy_selected = select_enemy(enemies, number_of_enemies);
+            int total_damage = (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemy_selected].stats.def)*(enemies[enemy_selected].modifier.tempdef));    
+            enemies[enemy_selected].health -= total_damage;
+            printf("You've used %s and have given %d damage to %s", character->active_weapon.skills[skill_selected].name, total_damage, enemies[enemy_selected].name);
 
-            push_stack(attackStack, totalDamage);
+            push_stack(attack_stack, total_damage);
 
-            ++attacksDone;
+            ++attacks_done;
             }
         
         default:
@@ -387,9 +427,9 @@ It does:
 Returns:
     - Nothing
 */
-void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
+void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
     printf("You've started a combat with:\n ");
-    for (int i=0; i<MAX_ENEMIES; ++i){
+    for (int i=0; i<MAX_ENEMIES; ++i) {
         printf("%s ", enemies[i].name);
     }
 
@@ -398,14 +438,14 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
     int n = rand() % 11 + 10;
 
     /* We initialise the queue */
-    Queue *turnQueue = create_queue(n*(number_of_enemies+1));
+    Queue *turn_queue = create_queue(n*(number_of_enemies+1));
 
     srand(time(NULL));
     /*The baddies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be that value, so it is fixed*/
-    int firstTurn = rand() % (number_of_enemies+1);
+    int first_turn = rand() % (number_of_enemies+1);
 
-    for (int i=0; i<((number_of_enemies+1)*n); ++i){
-        enqueue(turnQueue, i%(number_of_enemies+1));
+    for (int i=0; i<((number_of_enemies+1)*n); ++i) {
+        enqueue(turn_queue, i%(number_of_enemies+1));
     }
     
     /*Here we set a dead enemy counter and a copy of n to keep track of when the battle ends*/
@@ -413,48 +453,38 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
     int dead_enemies = 0;
     int N = n;
     bool first_turn_done = false;
-    while(dead_enemies != 0 && !isEmpty(turnQueue) && character->health>0){
+    while (dead_enemies != 0 && !isEmpty(turn_queue) && character->health>0) {
         //Here we do the first turn control
-        if(!first_turn_done){
-            if (turnQueue->items[turnQueue->front] = firstTurn){
-                if(turnQueue->items[turnQueue->front] = goodie_index){
+        if (!first_turn_done) {
+            if (turn_queue->items[turn_queue->front] = first_turn) {
+                if (turn_queue->items[turn_queue->front] = goodie_index) {
                     printf("Your turn to attack! \n");
-                    turn_player();
-                    dequeue(turnQueue);
-                }else{
-                    printf("%s is now attacking!\n", enemies[turnQueue->items[turnQueue->front]].name);
+                    turn_player(character, enemies, number_of_enemies, attack_stack, attacks_done);
+                    dequeue(turn_queue);
+                }
+                else {
+                    printf("%s is now attacking!\n", enemies[turn_queue->items[turn_queue->front]].name);
                     turn_enemy();
-                    dequeue(turnQueue);
+                    dequeue(turn_queue);
                 }
                 first_turn_done = true;
-            }else{
-                dequeue(turnQueue);
+            }
+            else {
+                dequeue(turn_queue);
             }
         }
-        else{
-            if(turnQueue->items[turnQueue->front] = goodie_index){
+        else {
+            if (turn_queue->items[turn_queue->front] = goodie_index) {
                     /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
                     attack_player(character, enemies, dead_enemies);
-                    dequeue(turnQueue);
-                }else{
+                    dequeue(turn_queue);
+            }
+            else {
                     /*In the enemy attack we pass the enemy in turn and the character*/
                     /*The enemy shoud be a pointer TALK WITH MARCELINO*/
-                    attack_enemy(enemies[turnQueue->items[turnQueue->front]], character, dead_enemies);
-                    dequeue(turnQueue);
-                }
+                    attack_enemy(enemies[turn_queue->items[turn_queue->front]], character, dead_enemies);
+                    dequeue(turn_queue);
+            }
         }
     }
-}
-
-Character customize_character(Character *character){
-    
-}
-
-void obtain_weapon(Character *character, Weapon weapon){
-    int size = character->inventory.fill; /*you need to us a dot on the second as it is by value.*/
-    character->inventory.weapons_in_inventory[size] = weapon;
-    character->inventory.fill++;
-
-    /*realistically this function doesnt need to exist and can just be done at the
-    bottom of the do_fight function*/
 }
