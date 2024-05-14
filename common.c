@@ -2,17 +2,15 @@
 
 #include "common.h"
 
-/*  
+/* GET SELECTION (Important: This function returns index+1 of the array entered)
 This function recieves: 
     - An array of strings, the last element MUST be NULL. 
 It does:
     - Prints the strings as enumerated options and correctly scans the selection
 Returns:
     - The selection (int)
-*/
 
-/* Example of definition of array:
-
+Example of definition of array:
 const char *array[] = {
         "Option 1",
         "Option 2",
@@ -60,7 +58,7 @@ int get_selection(const char *strings[]) {
     return selection;
 }
 
-/*
+/* PRINT MAIN TITLE
 This function recieves: 
     - Nothing. 
 It does:

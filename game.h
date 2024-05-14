@@ -155,8 +155,10 @@ void change_weapon(Character *character);
 
 int select_skill(Character *character);
 
-void do_combat(Character *character, Enemy *enemies, int number_of_enemies);
+int select_enemy(Enemy *enemies, int number_of_enemies);
 
-void attack_player(Character *character, Enemy *enemies, int dead_enemies);
+void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done);
+
+void do_combat(Character *character, Enemy *enemies, int number_of_enemies);
 
 #endif /* COMMON_H */

@@ -29,7 +29,7 @@ Skill *init_skills() {
 Skill *init_skill(char filename[], char name[] /*pull it out on the name*/) {
     FILE *file_pointer = fopen(filename, "w");
     if (file_pointer == NULL) {
-        perror("Error opening file") //this is a boss function use it more often
+        perror("Error opening file"); //this is a boss function use it more often
     }
 
     while (strncmp()) //this needs to be finished later
@@ -251,14 +251,20 @@ It does:
     - Adds weapon to character's inventory
 Returns:
     - Nothing
+
+Note: This function lets us separe the weapon obtaining from the function of the fight, making the program more modular
 */
 void obtain_weapon(Character *character, Weapon weapon) {
-    int size = character->inventory.fill; /*you need to us a dot on the second as it is by value.*/
+
+    /* Printing the name of the weapon obtained */
+    printf("You obtained %s!", weapon.name);
+
+    /* Temporary variable to store size of inventory */
+    int size = character->inventory.fill; /* You need to use a dot on the second as it is by value */
+    
+    /* Add the new weapon to the empty slot [size] and update fill (size of inventory)*/
     character->inventory.weapons_in_inventory[size] = weapon;
     character->inventory.fill++;
-
-    /*realistically this function doesnt need to exist and can just be done at the
-    bottom of the do_fight function*/
 }
 
 /* CHANGE WEAPON 
@@ -270,18 +276,53 @@ Returns:
     - Nothing
 */
 void change_weapon(Character *character) {
-    int inventory_full = character->inventory.fill;
-    printf("Select a weapon from your inventory (1-%d): \n",inventory_full);
-    for (int i=0; i<inventory_full; ++i) {
-        printf("%d. %s: %s\n",i+1,character->inventory.weapons_in_inventory[i].name,character->inventory.weapons_in_inventory[i].description);
-    }
+
+    /* Create a selection variable for choosing your weapon */
+    int selection;
+
+    /* Create a temporary variable of inventory fill value for readability */
+    int inventory_size = character->inventory.fill;
+
+    /* Create a flag to track validity of input */
+    bool valid_input = false;
     
+    /* Do a while loop to ensure valid choice for weapon */
+    while (!valid_input) {
+
+        /* Printing the available weapons in your inventory */
+        printf("Select a weapon from your inventory (1-%d): \n",inventory_size);
+        for (int i=0; i<inventory_size; ++i) {
+            printf("%d. %s: %s\n",i+1,character->inventory.weapons_in_inventory[i].name,character->inventory.weapons_in_inventory[i].description);
+        }
+        /* Getting the selection */
+        if (scanf(" %d", &selection) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+            /* Flush the input buffer to clear all characters but the first */
+            while (getchar() != '\n');
+        } 
+        else {
+            valid_input = true;
+        }
+        if (valid_input && (selection < 1 || selection > inventory_size)) {
+            printf("Invalid selection. Please try again.\n");
+            valid_input = false;
+        }
+    }
+    int chosen_weapon_index = selection-1; /* We selected the option, which is index+1 in UI */
+    
+    /* We change the active weapon into the selection */
+    character->active_weapon = character->inventory.weapons_in_inventory[chosen_weapon_index];
 }
 
 /* Functions for combat */
 
 /* SELECT SKILL
-This function recieves
+This function recieves:
+    - Pointer to character
+It does:
+    - Selects a skill from the skills array of the active weapon
+Returns:
+    - Index of skill chosen
 */
 int select_skill(Character *character) {
     int bullets = character->bullets;
@@ -332,7 +373,7 @@ int select_skill(Character *character) {
     return available_skills[selection - 1];
 }
 
-/*
+/* SELECT ENEMY
 This function recieves:
     - An array of enemies in form of pointer
     - An int number_of_enemies
@@ -361,7 +402,15 @@ int select_enemy(Enemy *enemies, int number_of_enemies) {
     return choice - 1; // Return index of selected enemy
 }
 
-void turn_player(Character *character, Enemy *enemies, int number_of_enemies, Stack* attack_stack, int attacks_done) {
+/* TURN PLAYER 
+This function recieves:
+    - Pointer to character, array of enemies and stack of attacks. Also an int of number of enemies (size of array) and attacks done for Time Strike implementation
+It does:
+    - All the turn of the player: Choosing to attack or use skill, use of the skill, special skill Time Strike implementation.
+Returns:
+    - Nothing
+*/
+void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done) {
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
     const char *options1[] = {"Attack", "Skills", NULL};
     int atkType = get_selection(options1);
@@ -418,7 +467,8 @@ void turn_player(Character *character, Enemy *enemies, int number_of_enemies, St
     /*Use the multiplier and substract the hp points form the baddie*/
     /*Return the modified abilities to normality*/
 }
-/*
+
+/* DO COMBAT
 This function recieves:
     - The character (by reference)
     - An array of enemies of size n 
@@ -441,17 +491,21 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
     Queue *turn_queue = create_queue(n*(number_of_enemies+1));
 
     srand(time(NULL));
-    /*The baddies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be that value, so it is fixed*/
+    /*The enemies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be that value, so it is fixed*/
     int first_turn = rand() % (number_of_enemies+1);
 
     for (int i=0; i<((number_of_enemies+1)*n); ++i) {
         enqueue(turn_queue, i%(number_of_enemies+1));
     }
     
-    /*Here we set a dead enemy counter and a copy of n to keep track of when the battle ends*/
+    /* We initialise the stack of size n turns */
+    Stack *attack_stack = create_stack(n);
+
+    /* Here we set a dead enemy counter, a copy of n to keep track of when the battle ends and a counter for number of attacks done by us */
     int goodie_index = number_of_enemies;
     int dead_enemies = 0;
     int N = n;
+    int attacks_done = 0;
     bool first_turn_done = false;
     while (dead_enemies != 0 && !isEmpty(turn_queue) && character->health>0) {
         //Here we do the first turn control
@@ -461,6 +515,7 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
                     printf("Your turn to attack! \n");
                     turn_player(character, enemies, number_of_enemies, attack_stack, attacks_done);
                     dequeue(turn_queue);
+                    ++attacks_done;
                 }
                 else {
                     printf("%s is now attacking!\n", enemies[turn_queue->items[turn_queue->front]].name);
