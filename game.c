@@ -486,10 +486,9 @@ Returns:
     - Nothing
 */
 void turn_enemy(Character *character, Enemy *enemy) {
-
     int character_health = character->health;
     int enemy_health = enemy->health;
-    float aggressiveness = character_health/enemy_health; // This can make the enemy more aggressive as its health goes down
+    float aggressiveness = (float)character_health / enemy_health; // This can make the enemy more aggressive as its health goes down
 
     /* Initialize chance of types of attack */
     int base_attack_chance;
@@ -499,23 +498,47 @@ void turn_enemy(Character *character, Enemy *enemy) {
     /* Set base chances for the fight in function of character's luck */
     int luck = character->stats.luc;  
     base_attack_chance = luck * 4;
-    skill_chance = 100-base_attack_chance;
-    miss_chance = luck;
+    skill_chance = 100 - base_attack_chance;
+    miss_chance = 0; // Initially set to 0, will be recalculated if needed
 
     /* Adjust chances if enemy is in disadvantage */
     if (aggressiveness > AGGRESSIVE_MODE_ACTIVATOR) {
-        base_attack_chance += 10; // Example adjustment, you can modify this as needed
-        skill_chance -= 10; // Example adjustment, you can modify this as needed
+        base_attack_chance += 10;
+        skill_chance -= 10;
         miss_chance = 100 - (base_attack_chance + skill_chance); // Recalculate miss chance
     }
+
     /* Seed a random number generator */
     srand(time(NULL));
 
     /* Generate a random number between 1 and 100 */
-    int n = rand() % 100 + 1;
+    int r = rand() % 100 + 1;
 
     /* Depending on the number and chances, do one thing or another */
+    if (r <= base_attack_chance) {
+        int total_damage = (10 * (enemy->stats.atk * enemy->active_modifiers[0].tempatk)) / (character->stats.def * character->active_modifiers[0].tempdef);    
+        character->health -= total_damage;
+        printf("%s has done a base attack and caused %d damage\n", enemy->name, total_damage);
+    } else if (r <= base_attack_chance + skill_chance) {
+        /* To choose the skill, we'll use a random integer generator from 0 to 1 */
+        int skill_index = rand() % 2;
+        Skill chosen_skill = enemy->weapon.skills[skill_index];
 
+        /* Now we apply the modifiers of the skill */
+        enemy->active_modifiers[0].tempatk += chosen_skill.skill_modifier.tempatk;
+        enemy->active_modifiers[0].tempdef += chosen_skill.skill_modifier.tempdef;
+        enemy->active_modifiers[0].templuc += chosen_skill.skill_modifier.templuc;
+
+        /* Finally, the enemy attacks */
+        int total_damage = (10 * (enemy->stats.atk * enemy->active_modifiers[0].tempatk)) / (character->stats.def * character->active_modifiers[0].tempdef);    
+        character->health -= total_damage;
+
+        printf("%s has used %s and caused %d damage\n", enemy->name, chosen_skill.name, total_damage);
+    } 
+    else {
+        enemy->health += 5*(enemy->stats.hp)
+        printf("%s has skipped his turn but healed himself! No damage\n", enemy->name);
+    }
 }
 
 /* DO COMBAT
