@@ -20,7 +20,8 @@ Skill skills_dictionary[11] = {
     {100, "Time Strike", "Repeat a random previous attack and double its damage", {1,1,1}, 0}
 };
 
-Weapon weapons_dictionary[6] = {
+Weapon weapons_dictionary[7] = {
+    {"Fists", "Ol' reliable bare knuckles", {&skills_dictionary[4], &skills_dictionary[10]}},
     {"Rusty Revolver", "Older than the mountains", {&skills_dictionary[0], &skills_dictionary[4]}},
     {"Linda", "Sweetest kisses in the wild west", {&skills_dictionary[2], &skills_dictionary[0]}},
     {"GOAT", "Gun Of Antilope Trilobites", {&skills_dictionary[5]}, {&skills_dictionary[3]}},

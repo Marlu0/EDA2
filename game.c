@@ -221,7 +221,7 @@ Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */)
     }
 
     /* Initialize active modifier to default values */
-    for (int i = 0; i < MAX_MODIFIERS; i++) {
+    for (int i = 0; i < NUM_MODIFIERS; i++) {
         character.active_modifiers[i].tempatk = 1;
         character.active_modifiers[i].tempdef = 1;
         character.active_modifiers[i].templuc = 1;
@@ -324,7 +324,7 @@ It does:
 Returns:
     - Index of skill chosen
 */
-int select_skill(Character *character) {
+int select_skill(Character *character, int attacks_done) {
     int bullets = character->bullets;
     int available_skills[NUM_SKILLS]; // Array to store indices of available skills
     int num_available_skills = 0; // Counter for available skills
@@ -364,6 +364,12 @@ int select_skill(Character *character) {
         if (selection < 1 || selection > num_available_skills) {
             printf("Invalid selection. Please select a skill between 1 and %d.\n", num_available_skills);
             continue; // Skip the rest of the loop and ask again for input
+        }
+
+        // Check if Time Strike is possible (attacks done must be more than 1)
+        if (character->active_weapon.skills[selection-1].name == "Time Strike" && attacks_done < 1) {
+            printf("Time Strike isn't possible, you haven't done any attacks yet!\n");
+            continue;
         }
 
         break; // Break out of the loop if the input is valid
@@ -420,7 +426,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             enemies[enemy_selected].health -= (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemy_selected].stats.def)*(enemies[enemy_selected].modifier.tempdef));
         
         case 2:
-            int skill_selected = select_skill(character);
+            int skill_selected = select_skill(character, attacks_done);
 
             // Special skill, Time Strike
             if (character->active_weapon.skills[skill_selected].name == "Time Strike") {
@@ -479,7 +485,7 @@ Returns:
 */
 void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
     printf("You've started a combat with:\n ");
-    for (int i=0; i<MAX_ENEMIES; ++i) {
+    for (int i=0; i<number_of_enemies; ++i) {
         printf("%s ", enemies[i].name);
     }
 

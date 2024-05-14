@@ -49,7 +49,7 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/) {
         fprintf(file_pointer, "%s\n", character->inventory.weapons_in_inventory[i].name);
     }
 
-    for (int i = 0; i < MAX_MODIFIERS; i++) { /*will this not print all the modifiers tahta re active.*/
+    for (int i = 0; i < NUM_MODIFIERS; i++) { /*will this not print all the modifiers tahta re active.*/
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempatk);
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempdef);
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].templuc);

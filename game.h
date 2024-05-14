@@ -73,7 +73,7 @@ typedef struct{
     int balance; //money
     Stats stats;
     Inventory inventory;
-    Modifier active_modifiers[MAX_MODIFIERS];
+    Modifier active_modifiers[NUM_MODIFIERS];
     Weapon active_weapon;
 }Character;
 
@@ -105,14 +105,14 @@ typedef struct{
 }Option;
 
 /* DECISION:
-    Has a description of the decision to make and MAX_OPTIONS options
+    Has a description of the decision to make and NUM_OPTIONS options
     Example:
         - "You find a snake, it is looking at you in a menacing way, what do you do?"
         - ["Fight", "Flee"]
 */
 typedef struct{
     char description[MAX_DESCRIPTION_LEN];
-    Option option[MAX_OPTIONS];
+    Option option[NUM_OPTIONS];
 }Decision;
 
 /* SCENARIO:
@@ -125,7 +125,7 @@ typedef struct{
 typedef struct{
     char title[MAX_STRING_LEN];
     char description[MAX_DESCRIPTION_LEN];
-    Decision decision[MAX_DECISIONS];
+    Decision decision[NUM_DECISIONS];
 }Scenario;
 
 /*we will need to make a fucntion that inits the linked list of all scenaraios. and then a function that iters
@@ -133,7 +133,7 @@ over them so that the load function can put you back in the correct section.*/
 
 /* FUNCTION DECLARATIONS */
 
-/* Functions for character creation and customization */
+/* Functions for character creation */
 
 void name_character(Character *character);
 
@@ -143,8 +143,6 @@ void assign_points(int *stat, int *statpts, const char *stat_name);
 
 Character create_character();
 
-Character customize_character();
-
 /* Functions for inventory */
 
 void obtain_weapon(Character *character, Weapon weapon);
@@ -153,7 +151,7 @@ void change_weapon(Character *character);
 
 /* Functions for combat */
 
-int select_skill(Character *character);
+int select_skill(Character *character, int attacks_done);
 
 int select_enemy(Enemy *enemies, int number_of_enemies);
 

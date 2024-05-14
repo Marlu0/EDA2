@@ -12,13 +12,12 @@
 /* MACROS */
 
 #define NUM_SKILLS 2
-#define MAX_MODIFIERS 4
+#define NUM_MODIFIERS 4
 #define MAX_STRING_LEN 50
 #define MAX_DESCRIPTION_LEN 100
-#define MAX_OPTIONS 2
-#define MAX_DECISIONS 2
-#define MAX_ENEMIES 3
-#define INVENTORY_SIZE 7 /*this is the number of weapons including fists.*/
+#define NUM_OPTIONS 2
+#define NUM_DECISIONS 2
+#define INVENTORY_SIZE 7
 
 /* FUNCTION DECLARATIONS */
 
