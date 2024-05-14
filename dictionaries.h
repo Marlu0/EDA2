@@ -1,7 +1,10 @@
-#include "common.h"
-#include "game.h"
+#ifndef SKILLS_WEAPONS_H
+#define SKILLS_WEAPONS_H
 
 /* Here we define the skills and weapons, hard coded as a .h to make adjustments to the playability easier */
+
+#include "common.h"
+#include "game.h"
 
 Skill skills_dictionary[11] = {
     {10, "The Hermit", "Increases defense a 15%", {1, 1.15, 1}, 0},
@@ -25,3 +28,5 @@ Weapon weapons_dictionary[6] = {
     {"Cactus Thrower", "Ouch..", {&skills_dictionary[7]}, {&skills_dictionary[8]},},
     {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6]}, {&skills_dictionary[5]}}
 };
+
+#endif /* SKILLS_WEAPONS_H */
