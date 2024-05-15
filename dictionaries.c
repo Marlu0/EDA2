@@ -2,7 +2,7 @@
 #include "game.h"
 
 Skill skills[10] = {
-    /*0*/("The Hermit", "Increases defense a 15%", (1, 1.15, 1)),
+    /*0*/("The Hermit", "Increases defense a 15%", (1, 1.15, 1)), //these need to be changed for curly brackets.
     /*1*/("The Chariot", "Increases defence a 30%", (1, 1.3, 1)),
     /*2*/("The Tower", "Increases attack a 15%", (1.15 , 1, 1)),
     /*3*/("The Devil", "Increases attack a 30%", (1.3,1,1)),
