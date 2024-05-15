@@ -211,6 +211,7 @@ void attack_player(Character *character, Enemy *enemies, int dead_enemies){
     const char *options1[] = {"Attack", "Skills", NULL};
     int tipo_ataque = get_selection(options1);
     if (tipo_ataque == 0){
+        const char *Enemies[] = {enemies[0].name, "Skills", NULL};
         int enemigo = funcion_de_marcel(a que enemigo le quieres zurrar);
         reducir vida del enemigo con las bhgv
 
