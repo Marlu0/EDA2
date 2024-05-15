@@ -30,4 +30,15 @@ Weapon weapons_dictionary[7] = {
     {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6]}, {&skills_dictionary[5]}}
 };
 
+Enemy enemies_dictionary[6] = {
+    {"shelly the turtle", }
+};
+typedef struct{
+    char name[MAX_STRING_LEN];
+    int health;
+    Stats stats;
+    Weapon weapon;
+    Modifier active_modifiers[NUM_MODIFIERS];
+}Enemy;
+
 #endif /* DICTIONARIES_H */
