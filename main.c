@@ -2,7 +2,8 @@
 
 #include "common.h"
 #include "game.h"
-/*
+
+/*SAVE GAME
 this fucntion receives:
     - character and scenario.
 it:
@@ -75,17 +76,31 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/) {
     fclose(file_pointer);
 }
 
-/*
+/*LOAD GAME
 this function receives:
     -   charcater and scenario
 use:
     - loads a pervious save froma  text file.
 returns:
     nothing.*/
-void load_game(Character *character, Scenario *scenario) {
+void load_game(Character *character, Scenario *scenario) {}
 
-}
-/*
+/*START GAME
+this function receives: nothing
+it does:
+    - stores runs all the other functions that make the game work
+Returns:
+    - character and scenario for possible later saves.
+*/
+/*init_start_scenario
+this function receives: nothing
+it does:
+    - creates the starting scenario
+it returns:
+    - pointer to the start scenario.
+*/
+Character *start_game(Scenario *start){} //or that the init character is before this as well.
+/*PRINT CREDITS
 This function recieves:
     - Nothing
 It does:
@@ -93,6 +108,7 @@ It does:
 Returns:
     - Nothing
 */
+void contin
 
 
 void print_credits() {
@@ -166,7 +182,8 @@ void init_game(bool first_game) {
     {
     case 1:
         first_game = false;
-        start_game();
+        create_character(first_game) //ou need to update this function to remove the line about
+        start_game(); //we'll get to this eventually.
         break;
 
     case 2:

@@ -32,7 +32,7 @@ it does:
     - loads the skill from the file into a skill struct
 returns:
     - the skill struct*/
-void init_weapon_skill(Weapon *weapon, char filename[], int index1, int index2){
+void init_weapon_skill(Weapon *weapon, char filename[], int index1, int index2){ //fix this function again later.
     FILE *file_pointer = fopen(filename, "r");
     if(file_pointer == NULL){
         perror("Error opening file!");
@@ -208,9 +208,12 @@ It does:
 Returns:
     - character of type Character 
 */
-Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */) {
-    printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
-
+Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */, bool first_game) { //why does this take in the weapons dictionary
+    if (first_game = true){
+        printf("Welcome to Character Creation!\n");
+    } else{
+        printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
+    }
     /* Character initialization */
     Character character;
     
