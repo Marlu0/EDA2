@@ -207,7 +207,7 @@ It does:
 Returns:
     - character of type Character 
 */
-Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */, bool first_game) { //why does this take in the weapons dictionary
+Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */, bool first_game) { //trya dn save this for later
     if (first_game = true){
         printf("Welcome to Character Creation!\n");
     } else{
