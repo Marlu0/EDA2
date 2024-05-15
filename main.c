@@ -2,6 +2,9 @@
 
 #include "common.h"
 #include "game.h"
+#include "combat.h"
+#include "dictionaries.h"
+
 
 /*SAVE GAME
 this fucntion receives:
@@ -75,7 +78,6 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/) {
     //i think it might be better to orgaise the scenarios as a linked list.
     fclose(file_pointer);
 }
-
 /*LOAD GAME
 this function receives:
     -   charcater and scenario
@@ -99,7 +101,10 @@ it does:
 it returns:
     - pointer to the start scenario.
 */
-Character *start_game(Scenario *start){} //or that the init character is before this as well.
+Character *start_game(Character *character, Scenario *start, int first_game){
+    Weapon *weapons_list;
+    Character character = create_character(first_game);
+}
 /*PRINT CREDITS
 This function recieves:
     - Nothing
@@ -108,10 +113,10 @@ It does:
 Returns:
     - Nothing
 */
-void contin
+void continue_game(/*this is the thing that you should put into load file.*/){}
 
 
-void print_credits() {
+void print_credits(){
     printf("\nGame Producers:\n");
     printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
 
@@ -182,8 +187,13 @@ void init_game(bool first_game) {
     {
     case 1:
         first_game = false;
-        create_character(first_game) //ou need to update this function to remove the line about
-        start_game(); //we'll get to this eventually.
+        Character character;
+        Character *character_p = &character;
+
+        Scenario scenario;
+        Scenario *scenario_p = &scenario;
+
+        start_game(character_p, scenario_p); //we'll get to this eventually.
         break;
 
     case 2:
