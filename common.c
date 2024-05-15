@@ -2,17 +2,15 @@
 
 #include "common.h"
 
-/*  
+/* GET SELECTION (Important: This function returns index+1 of the array entered)
 This function recieves: 
     - An array of strings, the last element MUST be NULL. 
 It does:
     - Prints the strings as enumerated options and correctly scans the selection
 Returns:
     - The selection (int)
-*/
 
-/* Example of definition of array:
-
+Example of definition of array:
 const char *array[] = {
         "Option 1",
         "Option 2",
@@ -60,7 +58,7 @@ int get_selection(const char *strings[]) {
     return selection;
 }
 
-/*
+/* PRINT MAIN TITLE
 This function recieves: 
     - Nothing. 
 It does:
@@ -86,7 +84,7 @@ void print_main_title() {
 /* FUNCTIONS FOR STACK */
 
 // Function to create a new stack
-Stack* createStack(int capacity) {
+Stack* create_stack(int capacity) {
     Stack* stack = (Stack*)malloc(sizeof(Stack));
     stack->capacity = capacity;
     stack->top = -1; // Initialize top to -1 (empty stack)
@@ -95,18 +93,18 @@ Stack* createStack(int capacity) {
 }
 
 // Function to check if the stack is empty
-int isEmptyStack(Stack* stack) {
+int is_empty_stack(Stack* stack) {
     return stack->top == -1;
 }
 
 // Function to check if the stack is full
-int isFullStack(Stack* stack) {
+int is_full_stack(Stack* stack) {
     return stack->top == stack->capacity - 1;
 }
 
 // Function to push an element onto the stack
-void pushStack(Stack* stack, int item) {
-    if (isFullStack(stack)) {
+void push_stack(Stack* stack, int item) {
+    if (is_full_stack(stack)) {
         printf("Stack Overflow\n");
         return;
     }
@@ -114,8 +112,8 @@ void pushStack(Stack* stack, int item) {
 }
 
 // Function to pop an element from the stack
-int popStack(Stack* stack) {
-    if (isEmptyStack(stack)) {
+int pop_stack(Stack* stack) {
+    if (is_empty_stack(stack)) {
         printf("Stack Underflow\n");
         return -1; // Return -1 to indicate stack underflow
     }
@@ -123,8 +121,8 @@ int popStack(Stack* stack) {
 }
 
 // Function to get the top element of the stack without removing it
-int peekStack(Stack* stack) {
-    if (isEmptyStack(stack)) {
+int peek_stack(Stack* stack) {
+    if (is_empty_stack(stack)) {
         printf("Stack is empty\n");
         return -1; // Return -1 to indicate empty stack
     }
@@ -132,7 +130,7 @@ int peekStack(Stack* stack) {
 }
 
 // Function to print the elements of the stack
-void printStack(Stack* stack) {
+void print_stack(Stack* stack) {
     printf("Stack: ");
     for (int i = 0; i <= stack->top; i++) {
         printf("%d ", stack->arr[i]);
@@ -141,7 +139,7 @@ void printStack(Stack* stack) {
 }
 
 // Function to free the memory allocated for the stack
-void freeStack(Stack* stack) {
+void free_stack(Stack* stack) {
     free(stack->arr);
     free(stack);
 }
@@ -149,7 +147,7 @@ void freeStack(Stack* stack) {
 /* FUNCTIONS FOR QUEUE */
 
 // Function to create a new queue with given maximum size
-Queue* createQueue(int maxSize) {
+Queue* create_queue(int maxSize) {
     Queue* queue = (Queue*)malloc(sizeof(Queue));
     queue->front = -1;
     queue->rear = -1;
@@ -159,22 +157,22 @@ Queue* createQueue(int maxSize) {
 }
 
 // Function to check if the queue is empty
-int isEmptyQueue(Queue* queue) {
+int is_empty_queue(Queue* queue) {
     return (queue->rear == -1);
 }
 
 // Function to check if the queue is full
-int isFullQueue(Queue* queue) {
+int is_full_queue(Queue* queue) {
     return ((queue->rear + 1) % queue->maxSize == queue->front);
 }
 
 // Function to add an element to the rear of the queue
 void enqueue(Queue* queue, int value) {
-    if (isFullQueue(queue)) {
+    if (is_full_queue(queue)) {
         printf("Queue is full. Cannot enqueue.\n");
         return;
     }
-    if (isEmptyQueue(queue)) {
+    if (is_empty_queue(queue)) {
         queue->front = 0;
         queue->rear = 0;
     } else {
@@ -185,7 +183,7 @@ void enqueue(Queue* queue, int value) {
 
 // Function to remove an element from the front of the queue
 int dequeue(Queue* queue) {
-    if (isEmptyQueue(queue)) {
+    if (is_empty_queue(queue)) {
         printf("Queue is empty. Cannot dequeue.\n");
         return -1;
     }
@@ -200,8 +198,8 @@ int dequeue(Queue* queue) {
 }
 
 // Function to display the elements in the queue
-void displayQueue(Queue* queue) {
-    if (isEmptyQueue(queue)) {
+void display_queue(Queue* queue) {
+    if (is_empty_queue(queue)) {
         printf("Queue is empty.\n");
         return;
     }

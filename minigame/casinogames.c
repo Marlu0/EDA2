@@ -24,7 +24,7 @@ int play_dice(int balance) {            // If we implement the casino, Character
         printf("Enter your bet (0 to quit): ");
         scanf("%d", &bet);
 
-        if (balance<200){
+        if (balance<200) {
             printf("You've played enough dice, haven't you?\nYou better leave the table if you don't want trouble!\n");
             break;
         }
@@ -126,7 +126,7 @@ int play_slotmachine(int balance) {
 |  SHOT ROULETTE  |
 -----------------*/
 
-int play_shotroulette(int balance, Character player){
+int play_shotroulette(int balance, Character player) {
     int bet;
     int dealer_hp = 100; // Initial dealer HP
     srand(time(NULL)); // Seed the random number generator

@@ -3,7 +3,104 @@
 #include "common.h"
 #include "game.h"
 
-/*
+/*SAVE GAME
+this fucntion receives:
+    - character and scenario.
+it:
+    - saves the game data in a text file.
+returns:
+    -nothing
+    */
+void save_game(Character *character, Scenario *scenario/*figure this out*/) {
+
+    /*||PRINTING CHARACTER INFROMATION||*/
+
+    /*checks that the cahracter has been initilized*/
+    if (character->name[0] == NULL) {
+        /*at least like this we know a name exists so the character prob inited.*/
+        printf("Character Does not exist"); /*in order for this to exist we need to have error handling on charcter creation*/
+        return;
+    }
+    printf("Enter save filename: ");
+    char filename[MAX_STRING_LEN]; /*error proof this later*/
+
+    FILE *file_pointer = fopen(filename, "w");
+    if (file_pointer == NULL) {
+        printf("Couldn't open file");
+        return;
+    }
+
+    /*here is where you need to do the actual writing.*/
+    fprintf(file_pointer, "%s\n", character->name);
+
+    fprintf(file_pointer, "%d\n", character->health); // goes without saying that these should be less than 4 million
+    fprintf(file_pointer, "%d\n", character->bullets);
+    fprintf(file_pointer, "%d\n", character->balance);
+
+
+    fprintf(file_pointer, "%d\n", character->stats.hp);
+    fprintf(file_pointer, "%d\n", character->stats.bp);
+    fprintf(file_pointer, "%d\n", character->stats.atk);
+    fprintf(file_pointer, "%d\n", character->stats.def);
+    fprintf(file_pointer, "%d\n", character->stats.luc);
+
+    fprintf(file_pointer, "%s\n", character->active_weapon.name);
+
+    fprint(file_pointer, "%d\n", character->inventory.fill);
+
+    int temp_fill = character->inventory.fill;
+    fprintf(file_pointer, "%d\n", temp_fill);
+    for (int i = 0; i < temp_fill; i++) {
+        fprintf(file_pointer, "%s\n", character->inventory.weapons_in_inventory[i].name);
+    } //here you are just printing the names of all the weapons you have
+
+    for (int i = 0; i < NUM_MODIFIERS; i++) { /*will this not print all the modifiers tahta re active.*/
+        fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempatk);
+        fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempdef);
+        fprintf(file_pointer, "%d\n", character->active_modifiers[i].templuc);
+        fpirntf(file_pointer, "\n");
+    }
+    fprintf(file_pointer, "%s\n", "END_OF_CHARACTER");
+
+    /*||PRINING SCENARIO INFO||*/
+
+
+
+    // you still need to do this 
+
+
+
+
+    /*we can say that when you are printing the scenario that you have passed the scenarios before.*/
+    //i think it might be better to orgaise the scenarios as a linked list.
+    fclose(file_pointer);
+}
+
+/*LOAD GAME
+this function receives:
+    -   charcater and scenario
+use:
+    - loads a pervious save froma  text file.
+returns:
+    nothing.*/
+void load_game(Character *character, Scenario *scenario) {}
+
+/*START GAME
+this function receives: nothing
+it does:
+    - stores runs all the other functions that make the game work
+Returns:
+    - character and scenario for possible later saves.
+*/
+/*init_start_scenario
+this function receives: nothing
+it does:
+    - creates the starting scenario
+it returns:
+    - pointer to the start scenario.
+*/
+Character *start_game(Scenario *start){} //or that the init character is before this as well.
+/*PRINT CREDITS
 This function recieves:
     - Nothing
 It does:
@@ -11,7 +108,10 @@ It does:
 Returns:
     - Nothing
 */
-void print_credits(){
+void contin
+
+
+void print_credits() {
     printf("\nGame Producers:\n");
     printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
 
@@ -43,33 +143,29 @@ Does:
 Returns:
     - the selection of the user.
 */
-int start_menu(bool first_game){
+int start_menu(bool first_game) {
     print_main_title();
     printf("\n"); //It looks nicer with an extra line
-    clock_t start_time = clock();
-    int delay = 2;
     
+    if (first_game) {
+        clock_t start_time = clock();
+        int delay = 2;
+        
 
-    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
-    printf("JUEGAZO DEL GRUPO 4!\n\n");
-    start_time = clock();
+        while (clock() < start_time + CLOCKS_PER_SEC * delay) {}
+        printf("JUEGAZO DEL GRUPO 4!\n\n");
+        start_time = clock();
 
-    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
-    printf("VAMOS YA!!\n\n");
-    start_time = clock();
+        while (clock() < start_time + CLOCKS_PER_SEC * delay) {}
+        printf("VAMOS YA!!\n\n");
+        start_time = clock();
 
-    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
+        while (clock() < start_time + CLOCKS_PER_SEC * delay) {}
+    }
 
     int option;
-    do{
-        const char *options[] = {"New Game", "Save game", "Load game", "Customize Character", "Credits", "Exit", NULL};
-        option = get_selection(options);
-        if ((option == 2) && (first_game = true)){
-            printf("You have to first play a game before you can save anything");
-        };
-
-    }while((first_game == true) && (option == 2));
-    return option;
+    const char *options[] = {"New Game", "Load game", "Credits", "Exit", NULL};
+    return option = get_selection(options); // this is just the first menu later menus will have the save game and the customize character.
 }
 /*
 this funtion receives:
@@ -79,33 +175,29 @@ it does:
 it returns:
     -nothing
 */
-void init_game(bool first_game){
+void init_game(bool first_game) {
     int option = start_menu(first_game);
 
     switch (option)
     {
     case 1:
         first_game = false;
-        start_game();
+        create_character(first_game) //ou need to update this function to remove the line about
+        start_game(); //we'll get to this eventually.
         break;
 
     case 2:
-        save_game(character, scenario);
-        break;
-    
-    case 3:
-        load_game(filename);
+        /*do the filename things here.*/
+        load_game();
         break;
 
     case 4:
-        //THIS WILL ONLY BE ACTIVATED IF A GAME HAS BEEN STARTED
-        customize_character(Character *character /*dont code this untill you ask whats up.*/); //we need to break the character creation in 2 function. like the modifiers and such that are not part of the customization and then the things that you can customise in a fucntion called "character customization"
-        break;    
-    case 5:
         print_credits();
         break;
-    case 6:
+
+    case 5:
         exit(0);
+
     default:
         printf("Error");
         break;
@@ -113,7 +205,7 @@ void init_game(bool first_game){
 
 }
 /*main*/
-int main(){
+int main() {
     bool first_game = true;
     init_game(first_game);
 

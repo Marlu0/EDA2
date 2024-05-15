@@ -1,8 +1,20 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include "common.h"
 
-/* MODIFIER: This will help us with combat calculations like: damage = atk + tempatk */
+/* TYPE DEFINITIONS */
+
+/* STATS: 
+Health, maná, attack, defense, luck*/
 typedef struct{
-    int tempatk, tempdef, templuc;
+    int hp, bp, atk, def, luc;
+}Stats;
+
+/* MODIFIER: 
+This will help us with combat calculations like: damage = atk + tempatk */
+typedef struct{
+    float tempatk, tempdef, templuc;
 }Modifier;
 
 /* SKILL:
@@ -10,50 +22,40 @@ typedef struct{
     combat outcome by adding a modifier to stats when fighting.
     Example:
         - name = "Rampage"
-        - description = "You shoot twice in the same turn"
+        - description = "You double the damage"
         - skill_modifier = {atk, 0, 0} (This will make damage = atk + tempatk = 2*atk)
 */
 typedef struct{
+    int bulletcost;
     char name[MAX_STRING_LEN];                  
     char description[MAX_STRING_LEN];           
     Modifier skill_modifier;
-    int healing;
+    int healing; /*where do we put this in the skills?*///ill add it in later
 }Skill;
 
+/* WEAPON:
+    Has name, description and an array of skill structs.
+    Will affect available skills.
+    Example:
+        - name = "Rusty Revolver"
+        - description = "Older than the mountains"
+        - skills[] = skills[0], skills[4]
+*/
 typedef struct{
     char name[MAX_STRING_LEN];
     char description[MAX_STRING_LEN];
-    Skill skill_1;
-    Skill skill_2;
-    Modifier modifier;
+    Skill *skills; //Size of the array = NUM_SKILLS
 }Weapon;
 
-Skill skills[10] = {
-    /*0*/{"The Hermit", "Increases +1 defense", {1, 1.15, 1}},
-    /*1*/{"The Chariot", "Increases +2 defense", {1, 1.3, 1}},
-    /*2*/{"The Tower", "Increases +1 attack", {1.15 , 1, 1}},
-    /*3*/{"The Devil", "Increases +2 attack", {1.3,1,1}},
-    /*4*/{"The Hangman", "Reduces to 0 luck", {1,1,0}},
-    /*5*/{"Weel Of Fortune", "Duplicates luck", {1,1,2}},
-    /*6*/{"Death of Theo", "Death is the only way", {0.5, 2, 1}},
-    /*7*/{"The Armadillo", "Nothing like home", {2, 0.5, 1}},
-    /*8*/{"The Fool", "Decreases defense -1, and increase luck a +2", {1, 0.9, 1.3}},
-    /*9*/{"Justice", "Faith will guide you", {1.1,1.1,1.1}}
-};
-
-Weapon weapons[6] = {
-    {"Rusty Revolver", "Older that the mountains", skills[0], skills[4]}, //this does not work because items in an arry need to be constant size and these arrays are not
-    {"Linda", "Sweetest kisses in the wild west", skills[2], skills[0]},
-    {"GOAT", "Gun Of Antilope Trilobites ", skills[5], skills[3]},
-    {"Gun & Barrel", "A gun in a barrel", skills[1], skills[2]},
-    {"Cactus Thrower", "Ouch..", skills[7], skills[8]},
-    {"Gatling Gun", "RATATATTATATA", skills[6], skills[5]} 
-};
-
-/* STATS: Health, maná, attack, defense, luck*/
+/* INVENTORY:
+    Has:
+    - A weapons array of size INVENTORY_SIZE, a macro defined to not have to pass the size on all functions
+    - An int fill to track empty slots when adding new weapons
+*/
 typedef struct{
-    int hp, bp, atk, def, luc;
-}Stats;
+    Weapon weapons_in_inventory[INVENTORY_SIZE];
+    int fill; //create_character sets the fill equal to 1.
+}Inventory;
 
 /* CHARACTER:
     Has name, reputation, Stats, an array of skills and an array of active modifiers
@@ -62,7 +64,7 @@ typedef struct{
         - reputation = -1
         - stats = {100,50,10,20,5}
         - skills = [Rampage, Time Strike]
-        - active_modifier = []
+        - active_modifiers = []
 */
 typedef struct{
     char name[MAX_STRING_LEN];
@@ -70,8 +72,8 @@ typedef struct{
     int bullets;
     int balance; //money
     Stats stats;
-    Skill skills[MAX_SKILLS];
-    Modifier active_modifier[MAX_MODIFIERS];
+    Inventory inventory;
+    Modifier active_modifiers[NUM_MODIFIERS];
     Weapon active_weapon;
 }Character;
 
@@ -84,8 +86,10 @@ typedef struct{
 */
 typedef struct{
     char name[MAX_STRING_LEN];
+    int health;
     Stats stats;
-    Skill skill1,skill2;
+    Weapon weapon;
+    Modifier active_modifiers[NUM_MODIFIERS];
 }Enemy;
 
 /* OPTION:
@@ -101,14 +105,14 @@ typedef struct{
 }Option;
 
 /* DECISION:
-    Has a description of the decision to make and MAX_OPTIONS options
+    Has a description of the decision to make and NUM_OPTIONS options
     Example:
         - "You find a snake, it is looking at you in a menacing way, what do you do?"
         - ["Fight", "Flee"]
 */
 typedef struct{
     char description[MAX_DESCRIPTION_LEN];
-    Option option[MAX_OPTIONS];
+    Option option[NUM_OPTIONS];
 }Decision;
 
 /* SCENARIO:
@@ -121,10 +125,15 @@ typedef struct{
 typedef struct{
     char title[MAX_STRING_LEN];
     char description[MAX_DESCRIPTION_LEN];
-    Decision decision[MAX_DECISIONS];
+    Decision decision[NUM_DECISIONS];
 }Scenario;
 
+/*we will need to make a fucntion that inits the linked list of all scenaraios. and then a function that iters
+over them so that the load function can put you back in the correct section.*/
+
 /* FUNCTION DECLARATIONS */
+
+/* Functions for character creation */
 
 void name_character(Character *character);
 
@@ -132,20 +141,12 @@ void reset_character_stats(Character *character);
 
 void assign_points(int *stat, int *statpts, const char *stat_name);
 
-Character create_character();
+Character create_character(bool first_game); //it doesnt take in the list here what?
 
-Character customize_character();
+/* Functions for inventory */
 
-void do_combat(Character *character, Enemy *enemies, int number_of_enemies);
+void obtain_weapon(Character *character, Weapon weapon);
 
-void attack_player(Character *character, Enemy *enemies, int dead_enemies);
+void change_weapon(Character *character);
 
-
-
-
-
-
-
-
-
-
+#endif /* GAME_H */

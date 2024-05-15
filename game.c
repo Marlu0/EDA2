@@ -1,6 +1,128 @@
 #include "game.h"
 
 /*
+This function receives:
+    - nothing
+It does:
+    - inits the skills array
+Returns:
+    - pointer to array
+*/
+Skill *init_skill_list(){
+    Skill skills[10] = {
+        /*0*/{ "The Hermit", "Increases +1 defense", {1.0, 1.15, 1.0}},
+        /*1.0*/{ "The Chariot", "Increases +2 defense", {1.0, 1.3, 1.0}},
+        /*2*/{ "The Tower", "Increases +1 attack", {1.15, 1.0, 1.0}},
+        /*3*/{ "The Devil", "Increases +2 attack", {1.3, 1.0, 1.0}},
+        /*4*/{ "The Hangman", "Reduces to 0 luck", {1.0, 1.0, 0.0}},
+        /*5*/{ "Weel Of Fortune", "Duplicates luck", {1.0, 1.0, 2}},
+        /*6*/{ "Death of Theo", "Death is the only way", {0.5, 2, 1.0}},
+        /*7*/{ "The Armadillo", "Nothing like home", {2, 0.5, 1.0}},
+        /*8*/{ "The Fool", "Decreases defense -1, and increase luck a +2", {1.0, 0.9, 1.3}},
+        /*9*/{ "Justice", "Faith will guide you", {1.1, 1.1, 1.1}}
+    };
+    // i need to change this function as hell
+    return skills;
+};
+/*
+this function receives:
+    - filename and the skill_name
+it does:
+    - loads the skill from the file into a skill struct
+returns:
+    - the skill struct*/
+void init_weapon_skill(Weapon *weapon, char filename[], int index1, int index2){ //fix this function again later.
+    FILE *file_pointer = fopen(filename, "r");
+    if(file_pointer == NULL){
+        perror("Error opening file!");
+    }
+    char skill_name[MAX_STRING_LEN];
+    int min, max, difference;
+    if(index1 < index2){
+        min = index1;
+        max = index2;
+    } else {
+        min = index2;
+        max = index1;
+    }
+    difference = max - min;
+    if (difference < 1){perror("error indexing weapon skills.");}
+
+    for(int i = 0; i < (min*4 + 1); i++){
+        fgets(weapon->skill_1.name, sizeof(weapon->skill_1.name), file_pointer);
+    }
+    fgets(weapon->skill_1.description, sizeof(weapon->skill_1.description), file_pointer);
+    fscanf(file_pointer, "%d %d %d\n", &(weapon->skill_1.skill_modifier.tempatk), &(weapon->skill_1.skill_modifier.tempdef), &(weapon->skill_1.skill_modifier.templuc));
+
+    for(int i = 0; i < ((difference-1)*4 + 2); i++){
+        fgets(weapon->skill_2.name, sizeof(weapon->skill_2.name), file_pointer);
+    }
+    fgets(weapon->skill_2.description, sizeof(weapon->skill_2.description), file_pointer);
+    fscanf(file_pointer, "%d %d %d\n", &(weapon->skill_2.skill_modifier.tempatk), &(weapon->skill_2.skill_modifier.tempdef), &(weapon->skill_2.skill_modifier.templuc));
+
+    flcose(file_pointer);
+}
+/*
+this receives:
+    - character by reference, filename and weapon name
+it does:
+    - find the weapon attributes in the file and assigns it to the character.
+it returns:
+ - nothing (updates character by reference)
+*/
+void pick_up_weapon(Character *character, FILE *file_pointer, char search_weapon_name[]){
+    char file_weapon_name[MAX_STRING_LEN];
+    int equality = strncpm(fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer), search_weapon_name); //this might need newline char
+
+    while(equality != 0){
+        for(int i = 0; i < 3; i++){ // you executre it 4 - 1 times sot aht the last correct one can be the assignemtn too.
+            fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer);
+        }
+    equality = strncpm(fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer), search_weapon_name);
+    }
+    //line below is done just for the shorthand
+    // Weapon *weapon_p_shorthand = &(character->inventory.weapons_in_inventory[character->inventory.fill]);
+    if(character->inventory.fill >= 7){
+        printf("Inventory Full!");
+        return;
+    }
+    character->inventory.weapons_in_inventory[character->inventory.fill] = character->active_weapon;
+    character->inventory.fill++;
+    
+    
+    strncpy(character->active_weapon.name, search_weapon_name, MAX_STRING_LEN);
+
+
+    fgets(character->active_weapon.description, sizeof(character->active_weapon.description), file_pointer);
+    int index1, index2;
+    fgets(&index1, sizeof(int), file_pointer);
+    fgets(&index2, sizeof(int), file_pointer);
+    init_weapon_skill(&(character->active_weapon),file_pointer ,index1 ,index2);
+}
+/*
+This function receives:
+    - skills array
+It does:
+    - inits the wepons array
+Returns:
+    - pointer to array.
+*/
+
+Weapon *init_weapons(Skill skills[]) {
+    Weapon weapons[6] = {
+        {"Rusty Revolver", "Older that the mountains", skills[0], skills[4]}, //this does not work because items in an arry need to be constant size and these arrays are not
+        {"Linda", "Sweetest kisses in the wild west", skills[2], skills[0]},
+        {"GOAT", "Gun Of Antilope Trilobites ", skills[5], skills[3]},
+        {"Gun & Barrel", "A gun in a barrel", skills[1], skills[2]},
+        {"Cactus Thrower", "Ouch..", skills[7], skills[8]},
+        {"Gatling Gun", "RATATATTATATA", skills[6], skills[5]}
+    };
+    return weapons;
+};
+
+/* Functions for character creation and customization*/
+
+/* NAME CHARACTER
 This function recieves: 
     - Pointer to character of type Character 
 It does:
@@ -8,7 +130,6 @@ It does:
 Returns:
     - Nothing
 */
-
 void name_character(Character *character) {
     /* Flag to track validity of input */
     int sure = 0;
@@ -37,7 +158,7 @@ void name_character(Character *character) {
     }
 }
 
-/*
+/* RESET CHARACTER STATS
 This function recieves: 
     - Pointer to character of type Character
 It does:
@@ -46,14 +167,14 @@ Returns:
     - Nothing
 */
 void reset_character_stats(Character *character) {
-    character->stats.hp = 0;
-    character->stats.bp = 0;
-    character->stats.atk = 0;
-    character->stats.def = 0;
-    character->stats.luc = 0;
+    character->stats.hp = 1;
+    character->stats.bp = 1;
+    character->stats.atk = 1;
+    character->stats.def = 1;
+    character->stats.luc = 1;
 }
 
-/*
+/* ASSIGN POINTS
 This function recieves: 
     - Pointer to stat to change, pointer to available statpts and a string containing the stat_name 
 It does:
@@ -78,23 +199,23 @@ void assign_points(int *stat, int *statpts, const char *stat_name) {
     }
 }
 
-/*
+/* CREATE CHARACTER
 This function recieves: 
-    - Nothing
+    - weapons_dictionary array from dictionaries.h
 It does:
     - Creates a character, initializes its values and assigns name and stats depending on input
 Returns:
     - character of type Character 
 */
-Character create_character() {
-    printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
-
+Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */, bool first_game) { //why does this take in the weapons dictionary
+    if (first_game = true){
+        printf("Welcome to Character Creation!\n");
+    } else{
+        printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
+    }
     /* Character initialization */
     Character character;
-
-    character.active_weapon = weapons[0];
-    character.weapon_inventory[0] = weapons[0];
-
+    
     /* We name our character */
     name_character(&character);
     
@@ -103,10 +224,13 @@ Character create_character() {
     /* Flag to track validity of input */
     int done = 0;
     int statpts = 15;  /* Initialize stat points to 15 outside the loop */
+    
+    printf("Base level of all stats: 1\n");
+    /* Initialize character stats to 1 */
     reset_character_stats(&character);
 
     /* Outer loop in case of re-doing stats */
-    while (!done){
+    while (!done) {
         /* Loop until sure is true and there are stat points remaining */
         while (statpts > 0) {
             printf("Select stat to assign: (Current points: %d)\n", statpts);
@@ -166,141 +290,96 @@ Character create_character() {
         }
     }
 
-    /* Initialize skills array with empty values */
-    for (int i = 0; i < MAX_SKILLS; i++) {
-        strcpy(character.skills[i].name, "");
-        strcpy(character.skills[i].description, "");
-        character.skills[i].skill_modifier.tempatk = 0;
-        character.skills[i].skill_modifier.tempdef = 0;
-        character.skills[i].skill_modifier.templuc = 0;
-    }
-
     /* Initialize active modifier to default values */
-    for (int i = 0; i < MAX_MODIFIERS; i++) {
-        character.active_modifier[i].tempatk = 0;
-        character.active_modifier[i].tempdef = 0;
-        character.active_modifier[i].templuc = 0;
+    for (int i = 0; i < NUM_MODIFIERS; i++) {
+        character.active_modifiers[i].tempatk = 1;
+        character.active_modifiers[i].tempdef = 1;
+        character.active_modifiers[i].templuc = 1;
     }
     
     /* We initialize balance */
     character.balance = 0;
 
-    /* We add the initial weapon */
-    character.active_weapon = weapons[0];
+    /* We add the initial weapon (fists) and initialise the inventory */
+    character.active_weapon = weapons_dictionary[0];
+    character.inventory.weapons_in_inventory[0] = weapons_dictionary[0];
+    character.inventory.fill = 1;
 
     /* We initialise health and mana in function of hp and mp stats */
-    character.health = 100 + (10*(character.stats.hp));
-    character.bullets = 100 + (10*(character.stats.bp));
+    character.health = 100+(20*(character.stats.hp-1));
+    character.bullets = 100+(10*(character.stats.bp-1));
 
     return character;
 }
 
-/*
+/* Functions for inventory*/
+
+/* OBTAIN WEAPON
 This function recieves:
-    - The character (by reference)
-    - An array of enemies of size n 
-    - Number of dead enemies 
+    - Pointer to character
 It does:
-    - The attack process of the player itself
+    - Adds weapon to character's inventory
+Returns:
+    - Nothing
+
+Note: This function lets us separe the weapon obtaining from the function of the fight, making the program more modular
+*/
+void obtain_weapon(Character *character, Weapon weapon) {
+
+    /* Printing the name of the weapon obtained */
+    printf("You obtained %s!", weapon.name);
+
+    /* Temporary variable to store size of inventory */
+    int size = character->inventory.fill; /* You need to use a dot on the second as it is by value */
+    
+    /* Add the new weapon to the empty slot [size] and update fill (size of inventory)*/
+    character->inventory.weapons_in_inventory[size] = weapon;
+    character->inventory.fill++;
+}
+
+/* CHANGE WEAPON 
+This function recieves:
+    - Pointer to character
+Does:
+    - Changes active_weapon in character's inventory
 Returns:
     - Nothing
 */
+void change_weapon(Character *character) {
 
-void attack_player(Character *character, Enemy *enemies, int dead_enemies){
-    /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
-    const char *options1[] = {"Attack", "Skills", NULL};
-    int tipo_ataque = get_selection(options1);
-    if (tipo_ataque == 0){
-        const char *Enemies[] = {enemies[0].name, "Skills", NULL};
-        int enemigo = funcion_de_marcel(a que enemigo le quieres zurrar);
-        reducir vida del enemigo con las bhgv
+    /* Create a selection variable for choosing your weapon */
+    int selection;
 
-    }else{
-        int ability = funcion_de_marcel(que habilidad hacer);
-        aplicamos modificador
-        int enemigo = funcion_de_marcel(a que enemigo le quieres zurrar);
-        reducir vida del enemigo con las bhgv
+    /* Create a temporary variable of inventory fill value for readability */
+    int inventory_size = character->inventory.fill;
 
+    /* Create a flag to track validity of input */
+    bool valid_input = false;
     
-    }
+    /* Do a while loop to ensure valid choice for weapon */
+    while (!valid_input) {
 
-    /*Do the switch fot the differnt attacks possible*/
-    /*To each switch possibility, relate it with the ability*/
-    /*Add the attack chosen to the attack stack (for the time shot ability)*/
-    /*Use the multiplier and substract the hp points form the baddie*/
-    /*Return the modified abilities to normality*/
-}
-
-
-
-/*
-This function recieves:
-    - The character (by reference)
-    - An array of enemies of size n 
-It does:
-    - The fight
-Returns:
-    - Nothing
-*/
-void do_combat(Character *character, Enemy *enemies, int number_of_enemies){
-    printf("You've started a combat with:\n ");
-    for (int i=0; i<MAX_ENEMIES; ++i){
-        printf("%s ", enemies[i].name);
-    }
-
-    /* We generate a random value from 10 to 20, that will be the number of turns for each fighter */
-    srand(time(NULL));
-    int n = rand() % 11 + 10;
-
-    /* We initialise the queue */
-    Queue *turnQueue = createQueue(n*(number_of_enemies+1));
-
-    srand(time(NULL));
-    /*The baddies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be that value, so it is fixed*/
-    int firstTurn = rand() % (number_of_enemies+1);
-
-    for (int i=0; i<((number_of_enemies+1)*n); ++i){
-        enqueue(turnQueue, i%(number_of_enemies+1));
-    }
-    
-    /*Here we set a dead enemy counter and a copy of n to keep track of when the battle ends*/
-    int goodie_index = number_of_enemies;
-    int dead_enemies = 0;
-    int N = n;
-    bool first_turn_done = false;
-    while(dead_enemies != 0 && !isEmpty(turnQueue) && character->health>0){
-        //Here we do the first turn control
-        if(!first_turn_done){
-            if (turnQueue->items[turnQueue->front] = firstTurn){
-                if(turnQueue->items[turnQueue->front] = goodie_index){
-                    printf("Your turn to attack! \n");
-                    attack_player();
-                    dequeue(turnQueue);
-                }else{
-                    printf("%s is now attacking!\n", enemy[turnQueue->items[turnQueue->front]].name);
-                    attack_enemy();
-                    dequeue(turnQueue);
-                }
-                first_turn_done = true;
-            }else{
-                dequeue(turnQueue);
-            }
+        /* Printing the available weapons in your inventory */
+        printf("Select a weapon from your inventory (1-%d): \n",inventory_size);
+        for (int i=0; i<inventory_size; ++i) {
+            printf("%d. %s: %s\n",i+1,character->inventory.weapons_in_inventory[i].name,character->inventory.weapons_in_inventory[i].description);
         }
-        else{
-            if(turnQueue->items[turnQueue->front] = goodie_index){
-                    /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
-                    attack_player(character, enemies, dead_enemies);
-                    dequeue(turnQueue);
-                }else{
-                    /*In the enemy attack we pass the enemy in turn and the character*/
-                    /*The enemy shoud be a pointer TALK WITH MARCELINO*/
-                    attack_enemy(enemies[turnQueue->items[turnQueue->front]], character, dead_enemies);
-                    dequeue(turnQueue);
-                }
+        /* Getting the selection */
+        if (scanf(" %d", &selection) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+            /* Flush the input buffer to clear all characters but the first */
+            while (getchar() != '\n');
+        } 
+        else {
+            valid_input = true;
+        }
+        if (valid_input && (selection < 1 || selection > inventory_size)) {
+            printf("Invalid selection. Please try again.\n");
+            valid_input = false;
         }
     }
-}
-
-Character customize_character(Character *character){
+    int chosen_weapon_index = selection-1; /* We selected the option, which is index+1 in UI */
     
+    /* We change the active weapon into the selection */
+    character->active_weapon = character->inventory.weapons_in_inventory[chosen_weapon_index];
 }
