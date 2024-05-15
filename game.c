@@ -109,7 +109,7 @@ Returns:
     - pointer to array.
 */
 
-Weapon *init_weapons_dictionary(Skill skills[]) {
+Weapon *init_weapons_dictionary(Skill skills_dictionary[]) {
     Weapon weapons[7] = {
     {"Fists", "Ol' reliable bare knuckles", {&skills_dictionary[4], &skills_dictionary[10]}},
     {"Rusty Revolver", "Older than the mountains", {&skills_dictionary[0], &skills_dictionary[4]}},
