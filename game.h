@@ -141,7 +141,7 @@ void reset_character_stats(Character *character);
 
 void assign_points(int *stat, int *statpts, const char *stat_name);
 
-Character create_character(bool first_game); //it doesnt take in the list here what?
+Character create_character(Weapon weapons_array, bool first_game); //it doesnt take in the list here what?
 
 /* Functions for inventory */
 
