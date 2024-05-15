@@ -149,4 +149,8 @@ void obtain_weapon(Character *character, Weapon weapon);
 
 void change_weapon(Character *character);
 
+Skill *init_skill_list();
+
+Weapon *init_weapons_dictionary(Skill skills_dictionary[]);
+
 #endif /* GAME_H */
