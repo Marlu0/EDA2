@@ -37,7 +37,6 @@ Enemy enemies_dictionary[6] = {
     {"mr bubbles",,,&weapons_dictionary[6],0},
     
 };
-enemy.health = 100+(20*(enemy.stats.hp-1));
 
 typedef struct{
     char name[MAX_STRING_LEN];
