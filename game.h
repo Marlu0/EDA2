@@ -149,14 +149,4 @@ void obtain_weapon(Character *character, Weapon weapon);
 
 void change_weapon(Character *character);
 
-/* Functions for combat */
-
-int select_skill(Character *character, int attacks_done);
-
-int select_enemy(Enemy *enemies, int number_of_enemies);
-
-void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done);
-
-void do_combat(Character *character, Enemy *enemies, int number_of_enemies);
-
-#endif /* COMMON_H */
+#endif /* GAME_H */

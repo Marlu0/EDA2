@@ -1,5 +1,5 @@
-#ifndef SKILLS_WEAPONS_H
-#define SKILLS_WEAPONS_H
+#ifndef DICTIONARIES_H
+#define DICTIONARIES_H
 
 /* Here we define the skills and weapons, hard coded as a .h to make adjustments to the playability easier */
 
@@ -30,4 +30,4 @@ Weapon weapons_dictionary[7] = {
     {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6]}, {&skills_dictionary[5]}}
 };
 
-#endif /* SKILLS_WEAPONS_H */
+#endif /* DICTIONARIES_H */
