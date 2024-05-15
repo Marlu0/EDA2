@@ -8,6 +8,7 @@
 #include <time.h>
 #include <string.h>
 #include <stdbool.h>
+#include "dictionaries.h"
 
 /* MACROS */
 
