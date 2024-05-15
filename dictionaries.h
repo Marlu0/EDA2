@@ -38,11 +38,4 @@ Enemy enemies_dictionary[6] = {
     
 };
 
-typedef struct{
-    char name[MAX_STRING_LEN];
-    int health;
-    Stats stats;
-    Weapon weapon;
-    Modifier active_modifiers[NUM_MODIFIERS];
-}Enemy;
 #endif /* DICTIONARIES_H */
