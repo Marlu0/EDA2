@@ -10,12 +10,12 @@ it:
 returns:
     -nothing
     */
-void save_game(Character *character, Scenario *scenario/*figure this out*/){
+void save_game(Character *character, Scenario *scenario/*figure this out*/) {
 
     /*||PRINTING CHARACTER INFROMATION||*/
 
     /*checks that the cahracter has been initilized*/
-    if (character->name[0] == NULL){
+    if (character->name[0] == NULL) {
         /*at least like this we know a name exists so the character prob inited.*/
         printf("Character Does not exist"); /*in order for this to exist we need to have error handling on charcter creation*/
         return;
@@ -24,7 +24,7 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/){
     char filename[MAX_STRING_LEN]; /*error proof this later*/
 
     FILE *file_pointer = fopen(filename, "w");
-    if(file_pointer == NULL){
+    if (file_pointer == NULL) {
         printf("Couldn't open file");
         return;
     }
@@ -49,11 +49,11 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/){
 
     int temp_fill = character->inventory.fill;
     fprintf(file_pointer, "%d\n", temp_fill);
-    for(int i = 0; i < temp_fill; i++){
+    for (int i = 0; i < temp_fill; i++) {
         fprintf(file_pointer, "%s\n", character->inventory.weapons_in_inventory[i].name);
     } //here you are just printing the names of all the weapons you have
 
-    for(int i = 0; i < MAX_MODIFIERS; i++){ /*will this not print all the modifiers tahta re active.*/
+    for (int i = 0; i < NUM_MODIFIERS; i++) { /*will this not print all the modifiers tahta re active.*/
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempatk);
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempdef);
         fprintf(file_pointer, "%d\n", character->active_modifiers[i].templuc);
@@ -82,7 +82,7 @@ use:
     - loads a pervious save froma  text file.
 returns:
     nothing.*/
-void load_game(Characater *character, Scenario *scenario){
+void load_game(Character *character, Scenario *scenario) {
 
 }
 /*
@@ -95,7 +95,7 @@ Returns:
 */
 
 
-void print_credits(){
+void print_credits() {
     printf("\nGame Producers:\n");
     printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
 
@@ -127,22 +127,25 @@ Does:
 Returns:
     - the selection of the user.
 */
-int start_menu(bool first_game){
+int start_menu(bool first_game) {
     print_main_title();
     printf("\n"); //It looks nicer with an extra line
-    clock_t start_time = clock();
-    int delay = 2;
     
+    if (first_game) {
+        clock_t start_time = clock();
+        int delay = 2;
+        
 
-    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
-    printf("JUEGAZO DEL GRUPO 4!\n\n");
-    start_time = clock();
+        while (clock() < start_time + CLOCKS_PER_SEC * delay) {}
+        printf("JUEGAZO DEL GRUPO 4!\n\n");
+        start_time = clock();
 
-    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
-    printf("VAMOS YA!!\n\n");
-    start_time = clock();
+        while (clock() < start_time + CLOCKS_PER_SEC * delay) {}
+        printf("VAMOS YA!!\n\n");
+        start_time = clock();
 
-    while(clock() < start_time + CLOCKS_PER_SEC * delay){}
+        while (clock() < start_time + CLOCKS_PER_SEC * delay) {}
+    }
 
     int option;
     const char *options[] = {"New Game", "Load game", "Credits", "Exit", NULL};
@@ -156,7 +159,7 @@ it does:
 it returns:
     -nothing
 */
-void init_game(bool first_game){
+void init_game(bool first_game) {
     int option = start_menu(first_game);
 
     switch (option)
@@ -185,7 +188,7 @@ void init_game(bool first_game){
 
 }
 /*main*/
-int main(){
+int main() {
     bool first_game = true;
     init_game(first_game);
 

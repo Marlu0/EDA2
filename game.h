@@ -1,6 +1,18 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include "common.h"
 
-/* MODIFIER: This will help us with combat calculations like: damage = atk + tempatk */
+/* TYPE DEFINITIONS */
+
+/* STATS: 
+Health, maná, attack, defense, luck*/
+typedef struct{
+    int hp, bp, atk, def, luc;
+}Stats;
+
+/* MODIFIER: 
+This will help us with combat calculations like: damage = atk + tempatk */
 typedef struct{
     float tempatk, tempdef, templuc;
 }Modifier;
@@ -10,40 +22,40 @@ typedef struct{
     combat outcome by adding a modifier to stats when fighting.
     Example:
         - name = "Rampage"
-        - description = "You shoot twice in the same turn"
+        - description = "You double the damage"
         - skill_modifier = {atk, 0, 0} (This will make damage = atk + tempatk = 2*atk)
 */
 typedef struct{
-    char name[MAX_STRING_LEN];
-    char description[MAX_STRING_LEN];
+    int bulletcost;
+    char name[MAX_STRING_LEN];                  
+    char description[MAX_STRING_LEN];           
     Modifier skill_modifier;
     int healing; /*where do we put this in the skills?*///ill add it in later
 }Skill;
 
+/* WEAPON:
+    Has name, description and an array of skill structs.
+    Will affect available skills.
+    Example:
+        - name = "Rusty Revolver"
+        - description = "Older than the mountains"
+        - skills[] = skills[0], skills[4]
+*/
 typedef struct{
     char name[MAX_STRING_LEN];
     char description[MAX_STRING_LEN];
-    Skill skill_1;
-    Skill skill_2; //
-    Modifier modifier;
+    Skill *skills; //Size of the array = NUM_SKILLS
 }Weapon;
 
+/* INVENTORY:
+    Has:
+    - A weapons array of size INVENTORY_SIZE, a macro defined to not have to pass the size on all functions
+    - An int fill to track empty slots when adding new weapons
+*/
 typedef struct{
-    /*weapons array it includes the sixe of the array so that
-    you don't have to pass it in seperatly in fucntions*/
     Weapon weapons_in_inventory[INVENTORY_SIZE];
-    int fill; //init_character sets the fill equal to 1.
+    int fill; //create_character sets the fill equal to 1.
 }Inventory;
-
-Skill *init_skills(){};
-
-Weapon *init_weapons(Skill skills[]){}; // It has to be in a function so that the array gets created in runtime.
-// if it is created in compilation it doesnt know what to do.
-
-/* STATS: Health, maná, attack, defense, luck*/
-typedef struct{
-    int hp, bp, atk, def, luc;
-}Stats;
 
 /* CHARACTER:
     Has name, reputation, Stats, an array of skills and an array of active modifiers
@@ -61,7 +73,7 @@ typedef struct{
     int balance; //money
     Stats stats;
     Inventory inventory;
-    Modifier active_modifiers[MAX_MODIFIERS];
+    Modifier active_modifiers[NUM_MODIFIERS];
     Weapon active_weapon;
 }Character;
 
@@ -76,8 +88,8 @@ typedef struct{
     char name[MAX_STRING_LEN];
     int health;
     Stats stats;
-    Skill skill1,skill2;
-    Modifier modifier;
+    Weapon weapon;
+    Modifier active_modifiers[NUM_MODIFIERS];
 }Enemy;
 
 /* OPTION:
@@ -93,14 +105,14 @@ typedef struct{
 }Option;
 
 /* DECISION:
-    Has a description of the decision to make and MAX_OPTIONS options
+    Has a description of the decision to make and NUM_OPTIONS options
     Example:
         - "You find a snake, it is looking at you in a menacing way, what do you do?"
         - ["Fight", "Flee"]
 */
 typedef struct{
     char description[MAX_DESCRIPTION_LEN];
-    Option option[MAX_OPTIONS];
+    Option option[NUM_OPTIONS];
 }Decision;
 
 /* SCENARIO:
@@ -113,13 +125,15 @@ typedef struct{
 typedef struct{
     char title[MAX_STRING_LEN];
     char description[MAX_DESCRIPTION_LEN];
-    Decision decision[MAX_DECISIONS];
+    Decision decision[NUM_DECISIONS];
 }Scenario;
 
 /*we will need to make a fucntion that inits the linked list of all scenaraios. and then a function that iters
 over them so that the load function can put you back in the correct section.*/
 
 /* FUNCTION DECLARATIONS */
+
+/* Functions for character creation */
 
 void name_character(Character *character);
 
@@ -129,18 +143,20 @@ void assign_points(int *stat, int *statpts, const char *stat_name);
 
 Character create_character();
 
-Character customize_character();
+/* Functions for inventory */
+
+void obtain_weapon(Character *character, Weapon weapon);
+
+void change_weapon(Character *character);
+
+/* Functions for combat */
+
+int select_skill(Character *character, int attacks_done);
+
+int select_enemy(Enemy *enemies, int number_of_enemies);
+
+void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done);
 
 void do_combat(Character *character, Enemy *enemies, int number_of_enemies);
 
-void attack_player(Character *character, Enemy *enemies, int dead_enemies);
-
-
-
-
-
-
-
-
-
-
+#endif /* COMMON_H */
