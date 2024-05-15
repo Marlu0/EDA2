@@ -33,6 +33,8 @@ Weapon weapons_dictionary[7] = {
 Enemy enemies_dictionary[6] = {
     {"shelly the turtle", }
 };
+enemy.health = 100+(20*(enemy.stats.hp-1));
+
 typedef struct{
     char name[MAX_STRING_LEN];
     int health;
