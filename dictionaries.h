@@ -27,10 +27,10 @@ Weapon weapons_dictionary[7] = {
     {"Fists", "Ol' reliable bare knuckles", {&skills_dictionary[4], &skills_dictionary[10]}},
     {"Rusty Revolver", "Older than the mountains", {&skills_dictionary[0], &skills_dictionary[4]}},
     {"Linda", "Sweetest kisses in the wild west", {&skills_dictionary[2], &skills_dictionary[0]}},
-    {"GOAT", "Gun Of Antilope Trilobites", {&skills_dictionary[5]}, {&skills_dictionary[3]}},
-    {"Gun & Barrel", "A gun in a barrel", {&skills_dictionary[1]}, {&skills_dictionary[2]}},
-    {"Cactus Thrower", "Ouch..", {&skills_dictionary[7]}, {&skills_dictionary[8]},},
-    {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6]}, {&skills_dictionary[5]}}
+    {"GOAT", "Gun Of Antilope Trilobites", {&skills_dictionary[5], &skills_dictionary[3]}},
+    {"Gun & Barrel", "A gun in a barrel", {&skills_dictionary[1], &skills_dictionary[2]}},
+    {"Cactus Thrower", "Ouch..", {&skills_dictionary[7], &skills_dictionary[8]}},
+    {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6], &skills_dictionary[5]}
 };
 /*Enemy enemies_dictionary[6] = {
     {"shelly the turtle",,,&weapons_dictionary[4],0 },
