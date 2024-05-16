@@ -29,13 +29,13 @@ Weapon weapons_dictionary[7] = {
     {"Cactus Thrower", "Ouch..", {&skills_dictionary[7]}, {&skills_dictionary[8]},},
     {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6]}, {&skills_dictionary[5]}}
 };
-Enemy enemies_dictionary[6] = {
+/*Enemy enemies_dictionary[6] = {
     {"shelly the turtle",,,&weapons_dictionary[4],0 },
     {"bull the bully",,&weapons_dictionary[3],0},
     {"minion 1",,,&weapons_dictionary[1],0},
     {"minion 2",,,&weapons_dictionary[2],0},
     {"mr bubbles",,,&weapons_dictionary[6],0},
     
-};
+    };*/
 
 #endif /* DICTIONARIES_H */
