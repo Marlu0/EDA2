@@ -35,7 +35,7 @@ it does:
     - loads the skill from the file into a skill struct
 returns:
     - the skill struct*/
-void init_weapon_skill(Weapon *weapon, char filename[], int index1, int index2){ //fix this function again later.
+void init_weapon_skill(Weapon *weapon, char filename[] /*weapons.txt*/, int index1, int index2){ //fix this function again later.
     FILE *file_pointer = fopen(filename, "r");
     if(file_pointer == NULL){
         perror("Error opening file!");
@@ -101,7 +101,7 @@ void pick_up_weapon(Character *character, FILE *file_pointer, char search_weapon
     int index1, index2;
     fgets(&index1, sizeof(int), file_pointer);
     fgets(&index2, sizeof(int), file_pointer);
-    init_weapon_skill(&(character->active_weapon),file_pointer ,index1 ,index2);
+    init_weapon_skill(&(character->active_weapon),"skills.txt",index1 ,index2);
 }
 /*
 This function receives:
