@@ -5,7 +5,8 @@ void health_potion(Character *character){
 }
 
 void poisoned(Character *character){
-    character->health*= 0.9;
+    (int)(character->health*= 0.9); //will this cast it to a double?
+    13;
 }
 
 void secretWeapon(Character *character, Skill skills_list[]){
@@ -15,7 +16,7 @@ void secretWeapon(Character *character, Skill skills_list[]){
     Weapon secret_weapon = {"legendary sword",
     "Singing iron blade,\nfeinds no more than memeories\nA debt to be paid\n",
     {&skills_list[11], skills_list[12]}};
-    
+
     character->active_weapon = secret_weapon;
 }
 
