@@ -1,4 +1,5 @@
 #include "game.h"
+#include "decision_functions.h"
 
 /*
 This function receives:
@@ -10,17 +11,19 @@ Returns:
 */
 Skill *init_skill_list(){
     Skill skills_dictionary[11] = {
-    {10, "The Hermit", "Increases defense a 15%", {1, 1.15, 1}, 0},
-    {10, "The Chariot", "Increases defense a 30%", {1, 1.3, 1}, 0},
-    {10, "The Tower", "Increases attack a 15%", {1.15 , 1, 1}, 0},
-    {10, "The Devil", "Increases attack a 30%", {1.3, 1, 1}, 0},
-    {10, "The Hangman", "Eliminates luck", {1, 1, 0}, 10},
-    {10, "Weel Of Fortune", "Duplicates luck", {1, 1, 2}, 0},
-    {10, "Death of Theo", "Death is the only way", {0.5, 2, 1}, -5},
-    {10, "The Armadillo", "Nothing like home", {0.5, 2, 1}, 20},
-    {10, "The Fool", "Decreases defense a 10%, and increase luck a 30%", {1, 0.9, 1.3}, 0},
-    {10, "Justice", "Faith will guide you", {1.1, 1.1, 1.1}, 0},
-    {100, "Time Strike", "Repeat a random previous attack and double its damage", {1,1,1}, 0}
+    /*0*/{10, "The Hermit", "Increases defense a 15%", {1, 1.15, 1}, 0},
+    /*1*/{10, "The Chariot", "Increases defense a 30%", {1, 1.3, 1}, 0},
+    /*2*/{10, "The Tower", "Increases attack a 15%", {1.15 , 1, 1}, 0},
+    /*3*/{10, "The Devil", "Increases attack a 30%", {1.3, 1, 1}, 0},
+    /*4*/{10, "The Hangman", "Eliminates luck", {1, 1, 0}, 10},
+    /*5*/{10, "Weel Of Fortune", "Duplicates luck", {1, 1, 2}, 0},
+    /*6*/{10, "Death of Theo", "Death is the only way", {0.5, 2, 1}, -5},
+    /*7*/{10, "The Armadillo", "Nothing like home", {0.5, 2, 1}, 20},
+    /*8*/{10, "The Fool", "Decreases defense a 10%, and increase luck a 30%", {1, 0.9, 1.3}, 0},
+    /*9*/{10, "Justice", "Faith will guide you", {1.1, 1.1, 1.1}, 0},
+    /*10*/{100, "Time Strike", "Repeat a random previous attack and double its damage", {1,1,1}, 0},
+    /*11*/{0, "Sword Slash", "their blood, better spent in soil than veins", {100.0, 100.0, 100.0}, 100},
+    /*12*/{10, "Sword Strie", "peirce the enemies' unfeeling heart", {200.0, 200.0, 200.0}, 100},
     };
     // i need to change this function as hell
     return skills_dictionary;
@@ -50,16 +53,16 @@ void init_weapon_skill(Weapon *weapon, char filename[], int index1, int index2){
     if (difference < 1){perror("error indexing weapon skills.");}
 
     for(int i = 0; i < (min*4 + 1); i++){
-        fgets(weapon->skill_1.name, sizeof(weapon->skill_1.name), file_pointer);
+        fgets(weapon->skills[0].name, sizeof(weapon->skills[0].name), file_pointer);
     }
-    fgets(weapon->skill_1.description, sizeof(weapon->skill_1.description), file_pointer);
-    fscanf(file_pointer, "%d %d %d\n", &(weapon->skill_1.skill_modifier.tempatk), &(weapon->skill_1.skill_modifier.tempdef), &(weapon->skill_1.skill_modifier.templuc));
+    fgets(weapon->skills[0].description, sizeof(weapon->skills[0].description), file_pointer);
+    fscanf(file_pointer, "%d %d %d\n", &(weapon->skills[0].skill_modifier.tempatk), &(weapon->skills[0].skill_modifier.tempdef), &(weapon->skills[0].skill_modifier.templuc));
 
     for(int i = 0; i < ((difference-1)*4 + 2); i++){
-        fgets(weapon->skill_2.name, sizeof(weapon->skill_2.name), file_pointer);
+        fgets(weapon->skills[1].name, sizeof(weapon->skills[1].name), file_pointer);
     }
-    fgets(weapon->skill_2.description, sizeof(weapon->skill_2.description), file_pointer);
-    fscanf(file_pointer, "%d %d %d\n", &(weapon->skill_2.skill_modifier.tempatk), &(weapon->skill_2.skill_modifier.tempdef), &(weapon->skill_2.skill_modifier.templuc));
+    fgets(weapon->skills[1].description, sizeof(weapon->skills[1].description), file_pointer);
+    fscanf(file_pointer, "%d %d %d\n", &(weapon->skills[1].skill_modifier.tempatk), &(weapon->skills[1].skill_modifier.tempdef), &(weapon->skills[1].skill_modifier.templuc));
 
     flcose(file_pointer);
 }
@@ -381,7 +384,72 @@ void change_weapon(Character *character) {
         }
     }
     int chosen_weapon_index = selection-1; /* We selected the option, which is index+1 in UI */
-    
     /* We change the active weapon into the selection */
     character->active_weapon = character->inventory.weapons_in_inventory[chosen_weapon_index];
 }
+Decision *init_decision_list(){ //i have not implemented most of this its just a framework
+    Decision decision_list[] = {
+        {"CHAPA NUMERO 0", {{"REPUESTA 0.0"}, {"RESPUESTA 0.1"}, {"REPUESTA 0.2"}, {"RESPUESTA 0.3"}}},
+        {"CHAPA NUMERO 1", {{"REPUESTA 1.0"}, {"RESPUESTA 1.1"}, {"REPUESTA 1.2"}, {"RESPUESTA 1.3"}}},
+        {"CHAPA NUMERO 2", {{"REPUESTA 2.0"}, {"RESPUESTA 2.1"}, {"REPUESTA 2.2"}, {"RESPUESTA 2.3"}}},
+        {"CHAPA NUMERO 3", {{"REPUESTA 3.0"}, {"RESPUESTA 3.1"}, {"REPUESTA 3.2"}, {"RESPUESTA 3.3"}}},
+        {"CHAPA NUMERO 4", {{"REPUESTA 4.0"}, {"RESPUESTA 4.1"}, {"REPUESTA 4.2"}, {"RESPUESTA 4.3"}}},
+        {"CHAPA NUMERO 5", {{"REPUESTA 5.0"}, {"RESPUESTA 5.1"}, {"REPUESTA 5.2"}, {"RESPUESTA 5.3"}}},
+    };
+
+    return decision_list;
+}
+
+Scenario *init_scenario_list(Decision decision_list[]){
+
+    Scenario scenario_list[] = {
+        {"name0", "description0", /*we need to put the other things here*/ .decision = decision_list[0]},
+        {"name1", "description1", .decision = decision_list[1]},
+        {"name2", "description2", .decision = decision_list[2]},
+        {"name3", "description3", .decision = decision_list[3]},
+        {"name4", "description4", .decision = decision_list[4]},
+        {"name5", "description5", .decision = decision_list[5]},
+    };
+
+    return scenario_list;
+}
+
+Scenario *init_first_scenario(Scenario scenario_list[], int index){
+    Scenario first_scenario = scenario_list[0]; //we just have to make sure that the first one in the list is the starting one
+    return &first_scenario;
+}
+
+Scenario *init_next_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario){
+    Scenario *next_scenario = (Scenario *)malloc(sizeof(Scenario));
+    *next_scenario = scenario_list[index];
+
+
+    /*setting the doubly linked list.*/
+    prev_scenario->next = next_scenario;
+    next_scenario->prev = prev_scenario;
+
+}
+
+Scenario *init_other_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario){
+    Scenario *other_scenario = (Scenario *)malloc(sizeof(Scenario));
+    *other_scenario = scenario_list[index];
+
+    /*this is the same as the above function but with a other route.*/ //it might be useful to store the direction in an arry so that we can appluy marcels function
+    prev_scenario->other_direction = other_scenario;
+    other_scenario->prev = prev_scenario;
+}
+
+int backwards(int direction){
+    return (4 - direction);
+}
+
+void change_scenario(Scenario *scenario, int direction /*should be passed in as macro*/){
+    int backwards_direction = backwards(direction);
+    /*there will need to be error checking here*/
+}
+
+void delete_scenarios(Scenario *scenario){
+    // while there are valid directions to go you should delete them all this is done when you die and want to restart so that memory is not building up forever.
+}
+
+void play_scenario(Scenario *cuurent_scenario){ /*this is where you have the fight and everything*/}

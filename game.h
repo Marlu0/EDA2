@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "common.h"
+#include "common.h" // this isn't working oops
 
 /* TYPE DEFINITIONS */
 
@@ -27,8 +27,8 @@ typedef struct{
 */
 typedef struct{
     int bulletcost;
-    char name[MAX_STRING_LEN];                  
-    char description[MAX_STRING_LEN];           
+    char name[MAX_STRING_LEN]; //I HAVE NO IDEA WHY THIS IS RED LIKE WHAT!
+    char description[MAX_STRING_LEN];
     Modifier skill_modifier;
     int healing; /*where do we put this in the skills?*///ill add it in later
 }Skill;
@@ -44,7 +44,7 @@ typedef struct{
 typedef struct{
     char name[MAX_STRING_LEN];
     char description[MAX_STRING_LEN];
-    Skill *skills; //Size of the array = NUM_SKILLS
+    Skill *skills[NUM_SKILLS];
 }Weapon;
 
 /* INVENTORY:
@@ -92,41 +92,33 @@ typedef struct{
     Modifier active_modifiers[NUM_MODIFIERS];
 }Enemy;
 
-/* OPTION:
-    Has choice string which displays the choice, its outcome and the change in reputation
-    Example:
-        - choice = "Spit on his boot"
-        - outcome = "Don't you disrespect me young lad!"
-        - reputation = -1
-*/
+/*SCENARIO STRUCTURES.*/
 typedef struct{
-    char choice[MAX_STRING_LEN];
-    char outcome[MAX_STRING_LEN];
-}Option;
+    char response[MAX_STRING_LEN];
+    Scenario *outcome_on_senario;
+    Character *(*outcome_on_character)(Character *);
+    /*this is a function pointer that points to a function describing what happened to your character.*/
+}Response_Outcome;
 
-/* DECISION:
-    Has a description of the decision to make and NUM_OPTIONS options
-    Example:
-        - "You find a snake, it is looking at you in a menacing way, what do you do?"
-        - ["Fight", "Flee"]
-*/
+
 typedef struct{
-    char description[MAX_DESCRIPTION_LEN];
-    Option option[NUM_OPTIONS];
+    char chapa_del_NPC[MAX_STRING_LEN];
+    Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
+
 }Decision;
 
-/* SCENARIO:
-    Has title, description and an array of decisions
-    Example:
-        - title = "Casino"
-        - description = "A place to unleash yourself"
-        - decision = [play_blackjack, play_shot-roulette]
-*/
-typedef struct{
-    char title[MAX_STRING_LEN];
-    char description[MAX_DESCRIPTION_LEN];
-    Decision decision[NUM_DECISIONS];
+typedef struct scenario{
+    char name[MAX_STRING_LEN];
+    char description[MAX_DESCRIPTION_LEN]; //description of the scenario.
+    struct scenario *next;
+    struct scenario *prev;
+    struct scenario *other_direction; //there is going to be max  3 direction on any node.
+    Decision decision; //this is the thing that you will need to have a library for
+    bool completed;
 }Scenario;
+
+
+/*  WE NEED HAVE AN INIT_sCENARIO FUNCTION THAT TAKES IN */
 
 /*we will need to make a fucntion that inits the linked list of all scenaraios. and then a function that iters
 over them so that the load function can put you back in the correct section.*/
@@ -153,4 +145,4 @@ Skill *init_skill_list();
 
 Weapon *init_weapons_dictionary(Skill skills_dictionary[]);
 
-#endif /* GAME_H */
+#endif // GAME H

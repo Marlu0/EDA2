@@ -85,7 +85,7 @@ use:
     - loads a pervious save froma  text file.
 returns:
     nothing.*/
-void load_game(Character *character, Scenario *scenario) {}
+void load_game(Character *character, Scenario *scenario) {} //figure this out.
 
 /*START GAME
 this function receives: nothing
@@ -102,9 +102,13 @@ it returns:
     - pointer to the start scenario.
 */
 Character *start_game(Character *character, Scenario *start, int first_game){
-    Weapon *weapons_list;
-    Character character = create_character(first_game);
+    Skill *skills_list = init_skill_list;
+    Weapon *weapons_list = init_weapons_dictionary;
+    Character character = create_character(weapons_list, first_game);
+    // after you create your character you go to the first scenario (load scenario function.)
+    //
 }
+void continue_game(/*this is the thing that you should put into load file.*/){}
 /*PRINT CREDITS
 This function recieves:
     - Nothing
@@ -113,7 +117,6 @@ It does:
 Returns:
     - Nothing
 */
-void continue_game(/*this is the thing that you should put into load file.*/){}
 
 
 void print_credits(){
