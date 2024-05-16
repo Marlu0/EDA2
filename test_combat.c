@@ -37,5 +37,11 @@ int main(){
     bool boolean = false;
     jose = create_character(weapons_dictionar, boolean);
 
-    Enemy paco = {"Paco", 100, {10, 10, 10}, weapons_dictionar[0], };
+    Enemy paco = {"Paco", 100, {10, 10, 10}, weapons_dictionar[0], {1.2, 1.3, 1.5}};
+    Enemy manolo = {"Manolo", 100, {10, 10, 10}, weapons_dictionar[0], {1.2, 1.3, 1.5}};
+    Enemy enemies[2];
+    enemies[0] = paco;
+    enemies[1] = manolo;
+
+    do_combat(&jose, enemies, 2);
 }
