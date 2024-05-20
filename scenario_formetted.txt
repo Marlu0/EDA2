@@ -1,0 +1,24 @@
+name of the thingey
+description will have to be all on one linked
+
+Chapa del NPC
+
+repuesta tuyo 1
+name of outcome scenario. 1
+function name 1
+
+repuesta tuyo 2
+name of outcome scenario. 2
+function name 2
+
+repuesta tuyo 3
+name of outcome scenario. 3
+function name 3
+
+repuesta tuyo 4
+name of outcome scenario. 4
+function name 4
+
+// (we do not need the names of the pointer to next nor do we need the names of the boolean stating completion.)
+
+//this is the most urgent this to fix 

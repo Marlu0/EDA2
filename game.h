@@ -106,6 +106,25 @@ typedef struct{
     Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
 
 }Decision;
+//you will need apointer to indicate where you are.
+
+
+// you need a meta function that asks where the player wants to go and then loads that scenario and then moves the current pointer over there.
+// with this current scenario pointer you can pass it in the ply scenario function to play it out.once the scenario has played out it will then ask you where you want to go.
+// you need to change how we are storing the scenarios becasue as it is they have no indication of what next is and we are just going to have to magic number the shit out of it.
+//but that is an issue for you once you are done with the EDA coruse.
+// htings you need to implement is the meta functions above and you need to change the load Scenarios list function to include some sort of pointer to the next one.
+
+
+
+
+
+
+
+
+
+
+
 
 typedef struct scenario{
     char name[MAX_STRING_LEN];
