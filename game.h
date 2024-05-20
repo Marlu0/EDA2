@@ -2,7 +2,22 @@
 #define GAME_H
 
 #include "common.h" // this isn't working oops
+#define UP 1
+#define LEFT 2
+#define RIGHT 3
+#define DOWN 4
+#define BACKWARDS 5
+// its arranged in that if you do backwards - direction you get the other direction
 
+#define NUM_SKILLS 2
+#define NUM_MODIFIERS 4
+#define MAX_CHOICES 4
+#define MAX_STRING_LEN 50
+#define MAX_DESCRIPTION_LEN 100
+#define NUM_OPTIONS 2
+#define NUM_DECISIONS 2
+#define INVENTORY_SIZE 8
+#define AGGRESSIVE_MODE_ACTIVATOR 2.5
 /* TYPE DEFINITIONS */
 
 /* STATS: 
@@ -93,17 +108,20 @@ typedef struct{
 }Enemy;
 
 /*SCENARIO STRUCTURES.*/
-typedef struct{
-    char response[MAX_STRING_LEN];
-    Scenario *outcome_on_senario;
-    Character *(*outcome_on_character)(Character *);
+
+/*ITS ME POL, ALL OF THESE WAS A SHITFUCK OF ERRORS, IT CANNOT COMPILE IF YOU USE IT BEFORE 
+DECLARING IT os amo*/
+
+//typedef struct{
+    //char response[MAX_STRING_LEN];
+   // Scenario *outcome_on_senario;
+   // Character *(*outcome_on_character)(Character *);
     /*this is a function pointer that points to a function describing what happened to your character.*/
-}Response_Outcome;
+//}Response_Outcome;
 
-
-typedef struct{
-    char chapa_del_NPC[MAX_STRING_LEN];
-    Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
+//typedef struct{
+  //  char chapa_del_NPC[MAX_STRING_LEN];
+    //Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
 
 }Decision;
 //you will need apointer to indicate where you are.
@@ -126,15 +144,16 @@ typedef struct{
 
 
 
-typedef struct scenario{
-    char name[MAX_STRING_LEN];
-    char description[MAX_DESCRIPTION_LEN]; //description of the scenario.
-    struct scenario *next;
-    struct scenario *prev;
-    struct scenario *other_direction; //there is going to be max  3 direction on any node.
-    Decision decision; //this is the thing that you will need to have a library for
-    bool completed;
-}Scenario;
+
+//typedef struct scenario{
+  //  char name[MAX_STRING_LEN];
+    //char description[MAX_DESCRIPTION_LEN]; //description of the scenario.
+    //struct scenario *next;
+    //struct scenario *prev;
+   // struct scenario *other_direction; //there is going to be max  3 direction on any node.
+  //  Decision decision; //this is the thing that you will need to have a library for
+  //  bool completed;
+//}Scenario;
 
 
 /*  WE NEED HAVE AN INIT_sCENARIO FUNCTION THAT TAKES IN */

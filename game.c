@@ -117,10 +117,10 @@ Weapon *init_weapons_dictionary(Skill skills_dictionary[]) {
     {"Fists", "Ol' reliable bare knuckles", {&skills_dictionary[4], &skills_dictionary[10]}},
     {"Rusty Revolver", "Older than the mountains", {&skills_dictionary[0], &skills_dictionary[4]}},
     {"Linda", "Sweetest kisses in the wild west", {&skills_dictionary[2], &skills_dictionary[0]}},
-    {"GOAT", "Gun Of Antilope Trilobites", {&skills_dictionary[5]}, {&skills_dictionary[3]}},
-    {"Gun & Barrel", "A gun in a barrel", {&skills_dictionary[1]}, {&skills_dictionary[2]}},
-    {"Cactus Thrower", "Ouch..", {&skills_dictionary[7]}, {&skills_dictionary[8]},},
-    {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6]}, {&skills_dictionary[5]}}
+    {"GOAT", "Gun Of Antilope Trilobites", {&skills_dictionary[5], &skills_dictionary[3]}},
+    {"Gun & Barrel", "A gun in a barrel", {&skills_dictionary[1], &skills_dictionary[2]}},
+    {"Cactus Thrower", "Ouch..", {&skills_dictionary[7], &skills_dictionary[8]}},
+    {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6],&skills_dictionary[5]}}
     };
     return weapons;
 };
@@ -213,7 +213,7 @@ Returns:
     - character of type Character 
 */
 Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */, bool first_game) { //trya dn save this for later
-    if (first_game = true){
+    if (first_game == true){
         printf("Welcome to Character Creation!\n");
     } else{
         printf("Welcome to Character Creation!\nWarning: Previous character will be erased\n");
