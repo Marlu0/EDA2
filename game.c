@@ -1,4 +1,5 @@
 #include "game.h"
+#include "scenario.h"
 #include "decision_functions.h"
 
 /*
@@ -53,16 +54,16 @@ void init_weapon_skill(Weapon *weapon, char filename[] /*weapons.txt*/, int inde
     if (difference < 1){perror("error indexing weapon skills.");}
 
     for(int i = 0; i < (min*4 + 1); i++){
-        fgets(weapon->skills[0].name, sizeof(weapon->skills[0].name), file_pointer);
+        fgets(weapon->skills[0]->name, sizeof(weapon->skills[0]->name), file_pointer);
     }
-    fgets(weapon->skills[0].description, sizeof(weapon->skills[0].description), file_pointer);
-    fscanf(file_pointer, "%d %d %d\n", &(weapon->skills[0].skill_modifier.tempatk), &(weapon->skills[0].skill_modifier.tempdef), &(weapon->skills[0].skill_modifier.templuc));
+    fgets(weapon->skills[0]->description, sizeof(weapon->skills[0]->description), file_pointer);
+    fscanf(file_pointer, "%d %d %d\n", &(weapon->skills[0]->skill_modifier.tempatk), &(weapon->skills[0]->skill_modifier.tempdef), &(weapon->skills[0]->skill_modifier.templuc));
 
     for(int i = 0; i < ((difference-1)*4 + 2); i++){
-        fgets(weapon->skills[1].name, sizeof(weapon->skills[1].name), file_pointer);
+        fgets(weapon->skills[1]->name, sizeof(weapon->skills[1]->name), file_pointer);
     }
-    fgets(weapon->skills[1].description, sizeof(weapon->skills[1].description), file_pointer);
-    fscanf(file_pointer, "%d %d %d\n", &(weapon->skills[1].skill_modifier.tempatk), &(weapon->skills[1].skill_modifier.tempdef), &(weapon->skills[1].skill_modifier.templuc));
+    fgets(weapon->skills[1]->description, sizeof(weapon->skills[1]->description), file_pointer);
+    fscanf(file_pointer, "%d %d %d\n", &(weapon->skills[1]->skill_modifier.tempatk), &(weapon->skills[1]->skill_modifier.tempdef), &(weapon->skills[1]->skill_modifier.templuc));
 
     flcose(file_pointer);
 }
