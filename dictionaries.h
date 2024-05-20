@@ -6,7 +6,7 @@
 #include "common.h"
 #include "game.h"
 
-Skill skills_dictionary[11] = {
+Skill skills_dictionary[13] = {
     /*1*/{10, "The Hermit", "Increases defense a 15%", {1, 1.15, 1}, 0},
     /*2*/{10, "The Chariot", "Increases defense a 30%", {1, 1.3, 1}, 0},
     /*3*/{10, "The Tower", "Increases attack a 15%", {1.15 , 1, 1}, 0},
@@ -17,9 +17,9 @@ Skill skills_dictionary[11] = {
     /*8*/{10, "The Armadillo", "Nothing like home", {0.5, 2, 1}, 20},
     /*8*/{10, "The Fool", "Decreases defense a 10%, and increase luck a 30%", {1, 0.9, 1.3}, 0},
     /*9*/{10, "Justice", "Faith will guide you", {1.1, 1.1, 1.1}, 0},
-    /*10*/{100, "Time Strike", "Repeat a random previous attack and double its damage", {1,1,1}, 0}
-    /*11*/{0, "Sword Slash", "their blood, better spent in soil than veins", {100.0, 100.0, 100.0}, 100},
-    /*12*/{10, "Sword Strie", "peirce the enemies' unfeeling heart", {200.0, 200.0, 200.0}, 100},
+    /*10*/{100, "Time Strike", "Repeat a random previous ", {1,1,1}, 0},//string shortened because it was too long
+    /*11*/{0, "Sword Slash", "their blood better spent in soil than veins", {100.0, 100.0, 100.0}, 100},
+    /*12*/{10, "Sword Strie", "peirce the enemies' unfeeling heart", {200.0, 200.0, 200.0}, 100}
 
 };
 
@@ -30,7 +30,7 @@ Weapon weapons_dictionary[7] = {
     {"GOAT", "Gun Of Antilope Trilobites", {&skills_dictionary[5], &skills_dictionary[3]}},
     {"Gun & Barrel", "A gun in a barrel", {&skills_dictionary[1], &skills_dictionary[2]}},
     {"Cactus Thrower", "Ouch..", {&skills_dictionary[7], &skills_dictionary[8]}},
-    {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6], &skills_dictionary[5]}
+    {"Gatling Gun", "RATATATTATATA", {&skills_dictionary[6], &skills_dictionary[5]}}
 };
 /*Enemy enemies_dictionary[6] = {
     {"shelly the turtle",,,&weapons_dictionary[4],0 },

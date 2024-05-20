@@ -108,29 +108,33 @@ typedef struct{
 }Enemy;
 
 /*SCENARIO STRUCTURES.*/
-typedef struct{
-    char response[MAX_STRING_LEN];
-    Scenario *outcome_on_senario;
-    Character *(*outcome_on_character)(Character *);
+
+/*ITS ME POL, ALL OF THESE WAS A SHITFUCK OF ERRORS, IT CANNOT COMPILE IF YOU USE IT BEFORE 
+DECLARING IT os amo*/
+
+//typedef struct{
+    //char response[MAX_STRING_LEN];
+   // Scenario *outcome_on_senario;
+   // Character *(*outcome_on_character)(Character *);
     /*this is a function pointer that points to a function describing what happened to your character.*/
-}Response_Outcome;
+//}Response_Outcome;
+
+//typedef struct{
+  //  char chapa_del_NPC[MAX_STRING_LEN];
+    //Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
+
+//}Decision;
 
 
-typedef struct{
-    char chapa_del_NPC[MAX_STRING_LEN];
-    Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
-
-}Decision;
-
-typedef struct scenario{
-    char name[MAX_STRING_LEN];
-    char description[MAX_DESCRIPTION_LEN]; //description of the scenario.
-    struct scenario *next;
-    struct scenario *prev;
-    struct scenario *other_direction; //there is going to be max  3 direction on any node.
-    Decision decision; //this is the thing that you will need to have a library for
-    bool completed;
-}Scenario;
+//typedef struct scenario{
+  //  char name[MAX_STRING_LEN];
+    //char description[MAX_DESCRIPTION_LEN]; //description of the scenario.
+    //struct scenario *next;
+    //struct scenario *prev;
+   // struct scenario *other_direction; //there is going to be max  3 direction on any node.
+  //  Decision decision; //this is the thing that you will need to have a library for
+  //  bool completed;
+//}Scenario;
 
 
 /*  WE NEED HAVE AN INIT_sCENARIO FUNCTION THAT TAKES IN */
