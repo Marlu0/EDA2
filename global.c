@@ -1,6 +1,6 @@
-/* common.c contains the most used functions to optimise their use in other files */
+/* global.c contains functions commonly used across the code to optimise the other files */
 
-#include "common.h"
+#include "global.h"
 
 /* GENERAL FUNCTION DECLARATIONS */
 
@@ -114,7 +114,7 @@ void print_credits(){
     printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
 }
 
-/* FUNCTIONS FOR STACK */
+/* STACK FUNCTIONS */
 
 // Function to create a new stack
 Stack* create_stack(int capacity) {
@@ -177,7 +177,7 @@ void free_stack(Stack* stack) {
     free(stack);
 }
 
-/* FUNCTIONS FOR QUEUE */
+/* QUEUE FUNCTIONS */
 
 // Function to create a new queue with given maximum size
 Queue* create_queue(int maxSize) {
@@ -245,7 +245,7 @@ void display_queue(Queue* queue) {
     printf("%d\n", queue->items[i]);
 }
 
-/* FUNCTIONS FOR DICTIONARY */
+/* DICTIONARY FUNCTIONS */
 
 HashTable* create_table() {
     HashTable *hashTable = malloc(sizeof(HashTable));

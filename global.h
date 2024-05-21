@@ -171,7 +171,7 @@ int dequeue(Queue* queue);
 
 void display_queue(Queue* queue);
 
-/* FUNCTIONS FOR DICTIONARY */
+/* DICTIONARY DEFINITIONS AND FUNCTIONS */
 
 typedef struct Node {
     char *key;
