@@ -1,6 +1,6 @@
-/* common.c contains the most used functions to optimise their use in other files */
+/* global.c contains functions commonly used across the code to optimise the other files */
 
-#include "common.h"
+#include "global.h"
 
 /* GENERAL FUNCTION DECLARATIONS */
 
