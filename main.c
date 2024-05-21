@@ -3,7 +3,7 @@
 #include "global.h"
 #include "game.h"
 #include "combat.h"
-#include "dictionaries.h"
+#include "global.h"
 
 
 /*SAVE GAME
@@ -188,6 +188,7 @@ void init_game(bool first_game) {
 /*main*/
 int main() {
     bool first_game = true;
+    srand(time(NULL));
     init_game(first_game);
 
     return 0;

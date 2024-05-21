@@ -76,12 +76,12 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             }
             case 5: {
                 // SKILL 4: TIME STRIKE
-                if (!isEmpty(attack_stack)) {
+                if (!isEmpty(attack_stack) && !time_strike_done) {
                     // Seed the random number generator (optional)
                     srand(time(NULL));
 
                     // Generate a random number between 0 and n-1
-                    int random_number = rand() % (*attacks_done);
+                    int random_number = rand() % (*attacks_done) + 1;
                     // Initialise past_damage variable to store random attack
                     int past_damage = -1;
 
@@ -92,11 +92,15 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     int enemy_selected = select_enemy(enemies, number_of_enemies);
                     enemies[enemy_selected].health -= total_damage;
                     (*attacks_done)++;
+                    free_stack(attack_stack);
                     (*time_strike_done) = 1;
                     turn_done = 1;
                 }
                 else {
-                    printf("No past attacks to use Time Strike!\n");
+                    if (time_strike_done) {
+                        printf("You've already used Time Strike this fight!\n")
+                    }
+                    else printf("No past attacks to use Time Strike!\n");
                 }
                 break;
             }
