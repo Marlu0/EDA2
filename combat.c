@@ -1,4 +1,4 @@
-#include "combat.h"
+#include "global.h"
 
 /* Functions for turn-based combat */
 
@@ -110,9 +110,10 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
         case 1:
             int enemy_selected = select_enemy(enemies, number_of_enemies);
             enemies[enemy_selected].health -= (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemy_selected].stats.def)*(enemies[enemy_selected].active_modifiers->tempdef));
-        
+            break;
         case 2:
-            int skill_selected = select_skill(character, attacks_done);
+            int skill_selected; 
+            skill_selected = select_skill(character, attacks_done);
 
             // Special skill, Time Strike
             if ((character->active_weapon.skills[skill_selected].name == "Time Strike") && (!time_strike_done)) {
@@ -149,7 +150,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
 
             ++attacks_done;
             }
-        
+            break;
         default:
             printf("Invalid selection. Please try again.\n");
     }
