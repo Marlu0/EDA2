@@ -1,29 +1,34 @@
+W01
+Fists
+That's gonna hurt!
+S03 S05
+
+W02
 Rusty Revolver
 Older that the mountains
-0
-4
+S01 S05
 
+W03
 Linda
 Sweetest kisses in the wild west
-0
-2
+S01 S03
 
+W04
 GOAT
 Gun Of Antilope Trilobites
-3
-5
+S04 S06
 
+W05
 Gun & Barrel
 A gun in a barrel
-1
-2
+S02 S03
 
+W06
 Cactus Catapult
 Ouch...
-7
-8
+S08 S09
 
+W07
 Gatling Gun
 RATATATTATATA
-5
-6
+S06 S07

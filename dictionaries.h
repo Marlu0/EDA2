@@ -3,7 +3,7 @@
 
 /* Here we define the skills and weapons, hard coded as a .h to make adjustments to the playability easier */
 
-#include "common.h"
+#include "global.h"
 #include "game.h"
 
 Skill skills_dictionary[13] = {

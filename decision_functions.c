@@ -1,4 +1,4 @@
-#include "common.h"
+#include "global.h"
 
 void health_potion(Character *character){
     character->health = 100;
