@@ -2,6 +2,8 @@
 
 #include "common.h"
 
+/* GENERAL FUNCTION DECLARATIONS */
+
 /* GET SELECTION (Important: This function returns index+1 of the array entered)
 This function recieves: 
     - An array of strings, the last element MUST be NULL. 

@@ -6,7 +6,7 @@
 #define NUM_SKILLS 2
 #define NUM_MODIFIERS 4
 #define MAX_CHOICES 4
-#define MAX_STRING_LEN 50
+#define MAX_DESCRIPTION_LEN 50
 #define MAX_DESCRIPTION_LEN 100
 #define NUM_OPTIONS 2
 #define NUM_DECISIONS 2
@@ -36,8 +36,8 @@ typedef struct{
 */
 typedef struct{
     int bulletcost;
-    char name[MAX_STRING_LEN]; //I HAVE NO IDEA WHY THIS IS RED LIKE WHAT!
-    char description[MAX_STRING_LEN];
+    char name[MAX_DESCRIPTION_LEN]; //I HAVE NO IDEA WHY THIS IS RED LIKE WHAT!
+    char description[MAX_DESCRIPTION_LEN];
     Modifier skill_modifier;
     int healing; /*where do we put this in the skills?*///ill add it in later
 }Skill;
@@ -51,8 +51,8 @@ typedef struct{
         - skills[] = skills[0], skills[4]
 */
 typedef struct{
-    char name[MAX_STRING_LEN];
-    char description[MAX_STRING_LEN];
+    char name[MAX_DESCRIPTION_LEN];
+    char description[MAX_DESCRIPTION_LEN];
     Skill *skills[NUM_SKILLS];
 }Weapon;
 
@@ -76,7 +76,7 @@ typedef struct{
         - active_modifiers = []
 */
 typedef struct{
-    char name[MAX_STRING_LEN];
+    char name[MAX_DESCRIPTION_LEN];
     int health;
     int bullets;
     int balance; //money
@@ -94,7 +94,7 @@ typedef struct{
         - skills = [Shell armor, Intimidate, Play Dead]
 */
 typedef struct{
-    char name[MAX_STRING_LEN];
+    char name[MAX_DESCRIPTION_LEN];
     int health;
     Stats stats;
     Weapon weapon;
@@ -107,14 +107,14 @@ typedef struct{
 DECLARING IT os amo*/
 
 //typedef struct{
-    //char response[MAX_STRING_LEN];
+    //char response[MAX_DESCRIPTION_LEN];
    // Scenario *outcome_on_senario;
    // Character *(*outcome_on_character)(Character *);
     /*this is a function pointer that points to a function describing what happened to your character.*/
 //}Response_Outcome;
 
 //typedef struct{
-  //  char chapa_del_NPC[MAX_STRING_LEN];
+  //  char chapa_del_NPC[MAX_DESCRIPTION_LEN];
     //Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
 
 //}Decision;
@@ -140,7 +140,7 @@ DECLARING IT os amo*/
 
 
 //typedef struct scenario{
-  //  char name[MAX_STRING_LEN];
+  //  char name[MAX_DESCRIPTION_LEN];
     //char description[MAX_DESCRIPTION_LEN]; //description of the scenario.
     //struct scenario *next;
     //struct scenario *prev;

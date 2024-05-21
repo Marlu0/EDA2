@@ -10,17 +10,18 @@
 #include <stdbool.h>
 
 /* MACROS */
+
+/* DIRECTIONS */
+// Arranged so that if you do BACKWARDS - DIRECTION(previous) you get the opposite direction
 #define UP 1
 #define LEFT 2
 #define RIGHT 3
 #define DOWN 4
 #define BACKWARDS 5
-// its arranged in that if you do backwards - direction you get the other direction
 
 #define NUM_SKILLS 2
 #define NUM_MODIFIERS 4
 #define MAX_CHOICES 4
-#define MAX_STRING_LEN 50
 #define MAX_DESCRIPTION_LEN 100
 #define NUM_OPTIONS 2
 #define NUM_DECISIONS 2
