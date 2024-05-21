@@ -46,61 +46,61 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
     int turn_done = 0;
     while (!turn_done){
         switch (atk_type) {
-        case 1: {
-            // BASE ATTACK: SHOOT
-            int enemy_selected = select_enemy(enemies, number_of_enemies);
-            int total_damage = (10 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (enemies[enemy_selected].stats.def);
-            enemies[enemy_selected].health -= total_damage;
-            push_stack(attack_stack, total_damage);
-            (*attacks_done)++;
-            turn_done = 1;
-            break;
-        }
-        case 2: {
-            // SKILL 1: AUGMENTING DEF
-            character->active_modifiers.tempdef += 1;
-            turn_done = 1;
-            break;
-        }
-        case 3: {
-            // SKILL 2: AUGMENTING ATK
-            character->active_modifiers.tempatk += 1;
-            turn_done = 1;
-            break;
-        }
-        case 4: {
-            // SKILL 3: AUGMENTING LUC
-            character->active_modifiers.templuc += 1;
-            turn_done = 1;
-            break;
-        }
-        case 5: {
-            // SKILL 4: TIME STRIKE
-            if (!isEmpty(attack_stack)) {
-                // Seed the random number generator (optional)
-                srand(time(NULL));
-
-                // Generate a random number between 0 and n-1
-                int random_number = rand() % (*attacks_done);
-                // Initialise past_damage variable to store random attack
-                int past_damage = -1;
-
-                for (int i = 0; i < random_number; ++i){
-                    past_damage = pop_stack(attack_stack);
-                }
-                int total_damage = 2 * past_damage;
+            case 1: {
+                // BASE ATTACK: SHOOT
                 int enemy_selected = select_enemy(enemies, number_of_enemies);
+                int total_damage = (10 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (enemies[enemy_selected].stats.def);
                 enemies[enemy_selected].health -= total_damage;
+                push_stack(attack_stack, total_damage);
                 (*attacks_done)++;
-                (*time_strike_done) = 1;
                 turn_done = 1;
+                break;
             }
-            else {
-                printf("No past attacks to use Time Strike!\n");
+            case 2: {
+                // SKILL 1: AUGMENTING DEF
+                character->active_modifiers.tempdef += 1;
+                turn_done = 1;
+                break;
             }
-            break;
+            case 3: {
+                // SKILL 2: AUGMENTING ATK
+                character->active_modifiers.tempatk += 1;
+                turn_done = 1;
+                break;
+            }
+            case 4: {
+                // SKILL 3: AUGMENTING LUC
+                character->active_modifiers.templuc += 1;
+                turn_done = 1;
+                break;
+            }
+            case 5: {
+                // SKILL 4: TIME STRIKE
+                if (!isEmpty(attack_stack)) {
+                    // Seed the random number generator (optional)
+                    srand(time(NULL));
+
+                    // Generate a random number between 0 and n-1
+                    int random_number = rand() % (*attacks_done);
+                    // Initialise past_damage variable to store random attack
+                    int past_damage = -1;
+
+                    for (int i = 0; i < random_number; ++i){
+                        past_damage = pop_stack(attack_stack);
+                    }
+                    int total_damage = 2 * past_damage;
+                    int enemy_selected = select_enemy(enemies, number_of_enemies);
+                    enemies[enemy_selected].health -= total_damage;
+                    (*attacks_done)++;
+                    (*time_strike_done) = 1;
+                    turn_done = 1;
+                }
+                else {
+                    printf("No past attacks to use Time Strike!\n");
+                }
+                break;
+            }
         }
-    }
     }
 }
 
