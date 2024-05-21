@@ -2,17 +2,11 @@
 
 /*SCENARIO STRUCTURES.*/
 typedef struct{
-<<<<<<< HEAD
     char response[MAX_STRING_LEN];
     Scenario *outcome_on_senario;
-=======
-    char response[MAX_DESCRIPTION_LEN];
-    //Scenario *outcome_on_senario; //not well defined, compiling errors
->>>>>>> 4d621e15962df87be6f4cd1dd33a34b38691e901
     Character *(*outcome_on_character)(Character *);
     /*this is a function pointer that points to a function describing what happened to your character.*/
 }Response_Outcome;
-
 
 typedef struct{
     char chapa_del_NPC[MAX_STRING_LEN];
