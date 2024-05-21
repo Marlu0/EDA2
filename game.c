@@ -41,7 +41,7 @@ void init_weapon_skill(Weapon *weapon, char filename[] /*weapons.txt*/, int inde
     if(file_pointer == NULL){
         perror("Error opening file!");
     }
-    char skill_name[MAX_STRING_LEN];
+    char skill_name[MAX_DESCRIPTION_LEN];
     int min, max, difference;
     if(index1 < index2){
         min = index1;
@@ -76,7 +76,7 @@ it returns:
  - nothing (updates character by reference)
 */
 void pick_up_weapon(Character *character, FILE *file_pointer, char search_weapon_name[]){
-    char file_weapon_name[MAX_STRING_LEN];
+    char file_weapon_name[MAX_DESCRIPTION_LEN];
     int equality = strncpm(fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer), search_weapon_name); //this might need newline char
 
     while(equality != 0){
@@ -95,7 +95,7 @@ void pick_up_weapon(Character *character, FILE *file_pointer, char search_weapon
     character->inventory.fill++;
     
     
-    strncpy(character->active_weapon.name, search_weapon_name, MAX_STRING_LEN);
+    strncpy(character->active_weapon.name, search_weapon_name, MAX_DESCRIPTION_LEN);
 
 
     fgets(character->active_weapon.description, sizeof(character->active_weapon.description), file_pointer);
@@ -145,14 +145,14 @@ void name_character(Character *character) {
         printf("Choose a name for your character: ");
         
         /* Use fgets to read the entire line, including spaces, for the character's name */
-        fgets(character->name, MAX_STRING_LEN, stdin);
+        fgets(character->name, MAX_DESCRIPTION_LEN, stdin);
 
         /* Remove the newline character from the end of the input and add the null terminator */
         character->name[strcspn(character->name, "\n")] = '\0';
 
         printf("Are you sure you want the name '%s'? (yes/no): ", character->name);
-        char answer[MAX_STRING_LEN];
-        fgets(answer, MAX_STRING_LEN, stdin);
+        char answer[MAX_DESCRIPTION_LEN];
+        fgets(answer, MAX_DESCRIPTION_LEN, stdin);
         /* Remove the newline character from the end of the input */
         answer[strcspn(answer, "\n")] = '\0';
 
@@ -280,8 +280,8 @@ Character create_character(Weapon weapons_dictionary[] /* Weapons dictionary */,
 
             /* Confirmation is asked in case the user wants to change their selection */
             printf("Are you sure about your stat selection? (yes/no): ");
-            char answer[MAX_STRING_LEN];
-            fgets(answer, MAX_STRING_LEN, stdin);
+            char answer[MAX_DESCRIPTION_LEN];
+            fgets(answer, MAX_DESCRIPTION_LEN, stdin);
             /* Remove the newline character from the end of the input */
             answer[strcspn(answer, "\n")] = '\0';
 

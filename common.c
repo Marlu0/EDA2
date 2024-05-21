@@ -2,6 +2,8 @@
 
 #include "common.h"
 
+/* GENERAL FUNCTION DECLARATIONS */
+
 /* GET SELECTION (Important: This function returns index+1 of the array entered)
 This function recieves: 
     - An array of strings, the last element MUST be NULL. 
@@ -245,3 +247,44 @@ void display_queue(Queue* queue) {
 
 /* FUNCTIONS FOR DICTIONARY */
 
+HashTable* create_table() {
+    HashTable *hashTable = malloc(sizeof(HashTable));
+    hashTable->table = malloc(sizeof(Node*) * TABLE_SIZE);
+
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        hashTable->table[i] = NULL;
+    }
+
+    return hashTable;
+}
+
+unsigned int hash(const char *key) {
+    unsigned int hash = 0;
+    while (*key) {
+        hash = (hash << 5) + *key++;
+    }
+    return hash % TABLE_SIZE;
+}
+
+void insert(HashTable *hashTable, const char *key, void *value) {
+    unsigned int index = hash(key);
+    Node *newNode = malloc(sizeof(Node));
+    newNode->key = strdup(key);
+    newNode->value = value;
+    newNode->next = hashTable->table[index];
+    hashTable->table[index] = newNode;
+}
+
+void* lookup(HashTable *hashTable, const char *key) {
+    unsigned int index = hash(key);
+    Node *node = hashTable->table[index];
+
+    while (node) {
+        if (strcmp(node->key, key) == 0) {
+            return node->value;
+        }
+        node = node->next;
+    }
+
+    return NULL;
+}
