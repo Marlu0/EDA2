@@ -75,11 +75,14 @@ int turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int n
                 // Seed the random number generator
                 srand(time(NULL));
                 // Generate a random number between 0 and n-1
-                int random_number = rand() % attacks_done;
-
-                // Shift the range to 1 to n (inclusive)
-                return random_number + 1;
-                attack_stack
+                int random_number = rand() % attacks_done + 1;
+                // Initialize past_attack to double it
+                int past_damage = 0;
+                // For a random number between 1 and attacks_done pop stack and save last value in past_attack
+                for (int i=0; i<random_number; ++i) {
+                    past_damage = pop_stack(attack_stack);
+                }
+                int total_damage = 2*past_damage;
             }
             else {
                 printf("You've already used Time Strike this fight!\n");
