@@ -13,9 +13,26 @@ W02 S01 S05
 E02
 Sheriff Roach
 He's missing a leg
-10 10 10 10 10
+15 10 5 10 10
 W03 S01 S03
 
 E03
 Shelly the turtle
 His shell is full of holes
+15 15 5 10 5
+W04 S04 S06
+
+E04
+Bill the Bull bully
+Looks like a madman
+10 10 15 5 1
+
+E05
+Deputy Dean
+What a cute bunny
+10 10 10 10 10
+
+E06
+Fat Fisho
+The mafia boss
+15 10 5 10 5
