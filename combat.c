@@ -40,7 +40,7 @@ It does:
 Returns:
     - Nothing
 */
-void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done) {
+void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done, int *time_strike_done) {
     const char *options1[] = {"Shoot", "Skill: +DEF", "Skill: +ATK", "Skill: +LUC", "Skill: Time Strike", NULL};
     int atkType = get_selection(options1);
 
@@ -72,11 +72,22 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
         case 5: {
             // SKILL 4: TIME STRIKE
             if (!isEmpty(attack_stack)) {
-                int past_damage = pop_stack(attack_stack);
+                // Seed the random number generator (optional)
+                srand(time(NULL));
+
+                // Generate a random number between 0 and n-1
+                int random_number = rand() % (*attacks_done);
+                // Initialise past_damage variable to store random attack
+                int past_damage = -1;
+
+                for (int i = 0; i < random_number; ++i){
+                    past_damage = pop_stack(attack_stack);
+                }
                 int total_damage = 2 * past_damage;
-                // Implement logic to choose a past attack (e.g., store last few attacks)
-                enemies[/*enemy_to_attack*/].health -= total_damage;
+                int enemy_selected = select_enemy(enemies, number_of_enemies);
+                enemies[enemy_selected].health -= total_damage;
                 (*attacks_done)++;
+                (*time_strike_done) = 1;
             }
             else {
                 printf("No past attacks to use Time Strike!\n");
