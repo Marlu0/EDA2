@@ -1,5 +1,5 @@
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 
 /* global.h contains the macros and the most used libraries and functions */
 
@@ -43,13 +43,13 @@ void print_credits();
 Health, maná, attack, defense, luck*/
 typedef struct{
     int hp, bp, atk, def, luc;
-}Stats;
+} Stats;
 
 /* MODIFIER: 
 This will help us with combat calculations like: damage = atk + tempatk */
 typedef struct{
     float tempatk, tempdef, templuc;
-}Modifier;
+} Modifier;
 
 /* SKILL:
     Has name, description and a modifier, this affects the 
@@ -60,12 +60,13 @@ typedef struct{
         - skill_modifier = {atk, 0, 0} (This will make damage = atk + tempatk = 2*atk)
 */
 typedef struct{
+    char id[4]; // ID for easy lookup
     int bulletcost;
-    char name[MAX_DESCRIPTION_LEN]; //I HAVE NO IDEA WHY THIS IS RED LIKE WHAT!
+    char name[MAX_DESCRIPTION_LEN];
     char description[MAX_DESCRIPTION_LEN];
     Modifier skill_modifier;
-    int healing; /*where do we put this in the skills?*///ill add it in later
-}Skill;
+    int healing;
+} Skill;
 
 /* WEAPON:
     Has name, description and an array of skill structs.
@@ -76,10 +77,11 @@ typedef struct{
         - skills[] = skills[0], skills[4]
 */
 typedef struct{
+    char id[4]; // ID for easy lookup
     char name[MAX_DESCRIPTION_LEN];
     char description[MAX_DESCRIPTION_LEN];
     Skill *skills[NUM_SKILLS];
-}Weapon;
+} Weapon;
 
 /* INVENTORY:
     Has:
@@ -89,7 +91,7 @@ typedef struct{
 typedef struct{
     Weapon weapons_in_inventory[INVENTORY_SIZE];
     int fill; //create_character sets the fill equal to 1.
-}Inventory;
+} Inventory;
 
 /* ENEMY:
     Has name, stats and an array of skills
@@ -99,12 +101,13 @@ typedef struct{
         - skills = [Shell armor, Intimidate, Play Dead]
 */
 typedef struct{
+    char id[4]; // ID for easy lookup
     char name[MAX_DESCRIPTION_LEN];
     int health;
     Stats stats;
     Weapon weapon;
     Modifier active_modifiers[NUM_MODIFIERS];
-}Enemy;
+} Enemy;
 
 /* CHARACTER:
     Has name, reputation, Stats, an array of skills and an array of active modifiers
@@ -124,7 +127,7 @@ typedef struct{
     Inventory inventory;
     Modifier active_modifiers[NUM_MODIFIERS];
     Weapon active_weapon;
-}Character;
+} Character;
 
 /* STACK DEFINITIONS AND FUNCTIONS */
 
@@ -191,4 +194,4 @@ void insert(HashTable *hashTable, const char *key, void *value);
 
 void* lookup(HashTable *hashTable, const char *key);
 
-#endif // COMMON_H
+#endif // GLOBAL_H
