@@ -14,4 +14,6 @@ void turn_enemy(Character *character, Enemy *enemy);
 
 void do_combat(Character *character, Enemy *enemies, int number_of_enemies);
 
+
+
 #endif /* COMBAT_H */

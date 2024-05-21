@@ -288,15 +288,15 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
             }
         }
         else {
-            if (turn_queue->items[turn_queue->front] = goodie_index) {
+            if (turn_queue->items[turn_queue->front] == goodie_index) {
                     /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
-                    attack_player(character, enemies, dead_enemies);
+                    turn_player(character, enemies, dead_enemies);
                     dequeue(turn_queue);
             }
             else {
                     /*In the enemy attack we pass the enemy in turn and the character*/
                     /*The enemy shoud be a pointer TALK WITH MARCELINO*/
-                    attack_enemy(enemies[turn_queue->items[turn_queue->front]], character, dead_enemies);
+                    turn_enemy(enemies[turn_queue->items[turn_queue->front]], character, dead_enemies);
                     dequeue(turn_queue);
             }
         }
