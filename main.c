@@ -25,7 +25,7 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/) {
         return;
     }
     printf("Enter save filename: ");
-    char filename[MAX_DESCRIPTION_LEN]; /*error proof this later*/
+    char filename[MAX_STRING_LEN]; /*error proof this later*/
 
     FILE *file_pointer = fopen(filename, "w");
     if (file_pointer == NULL) {

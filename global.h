@@ -20,14 +20,7 @@
 #define BACKWARDS 5
 
 #define TABLE_SIZE 100
-#define NUM_SKILLS 2
-#define NUM_MODIFIERS 4
-#define MAX_CHOICES 4
-#define MAX_DESCRIPTION_LEN 100
-#define NUM_OPTIONS 2
-#define NUM_DECISIONS 2
-#define INVENTORY_SIZE 8
-#define AGGRESSIVE_MODE_ACTIVATOR 2.5
+#define MAX_STRING_LEN 100
 
 /* GENERAL FUNCTION DECLARATIONS */
 
@@ -60,73 +53,38 @@ typedef struct{
         - skill_modifier = {atk, 0, 0} (This will make damage = atk + tempatk = 2*atk)
 */
 typedef struct{
-    char id[4]; // ID for easy lookup
     int bulletcost;
-    char name[MAX_DESCRIPTION_LEN];
-    char description[MAX_DESCRIPTION_LEN];
+    char name[MAX_STRING_LEN];
+    char description[MAX_STRING_LEN];
     Modifier skill_modifier;
-    int healing;
 } Skill;
 
-/* WEAPON:
-    Has name, description and an array of skill structs.
-    Will affect available skills.
-    Example:
-        - name = "Rusty Revolver"
-        - description = "Older than the mountains"
-        - skills[] = skills[0], skills[4]
-*/
-typedef struct{
-    char id[4]; // ID for easy lookup
-    char name[MAX_DESCRIPTION_LEN];
-    char description[MAX_DESCRIPTION_LEN];
-    Skill *skills[NUM_SKILLS];
-} Weapon;
-
-/* INVENTORY:
-    Has:
-    - A weapons array of size INVENTORY_SIZE, a macro defined to not have to pass the size on all functions
-    - An int fill to track empty slots when adding new weapons
-*/
-typedef struct{
-    Weapon weapons_in_inventory[INVENTORY_SIZE];
-    int fill; //create_character sets the fill equal to 1.
-} Inventory;
-
 /* ENEMY:
-    Has name, stats and an array of skills
     Example:
         - name = "Sheriff Roach"
         - stats = {2, 1, 5, 5, 2}
-        - skills = [Shell armor, Intimidate, Play Dead]
+        - skill_1 = Shell armor
+        - skill_2 = Play Dead
 */
 typedef struct{
-    char id[4]; // ID for easy lookup
-    char name[MAX_DESCRIPTION_LEN];
+    char name[MAX_STRING_LEN];
     int health;
     Stats stats;
-    Weapon weapon;
-    Modifier active_modifiers[NUM_MODIFIERS];
+    Skill skill_1;
+    Skill skill_2;
 } Enemy;
 
 /* CHARACTER:
-    Has name, reputation, Stats, an array of skills and an array of active modifiers
     Example:
         - name = "Lizzy"
-        - reputation = -1
         - stats = {100,50,10,20,5}
-        - skills = [Rampage, Time Strike]
-        - active_modifiers = []
 */
 typedef struct{
-    char name[MAX_DESCRIPTION_LEN];
+    char name[MAX_STRING_LEN];
     int health;
     int bullets;
-    int balance; //money
     Stats stats;
-    Inventory inventory;
-    Modifier active_modifiers[NUM_MODIFIERS];
-    Weapon active_weapon;
+    Modifier active_modifiers;
 } Character;
 
 /* STACK DEFINITIONS AND FUNCTIONS */
@@ -160,7 +118,7 @@ typedef struct {
     int front;
     int rear;
     int maxSize;
-}Queue;
+} Queue;
 
 Queue* create_queue(int maxSize);
 

@@ -2,7 +2,7 @@
 
 /*SCENARIO STRUCTURES.*/
 typedef struct{
-    char response[MAX_DESCRIPTION_LEN];
+    char response[MAX_STRING_LEN];
     Scenario *outcome_on_senario;
     Character *(*outcome_on_character)(Character *);
     /*this is a function pointer that points to a function describing what happened to your character.*/
@@ -10,7 +10,7 @@ typedef struct{
 
 
 typedef struct{
-    char chapa_del_NPC[MAX_DESCRIPTION_LEN];
+    char chapa_del_NPC[MAX_STRING_LEN];
     Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
 
 }Decision;
@@ -25,8 +25,8 @@ typedef struct{
 
 
 typedef struct scenario{
-    char name[MAX_DESCRIPTION_LEN];
-    char description[MAX_DESCRIPTION_LEN]; //description of the scenario.
+    char name[MAX_STRING_LEN];
+    char description[MAX_STRING_LEN]; //description of the scenario.
     struct scenario *next;
     struct scenario *prev;
     struct scenario *other_direction; //there is going to be max  3 direction on any node.
