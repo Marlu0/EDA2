@@ -42,35 +42,16 @@ Returns:
 */
 void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done, bool time_strike_done) {
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
-    const char *options1[] = {"Attack", "Skills", NULL};
+    const char *options1[] = {"Shoot", "Skill: +DEF", "Skill: +ATK", "Skill: +LUC", "Skill: Time Strike", NULL};
     int atkType = get_selection(options1);
     switch (atkType) {
-        case 1:{
+        case 1: {
             int enemy_selected = select_enemy(enemies, number_of_enemies);
-            enemies[enemy_selected].health -= (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemy_selected].stats.def)*(enemies[enemy_selected].active_modifiers->tempdef));
+            enemies[enemy_selected].health -= (10*((character->stats.atk)*(character->active_modifiers.tempatk)))/(enemies[enemy_selected].stats.def);
             break;
         }
         case 2: {
-            int skill_selected; 
-            skill_selected = select_skill(character, attacks_done);
-
-            // Special skill, Time Strike
-            if (strcmp(character->active_weapon.skills[skill_selected]->name, "Time Strike") && (!time_strike_done)) {
-                //Generate a random number n between 1 and attacks_done and pop n times
-                srand(time(NULL));
-                int n = rand() % attacks_done + 1;
-                int past_damage = 0;
-                for (int i=0; i<n; ++i) {
-                    past_damage = pop_stack(attack_stack);
-                }
-                int total_damage = 2*past_damage;
-                int enemy_selected = select_enemy(enemies, number_of_enemies);
-                enemies[enemy_selected].health -= total_damage;
-                printf("You've used Time Strike and have given %d damage to %s\n",total_damage, enemies[enemy_selected].name);
-                time_strike_done = true;
-            }
-            else {
-            //Apply modifiers to character
+            //SKILL 1
             character->active_modifiers->tempatk += character->active_weapon.skills[skill_selected]->skill_modifier.tempatk;
             character->active_modifiers->tempdef += character->active_weapon.skills[skill_selected]->skill_modifier.tempdef;
             character->active_modifiers->templuc += character->active_weapon.skills[skill_selected]->skill_modifier.templuc;
