@@ -1,0 +1,21 @@
+{"shelly the turtle",,,&weapons_dictionary[4],0 },
+    {"bull the bully",,&weapons_dictionary[3],0},
+    {"minion 1",,,&weapons_dictionary[1],0},
+    {"minion 2",,,&weapons_dictionary[2],0},
+    {"mr bubbles",,,&weapons_dictionary[6],0},
+
+E01
+Fish Goon
+Mean looking guy
+15 15 15 15 15
+W02 S01 S05
+
+E02
+Sheriff Roach
+He's missing a leg
+10 10 10 10 10
+W03 S01 S03
+
+E03
+Shelly the turtle
+His shell is full of holes
