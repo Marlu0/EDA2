@@ -1,6 +1,6 @@
 /*Cada vez k hay una \ en el string tienes k pone doble.
 */
-#include "common.h"
+#include "global.h"
 
 #define SIZE_Y 1000 //we can change this is we want the drawings bigger,
 

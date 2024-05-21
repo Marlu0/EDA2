@@ -1,7 +1,7 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-/* common.h contains the macros and the most used libraries and functions */
+/* global.h contains the macros and the most used libraries and functions */
 
 #include <stdio.h>
 #include <stdlib.h>

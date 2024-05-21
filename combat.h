@@ -1,7 +1,7 @@
 #ifndef COMBAT_H
 #define COMBAT_H
 
-#include "common.h"
+#include "global.h"
 #include "game.h"
 
 int select_skill(Character *character, int attacks_done);

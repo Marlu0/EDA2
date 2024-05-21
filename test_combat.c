@@ -1,4 +1,4 @@
-#include "common.h"
+#include "global.h"
 #include "game.h"
 #include "combat.h"
 

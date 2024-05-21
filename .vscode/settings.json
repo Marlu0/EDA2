@@ -2,6 +2,6 @@
     "cmake.configureOnOpen": false,
     "files.associations": {
         "stdio.h": "c",
-        "common.h": "c"
+        "global.h": "c"
     }
 }
