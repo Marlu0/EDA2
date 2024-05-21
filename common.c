@@ -211,3 +211,7 @@ void display_queue(Queue* queue) {
     }
     printf("%d\n", queue->items[i]);
 }
+
+int main(){
+    printf("hOLA");
+}
