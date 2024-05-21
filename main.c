@@ -109,38 +109,6 @@ Character *start_game(Character *character, Scenario *start, int first_game){
     //
 }
 void continue_game(/*this is the thing that you should put into load file.*/){}
-/*PRINT CREDITS
-This function recieves:
-    - Nothing
-It does:
-    - Print Credits
-Returns:
-    - Nothing
-*/
-
-
-void print_credits(){
-    printf("\nGame Producers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-
-    printf("\nGame Directors:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-    
-    printf("\nSenior programmers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-    
-    printf("\nJunior programmers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-
-    printf("\nGraphic Designers:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-
-    printf("\nStory Boarders:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-
-    printf("\nEverything Else:\n");
-    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
-}
 
 
 /*

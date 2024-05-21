@@ -81,6 +81,37 @@ void print_main_title() {
     printf("                    ▀▀▀▀ ▀▪▀▀▀.▀▀▀ ▀▀▀▀▀•      ▀▀▀▀ ▀▪ ▀▀▀  ▀▀▀▀  ▀▀▀   \n");
 }
 
+/* PRINT CREDITS
+This function recieves:
+    - Nothing
+It does:
+    - Print Credits
+Returns:
+    - Nothing
+*/
+void print_credits(){
+    printf("\nGame Producers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+
+    printf("\nGame Directors:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+    
+    printf("\nSenior programmers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+    
+    printf("\nJunior programmers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+
+    printf("\nGraphic Designers:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+
+    printf("\nStory Boarders:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+
+    printf("\nEverything Else:\n");
+    printf("Darcy Thomas Robertson\nMarcel Manzano\nPol Obrador\nRicardo Ortega\n\n");
+}
+
 /* FUNCTIONS FOR STACK */
 
 // Function to create a new stack
@@ -212,6 +243,5 @@ void display_queue(Queue* queue) {
     printf("%d\n", queue->items[i]);
 }
 
-int main(){
-    printf("hOLA");
-}
+/* FUNCTIONS FOR DICTIONARY */
+

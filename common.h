@@ -27,15 +27,15 @@
 #define INVENTORY_SIZE 8
 #define AGGRESSIVE_MODE_ACTIVATOR 2.5
 
-/* FUNCTION DECLARATIONS */
-
-void print_credits();
+/* GENERAL FUNCTION DECLARATIONS */
 
 int get_selection(const char *strings[]);
 
 void print_main_title();
 
-/* Stack definitions */
+void print_credits();
+
+/* STACK DEFINITIONS AND FUNCTIONS */
 
 typedef struct {
     int *arr;
@@ -59,7 +59,7 @@ void print_stack(Stack* stack);
 
 void free_stack(Stack* stack);
 
-/* Queue definitions */
+/* QUEUE DEFINITIONS AND FUNCTIONS */
 
 typedef struct {
     int *items; 
