@@ -1,13 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "common.h" // this isn't working oops
-#define UP 1
-#define LEFT 2
-#define RIGHT 3
-#define DOWN 4
-#define BACKWARDS 5
-// its arranged in that if you do backwards - direction you get the other direction
+#include "common.h"
 
 #define NUM_SKILLS 2
 #define NUM_MODIFIERS 4

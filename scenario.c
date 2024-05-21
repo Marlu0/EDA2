@@ -73,14 +73,32 @@ Scenario *init_other_scenario(Scenario scenario_list[], int index, Scenario *pre
     prev_scenario->other_direction = &other_scenario;
     other_scenario.prev = prev_scenario;
 }
+void play_scenario(Scenario *scenario, Character *character){
+    printf("%s\n\n", scenario->name);
+    printf("%s\n\n", scenario->description);
+    
+    printf("%s\n\n", scenario->decision.chapa_del_NPC);
 
-int backwards(int direction){
-    return (4 - direction);
+    int option = get_selection(scenario->decision.choices[0].response, scenario->decision.choices[1].response, scenario->decision.choices[2].response, scenario->decision.choices[3].response, NULL);
+
+    scenario = scenario->decision.choices[option - 1].outcome_on_senario;
+    // make sure that the option -1 thing works and figure out the function implementation.
+
 }
 
-void change_scenario(Scenario *scenario, int direction /*should be passed in as macro*/){
-    int backwards_direction = backwards(direction);
-    /*there will need to be error checking here*/
+void change_scenario(Scenario *scenario){
+    printf("where do you want to go?\n");
+    int option = get_selection("", "Right", "Back", NULL);
+
+    switch (option)
+    {
+    case 1:
+        
+        break;
+    
+    default:
+        break;
+    }
 }
 
 void delete_scenarios(Scenario *scenario){
