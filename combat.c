@@ -38,20 +38,20 @@ This function recieves:
 It does:
     - All the turn of the player: Choosing to attack or use skill, use of the skill, special skill Time Strike implementation.
 Returns:
-    - Int has_attached to add to the attacks_done number
+    - Nothing
 */
-int turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done, bool time_strike_done) {
-    /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
+void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done) {
     const char *options1[] = {"Shoot", "Skill: +DEF", "Skill: +ATK", "Skill: +LUC", "Skill: Time Strike", NULL};
     int atkType = get_selection(options1);
+
     switch (atkType) {
         case 1: {
             // BASE ATTACK
             int enemy_selected = select_enemy(enemies, number_of_enemies);
-            int total_damage = (10*((character->stats.atk)*(character->active_modifiers.tempatk)))/(enemies[enemy_selected].stats.def);
+            int total_damage = (10 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (enemies[enemy_selected].stats.def);
             enemies[enemy_selected].health -= total_damage;
             push_stack(attack_stack, total_damage);
-            int has_attacked = 1;
+            (*attacks_done)++;
             break;
         }
         case 2: {
@@ -71,32 +71,19 @@ int turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int n
         }
         case 5: {
             // SKILL 4: TIME STRIKE
-            if (time_strike_done == false) {
-                // Seed the random number generator
-                srand(time(NULL));
-                // Generate a random number between 0 and n-1
-                int random_number = rand() % attacks_done + 1;
-                // Initialize past_attack to double it
-                int past_damage = 0;
-                // For a random number between 1 and attacks_done pop stack and save last value in past_attack
-                for (int i=0; i<random_number; ++i) {
-                    past_damage = pop_stack(attack_stack);
-                }
-                int total_damage = 2*past_damage;
+            if (!isEmpty(attack_stack)) {
+                int past_damage = pop_stack(attack_stack);
+                int total_damage = 2 * past_damage;
+                // Implement logic to choose a past attack (e.g., store last few attacks)
+                enemies[/*enemy_to_attack*/].health -= total_damage;
+                (*attacks_done)++;
             }
             else {
-                printf("You've already used Time Strike this fight!\n");
+                printf("No past attacks to use Time Strike!\n");
             }
-        }
-        default {
-            printf("Invalid selection. Please try again.\n");
+            break;
         }
     }
-    /*Do the switch fot the differnt attacks possible*/
-    /*To each switch possibility, relate it with the ability*/
-    /*Add the attack chosen to the attack stack (for the time shot ability)*/
-    /*Use the multiplier and substract the hp points form the baddie*/
-    /*Return the modified abilities to normality*/
 }
 
 /* TURN ENEMY 
