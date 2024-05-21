@@ -266,13 +266,13 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
     int N = n;
     int attacks_done = 0;
     bool first_turn_done = false;
-    while (dead_enemies != 0 && !isEmpty(turn_queue) && character->health>0) {
-        //Here we do the first turn control
+    while (dead_enemies != 0 && !is_empty_stack(turn_queue) && character->health>0) {
+        //Here we do the first turn control 
         if (!first_turn_done) {
-            if (turn_queue->items[turn_queue->front] = first_turn) {
-                if (turn_queue->items[turn_queue->front] = goodie_index) {
+            if (turn_queue->items[turn_queue->front] == first_turn) {
+                if (turn_queue->items[turn_queue->front] == goodie_index) {
                     printf("Your turn to attack! \n");
-                    turn_player(character, enemies, number_of_enemies, attack_stack, attacks_done, time_strike_done);
+                    turn_player(character, enemies,  attack_stack, number_of_enemies,attacks_done, time_strike_done);
                     dequeue(turn_queue);
                     ++attacks_done;
                 }
@@ -290,13 +290,13 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
         else {
             if (turn_queue->items[turn_queue->front] == goodie_index) {
                     /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
-                    turn_player(character, enemies, dead_enemies);
+                    turn_player(character, enemies, attack_stack, number_of_enemies, attacks_done, time_strike_done);
                     dequeue(turn_queue);
             }
             else {
                     /*In the enemy attack we pass the enemy in turn and the character*/
                     /*The enemy shoud be a pointer TALK WITH MARCELINO*/
-                    turn_enemy(enemies[turn_queue->items[turn_queue->front]], character, dead_enemies);
+                    turn_enemy(character, &enemies[turn_queue->items[turn_queue->front]]);
                     dequeue(turn_queue);
             }
         }
