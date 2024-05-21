@@ -3,7 +3,7 @@
 /*SCENARIO STRUCTURES.*/
 typedef struct{
     char response[MAX_DESCRIPTION_LEN];
-    Scenario *outcome_on_senario;
+    //Scenario *outcome_on_senario; //not well defined, compiling errors
     Character *(*outcome_on_character)(Character *);
     /*this is a function pointer that points to a function describing what happened to your character.*/
 }Response_Outcome;

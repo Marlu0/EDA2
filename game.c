@@ -65,7 +65,7 @@ void init_weapon_skill(Weapon *weapon, char filename[] /*weapons.txt*/, int inde
     fgets(weapon->skills[1]->description, sizeof(weapon->skills[1]->description), file_pointer);
     fscanf(file_pointer, "%d %d %d\n", &(weapon->skills[1]->skill_modifier.tempatk), &(weapon->skills[1]->skill_modifier.tempdef), &(weapon->skills[1]->skill_modifier.templuc));
 
-    flcose(file_pointer);
+    fclose(file_pointer);
 }
 /*
 this receives:
@@ -77,13 +77,13 @@ it returns:
 */
 void pick_up_weapon(Character *character, FILE *file_pointer, char search_weapon_name[]){
     char file_weapon_name[MAX_DESCRIPTION_LEN];
-    int equality = strncpm(fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer), search_weapon_name); //this might need newline char
+    int equality = strcmp(fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer), search_weapon_name); //this might need newline char
 
     while(equality != 0){
         for(int i = 0; i < 3; i++){ // you executre it 4 - 1 times sot aht the last correct one can be the assignemtn too.
             fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer);
         }
-    equality = strncpm(fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer), search_weapon_name);
+    equality = strcmp(fgets(file_weapon_name, sizeof(file_weapon_name), file_pointer), search_weapon_name);
     }
     //line below is done just for the shorthand
     // Weapon *weapon_p_shorthand = &(character->inventory.weapons_in_inventory[character->inventory.fill]);
@@ -414,11 +414,12 @@ Scenario *init_scenario_list(Decision decision_list[]){
 
     return scenario_list;
 }
+/*This is conlicting with the same definition in scenario.h*/
 
-Scenario *init_first_scenario(Scenario scenario_list[], int index){
-    Scenario first_scenario = scenario_list[0]; //we just have to make sure that the first one in the list is the starting one
-    return &first_scenario;
-}
+//Scenario *init_first_scenario(Scenario scenario_list[], int index){
+    //Scenario first_scenario = scenario_list[0]; //we just have to make sure that the first one in the list is the starting one
+  //  return &first_scenario;
+//}
 
 Scenario *init_next_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario){
     Scenario *next_scenario = (Scenario *)malloc(sizeof(Scenario));

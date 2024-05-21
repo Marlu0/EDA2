@@ -1,4 +1,5 @@
 #include "global.h"
+#include "game.h"
 
 /* Functions for turn-based combat */
 
@@ -107,16 +108,17 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
     const char *options1[] = {"Attack", "Skills", NULL};
     int atkType = get_selection(options1);
     switch (atkType) {
-        case 1:
+        case 1:{
             int enemy_selected = select_enemy(enemies, number_of_enemies);
             enemies[enemy_selected].health -= (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemy_selected].stats.def)*(enemies[enemy_selected].active_modifiers->tempdef));
             break;
-        case 2:
+        }
+        case 2: {
             int skill_selected; 
             skill_selected = select_skill(character, attacks_done);
 
             // Special skill, Time Strike
-            if ((character->active_weapon.skills[skill_selected].name == "Time Strike") && (!time_strike_done)) {
+            if (strcmp(character->active_weapon.skills[skill_selected]->name, "Time Strike") && (!time_strike_done)) {
                 //Generate a random number n between 1 and attacks_done and pop n times
                 srand(time(NULL));
                 int n = rand() % attacks_done + 1;
@@ -132,13 +134,13 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             }
             else {
             //Apply modifiers to character
-            character->active_modifiers->tempatk += character->active_weapon.skills[skill_selected].skill_modifier.tempatk;
-            character->active_modifiers->tempdef += character->active_weapon.skills[skill_selected].skill_modifier.tempdef;
-            character->active_modifiers->templuc += character->active_weapon.skills[skill_selected].skill_modifier.templuc;
+            character->active_modifiers->tempatk += character->active_weapon.skills[skill_selected]->skill_modifier.tempatk;
+            character->active_modifiers->tempdef += character->active_weapon.skills[skill_selected]->skill_modifier.tempdef;
+            character->active_modifiers->templuc += character->active_weapon.skills[skill_selected]->skill_modifier.templuc;
             
             //Apply healing in case skill heals
-            character->health += character->active_weapon.skills[skill_selected].healing;
-            printf("You've healed %d health points", character->active_weapon.skills[skill_selected].healing);
+            character->health += character->active_weapon.skills[skill_selected]->healing;
+            printf("You've healed %d health points", character->active_weapon.skills[skill_selected]->healing);
 
             //Do the attack part
             int enemy_selected = select_enemy(enemies, number_of_enemies);
@@ -151,6 +153,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             ++attacks_done;
             }
             break;
+        }
         default:
             printf("Invalid selection. Please try again.\n");
     }
