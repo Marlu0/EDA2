@@ -13,12 +13,7 @@
 #define NUM_SKILLS 2
 #define NUM_MODIFIERS 4
 #define MAX_CHOICES 4
-<<<<<<< HEAD
-#define MAX_STRING_LEN 50
 #define MAX_STRING_LEN 100
-=======
-
->>>>>>> 4d621e15962df87be6f4cd1dd33a34b38691e901
 #define NUM_OPTIONS 2
 #define NUM_DECISIONS 2
 #define INVENTORY_SIZE 8
