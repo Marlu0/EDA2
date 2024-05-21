@@ -46,34 +46,48 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
     int atkType = get_selection(options1);
     switch (atkType) {
         case 1: {
+            // BASE ATTACK
             int enemy_selected = select_enemy(enemies, number_of_enemies);
-            enemies[enemy_selected].health -= (10*((character->stats.atk)*(character->active_modifiers.tempatk)))/(enemies[enemy_selected].stats.def);
+            int total_damage = (10*((character->stats.atk)*(character->active_modifiers.tempatk)))/(enemies[enemy_selected].stats.def);
+            enemies[enemy_selected].health -= total_damage;
+            push_stack(attack_stack, total_damage);
+            
             break;
         }
         case 2: {
-            //SKILL 1
-            character->active_modifiers->tempatk += character->active_weapon.skills[skill_selected]->skill_modifier.tempatk;
-            character->active_modifiers->tempdef += character->active_weapon.skills[skill_selected]->skill_modifier.tempdef;
-            character->active_modifiers->templuc += character->active_weapon.skills[skill_selected]->skill_modifier.templuc;
-            
-            //Apply healing in case skill heals
-            character->health += character->active_weapon.skills[skill_selected]->healing;
-            printf("You've healed %d health points", character->active_weapon.skills[skill_selected]->healing);
-
-            //Do the attack part
-            int enemy_selected = select_enemy(enemies, number_of_enemies);
-            int total_damage = (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemy_selected].stats.def)*(enemies[enemy_selected].active_modifiers->tempdef));    
-            enemies[enemy_selected].health -= total_damage;
-            printf("You've used %s and have given %d damage to %s", character->active_weapon.skills[skill_selected]->name, total_damage, enemies[enemy_selected].name);
-
-            push_stack(attack_stack, total_damage);
-
-            ++attacks_done;
-            }
+            // SKILL 1: AUGMENTING DEF
+            character->active_modifiers.tempdef += 1;
             break;
         }
-        default:
+        case 3: {
+            // SKILL 2: AUGMENTING ATK
+            character->active_modifiers.tempatk += 1;
+            break;
+        }
+        case 4: {
+            // SKILL 3: AUGMENTING LUC
+            character->active_modifiers.templuc += 1;
+            break;
+        }
+        case 5: {
+            // SKILL 4: TIME STRIKE
+            if (time_strike_done == false) {
+                // Seed the random number generator
+                srand(time(NULL));
+                // Generate a random number between 0 and n-1
+                int random_number = rand() % attacks_done;
+
+                // Shift the range to 1 to n (inclusive)
+                return random_number + 1;
+                attack_stack
+            }
+            else {
+                printf("You've already used Time Strike this fight!\n");
+            }
+        }
+        default {
             printf("Invalid selection. Please try again.\n");
+        }
     }
     /*Do the switch fot the differnt attacks possible*/
     /*To each switch possibility, relate it with the ability*/
