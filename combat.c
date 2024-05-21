@@ -205,7 +205,7 @@ void turn_enemy(Character *character, Enemy *enemy) {
     } else if (r <= base_attack_chance + skill_chance) {
         /* To choose the skill, we'll use a random integer generator from 0 to 1 */
         int skill_index = rand() % 2;
-        Skill chosen_skill = enemy->weapon.skills[skill_index];
+        Skill chosen_skill = *enemy->weapon.skills[skill_index];
 
         /* Now we apply the modifiers of the skill */
         enemy->active_modifiers[0].tempatk += chosen_skill.skill_modifier.tempatk;
@@ -266,7 +266,7 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
     int N = n;
     int attacks_done = 0;
     bool first_turn_done = false;
-    while (dead_enemies != 0 && !is_empty_stack(turn_queue) && character->health>0) {
+    while (dead_enemies != 0 && !is_empty_queue(turn_queue) && character->health>0) {
         //Here we do the first turn control 
         if (!first_turn_done) {
             if (turn_queue->items[turn_queue->front] == first_turn) {
