@@ -17,7 +17,7 @@ int select_skill(Character *character, int attacks_done) {
 
     // Check available skills and store their indices
     for (int i = 0; i < NUM_SKILLS; ++i) {
-        if (bullets >= character->active_weapon.skills[i].bulletcost) {
+        if (bullets >= character->active_weapon.skills[i]->bulletcost) {
             available_skills[num_available_skills++] = i;
         }
     }
@@ -32,7 +32,7 @@ int select_skill(Character *character, int attacks_done) {
     printf("Available Skills:\n");
     for (int i = 0; i < num_available_skills; ++i) {
         int index = available_skills[i];
-        printf("%d. %s, Cost: %d\n", i + 1, character->active_weapon.skills[index].name, character->active_weapon.skills[index].bulletcost);
+        printf("%d. %s, Cost: %d\n", i + 1, character->active_weapon.skills[index]->name, character->active_weapon.skills[index]->bulletcost);
     }
     
 
@@ -51,9 +51,9 @@ int select_skill(Character *character, int attacks_done) {
             printf("Invalid selection. Please select a skill between 1 and %d.\n", num_available_skills);
             continue; // Skip the rest of the loop and ask again for input
         }
-
+        
         // Check if Time Strike is possible (attacks done must be more than 1)
-        if (character->active_weapon.skills[selection-1].name == "Time Strike" && attacks_done < 1) {
+        if (strcmp(character->active_weapon.skills[selection-1]->name, "Time Strike") && attacks_done < 1) {
             printf("Time Strike isn't possible, you haven't done any attacks yet!\n");
             continue;
         }
@@ -143,7 +143,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             int enemy_selected = select_enemy(enemies, number_of_enemies);
             int total_damage = (10*((character->stats.atk)*(character->active_modifiers->tempatk)))/((enemies[enemy_selected].stats.def)*(enemies[enemy_selected].active_modifiers->tempdef));    
             enemies[enemy_selected].health -= total_damage;
-            printf("You've used %s and have given %d damage to %s", character->active_weapon.skills[skill_selected].name, total_damage, enemies[enemy_selected].name);
+            printf("You've used %s and have given %d damage to %s", character->active_weapon.skills[skill_selected]->name, total_damage, enemies[enemy_selected].name);
 
             push_stack(attack_stack, total_damage);
 

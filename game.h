@@ -117,7 +117,7 @@ DECLARING IT os amo*/
   //  char chapa_del_NPC[MAX_STRING_LEN];
     //Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
 
-}Decision;
+//}Decision;
 //you will need apointer to indicate where you are.
 
 
