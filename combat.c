@@ -42,31 +42,36 @@ Returns:
 */
 void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done, int *time_strike_done) {
     const char *options1[] = {"Shoot", "Skill: +DEF", "Skill: +ATK", "Skill: +LUC", "Skill: Time Strike", NULL};
-    int atkType = get_selection(options1);
-
-    switch (atkType) {
+    int atk_type = get_selection(options1);
+    int turn_done = 0;
+    while (!turn_done){
+        switch (atk_type) {
         case 1: {
-            // BASE ATTACK
+            // BASE ATTACK: SHOOT
             int enemy_selected = select_enemy(enemies, number_of_enemies);
             int total_damage = (10 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (enemies[enemy_selected].stats.def);
             enemies[enemy_selected].health -= total_damage;
             push_stack(attack_stack, total_damage);
             (*attacks_done)++;
+            turn_done = 1;
             break;
         }
         case 2: {
             // SKILL 1: AUGMENTING DEF
             character->active_modifiers.tempdef += 1;
+            turn_done = 1;
             break;
         }
         case 3: {
             // SKILL 2: AUGMENTING ATK
             character->active_modifiers.tempatk += 1;
+            turn_done = 1;
             break;
         }
         case 4: {
             // SKILL 3: AUGMENTING LUC
             character->active_modifiers.templuc += 1;
+            turn_done = 1;
             break;
         }
         case 5: {
@@ -88,12 +93,14 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 enemies[enemy_selected].health -= total_damage;
                 (*attacks_done)++;
                 (*time_strike_done) = 1;
+                turn_done = 1;
             }
             else {
                 printf("No past attacks to use Time Strike!\n");
             }
             break;
         }
+    }
     }
 }
 
