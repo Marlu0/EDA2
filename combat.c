@@ -38,9 +38,9 @@ This function recieves:
 It does:
     - All the turn of the player: Choosing to attack or use skill, use of the skill, special skill Time Strike implementation.
 Returns:
-    - Nothing
+    - Int has_attached to add to the attacks_done number
 */
-void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done, bool time_strike_done) {
+int turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int attacks_done, bool time_strike_done) {
     /*Do a scanf for the player to choose the enemy to which attack (they will range from 0 to max_enemies)*/
     const char *options1[] = {"Shoot", "Skill: +DEF", "Skill: +ATK", "Skill: +LUC", "Skill: Time Strike", NULL};
     int atkType = get_selection(options1);
@@ -51,7 +51,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             int total_damage = (10*((character->stats.atk)*(character->active_modifiers.tempatk)))/(enemies[enemy_selected].stats.def);
             enemies[enemy_selected].health -= total_damage;
             push_stack(attack_stack, total_damage);
-            
+            int has_attacked = 1;
             break;
         }
         case 2: {
