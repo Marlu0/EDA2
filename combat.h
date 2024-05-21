@@ -5,7 +5,11 @@
 #include "combat.h"
 #include "game.h"
 
+/* Macros for turn-based combat */
+
 #define AGGRESSIVE_MODE_VALUE 2.5
+
+/* Functions for turn-based combat */
 
 int select_enemy(Enemy *enemies, int number_of_enemies);
 
