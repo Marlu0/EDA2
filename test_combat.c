@@ -6,8 +6,9 @@ int main(){
     Enemy paco = {"Paco", 100, {10, 10, 10, 10, 10}};
     Enemy manolo = {"Manolo", 100, {10, 10, 10, 10, 10}};
     Enemy enemies[2];
+    int number_of_enemies = 2;
     enemies[0] = paco;
     enemies[1] = manolo;
 
-    do_combat(&jose, enemies, 2);
+    do_combat(&jose, enemies, number_of_enemies);
 }
