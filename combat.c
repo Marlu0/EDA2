@@ -56,7 +56,7 @@ It does:
 Returns:
     - Nothing
 */
-void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done, int *time_strike_done) {
+void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done, int *time_strike_done, int *dead_enemies) {
     const char *options1[] = {"Shoot", "Skill: +DEF", "Skill: +ATK", "Skill: +LUC", "Skill: Time Strike", "Skill: Heal", NULL};
     int atk_type = get_selection(options1);
     int turn_done = 0;
@@ -68,6 +68,13 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 int total_damage = (10 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (enemies[enemy_selected].stats.def);
                 enemies[enemy_selected].health -= total_damage;
                 printf("You've dealt %d damage to %s\n", total_damage, enemies[enemy_selected].name);
+                if (enemies[enemy_selected].health <= 0) {
+                    printf("%s has died\n", enemies[enemy_selected].name);
+                    (*dead_enemies)++;
+                }
+                else {
+                    printf("%s health: %d\n", enemies[enemy_selected].name, enemies[enemy_selected].health);
+                }
                 push_stack(attack_stack, total_damage);
                 (*attacks_done)++;
                 turn_done = 1;
@@ -76,18 +83,21 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             case 2: {
                 // SKILL 1: AUGMENTING DEF
                 character->active_modifiers.tempdef += 1;
+                printf("You've added +1 to your defense for the next turn\n");
                 turn_done = 1;
                 break;
             }
             case 3: {
                 // SKILL 2: AUGMENTING ATK
                 character->active_modifiers.tempatk += 1;
+                printf("You've added +1 to your attack for the next turn\n");
                 turn_done = 1;
                 break;
             }
             case 4: {
                 // SKILL 3: AUGMENTING LUC
                 character->active_modifiers.templuc += 1;
+                printf("You've added +1 to your luck for the next turn\n");
                 turn_done = 1;
                 break;
             }
@@ -124,7 +134,9 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             }
             case 6: {
                 // SKILL 5: HEAL
-                character->health += (character->stats.hp + character->stats.luc + character->active_modifiers.templuc);
+                int healing = (character->stats.hp + character->stats.luc + character->active_modifiers.templuc);
+                character->health += healing;
+                printf("You've healed yourself by %d points!\n", healing);
                 turn_done = 1;
                 break;
             }
@@ -145,10 +157,10 @@ void turn_enemy(Character *character, Enemy *enemy) {
     /* Seed a random number generator */
     srand(time(NULL));
 
-    /* Generate a random number between 0 and 5 */
-    int r = rand() % 5;
+    /* Generate a random number between 0 and 10 */
+    int r = rand() % 10;
 
-    /* Depending on the number and chances, do one thing or another */
+    /* There's a 10% chance that the enemy heals, otherwise it attacks normally */
     if (r!=0) {
         int total_damage = (10 * enemy->stats.atk) / (character->stats.def * character->active_modifiers.tempdef);    
         character->health -= total_damage;
@@ -214,17 +226,12 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
         int turn = dequeue(turn_queue);
         if (turn == player_index){
             printf("Your turn to attack! \n");
-            turn_player(character, enemies, attack_stack, number_of_enemies, &attacks_done, &time_strike_done);
-            for (int i = 0; i < number_of_enemies; ++i) {
-                if (enemies[i].health <= 0) {
-                    printf("%s has died\n", enemies[i].name);
-                    dead_enemies++;
-                }
-            }
+            turn_player(character, enemies, attack_stack, number_of_enemies, &attacks_done, &time_strike_done, &dead_enemies);
         }
         else {
             printf("%s is now attacking!\n", enemies[turn].name);
             turn_enemy(character, &(enemies[turn]));
+            printf("%s health: %d\n", character->name, character->health);
         }
     }
 
