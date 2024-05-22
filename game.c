@@ -63,7 +63,7 @@ Returns:
     - Nothing
 */
 void assign_points(int *stat, int *statpts, const char *stat_name) {
-    printf("You selected %s\n", stat_name);
+    printf("You selected: %s\n", stat_name);
     printf("How many points do you wish to assign? (0-%d): ", *statpts);
     int points;
     scanf(" %d", &points);
@@ -88,7 +88,7 @@ Returns:
     - character of type Character 
 */
 Character create_character() {
-    printf("Welcome to Character Creation!\nWarning: Previous characters will be erased\n");
+    printf("Welcome to Character Creation!\n\nWarning: Previous characters will be erased\n");
 
     /* Character initialization */
     Character character;
@@ -100,7 +100,7 @@ Character create_character() {
 
     /* Flag to track validity of input */
     int done = 0;
-    int statpts = 15;  /* Initialize stat points to 15 outside the loop */
+    int statpts = 20;  /* Initialize stat points to 20 outside the loop */
     
     printf("Base level of all stats: 1\n");
     /* Initialize character stats to 1 */
@@ -143,11 +143,11 @@ Character create_character() {
         if (statpts == 0) {
             printf("You've spent all the stat points!\n");
             printf("This was your selection:\n");
-            printf("· HP: %d\n", character.stats.hp);
-            printf("· BP: %d\n", character.stats.bp);
-            printf("· ATK: %d\n", character.stats.atk);
-            printf("· DEF: %d\n", character.stats.def);
-            printf("· LUC: %d\n", character.stats.luc);
+            printf("- HP: %d\n", character.stats.hp);
+            printf("- BP: %d\n", character.stats.bp);
+            printf("- ATK: %d\n", character.stats.atk);
+            printf("- DEF: %d\n", character.stats.def);
+            printf("- LUC: %d\n", character.stats.luc);
 
             /* Confirmation is asked in case the user wants to change their selection */
             printf("Are you sure about your stat selection? (yes/no): ");
