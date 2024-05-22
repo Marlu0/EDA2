@@ -56,11 +56,11 @@ Returns:
     - Nothing
 */
 void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done, int *time_strike_done, int *dead_enemies) {
-    const char *options1[] = {"Shoot", "Skill: +DEF (Costs 20 BP)", "Skill: +ATK (Costs 20 BP)", "Skill: +LUC (Costs 20 BP)", "Skill: Time Strike (Costs 100 BP)", "Skill: Heal (Costs 10 BP)", NULL};
+    const char *options[] = {"Shoot", "Skill: +DEF (Costs 20 BP)", "Skill: +ATK (Costs 20 BP)", "Skill: +LUC (Costs 20 BP)", "Skill: Time Strike (Costs 100 BP)", "Skill: Heal (Costs 10 BP)", NULL};
     int atk_type;
     int turn_done = 0;
     while (!turn_done){
-        int atk_type = get_selection(options1);
+        atk_type = get_selection(options);
         switch (atk_type) {
             case 1: {
                 // BASE ATTACK: SHOOT
@@ -191,7 +191,7 @@ void turn_enemy(Character *character, Enemy *enemy) {
 
     /* There's a 10% chance that the enemy heals, otherwise it attacks normally */
     if (r!=0) {
-        int total_damage = (10 * enemy->stats.atk) / (character->stats.def * character->active_modifiers.tempdef);    
+        int total_damage = (5 * enemy->stats.atk) / (character->stats.def * character->active_modifiers.tempdef);    
         character->health -= total_damage;
         printf("%s has done a base attack and caused %d damage\n", enemy->name, total_damage);
     }
@@ -280,8 +280,8 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
 int main(){
     int game_over = 0;
     Character jose = create_character();
-    Enemy paco = {"Paco", 100, {10, 10, 10, 10, 10}};
-    Enemy manolo = {"Manolo", 100, {10, 10, 10, 10, 10}};
+    Enemy paco = {"Paco", 100, {5,5,5,5,5}};
+    Enemy manolo = {"Manolo", 100, {5,5,5,5,5}};
     Enemy enemies[2];
     int number_of_enemies = 2;
     enemies[0] = paco;
