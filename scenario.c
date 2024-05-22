@@ -122,6 +122,7 @@ void play_scenario(Scenario *scenario, Character *character){
     
     printf("%s\n\n", scenario->decision.chapa_del_NPC);
 
+    // GET SELECTION WONT WORK FOR VARIABLES, THEY HAVE TO BE CONSTANT STRINGS. MAYBE CREATE ANOTHER FUNCTION THAT PRINTS VARIABLE STRINGS
     int option = get_selection(scenario->decision.choices[0].response, scenario->decision.choices[1].response, scenario->decision.choices[2].response, scenario->decision.choices[3].response, NULL);
 
     scenario = scenario->decision.choices[option - 1].outcome_on_senario;
