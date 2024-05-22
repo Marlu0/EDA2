@@ -4,6 +4,7 @@
 #include "game.h"
 #include "combat.h"
 #include "global.h"
+#include "scenario.h"
 
 
 /*SAVE GAME
@@ -34,7 +35,7 @@ void save_game(Character *character, Scenario *scenario/*figure this out*/) {
     }
 
     /*here is where you need to do the actual writing.*/
-    fprintf(file_pointer, "%s\n", character->name);
+    fprintf(file_pointer, "%s\n", character->name); //this is the save game shit gets weird.
 
     fprintf(file_pointer, "%d\n", character->health); // goes without saying that these should be less than 4 million
     fprintf(file_pointer, "%d\n", character->bullets);
@@ -110,39 +111,6 @@ Character *start_game(Character *character, Scenario *start, int first_game){
 }
 void continue_game(/*this is the thing that you should put into load file.*/){}
 
-
-/*
-this function receives:
-    -nothing
-Does:
-    -calls print_main_meu and does the opening menu
-Returns:
-    - the selection of the user.
-*/
-int start_menu(bool first_game) {
-    print_main_title();
-    printf("\n"); //It looks nicer with an extra line
-    
-    if (first_game) {
-        clock_t start_time = clock();
-        int delay = 2;
-        
-
-        while (clock() < start_time + CLOCKS_PER_SEC * delay) {}
-        printf("JUEGAZO DEL GRUPO 4!\n\n");
-        start_time = clock();
-
-        while (clock() < start_time + CLOCKS_PER_SEC * delay) {}
-        printf("VAMOS YA!!\n\n");
-        start_time = clock();
-
-        while (clock() < start_time + CLOCKS_PER_SEC * delay) {}
-    }
-
-    int option;
-    const char *options[] = {"New Game", "Load game", "Credits", "Exit", NULL};
-    return option = get_selection(options); // this is just the first menu later menus will have the save game and the customize character.
-}
 /*
 this funtion receives:
     -nothing
@@ -151,45 +119,112 @@ it does:
 it returns:
     -nothing
 */
-void init_game(bool first_game) {
-    int option = start_menu(first_game);
 
-    switch (option)
-    {
-    case 1:
-        first_game = false;
-        Character character;
-        Character *character_p = &character;
+/*INIT_SCENARIO_GRAPH
+this function take in:
+    - a scneario pointer
+it does:
+    - initializes the scenarios.
+it returns:
+    - nothing
+*/
+void init_scenario_graph(Scenario *first_scenario){
+    Decision *decision_list = init_decision_list();
+    Scenario *scenario_list = init_scenario_list(decision_list);
 
-        Scenario scenario;
-        Scenario *scenario_p = &scenario;
+    Scenario *temp_scenario;
 
-        start_game(character_p, scenario_p); //we'll get to this eventually.
-        break;
+    temp_scenario = first_scenario;
 
-    case 2:
-        /*do the filename things here.*/
-        load_game();
-        break;
+    for(int i = 0; i < 2)
+    *first_scenario = scenario_list[0];
+    first_scenario->next = SOMETHING else
+    //finishthis things.
+}
 
-    case 4:
-        print_credits();
-        break;
+/* INIT UTILS
+this function takes in:
+    - character, current_scenario, first_scenario, decision_list, scenario_list
+it:
+    - inits them.
+it returns:
+    - nothing*/
+void init_utils(Character *character, Scenario *current_scenario){
+    
+    character = (Character *)malloc(sizeof(Character));
+    current_scenario = (Scenario *)malloc(sizeof(Scenario));
+}
 
-    case 5:
-        exit(0);
+void main_menu(Character *character, Scenario *current_scenario) {
 
-    default:
-        printf("Error");
-        break;
+    bool first_game = true;
+    bool game_saved = false;
+
+    Scenario *first_scenario;
+
+    // in the game loop
+    int option = 0;
+    while(option != 5){
+
+        char strings[5][15] = {"start game", "load game", "print credits", "exit", NULL};
+        option = get_selection(strings);
+
+        switch (option){
+            case 1:
+                /*game_over*/ //put this in a loop in this function
+                /*game_win as well*/
+                init_scenario_graph(first_scenario);
+
+                current_scenario = first_scenario;
+
+                start_game(character, current_scenario, first_scenario); //we'll get to this eventually.
+                first_game = false;
+                break;
+
+            case 2:
+                /*do the filename things here.*/
+                init_scenario_graph(first_scenario);
+                load_game(/*filename*/); //where you pull out the current scenario
+                start_game(character, current_scenario, first_scenario)
+                break;
+
+            case 3:
+                save_game(character, current_scenario);
+                game_saved = true;
+                break;
+
+            case 4:
+                print_credits();
+                break;
+
+            case 5:
+                break;
+
+            default:
+                perror("Error finding game option");
+                break;
+        }
     }
-
 }
 /*main*/
 int main() {
     bool first_game = true;
     srand(time(NULL));
-    init_game(first_game);
+    print_main_title();
 
+    Character *character;
+
+    Decision *decision_list;
+    Scenario *scenario_list;
+
+    Scenario *current_scenario;
+
+    init_untils(character, current_scenario);
+
+    main_menu(character, current_scenario);
+
+    /*free the array function*/
+    /*free the decisions function*/
+    free(character);
     return 0;
 }

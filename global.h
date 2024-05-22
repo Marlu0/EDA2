@@ -11,14 +11,6 @@
 
 /* MACROS */
 
-/* DIRECTIONS */
-// Arranged so that if you do BACKWARDS - DIRECTION(previous) you get the opposite direction
-#define UP 1
-#define LEFT 2
-#define RIGHT 3
-#define DOWN 4
-#define BACKWARDS 5
-
 #define TABLE_SIZE 100
 #define MAX_STRING_LEN 100
 
