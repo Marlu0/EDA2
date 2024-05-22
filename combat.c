@@ -234,4 +234,7 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
             turn_enemy(character, &(enemies[turn]));
         }
     }
+
+    /* Check end of battle result */ 
+    
 }
