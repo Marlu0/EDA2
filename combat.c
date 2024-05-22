@@ -184,6 +184,10 @@ Returns:
     - Nothing
 */
 void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int *game_over) {
+    
+    //Initialisation of characters
+    init_fight_characters(character, enemies, number_of_enemies); 
+
     printf("You've started a combat with:\n ");
     for (int i=0; i<number_of_enemies; ++i) {
         printf("%s ", enemies[i].name);

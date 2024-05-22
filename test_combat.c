@@ -1,5 +1,4 @@
 #include "global.h"
-#include "game.h"
 #include "combat.h"
 
 
@@ -12,6 +11,9 @@ int main(){
 
     Enemy paco = {"Paco", 100, {10, 10, 10}};
     Enemy manolo = {"Manolo", 100, {10, 10, 10}};
+    Character jose = create_character();
+    Enemy paco = {"Paco", 100, {10, 10, 10, 10, 10}};
+    Enemy manolo = {"Manolo", 100, {10, 10, 10, 10, 10}};
     Enemy enemies[2];
     enemies[0] = paco;
     enemies[1] = manolo;
