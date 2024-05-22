@@ -12,6 +12,6 @@ int main(){
     int number_of_enemies = 2;
     enemies[0] = paco;
     enemies[1] = manolo;
-
-    do_combat(&jose, enemies, number_of_enemies);
+    int game_over = 0;
+    do_combat(&jose, enemies, number_of_enemies, &game_over);
 }
