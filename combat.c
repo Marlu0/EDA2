@@ -2,6 +2,23 @@
 
 /* Functions for turn-based combat */
 
+/* INIT FIGHT CHARACTER
+This function recieves:
+    - Nothing
+It does:
+    - Initialize characters in fight
+Returns:
+    - Nothing
+*/
+void init_fight_characters(Character *character, Enemy *enemies, int number_of_enemies){
+    character->health = 100+(20*(character->stats.hp-1));
+    character->bullets = 100+(10*(character->stats.bp-1));
+
+    for (int i = 0; i < number_of_enemies; ++i) {
+        enemies[i].health = 100+(20*(enemies[i].stats.hp-1));
+    }
+}
+
 /* SELECT ENEMY
 This function recieves:
     - An array of enemies in form of pointer
@@ -40,7 +57,7 @@ Returns:
     - Nothing
 */
 void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done, int *time_strike_done) {
-    const char *options1[] = {"Shoot", "Skill: +DEF", "Skill: +ATK", "Skill: +LUC", "Skill: Time Strike", NULL};
+    const char *options1[] = {"Shoot", "Skill: +DEF", "Skill: +ATK", "Skill: +LUC", "Skill: Time Strike", "Skill: Heal", NULL};
     int atk_type = get_selection(options1);
     int turn_done = 0;
     while (!turn_done){
@@ -50,6 +67,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 int enemy_selected = select_enemy(enemies, number_of_enemies);
                 int total_damage = (10 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (enemies[enemy_selected].stats.def);
                 enemies[enemy_selected].health -= total_damage;
+                printf("You've dealt %d damage to %s\n", total_damage, enemies[enemy_selected].name);
                 push_stack(attack_stack, total_damage);
                 (*attacks_done)++;
                 turn_done = 1;
@@ -75,7 +93,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             }
             case 5: {
                 // SKILL 4: TIME STRIKE
-                if (!isEmpty(attack_stack) && !time_strike_done) {
+                if (!is_empty_stack(attack_stack) && !time_strike_done) {
                     // Seed the random number generator (optional)
                     srand(time(NULL));
 
@@ -90,17 +108,24 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     int total_damage = 2 * past_damage;
                     int enemy_selected = select_enemy(enemies, number_of_enemies);
                     enemies[enemy_selected].health -= total_damage;
+                    printf("You've dealt %d damage to %s\n", total_damage, enemies[enemy_selected].name);
                     (*attacks_done)++;
                     free_stack(attack_stack);
                     (*time_strike_done) = 1;
                     turn_done = 1;
                 }
-                else {
+                else { 
                     if (time_strike_done) {
                         printf("You've already used Time Strike this fight!\n");
                     }
                     else printf("No past attacks to use Time Strike!\n");
                 }
+                break;
+            }
+            case 6: {
+                // SKILL 5: HEAL
+                character->health += (character->stats.hp + character->stats.luc + character->active_modifiers.templuc);
+                turn_done = 1;
                 break;
             }
         }
@@ -116,54 +141,22 @@ Returns:
     - Nothing
 */
 void turn_enemy(Character *character, Enemy *enemy) {
-    int character_health = character->health;
-    int enemy_health = enemy->health;
-    float aggressiveness = (float)character_health / enemy_health; // This can make the enemy more aggressive as its health goes down
-
-    /* Initialize chance of types of attack */
-    int base_attack_chance;
-    int skill_chance;
-    int miss_chance;
-
-    /* Set base chances for the fight in function of character's luck */
-    int luck = character->stats.luc;  
-    base_attack_chance = luck * 4;
-    skill_chance = 100 - base_attack_chance;
-    miss_chance = 0; // Initially set to 0, will be recalculated if needed
-
-    /* Adjust chances if enemy is in disadvantage */
-    if (aggressiveness > AGGRESSIVE_MODE_VALUE) {
-        base_attack_chance += 10;
-        skill_chance -= 10;
-        miss_chance = 100 - (base_attack_chance + skill_chance); // Recalculate miss chance
-    }
 
     /* Seed a random number generator */
     srand(time(NULL));
 
-    /* Generate a random number between 1 and 100 */
-    int r = rand() % 100 + 1;
+    /* Generate a random number between 0 and 5 */
+    int r = rand() % 5;
 
     /* Depending on the number and chances, do one thing or another */
-    if (r <= base_attack_chance) {
+    if (r!=0) {
         int total_damage = (10 * enemy->stats.atk) / (character->stats.def * character->active_modifiers.tempdef);    
         character->health -= total_damage;
         printf("%s has done a base attack and caused %d damage\n", enemy->name, total_damage);
-    } 
-    else if (r <= base_attack_chance + skill_chance) {
-        /* To choose the skill, we'll use a random integer generator from 0 to 1 */
-        int enemy_skill = rand() % 2;
-
-        if (enemy_skill == 1){
-            
-        }
-        else {
-
-        }
     }
     else {
         enemy->health += 5*(enemy->stats.hp);
-        printf("%s has skipped his turn but healed himself! No damage\n", enemy->name);
+        printf("%s has missed but healed himself! No damage\n", enemy->name);
     }
 }
 
@@ -176,7 +169,11 @@ It does:
 Returns:
     - Nothing
 */
-void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
+void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int *game_over) {
+    
+    //Initialisation of characters
+    init_fight_characters(character, enemies, number_of_enemies); 
+
     printf("You've started a combat with:\n ");
     for (int i=0; i<number_of_enemies; ++i) {
         printf("%s ", enemies[i].name);
@@ -189,59 +186,70 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
     /* We initialise the queue */
     Queue *turn_queue = create_queue(n*(number_of_enemies+1));
 
-    srand(time(NULL));
-    /*The enemies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be that value, so it is fixed*/
-    int first_turn = rand() % (number_of_enemies+1);
-
     for (int i=0; i<((number_of_enemies+1)*n); ++i) {
         enqueue(turn_queue, i%(number_of_enemies+1));
     }
-    
+
+    /* Dequeue a random number of turns from 1 to number_of_enemies to randomize who starts attacking */
+    srand(time(NULL));
+    int r = rand() % number_of_enemies + 1;
+    for (int i = 0; i < r; ++i){
+        dequeue(turn_queue);
+    }
+
     /* We initialise the stack of size n turns */
     Stack *attack_stack = create_stack(n);
-    
-    /* We initialise a flag to limit Time Strike to 1 use per fight */
-    bool time_strike_done = false;
 
-    /* Here we set a dead enemy counter, a copy of n to keep track of when the battle ends and a counter for number of attacks done by us */
-    int goodie_index = number_of_enemies;
+    /* We initialise a flag to limit Time Strike to 1 use per fight */
+    int time_strike_done = 0;
+
+    /* Here we set the player index for readibility and a counter for number of attacks done by us */
+    int player_index = number_of_enemies;
     int dead_enemies = 0;
-    int N = n;
     int attacks_done = 0;
-    bool first_turn_done = false;
-    while (dead_enemies != 0 && !is_empty_queue(turn_queue) && character->health>0) {
+
+    /* While loop of fight */
+    while (dead_enemies != number_of_enemies && !is_empty_queue(turn_queue) && character->health>0) {
         //Here we do the first turn control 
-        if (!first_turn_done) {
-            if (turn_queue->items[turn_queue->front] == first_turn) {
-                if (turn_queue->items[turn_queue->front] == goodie_index) {
-                    printf("Your turn to attack! \n");
-                    turn_player(character, enemies,  attack_stack, number_of_enemies,attacks_done, time_strike_done);
-                    dequeue(turn_queue);
-                    ++attacks_done;
+        int turn = dequeue(turn_queue);
+        if (turn == player_index){
+            printf("Your turn to attack! \n");
+            turn_player(character, enemies, attack_stack, number_of_enemies, &attacks_done, &time_strike_done);
+            for (int i = 0; i < number_of_enemies; ++i) {
+                if (enemies[i].health <= 0) {
+                    printf("%s has died\n", enemies[i].name);
+                    dead_enemies++;
                 }
-                else {
-                    printf("%s is now attacking!\n", enemies[turn_queue->items[turn_queue->front]].name);
-                    turn_enemy(character, &enemies[turn_queue->front]);
-                    dequeue(turn_queue);
-                }
-                first_turn_done = true;
-            }
-            else {
-                dequeue(turn_queue);
             }
         }
         else {
-            if (turn_queue->items[turn_queue->front] == goodie_index) {
-                    /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
-                    turn_player(character, enemies, attack_stack, number_of_enemies, attacks_done, time_strike_done);
-                    dequeue(turn_queue);
-            }
-            else {
-                    /*In the enemy attack we pass the enemy in turn and the character*/
-                    /*The enemy shoud be a pointer TALK WITH MARCELINO*/
-                    turn_enemy(character, &enemies[turn_queue->items[turn_queue->front]]);
-                    dequeue(turn_queue);
-            }
+            printf("%s is now attacking!\n", enemies[turn].name);
+            turn_enemy(character, &(enemies[turn]));
         }
     }
+
+    /* Check end of battle result */ 
+    if (dead_enemies == number_of_enemies){
+        printf("You've killed all enemies!\n");
+    }
+    else if (is_empty_queue(turn_queue)){
+        printf("You ran out of turns and lost!");
+        (*game_over) = 1;
+    }
+    else if (character->health<=0){
+        printf("You've died!\n");
+    }
+}
+
+int main(){
+    int game_over = 0;
+    Character jose = create_character();
+    Enemy paco = {"Paco", 100, {10, 10, 10, 10, 10}};
+    Enemy manolo = {"Manolo", 100, {10, 10, 10, 10, 10}};
+    Enemy enemies[2];
+    int number_of_enemies = 2;
+    enemies[0] = paco;
+    enemies[1] = manolo;
+
+    do_combat(&jose, enemies, number_of_enemies, &game_over);
 }

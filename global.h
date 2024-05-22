@@ -59,12 +59,9 @@ typedef struct{
         - skill_2 = Play Dead
 */
 typedef struct{
-    int type;
     char name[MAX_STRING_LEN];
     int health;
     Stats stats;
-    Skill skill_1;
-    Skill skill_2;
 } Enemy;
 
 /* CHARACTER:
