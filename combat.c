@@ -183,7 +183,7 @@ It does:
 Returns:
     - Nothing
 */
-void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
+void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int *game_over) {
     printf("You've started a combat with:\n ");
     for (int i=0; i<number_of_enemies; ++i) {
         printf("%s ", enemies[i].name);
@@ -197,11 +197,17 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
     Queue *turn_queue = create_queue(n*(number_of_enemies+1));
 
     srand(time(NULL));
-    /*The enemies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be index number_of_enemies, so it is fixed*/
+    /* The enemies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be index number_of_enemies, so it is fixed*/
     int first_turn = rand() % (number_of_enemies+1);
 
     for (int i=0; i<((number_of_enemies+1)*n); ++i) {
         enqueue(turn_queue, i%(number_of_enemies+1));
+    }
+
+    /* Dequeue a random number of turns from 1 to number_of_enemies to randomize who starts attacking */
+    int r = rand() % number_of_enemies + 1;
+    for (int i = 0; i < r; ++i){
+        dequeue(turn_queue);
     }
 
     /* We initialise the stack of size n turns */
@@ -236,5 +242,14 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
     }
 
     /* Check end of battle result */ 
-    
+    if (dead_enemies == number_of_enemies){
+        printf("You've killed all enemies!\n");
+    }
+    else if (is_empty_queue(turn_queue)){
+        printf("You ran out of turns and lost!");
+        (*game_over) == 1;
+    }
+    else if (character->health<=0){
+        printf("You've died!\n");
+    }
 }
