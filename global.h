@@ -70,8 +70,6 @@ typedef struct{
     char name[MAX_STRING_LEN];
     int health;
     Stats stats;
-    Skill skill_1;
-    Skill skill_2;
 } Enemy;
 
 /* CHARACTER:
