@@ -38,25 +38,15 @@ int main(){
     };
 
 
-    Weapon weapons_dictionar[7] = {
-        {"Fists", "Ol' reliable bare knuckles", {&skills_dictionar[4], &skills_dictionar[10]}},
-        {"Rusty Revolver", "Older than the mountains", {&skills_dictionar[0], &skills_dictionar[4]}},
-        {"Linda", "Sweetest kisses in the wild west", {&skills_dictionar[2], &skills_dictionar[0]}},
-        {"GOAT", "Gun Of Antilope Trilobites", {&skills_dictionar[5], &skills_dictionar[3]}},
-        {"Gun & Barrel", "A gun in a barrel", {&skills_dictionar[1], &skills_dictionar[2]}},
-        {"Cactus Thrower", "Ouch..", {&skills_dictionar[7], &skills_dictionar[8]},},
-        {"Gatling Gun", "RATATATTATATA", {&skills_dictionar[6], &skills_dictionar[5]}}
-    };
-
 
 
 
     Character jose;
     bool boolean = false;
-    jose = create_character(weapons_dictionar, boolean);
+    jose = create_character();
 
-    Enemy paco = {"Paco", 100, {10, 10, 10}, weapons_dictionar[0], {1.2, 1.3, 1.5}};
-    Enemy manolo = {"Manolo", 100, {10, 10, 10}, weapons_dictionar[0], {1.2, 1.3, 1.5}};
+    Enemy paco = {"Paco", 100, {10, 10, 10}, skills_dictionar[0], skills_dictionar[1]};
+    Enemy manolo = {"Manolo", 100, {10, 10, 10}, skills_dictionar[0], skills_dictionar[0]};
     Enemy enemies[2];
     enemies[0] = paco;
     enemies[1] = manolo;
