@@ -108,6 +108,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     int total_damage = 2 * past_damage;
                     int enemy_selected = select_enemy(enemies, number_of_enemies);
                     enemies[enemy_selected].health -= total_damage;
+                    printf("You've dealt %d damage to %s\n", total_damage, enemies[enemy_selected].name);
                     (*attacks_done)++;
                     free_stack(attack_stack);
                     (*time_strike_done) = 1;
