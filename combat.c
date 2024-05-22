@@ -93,7 +93,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
             }
             case 5: {
                 // SKILL 4: TIME STRIKE
-                if (!isEmpty(attack_stack) && !time_strike_done) {
+                if (!is_empty_stack(attack_stack) && !time_strike_done) {
                     // Seed the random number generator (optional)
                     srand(time(NULL));
 
@@ -141,20 +141,6 @@ Returns:
     - Nothing
 */
 void turn_enemy(Character *character, Enemy *enemy) {
-    int character_health = character->health;
-    int enemy_health = enemy->health;
-    float aggressiveness = (float)character_health / enemy_health; // This can make the enemy more aggressive as its health goes down
-
-    /* Set base chances for the fight in function of character's luck */
-    int luck = character->stats.luc;  
-    int hit_chance = luck * 4;
-    int miss_chance = 0; // Initially set to 0, will be recalculated if needed
-
-    /* Adjust chances if enemy is in disadvantage */
-    if (aggressiveness > AGGRESSIVE_MODE_VALUE) {
-        hit_chance += 20;
-        miss_chance = 100 - hit_chance; // Recalculate miss chance
-    }
 
     /* Seed a random number generator */
     srand(time(NULL));
@@ -200,15 +186,12 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
     /* We initialise the queue */
     Queue *turn_queue = create_queue(n*(number_of_enemies+1));
 
-    srand(time(NULL));
-    /* The enemies will have the indexes 0 to number_of_enemies-1 so we can acces their array, the goodie will be index number_of_enemies, so it is fixed*/
-    int first_turn = rand() % (number_of_enemies+1);
-
     for (int i=0; i<((number_of_enemies+1)*n); ++i) {
         enqueue(turn_queue, i%(number_of_enemies+1));
     }
 
     /* Dequeue a random number of turns from 1 to number_of_enemies to randomize who starts attacking */
+    srand(time(NULL));
     int r = rand() % number_of_enemies + 1;
     for (int i = 0; i < r; ++i){
         dequeue(turn_queue);
@@ -231,10 +214,10 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
         int turn = dequeue(turn_queue);
         if (turn == player_index){
             printf("Your turn to attack! \n");
-            turn_player(character, enemies, attack_stack, number_of_enemies, attacks_done, time_strike_done);
+            turn_player(character, enemies, attack_stack, number_of_enemies, &attacks_done, &time_strike_done);
             for (int i = 0; i < number_of_enemies; ++i) {
                 if (enemies[i].health <= 0) {
-                    printf("%s has died\n", (i + 1), enemies[i].name);
+                    printf("%s has died\n", enemies[i].name);
                     dead_enemies++;
                 }
             }
@@ -251,9 +234,22 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
     }
     else if (is_empty_queue(turn_queue)){
         printf("You ran out of turns and lost!");
-        (*game_over) == 1;
+        (*game_over) = 1;
     }
     else if (character->health<=0){
         printf("You've died!\n");
     }
+}
+
+int main(){
+    int game_over = 0;
+    Character jose = create_character();
+    Enemy paco = {"Paco", 100, {10, 10, 10, 10, 10}};
+    Enemy manolo = {"Manolo", 100, {10, 10, 10, 10, 10}};
+    Enemy enemies[2];
+    int number_of_enemies = 2;
+    enemies[0] = paco;
+    enemies[1] = manolo;
+
+    do_combat(&jose, enemies, number_of_enemies, &game_over);
 }
