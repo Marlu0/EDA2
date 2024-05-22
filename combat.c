@@ -58,9 +58,10 @@ Returns:
 */
 void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done, int *time_strike_done, int *dead_enemies) {
     const char *options1[] = {"Shoot", "Skill: +DEF", "Skill: +ATK", "Skill: +LUC", "Skill: Time Strike", "Skill: Heal", NULL};
-    int atk_type = get_selection(options1);
+    int atk_type;
     int turn_done = 0;
     while (!turn_done){
+        int atk_type = get_selection(options1);
         switch (atk_type) {
             case 1: {
                 // BASE ATTACK: SHOOT
