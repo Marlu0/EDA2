@@ -113,7 +113,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     (*time_strike_done) = 1;
                     turn_done = 1;
                 }
-                else {
+                else { 
                     if (time_strike_done) {
                         printf("You've already used Time Strike this fight!\n");
                     }
