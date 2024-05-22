@@ -22,6 +22,8 @@ typedef struct{
 //but that is an issue for you once you are done with the EDA coruse.
 // htings you need to implement is the meta functions above and you need to change the load Scenarios list function to include some sort of pointer to the next on
 
+//this will be implemented in main.
+
 
 typedef struct scenario{
     char name[MAX_STRING_LEN];

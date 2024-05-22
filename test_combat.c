@@ -12,7 +12,7 @@
 
 #define NUM_SKILLS 2
 #define NUM_MODIFIERS 4
-#define MAX_CHOICES 4
+#define MAX_CHOICES 2
 #define MAX_STRING_LEN 100
 #define NUM_OPTIONS 2
 #define NUM_DECISIONS 2

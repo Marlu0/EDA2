@@ -102,7 +102,7 @@ it does:
 it returns:
     - pointer to the start scenario.
 */
-Character *start_game(Character *character, Scenario *start, int first_game){
+Character *start_game(Character *character, Scenario *start){
     Skill *skills_list = init_skill_list;
     Weapon *weapons_list = init_weapons_dictionary;
     Character character = create_character(weapons_list, first_game);
@@ -128,19 +128,7 @@ it does:
 it returns:
     - nothing
 */
-void init_scenario_graph(Scenario *first_scenario){
-    Decision *decision_list = init_decision_list();
-    Scenario *scenario_list = init_scenario_list(decision_list);
 
-    Scenario *temp_scenario;
-
-    temp_scenario = first_scenario;
-
-    for(int i = 0; i < 2)
-    *first_scenario = scenario_list[0];
-    first_scenario->next = SOMETHING else
-    //finishthis things.
-}
 
 /* INIT UTILS
 this function takes in:

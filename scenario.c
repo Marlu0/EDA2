@@ -9,12 +9,13 @@ Returns:
 */
 Decision *init_decision_list(){ // silly list like last time you can make a file implementation another time.
     Decision decision_list[] = {
-        {"this is the fish one", {{"REPUESTA 0.0"}, {"RESPUESTA 0.1"}, {"REPUESTA 0.2"}, {"RESPUESTA 0.3"}}}, //i need to story board this
-        {"this is the raven one", {{"REPUESTA 1.0"}, {"RESPUESTA 1.1"}, {"REPUESTA 1.2"}, {"RESPUESTA 1.3"}}}, // we need to find a file format that works.
-        {"this is the turtle one.", {{"REPUESTA 2.0"}, {"RESPUESTA 2.1"}, {"REPUESTA 2.2"}, {"RESPUESTA 2.3"}}},
-        {"CHAPA NUMERO 3", {{"REPUESTA 3.0"}, {"RESPUESTA 3.1"}, {"REPUESTA 3.2"}, {"RESPUESTA 3.3"}}},
-        {"CHAPA NUMERO 4", {{"REPUESTA 4.0"}, {"RESPUESTA 4.1"}, {"REPUESTA 4.2"}, {"RESPUESTA 4.3"}}},
-        {"final boss.", {{"REPUESTA 5.0"}, {"RESPUESTA 5.1"}, {"REPUESTA 5.2"}, {"RESPUESTA 5.3"}}},
+        {"desert interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}}, //i need to story board this
+        {"town interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}, {"REPUESTA 1.2"}, {"RESPUESTA 1.3"}}}, // we need to find a file format that works.
+        {"talking to turtle", {{"REPUESTA 1"}, {"RESPUESTA 2"}}},
+        {"talking to bull", {{"REPUESTA 1"}, {"RESPUESTA 2"}}},
+        {"talking to the bull after turtle interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}},
+        {"talking to turtle after bull interaction", {{"repuesta 2"}, {"respueta 2"}}},
+        {"final interation", {{"REPUESTA 1"}, {"RESPUESTA 2"}}},
     };
 
     return decision_list;
@@ -30,12 +31,13 @@ it returns:
 Scenario *init_scenario_list(Decision decision_list[]){
 
     Scenario scenario_list[] = {
-        {"name0", "description0", /*we need to put the other things here*/ .decision = decision_list[0]},
-        {"name1", "description1", .decision = decision_list[1]},
-        {"name2", "description2", .decision = decision_list[2]},
-        {"name3", "description3", .decision = decision_list[3]},
-        {"name4", "description4", .decision = decision_list[4]},
-        {"name5", "description5", .decision = decision_list[5]},
+        {"DESERT", "description0", /*we need to put the other things here*/ .decision = decision_list[0]},
+        {"LOCAL TOWN", "description1", .decision = decision_list[1]},
+        {"TURTLE'S TOMBSTONES", "description2", .decision = decision_list[2]},
+        {"SHERIFF BULL'S STATION", "description3", .decision = decision_list[3]},
+        {"SHERIFF BULL'S STATION", "description4", .decision = decision_list[4]},
+        {"TURTLE'S TOMBSTONES", "description5", .decision = decision_list[5]},
+        {"CASINO", "description 6", .decision = decision_list[6]},
     };
     return scenario_list;
 }
@@ -47,7 +49,7 @@ it does:
 it returns:
     - the address to current scenario (this one)
 */
-Scenario *init_first_scenario(Scenario scenario_list[]){ //first scenario is at index 0 of the list.
+Scenario *init_first_scenario(Scenario scenario_list[]){ // I DONT THINK WE NEED THIS
     Scenario first_scenario = scenario_list[0];
     return &first_scenario;
 }
@@ -59,12 +61,53 @@ it does:
 it returns:
     - new current scenario
 */
-Scenario *init_next_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario){
+Scenario *init_next_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario){ // I DONT THINK WE NEED THIS EITHER
     Scenario next_scenario = scenario_list[index];
 
     /*setting the doubly linked list.*/
     prev_scenario->next = &next_scenario;
     next_scenario.prev = prev_scenario;
+}
+/*INIT_SCENARIO_GRAPH
+this function takes in:
+    - the first scenario
+it inits:
+    - the scenario graph
+it returns:
+    - nothing
+*/
+void init_scenario_graph(Scenario *first_scenario){
+    //you need to do a unit test on this. so far it should be easy as hell just export it out into a testing folder.
+    Decision *decision_list = init_decision_list();
+    Scenario *scenario_list = init_scenario_list(decision_list);
+
+    Scenario *temp_scenario = first_scenario;
+    Scenario *split_temp_scenario;
+
+    int i;
+    for(i = 0; i < 2; i++)
+    {
+        *temp_scenario = scenario_list[i];
+        temp_scenario = temp_scenario->next;
+    }
+    //this is where the first split is
+    *temp_scenario->next = scenario_list[i++];
+    *temp_scenario->other_direction = scenario_list[i++];
+    temp_scenario = temp_scenario->next;
+    split_temp_scenario = temp_scenario->other_direction;
+
+    //first branch.
+    *temp_scenario = scenario_list[i++];
+    temp_scenario = temp_scenario->next;
+
+
+    //second branch.
+    *split_temp_scenario = scenario_list[i++];
+    split_temp_scenario = split_temp_scenario->next;
+
+    //final node.
+    *temp_scenario = scenario_list[i];
+    *split_temp_scenario = scenario_list[i];
 }
 
 Scenario *init_other_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario){
