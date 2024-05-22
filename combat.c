@@ -233,37 +233,5 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies) {
             printf("%s is now attacking!\n", enemies[turn].name);
             turn_enemy(character, &(enemies[turn]));
         }
-        if (!first_turn_done) {
-            if (turn_queue->items[turn_queue->front] == first_turn) {
-                if (turn_queue->items[turn_queue->front] == goodie_index) {
-                    printf("Your turn to attack! \n");
-                    turn_player(character, enemies,  attack_stack, number_of_enemies,attacks_done, time_strike_done);
-                    dequeue(turn_queue);
-                    ++attacks_done;
-                }
-                else {
-                    printf("%s is now attacking!\n", enemies[turn_queue->items[turn_queue->front]].name);
-                    turn_enemy(character, &enemies[turn_queue->front]);
-                    dequeue(turn_queue);
-                }
-                first_turn_done = true;
-            }
-            else {
-                dequeue(turn_queue);
-            }
-        }
-        else {
-            if (turn_queue->items[turn_queue->front] == goodie_index) {
-                    /*For the player attack we pass the character and the array of enemies so we can choose to whom attack*/
-                    turn_player(character, enemies, attack_stack, number_of_enemies, attacks_done, time_strike_done);
-                    dequeue(turn_queue);
-            }
-            else {
-                    /*In the enemy attack we pass the enemy in turn and the character*/
-                    /*The enemy shoud be a pointer TALK WITH MARCELINO*/
-                    turn_enemy(character, &enemies[turn_queue->items[turn_queue->front]]);
-                    dequeue(turn_queue);
-            }
-        }
     }
 }
