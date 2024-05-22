@@ -5,12 +5,6 @@
 
 
 int main(){
-    Character jose;
-    bool boolean = false;
-    jose = create_character();
-
-    Enemy paco = {"Paco", 100, {10, 10, 10}};
-    Enemy manolo = {"Manolo", 100, {10, 10, 10}};
     Character jose = create_character();
     Enemy paco = {"Paco", 100, {10, 10, 10, 10, 10}};
     Enemy manolo = {"Manolo", 100, {10, 10, 10, 10, 10}};
