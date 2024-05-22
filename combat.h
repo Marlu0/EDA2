@@ -2,7 +2,6 @@
 #define COMBAT_H
 
 #include "global.h"
-#include "combat.h"
 #include "game.h"
 
 /* Macros for turn-based combat */
