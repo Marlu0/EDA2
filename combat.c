@@ -245,10 +245,12 @@ void turn_enemy(Character *character, Enemy *enemy) {
         int total_damage = (5 * enemy->stats.atk) / (character->stats.def * character->active_modifiers.tempdef);    
         character->health -= total_damage;
         printf("%s has done a base attack and caused %d damage\n", enemy->name, total_damage);
+        printf("%s health: %d\n", character->name, character->health);
     }
     else {
         enemy->health += 5*(enemy->stats.hp);
         printf("%s has missed but healed himself! No damage\n", enemy->name);
+        printf("%s health: %d\n", enemy->name, enemy->health);
     }
 }
 
@@ -311,7 +313,6 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
         else {
             printf("%s is now attacking!\n", enemies[turn].name);
             turn_enemy(character, &(enemies[turn]));
-            printf("%s health: %d\n", character->name, character->health);
         }
     }
     // Check end of battle result
