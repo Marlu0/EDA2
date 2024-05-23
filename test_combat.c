@@ -3,8 +3,8 @@
 
 int main(){
     Character jose = create_character();
-    Enemy paco = {"Paco", 100, {5, 5, 5, 5, 5}};
-    Enemy manolo = {"Manolo", 100, {5, 5, 5, 5, 5}};
+    Enemy paco = {"Paco", 50, {2, 2, 2, 2, 2}};
+    Enemy manolo = {"Manolo", 50, {2, 2, 2, 2, 2}};
     Enemy enemies[2];
     int number_of_enemies = 2;
     enemies[0] = paco;
