@@ -12,3 +12,5 @@ int main(){
     int game_over = 0;
     do_combat(&jose, enemies, number_of_enemies, &game_over);
 }
+
+//C:\msys64\ucrt64\bin\gcc.exe -fdiagnostics-color=always -Wall -g test_combat.c game.c global.c combat.c -o test_combat.exe
