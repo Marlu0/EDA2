@@ -156,7 +156,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
 
                 // Check for enough bulletpoints
                 if (character->bullets >= 100) {
-                    if (time_strike_done==0) {
+                    if ((*time_strike_done)==0) {
                         // Seed the random number generator (optional)
                         srand(time(NULL));
 
