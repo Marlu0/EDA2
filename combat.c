@@ -268,7 +268,7 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
 
     printf("You've started a combat with:\n ");
     for (int i=0; i<number_of_enemies; ++i) {
-        printf("%s ", enemies[i].name);
+        printf("%s\n", enemies[i].name);
     }
 
     // We generate a random value from 10 to 20, that will be the number of turns for each fighter
