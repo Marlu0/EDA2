@@ -1,3 +1,4 @@
+/*
 #include "global.h"
 
 void health_potion(Character *character){
@@ -22,7 +23,7 @@ void secretWeapon(Character *character, Skill skills_list[]){
 
 /*example of what the character function pointer can do it lets us be a lot more creative with what happens at decisions.*/
 
-
+/*
 Decision *init_decision_list(){ //i have not implemented most of this its just a framework
     Decision decision_list[] = {
         {"CHAPA NUMERO 0", {{"REPUESTA 0.0"}, {"RESPUESTA 0.1"}, {"REPUESTA 0.2"}, {"RESPUESTA 0.3"}}},
@@ -35,11 +36,11 @@ Decision *init_decision_list(){ //i have not implemented most of this its just a
 
     return decision_list;
 }
-
+/*
 Scenario *init_scenario_list(Decision decision_list[]){
 
     Scenario scenario_list[] = {
-        {"name0", "description0", /*we need to put the other things here*/ .decision = decision_list[0]},
+        {"name0", "description0", /*we need to put the other things here .decision = decision_list[0]},
         {"name1", "description1", .decision = decision_list[1]},
         {"name2", "description2", .decision = decision_list[2]},
         {"name3", "description3", .decision = decision_list[3]},
@@ -60,7 +61,7 @@ Scenario *init_next_scenario(Scenario scenario_list[], int index, Scenario *prev
     *next_scenario = scenario_list[index];
 
 
-    /*setting the doubly linked list.*/
+    /*setting the doubly linked list.
     prev_scenario->next = next_scenario;
     next_scenario->prev = prev_scenario;
 
@@ -70,7 +71,7 @@ Scenario *init_other_scenario(Scenario scenario_list[], int index, Scenario *pre
     Scenario *other_scenario = (Scenario *)malloc(sizeof(Scenario));
     *other_scenario = scenario_list[index];
 
-    /*this is the same as the above function but with a other route.*/ //it might be useful to store the direction in an arry so that we can appluy marcels function
+    /*this is the same as the above function but with a other route. //it might be useful to store the direction in an arry so that we can appluy marcels function
     prev_scenario->other_direction = other_scenario;
     other_scenario->prev = prev_scenario;
 }
@@ -79,13 +80,14 @@ int backwards(int direction){
     return (4 - direction);
 }
 
-void change_scenario(Scenario *scenario, int direction /*should be passed in as macro*/){
+void change_scenario(Scenario *scenario, int direction /*should be passed in as macro){
     int backwards_direction = backwards(direction);
-    /*there will need to be error checking here*/
+    /*there will need to be error checking here
 }
 
 void delete_scenarios(Scenario *scenario){
     // while there are valid directions to go you should delete them all this is done when you die and want to restart so that memory is not building up forever.
 }
 
-void play_scenario(Scenario *cuurent_scenario){ /*this is where you have the fight and everything*/}
+void play_scenario(Scenario *cuurent_scenario){ /*this is where you have the fight and everything
+*/
