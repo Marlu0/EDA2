@@ -190,7 +190,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     }
                     else {
                         // Print appropiate response in case Time Strike is not available
-                        if (time_strike_done == 1) {
+                        if ((*time_strike_done) == 1) {
                             printf("You've already used Time Strike this fight!\n");
                         }
                         else {
