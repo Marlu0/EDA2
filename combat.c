@@ -156,7 +156,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
 
                 // Check for enough bulletpoints
                 if (character->bullets >= 100) {
-                    if (!is_empty_stack(attack_stack) && !time_strike_done) {
+                    if (!is_empty_stack(attack_stack) && time_strike_done==0) {
                         // Seed the random number generator (optional)
                         srand(time(NULL));
 
@@ -190,7 +190,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     }
                     else {
                         // Print appropiate response in case Time Strike is not available
-                        if (time_strike_done) {
+                        if (time_strike_done == 1) {
                             printf("You've already used Time Strike this fight!\n");
                         }
                         else {
@@ -325,18 +325,4 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
     else if (character->health<=0){
         printf("You've died!\n");
     }
-}
-
-/* COMBAT TEST */
-int main(){
-    int game_over = 0;
-    Character jose = create_character();
-    Enemy paco = {"Paco", 100, {5,5,5,5,5}};
-    Enemy manolo = {"Manolo", 100, {5,5,5,5,5}};
-    Enemy enemies[2];
-    int number_of_enemies = 2;
-    enemies[0] = paco;
-    enemies[1] = manolo;
-
-    do_combat(&jose, enemies, number_of_enemies, &game_over);
 }
