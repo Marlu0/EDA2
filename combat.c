@@ -100,7 +100,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     printf("%s health: %d\n", enemies[enemy_selected].name, enemies[enemy_selected].health);
                 }
                 // Push damage done into the attack stack
-                push_stack(&attack_stack, total_damage);
+                push_stack(attack_stack, total_damage);
                 (*attacks_done)++;
                 turn_done = 1;
                 break;
