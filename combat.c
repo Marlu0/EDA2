@@ -155,7 +155,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 // SKILL 4: TIME STRIKE
 
                 // Check for enough bulletpoints
-                if (character->bullets >= 100) {
+                if (character->bullets >= 100 && (!is_empty_stack(attack_stack))) {
                     if ((*time_strike_done)==0) {
                         // Seed the random number generator (optional)
                         srand(time(NULL));
@@ -192,18 +192,18 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                         (*time_strike_done) = 1;
                         turn_done = 1;
                     }
-                    else {
+                    else if ((*time_strike_done) == 1){
                         // Print appropiate response in case Time Strike is not available
-                        if ((*time_strike_done) == 1) {
-                            printf("You've already used Time Strike this fight!\n");
-                        }
-                        else {
-                            printf("No past attacks to use Time Strike!\n");
-                        }
+                        printf("You've already used Time Strike this fight!\n");
                     }
-                }
+                    }
                 else {
-                    printf("Not enough bullet points to use this skill!\n");
+                    if (!is_empty_stack(attack_stack)) {
+                        printf("You haven't done any previous attacks!\n");
+                    }
+                    else {
+                        printf("Not enough bullet points to use this skill!\n");
+                    }
                 }
                 break;
             }
