@@ -160,13 +160,17 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                         // Seed the random number generator (optional)
                         srand(time(NULL));
 
-                        // Generate a random number between 0 and n-1
-                        int random_number = rand() % (*attacks_done) + 1;
+                        // Generate a random number between 0 and attacksdone-1
+                        int random_number = rand() % (*attacks_done);
                         // Initialise past_damage variable to store random attack
                         int past_damage = -1;
-
-                        for (int i = 0; i < random_number; ++i){
+                        if (random_number == 0) {
                             past_damage = pop_stack(attack_stack);
+                        }
+                        else {
+                            for (int i = 0; i < random_number; ++i){
+                                past_damage = pop_stack(attack_stack);
+                            }
                         }
                         // Calculate total damage by doubling past damage and apply it to enemy
                         int enemy_selected = select_enemy(enemies, number_of_enemies);
