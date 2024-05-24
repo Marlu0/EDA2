@@ -29,11 +29,10 @@ int get_selection(const char *strings[]) {
     while (strings[n] != NULL) {
         n++;
     }
-    // Create a flag to track validity of input
-    bool valid_input = false;
     
-    while (!valid_input) {
+    bool valid_input = false;
 
+    while (!valid_input) {
         // Printing the possible selections
         for (int i = 0; i < n; i++) {
             printf("%d. %s\n", i + 1, strings[i]);
@@ -42,19 +41,27 @@ int get_selection(const char *strings[]) {
         // Getting the selection
         printf("Enter your selection (1-%d): ", n);
         
+        // Read the input as an integer followed by any characters until a newline
         if (scanf(" %d", &selection) != 1) {
+            // Handle error or end of file
+            // For simplicity, let's assume no error handling is needed here
             printf("Invalid input. Please enter a number.\n");
-            while (getchar() != '\n'); // Flush the input buffer to clear all characters but the first
-        } 
-        else {
-            valid_input = true;
+            while (getchar() != '\n'); // Flush the input buffer
+            continue;
         }
+
+        // Check if there are any characters left in the input buffer
+        int extra;
+        while ((extra = getchar()) != '\n' && extra != EOF);
+
         // Validating input
-        if (valid_input && (selection < 1 || selection > n)) {
+        if (selection < 1 || selection > n) {
             printf("Invalid selection. Please try again.\n");
-            valid_input = false;
+            continue;
         }
-    };
+
+        valid_input = true;
+    }
     
     return selection;
 }
