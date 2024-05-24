@@ -88,28 +88,128 @@ returns:
     nothing.*/
 void load_game(Character *character, Scenario *scenario) {} //figure this out.
 
-/*START GAME
+/*PLAY GAME
 this function receives: nothing
 it does:
     - stores runs all the other functions that make the game work
 Returns:
     - character and scenario for possible later saves.
 */
-/*init_start_scenario
-this function receives: nothing
-it does:
-    - creates the starting scenario
-it returns:
-    - pointer to the start scenario.
-*/
-Character *start_game(Character *character, Scenario *start){
-    Skill *skills_list = init_skill_list;
-    Weapon *weapons_list = init_weapons_dictionary;
-    Character character = create_character(weapons_list, first_game);
-    // after you create your character you go to the first scenario (load scenario function.)
-    //
+void play_scenario_completed(Character *character, Scenario *current_scenario){
+    printf("%s\n\n", current_scenario->name);
+    printf("%s\n", current_scenario->completed_decription);
 }
-void continue_game(/*this is the thing that you should put into load file.*/){}
+
+void play_scenario_uncompleted(Character *character, Scenario *current_scenario) {
+    printf("%s\n\n", current_scenario->name);
+    printf("%s\n", current_scenario->description);
+    printf("%s\n", current_scenario->decision.chapa_del_NPC);
+
+
+}
+
+Character *play_game(Character *character, Scenario *current_scenario){
+    bool win = false;
+    Character character = create_character();
+    while(){
+        if (current_scenario->completed == true) {
+            play_scenario_completed(character, current_scenario);
+        } else{
+            play_scenario_uncompleted(character, current_scenario);
+        }
+        if (current_scenario->next == NULL && current_scenario->completed == true) {
+        } else {
+            printf("which direction do you want to go?\n"); 
+        }
+        if(current_scenario->other_direction != NULL){
+
+            if(current_scenario->next == NULL && current_scenario->completed == true){ // it is becuase you have won the game
+                printf("YOU WIN!!!\n\n");
+                win = true;
+            } else if(current_scenario->prev == NULL){
+                    print("1. forwards\n");
+
+                    int option;
+
+                    do {
+                    scanf("%d", &option);
+
+                    switch (option) {
+                        case 1:
+                            current_scenario = current_scenario->next;
+                            printf("moving left!\n");
+
+                        case 2:
+                            printf("can't go backwards!\n");
+                            // no break so that it also does the option after.
+
+                        default:
+                            printf("select a valid option\n");
+                            break;
+                    }
+                } while (option != 1);
+
+            } else {
+                printf("1. left\n");
+                printf("2. right\n");
+                printf("3. backwards\n");
+
+                int option;
+
+                do {
+                    scanf("%d", &option);
+
+                    switch (option) {
+                        case 1:
+                            current_scenario = current_scenario->next;
+                            printf("moving left!\n");
+                            break;
+
+                        case 2:
+                            current_scenario = current_scenario->other_direction;
+                            printf("moving right!\n");
+
+                        case 3:
+                            current_scenario = current_scenario->prev;
+                            printf("moving back!\n");
+
+                        default:
+                            printf("select a valid option\n");
+                            break;
+                    }
+                } while ((option != 1) || (option != 2) || (option != 3));
+            }
+
+            
+
+        } else {
+            printf("1. forewards\n");
+            printf("2. backwards\n");
+
+            int option;
+
+            do {
+                scanf("%d", &option);
+
+                switch (option) {
+                    case 1:
+                        current_scenario = current_scenario->next;
+                        printf("moving left!\n");
+                        break;
+
+                    case 2:
+                        current_scenario = current_scenario->prev;
+                        printf("moving right!\n");
+                        
+                    default:
+                        printf("select a valid option\n");
+                        break;
+                }
+            } while ((option != 1) || (option != 2));
+        }
+    }
+    //if win is true end the game
+}
 
 /*
 this funtion receives:
@@ -161,31 +261,36 @@ void main_menu(Character *character, Scenario *current_scenario) {
             case 1:
                 /*game_over*/ //put this in a loop in this function
                 /*game_win as well*/
-                init_scenario_graph(first_scenario);
+                Decision *decision_list = init_decision_list();
+                Scenario *scenario_list = init_scenario_list(decision_list);
+                init_scenario_graph(first_scenario, scenario_list);
 
-                current_scenario = first_scenario;
+                first_scenario = current_scenario;
 
-                start_game(character, current_scenario, first_scenario); //we'll get to this eventually.
+                play_game(character, current_scenario); //we'll get to this eventually.
                 first_game = false;
                 break;
 
             case 2:
                 /*do the filename things here.*/
-                init_scenario_graph(first_scenario);
-                load_game(/*filename*/); //where you pull out the current scenario
-                start_game(character, current_scenario, first_scenario)
+                Decision *decision_list = init_decision_list();
+                Scenario *scenario_list = init_scenario_list(decision_list);
+                init_scenario_graph(first_scenario, scenario_list);
+
+                load_game(character, current_scenario /*filename is found in here*/);
+                play_game(character, current_scenario);
                 break;
 
-            case 3:
+            /*case 3:
                 save_game(character, current_scenario);
                 game_saved = true;
-                break;
+                break;*/
 
-            case 4:
+            case 3:
                 print_credits();
                 break;
 
-            case 5:
+            case 4:
                 break;
 
             default:
@@ -196,23 +301,20 @@ void main_menu(Character *character, Scenario *current_scenario) {
 }
 /*main*/
 int main() {
-    bool first_game = true;
     srand(time(NULL));
     print_main_title();
 
     Character *character;
 
-    Decision *decision_list;
-    Scenario *scenario_list;
-
     Scenario *current_scenario;
 
     init_untils(character, current_scenario);
 
-    main_menu(character, current_scenario);
+    main_menu_selection(character, current_scenario);
 
     /*free the array function*/
     /*free the decisions function*/
     free(character);
+    free(current_scenario);
     return 0;
 }

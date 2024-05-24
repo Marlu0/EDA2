@@ -1,121 +1,155 @@
 #include "scenario.h"
-/* INIT_DECISION_LIST
-This function receives:
-    - nothing
-It does:
-    - inits the decision array
-Returns:
-    - pointer to array
-*/
+
 Decision *init_decision_list(){ // silly list like last time you can make a file implementation another time.
-    Decision decision_list[] = {
-        {"desert interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}}, //i need to story board this
-        {"town interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}, {"REPUESTA 1.2"}, {"RESPUESTA 1.3"}}}, // we need to find a file format that works.
-        {"talking to turtle", {{"REPUESTA 1"}, {"RESPUESTA 2"}}},
-        {"talking to bull", {{"REPUESTA 1"}, {"RESPUESTA 2"}}},
-        {"talking to the bull after turtle interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}},
-        {"talking to turtle after bull interaction", {{"repuesta 2"}, {"respueta 2"}}},
-        {"final interation", {{"REPUESTA 1"}, {"RESPUESTA 2"}}},
-    };
+    Decision *decision_list = (Decision *)calloc(8, sizeof(Decision));
+    Decision * temp = decision_list;
+
+    *temp++ = {"desert interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+
+    *temp++ = {"town interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+
+    *temp++ = {"talking to turtle", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+
+    *temp++ = {"talking to bull", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+
+    *temp++ = {"talking to the bull after turtle interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+
+    *temp++ = {"talking to turtle after bull interaction", {{"repuesta 2"}, {"respueta 2"}}};
+
+    *temp++ = {"final interation1", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+
+    *temp++ = {"final interation2", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
     return decision_list;
 }
-/*INIT_SCENARIO_LIST
-this fucntion receives:
-    - decision_list
-it does:
-    - inits the scenario list
-it returns:
-    - pointer to an the new list.
-*/
+
 Scenario *init_scenario_list(Decision decision_list[]){
 
-    Scenario scenario_list[] = {
-        {"DESERT", "description0", /*we need to put the other things here*/ .decision = decision_list[0]},
-        {"LOCAL TOWN", "description1", .decision = decision_list[1]},
-        {"TURTLE'S TOMBSTONES", "description2", .decision = decision_list[2]},
-        {"SHERIFF BULL'S STATION", "description3", .decision = decision_list[3]},
-        {"SHERIFF BULL'S STATION", "description4", .decision = decision_list[4]},
-        {"TURTLE'S TOMBSTONES", "description5", .decision = decision_list[5]},
-        {"CASINO", "description 6", .decision = decision_list[6]},
-    };
+    Scenario *scenario_list = (Scenario *)calloc(8, sizeof(Scenario));
+
+    Scenario *temp = scenario_list;
+
+    *temp++ = (Scenario){"DESERT", "description0", "description completed0", .decision = decision_list[0]};
+
+    *temp++ = (Scenario){"LOCAL TOWN", "description1", "description completed1", .decision = decision_list[1]};
+
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", "description2", "description completed2", .decision = decision_list[2]};
+    
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION", "description3", "description_completed3", .decision = decision_list[3]};
+    
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION", "description4", "description_completed4", .decision = decision_list[4]};
+    
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", "description5", "description_completed5", .decision = decision_list[5]};
+    
+    *temp++ = (Scenario){"CASINO1", "description 6", "description_completed6", .decision = decision_list[6]};
+
+    *temp++ = (Scenario){"CASINO2", "description 6", "description_completed7", .decision = decision_list[6]};
+
     return scenario_list;
 }
-/*INIT_FIRST_SCENARIO
-this fucntion receives:
-    - scenario list
-it does:
-    creates aninstance of the first scenario.
-it returns:
-    - the address to current scenario (this one)
-*/
-Scenario *init_first_scenario(Scenario scenario_list[]){ // I DONT THINK WE NEED THIS
-    Scenario first_scenario = scenario_list[0];
-    return &first_scenario;
-}
-/*INIT_NEXT_SCENARIO
-this fucntion receives:
-    - scenario list, index of specific scenario to load, pointer to the previous scenario
-it does:
-    - loads the nex scenario and puts it in *next of the prev
-it returns:
-    - new current scenario
-*/
-Scenario *init_next_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario){ // I DONT THINK WE NEED THIS EITHER
-    Scenario next_scenario = scenario_list[index];
 
-    /*setting the doubly linked list.*/
-    prev_scenario->next = &next_scenario;
-    next_scenario.prev = prev_scenario;
+void create_next_node(Scenario **pointer){ //pass the address of the scenario
+    (*pointer)->next = (Scenario *)malloc(sizeof(Scenario));
+    (*pointer)->next->prev = *pointer;
+    (*pointer) = (*pointer)->next;
 }
-/*INIT_SCENARIO_GRAPH
-this function takes in:
-    - the first scenario
-it inits:
-    - the scenario graph
-it returns:
-    - nothing
-*/
-void init_scenario_graph(Scenario *first_scenario){
-    //you need to do a unit test on this. so far it should be easy as hell just export it out into a testing folder.
-    Decision *decision_list = init_decision_list();
-    Scenario *scenario_list = init_scenario_list(decision_list);
+
+void create_branch(Scenario **pointer, Scenario **split_pointer){
+
+    (*pointer)->next = (Scenario *)malloc(sizeof(Scenario));
+    (*pointer)->next->prev = *pointer; // i think this might be because it goes into the prev of the split_pointer
+    (*pointer) = (*pointer)->next;
+
+    (*split_pointer)->other_direction = (Scenario *)malloc(sizeof(Scenario));
+    (*split_pointer)->other_direction->prev = (*split_pointer);
+    (*split_pointer) = (*split_pointer)->other_direction;
+}
+
+void init_scenario_graph(Scenario *first_scenario, Scenario *scenario_list){ // this function is borken as hell raise it frome the ground up
 
     Scenario *temp_scenario = first_scenario;
-    Scenario *split_temp_scenario;
 
-    int i;
-    for(i = 0; i < 2; i++)
-    {
-        *temp_scenario = scenario_list[i];
-        temp_scenario = temp_scenario->next;
-    }
-    //this is where the first split is
-    *temp_scenario->next = scenario_list[i++];
-    *temp_scenario->other_direction = scenario_list[i++];
-    temp_scenario = temp_scenario->next;
-    split_temp_scenario = temp_scenario->other_direction;
+    int i = 0;
 
-    //first branch.
+    //first node
     *temp_scenario = scenario_list[i++];
-    temp_scenario = temp_scenario->next;
 
+    //second node
+    create_next_node(&temp_scenario); //ok the pointer does not. update after the funcion
+    *temp_scenario = scenario_list[i++];
 
-    //second branch.
-    *split_temp_scenario = scenario_list[i++];
-    split_temp_scenario = split_temp_scenario->next;
+    //branch
+    Scenario *split_scenario = temp_scenario;
+    create_branch(&temp_scenario, &split_scenario);
 
-    //final node.
-    *temp_scenario = scenario_list[i];
-    *split_temp_scenario = scenario_list[i];
+    *temp_scenario = scenario_list[i++];
+    *split_scenario = scenario_list[i++];
+
+    //upper route
+    create_next_node(&temp_scenario);
+    *temp_scenario = scenario_list[i++];
+
+    //lower route
+    create_next_node(&split_scenario);
+    *split_scenario = scenario_list[i++];
+
+    //last node up
+    create_next_node(&temp_scenario);
+    *temp_scenario = scenario_list[i++];
+
+    //last node down
+    create_next_node(&split_scenario);
+    *split_scenario = scenario_list[i];
 }
 
-Scenario *init_other_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario){
-    Scenario other_scenario = scenario_list[index];
-
-    prev_scenario->other_direction = &other_scenario;
-    other_scenario.prev = prev_scenario;
+void free_node(Scenario **pointer){ //first_scneario did not update
+    Scenario *temp_pointer = *pointer;
+    if((*pointer)->next != NULL){
+        *pointer = (*pointer)->next;
+    }
+    free(temp_pointer);
+    pointer == NULL;
 }
+
+void free_branched_node(Scenario **pointer, Scenario **branch_pointer){
+    (*branch_pointer) = (*pointer)->other_direction;
+    free_node(pointer);
+}
+
+void working_free_scenario_graph(Scenario *first_scenario){
+
+    free_node(&first_scenario);
+
+    Scenario *branched_scneario = first_scenario;
+
+    free_branched_node(&first_scenario, &branched_scneario);
+
+    while(first_scenario->next != NULL){
+        free_node(&first_scenario);
+    }
+    while(branched_scneario->next != NULL){
+        free_node(&branched_scneario);
+    }
+}
+
+void free_scenario_graph_if_prev_works(Scenario *current_scenario){
+    while(current_scenario->prev != NULL){
+        current_scenario = current_scenario->prev;
+    }
+    free_node(&current_scenario);
+
+    Scenario *branched_scneario = current_scenario;
+
+    free_branched_node(&current_scenario, &branched_scneario);
+
+    while(current_scenario != NULL){
+        free_node(&current_scenario);
+    }
+    while(branched_scneario != NULL){
+        free_node(&branched_scneario);
+    }
+}
+
 void play_scenario(Scenario *scenario, Character *character){
     printf("%s\n\n", scenario->name);
     printf("%s\n\n", scenario->description);
@@ -142,10 +176,6 @@ void change_scenario(Scenario *scenario){
     default:
         break;
     }
-}
-
-void delete_scenarios(Scenario *scenario){
-    // while there are valid directions to go you should delete them all this is done when you die and want to restart so that memory is not building up forever.
 }
 
 void play_scenario(Scenario *cuurent_scenario){ /*this is where you have the fight and everything*/}

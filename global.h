@@ -13,6 +13,7 @@
 
 #define TABLE_SIZE 100
 #define MAX_STRING_LEN 100
+#define MAX_CHOICES 2
 
 /* GENERAL FUNCTION DECLARATIONS */
 
@@ -76,6 +77,11 @@ typedef struct{
     Stats stats;
     Modifier active_modifiers;
 } Character;
+
+typedef union{
+    bool dead;
+    bool win;
+}Over;
 
 /* STACK DEFINITIONS AND FUNCTIONS */
 

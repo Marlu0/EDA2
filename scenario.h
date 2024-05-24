@@ -1,18 +1,59 @@
+#ifndef SCENARIO_H
+#define SCENARIO_H
+
 #include "game.h"
 
 /*SCENARIO STRUCTURES.*/
+
+// foreward declaration
+
+struct Scenario;
+
 typedef struct{
     char response[MAX_STRING_LEN];
-    Scenario *outcome_on_senario;
+    struct Scenario *outcome_on_senario;
     Character *(*outcome_on_character)(Character *);
-    /*this is a function pointer that points to a function describing what happened to your character.*/
 }Response_Outcome;
 
 typedef struct{
     char chapa_del_NPC[MAX_STRING_LEN];
-    Response_Outcome choices[MAX_CHOICES]; /*in hex becuase its fun and silly lol*/
+    Response_Outcome choices[MAX_CHOICES];
 
 }Decision;
+
+typedef struct scenario{
+    char name[MAX_STRING_LEN];
+    char description[MAX_STRING_LEN];
+    char completed_decription[MAX_STRING_LEN]; //most recent change it means i have to update the list
+    struct scenario *next;
+    struct scenario *prev; //leaving this in incase
+    struct scenario *other_direction;
+    Decision decision;
+    bool completed;
+}Scenario;
+
+Decision *init_decision_list();
+
+Scenario *init_scenario_list(Decision decision_list[]);
+
+void create_next_node(Scenario **pointer);
+
+void create_branch(Scenario **pointer, Scenario **split_pointer);
+
+void init_scenario_graph(Scenario *first_scenario, Scenario *scenario_list);
+
+void free_node(Scenario **pointer);
+
+void free_branched_node(Scenario **pointer, Scenario **branch_pointer);
+
+void working_free_scenario_graph(Scenario *first_scenario);
+
+void free_scenario_graph_if_prev_works(Scenario *current_scenario);
+
+void play_scenario(Scenario *scenario, Character *character);
+
+void change_scenario(Scenario *scenario);
+
 //you will need apointer to indicate where you are.
 
 
@@ -22,33 +63,4 @@ typedef struct{
 //but that is an issue for you once you are done with the EDA coruse.
 // htings you need to implement is the meta functions above and you need to change the load Scenarios list function to include some sort of pointer to the next on
 
-//this will be implemented in main.
-
-
-typedef struct scenario{
-    char name[MAX_STRING_LEN];
-    char description[MAX_STRING_LEN]; //description of the scenario.
-    struct scenario *next;
-    struct scenario *prev;
-    struct scenario *other_direction; //there is going to be max  3 direction on any node.
-    Decision decision; //this is the thing that you will need to have a library for
-    bool completed;
-}Scenario;
-
-Decision *init_decision_list();
-
-Scenario *init_scenario_list(Decision decision_list[]);
-
-Scenario *init_first_scenario(Scenario scenario_list[]);
-
-Scenario *init_next_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario);
-
-Scenario *init_other_scenario(Scenario scenario_list[], int index, Scenario *prev_scenario);
-
-int backwards(int direction);
-
-void change_scenario(Scenario *scenario, int direction);
-
-void delete_scenarios(Scenario *scenario);
-
-void play_scenario(Scenario *cuurent_scenario);
+#endif //SCENARIO_H
