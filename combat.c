@@ -198,7 +198,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     }
                     }
                 else {
-                    if (!is_empty_stack(attack_stack)) {
+                    if (is_empty_stack(attack_stack)) {
                         printf("You haven't done any previous attacks!\n");
                     }
                     else {
