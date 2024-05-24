@@ -6,7 +6,7 @@
 
 /* GET SELECTION (Important: This function returns index+1 of the array entered)
 This function recieves: 
-    - An array of strings, the last element MUST be NULL. 
+    - An array of constant strings, the last element MUST be NULL. 
 It does:
     - Prints the strings as enumerated options and correctly scans the selection
 Returns:
@@ -25,37 +25,43 @@ int get_selection(const char *strings[]) {
     int selection;
     int n = 0;
 
-    /* Count the number of strings until NULL terminator */
+    // Count the number of strings until NULL terminator
     while (strings[n] != NULL) {
         n++;
     }
-    /* Create a flag to track validity of input */
-    bool valid_input = false;
     
-    while (!valid_input) {
+    bool valid_input = false;
 
-        /* Printing the possible selections */
+    while (!valid_input) {
+        // Printing the possible selections
         for (int i = 0; i < n; i++) {
             printf("%d. %s\n", i + 1, strings[i]);
         }
 
-        /* Getting the selection */
+        // Getting the selection
         printf("Enter your selection (1-%d): ", n);
         
+        // Read the input as an integer followed by any characters until a newline
         if (scanf(" %d", &selection) != 1) {
+            // Handle error or end of file
+            // For simplicity, let's assume no error handling is needed here
             printf("Invalid input. Please enter a number.\n");
-            /* Flush the input buffer to clear all characters but the first */
-            while (getchar() != '\n');
-        } 
-        else {
-            valid_input = true;
+            while (getchar() != '\n'); // Flush the input buffer
+            continue;
         }
 
-        if (valid_input && (selection < 1 || selection > n)) {
+        // Check if there are any characters left in the input buffer
+        int extra;
+        while ((extra = getchar()) != '\n' && extra != EOF);
+
+        // Validating input
+        if (selection < 1 || selection > n) {
             printf("Invalid selection. Please try again.\n");
-            valid_input = false;
+            continue;
         }
-    };
+
+        valid_input = true;
+    }
     
     return selection;
 }
@@ -248,6 +254,7 @@ void display_queue(Queue* queue) {
 
 /* DICTIONARY FUNCTIONS */
 
+// Function to create a hash table
 HashTable* create_table() {
     HashTable *hashTable = malloc(sizeof(HashTable));
     hashTable->table = malloc(sizeof(Node*) * TABLE_SIZE);
@@ -259,6 +266,7 @@ HashTable* create_table() {
     return hashTable;
 }
 
+// Hash function
 unsigned int hash(const char *key) {
     unsigned int hash = 0;
     while (*key) {
@@ -267,6 +275,7 @@ unsigned int hash(const char *key) {
     return hash % TABLE_SIZE;
 }
 
+// Function to insert element in a hash table
 void insert(HashTable *hashTable, const char *key, void *value) {
     unsigned int index = hash(key);
     Node *newNode = malloc(sizeof(Node));
@@ -276,6 +285,7 @@ void insert(HashTable *hashTable, const char *key, void *value) {
     hashTable->table[index] = newNode;
 }
 
+// Function to look up an element in a hash table
 void* lookup(HashTable *hashTable, const char *key) {
     unsigned int index = hash(key);
     Node *node = hashTable->table[index];

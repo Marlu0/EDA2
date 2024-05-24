@@ -11,23 +11,23 @@ Returns:
     - Nothing
 */
 void name_character(Character *character) {
-    /* Flag to track validity of input */
+    // Flag to track validity of input
     int sure = 0;
 
-    /* Loop to ensure input and handle errors */
+    // Loop to ensure input and handle errors
     while (sure != 1) {
         printf("Choose a name for your character: ");
         
-        /* Use fgets to read the entire line, including spaces, for the character's name */
+        // Use fgets to read the entire line, including spaces, for the character's name
         fgets(character->name, MAX_STRING_LEN, stdin);
 
-        /* Remove the newline character from the end of the input and add the null terminator */
+        // Remove the newline character from the end of the input and add the null terminator
         character->name[strcspn(character->name, "\n")] = '\0';
 
         printf("Are you sure you want the name '%s'? (yes/no): ", character->name);
         char answer[MAX_STRING_LEN];
         fgets(answer, MAX_STRING_LEN, stdin);
-        /* Remove the newline character from the end of the input */
+        // Remove the newline character from the end of the input
         answer[strcspn(answer, "\n")] = '\0';
 
         if (strcmp(answer, "yes") == 0) {
@@ -47,6 +47,7 @@ Returns:
     - Nothing
 */
 void reset_character_stats(Character *character) {
+    // All stats go to 1 since they're multipliers
     character->stats.hp = 1;
     character->stats.bp = 1;
     character->stats.atk = 1;
@@ -63,15 +64,15 @@ Returns:
     - Nothing
 */
 void assign_points(int *stat, int *statpts, const char *stat_name) {
-    printf("You selected %s\n", stat_name);
+    printf("You selected: %s\n", stat_name);
     printf("How many points do you wish to assign? (0-%d): ", *statpts);
     int points;
     scanf(" %d", &points);
-    getchar(); /* Consume the newline character left in the input buffer */
+    getchar(); // Consume the newline character left in the input buffer
 
-    /* Validate the points */
+    // Validate the points
     if (points >= 0 && points <= *statpts) {
-        /* Assign points and update statpts */
+        // Assign points and update statpts
         *stat += points;
         *statpts -= points;
     } else {
@@ -88,37 +89,37 @@ Returns:
     - character of type Character 
 */
 Character create_character() {
-    printf("Welcome to Character Creation!\nWarning: Previous characters will be erased\n");
+    printf("Welcome to Character Creation!\n\nWarning: Previous characters will be erased\n");
 
-    /* Character initialization */
+    // Character initialization
     Character character;
     
-    /* We name our character */
+    // We name our character
     name_character(&character);
     
-    /* We assign the skills to character*/
+    // We assign the skills to character
 
-    /* Flag to track validity of input */
+    // Flag to track validity of input
     int done = 0;
-    int statpts = 15;  /* Initialize stat points to 15 outside the loop */
+    int statpts = 20;  // Initialize stat points to 20 outside the loop
     
+    // Initialize character stats to 1
     printf("Base level of all stats: 1\n");
-    /* Initialize character stats to 1 */
     reset_character_stats(&character);
 
-    /* Outer loop in case of re-doing stats */
+    // Outer loop in case of re-doing stats
     while (!done) {
-        /* Loop until sure is true and there are stat points remaining */
+        // Loop until sure is true and there are stat points remaining
         while (statpts > 0) {
             printf("Select stat to assign: (Current points: %d)\n", statpts);
             
-            /* List of stats */
+            // List of stats
             const char *list_of_stats[] = {"HP (Health points)", "MP (Mana Points)", "ATK (Attack)", "DEF (Defense)", "LUC (Luck)", NULL};
             
-            /* Get user's selection */
+            // Get user's selection
             int selected_stat = get_selection(list_of_stats);
 
-            /* Handle selected stat and assign the respective points */
+            // Handle selected stat and assign the respective points
             switch (selected_stat) {
                 case 1:
                     assign_points(&character.stats.hp, &statpts, "HP (Health points)");
@@ -139,42 +140,41 @@ Character create_character() {
                     printf("Invalid selection. Please try again.\n");
             }
         }
-        /* If all points are allocated the selection is displayed */
+        // If all points are allocated the selection is displayed
         if (statpts == 0) {
             printf("You've spent all the stat points!\n");
             printf("This was your selection:\n");
-            printf("· HP: %d\n", character.stats.hp);
-            printf("· BP: %d\n", character.stats.bp);
-            printf("· ATK: %d\n", character.stats.atk);
-            printf("· DEF: %d\n", character.stats.def);
-            printf("· LUC: %d\n", character.stats.luc);
+            printf("- HP: %d\n", character.stats.hp);
+            printf("- BP: %d\n", character.stats.bp);
+            printf("- ATK: %d\n", character.stats.atk);
+            printf("- DEF: %d\n", character.stats.def);
+            printf("- LUC: %d\n", character.stats.luc);
 
-            /* Confirmation is asked in case the user wants to change their selection */
+            // Confirmation is asked in case the user wants to change their selection
             printf("Are you sure about your stat selection? (yes/no): ");
             char answer[MAX_STRING_LEN];
             fgets(answer, MAX_STRING_LEN, stdin);
-            /* Remove the newline character from the end of the input */
-            answer[strcspn(answer, "\n")] = '\0';
+            answer[strcspn(answer, "\n")] = '\0'; // Remove the newline character from the end of the input
 
             if (strcmp(answer, "yes") == 0) {
-                done = 1;  /* Set done to 1 to exit the loop */
+                done = 1;  // Set done to 1 to exit the loop
             } 
             else {
-                /* Reset stat points and stats */
-                statpts = 15;
+                // Reset stat points and stats
+                statpts = 20;
                 reset_character_stats(&character);
             }
         }
     }
 
-    /* Initialize active modifier to default values */
+    // Initialize active modifier to default values
     character.active_modifiers.tempatk = 1;
     character.active_modifiers.tempdef = 1;
     character.active_modifiers.templuc = 1;
 
-    /* We initialise health and mana in function of hp and bp stats */
-    character.health = 100+(20*(character.stats.hp-1));
-    character.bullets = 100+(10*(character.stats.bp-1));
+    // We initialise health and mana in function of hp and bp stats
+    character.health = 100 + (20 * (character.stats.hp - 1));
+    character.bullets = 100 + (10 * (character.stats.bp - 1));
 
     return character;
 }
