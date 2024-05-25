@@ -104,17 +104,21 @@ void play_scenario_completed(Game *game){
 void play_scenario_uncompleted(Game *game) {
     printf("%s\n\n", game->current_scenario->name);
     printf("%s\n--------------------\n", game->current_scenario->description);
-    //fight can go here maybe
+    
+    do_fight(game);
+
     printf("%s\n\n", game->current_scenario->decision.chapa_del_NPC);
 
     for(int i = 1; i <= MAX_CHOICES; i++){
         printf("%d. %s\n", i, game->current_scenario->decision.choices->response);
     }
     int option = 0;
-    scanf("%d", &option);
+    scanf(">%d", &option);
 
     game->current_scenario->decision.choices[option].response;
-    
+
+    game->character = *(game->current_scenario->decision.choices[option].outcome_on_character);
+    //there might be a bug here depending on whether you need to depoint it or not.
 
 }
 /*PLAY GAME
@@ -141,18 +145,11 @@ Game *play_game(Game *game){
             play_scenario_uncompleted(game);
         //DO FIGHT GOES OVER HERE
         }
-
-
-        if(game->state == WIN){
-            printf("\n\n\n\n\n\nYOU WIN!!!\n\n\n\n\n");
-            return game;
-        } else if(game->state == DEAD){
+        
+        if(game->state == DEAD){
             printf("\n\n\n\n\nyou died :(\n");
             printf("YOU LOSE!!\n\n\n\n\n");
             return game;
-        } else {
-            perror("the game is still in a playing state but somehow you are out of the game loop?\n good job you broke it. wuaw >:(\n");
-            exit(-1);
         }
 
         //checking possible movement directions and playing scenarios of said directions.
@@ -175,7 +172,7 @@ Game *play_game(Game *game){
                     switch (option) {
                         case 1:
                             game->current_scenario = game->current_scenario->next;
-                            printf("moving left!\n");
+                            printf("moving foreward!\n");
 
                         case 2:
                             printf("can't go backwards!\n");
@@ -242,6 +239,8 @@ Game *play_game(Game *game){
             } while ((option != 1) || (option != 2));
         }
     }
+    printf("\n\n\n\n\n\nYOU WIN!!!\n\n\n\n\n");
+    return game;
 }
 
 

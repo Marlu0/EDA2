@@ -38,7 +38,7 @@ Scenario *init_scenario_list(Decision decision_list[]){
 
     Scenario *temp = scenario_list;
 
-    *temp++ = (Scenario){"DESERT", "description0", "description completed0", .decision = decision_list[0], &enemies[0], 1};
+    *temp++ = (Scenario){"DESERT", "description0", "description completed0", .decision = decision_list[0], .enemies = &enemies[0], .numEnemies = 1, .completed = false};
 
     *temp++ = (Scenario){"LOCAL TOWN", "description1", "description completed1", .decision = decision_list[1], .completed = false};
 
