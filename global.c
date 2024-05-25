@@ -21,7 +21,7 @@ const char *array[] = {
         NULL // NULL terminator to indicate end of array
     };
 */
-int get_selection(/*const*/ char *strings[]) {
+int get_selection(const char *strings[]) { //const?
     int selection;
     int n = 0;
 
