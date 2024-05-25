@@ -29,21 +29,21 @@ Scenario *init_scenario_list(Decision decision_list[]){
 
     Scenario *temp = scenario_list;
 
-    *temp++ = (Scenario){"DESERT", "description0", "description completed0", .decision = decision_list[0]};
+    *temp++ = (Scenario){"DESERT", "description0", "description completed0", .decision = decision_list[0], .completed = false};
 
-    *temp++ = (Scenario){"LOCAL TOWN", "description1", "description completed1", .decision = decision_list[1]};
+    *temp++ = (Scenario){"LOCAL TOWN", "description1", "description completed1", .decision = decision_list[1], .completed = false};
 
-    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", "description2", "description completed2", .decision = decision_list[2]};
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", "description2", "description completed2", .decision = decision_list[2], .completed = false};
     
-    *temp++ = (Scenario){"SHERIFF BULL'S STATION", "description3", "description_completed3", .decision = decision_list[3]};
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION", "description3", "description_completed3", .decision = decision_list[3], .completed = false};
     
-    *temp++ = (Scenario){"SHERIFF BULL'S STATION", "description4", "description_completed4", .decision = decision_list[4]};
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION", "description4", "description_completed4", .decision = decision_list[4], .completed = false};
     
-    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", "description5", "description_completed5", .decision = decision_list[5]};
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", "description5", "description_completed5", .decision = decision_list[5], .completed = false};
     
-    *temp++ = (Scenario){"CASINO1", "description 6", "description_completed6", .decision = decision_list[6]};
+    *temp++ = (Scenario){"CASINO1", "description 6", "description_completed6", .decision = decision_list[6], .completed = false};
 
-    *temp++ = (Scenario){"CASINO2", "description 6", "description_completed7", .decision = decision_list[6]};
+    *temp++ = (Scenario){"CASINO2", "description 6", "description_completed7", .decision = decision_list[6], .completed = false};
 
     return scenario_list;
 }

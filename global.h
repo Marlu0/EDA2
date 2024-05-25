@@ -17,7 +17,7 @@ struct Scenario;
 
 #define TABLE_SIZE 100
 #define MAX_STRING_LEN 100
-#define MAX_CHOICES 2
+#define MAX_CHOICES 4
 
 /* GENERAL FUNCTION DECLARATIONS */
 
@@ -86,7 +86,6 @@ typedef struct{
 
 typedef struct{
     char response[MAX_STRING_LEN];
-    struct Scenario *outcome_on_senario;
     Character *(*outcome_on_character)(Character *);
 }Response_Outcome;
 

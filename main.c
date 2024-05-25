@@ -95,21 +95,26 @@ it does:
 Returns:
     - character and scenario for possible later saves.
 */
+
 void play_scenario_completed(Game *game){
     printf("%s\n\n", game->current_scenario->name);
-    printf("%s\n", game->current_scenario->completed_decription);
+    printf("%s\n--------------------\n", game->current_scenario->completed_decription);
 }
 
 void play_scenario_uncompleted(Game *game) {
     printf("%s\n\n", game->current_scenario->name);
-    printf("%s\n", game->current_scenario->description);
-    //only if you want to talk to him or not?
-    printf("%s\n", game->current_scenario->decision.chapa_del_NPC);
-    //
-    //elejir decision
-    // pick 1 or 2 K
-    //scanfc game->current_scenario->decision.response
+    printf("%s\n--------------------\n", game->current_scenario->description);
+    //fight can go here maybe
+    printf("%s\n\n", game->current_scenario->decision.chapa_del_NPC);
 
+    for(int i = 1; i <= MAX_CHOICES; i++){
+        printf("%d. %s\n", i, game->current_scenario->decision.choices->response);
+    }
+    int option = 0;
+    scanf("%d", &option);
+
+    game->current_scenario->decision.choices[option].response;
+    
 
 }
 /*PLAY GAME
