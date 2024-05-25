@@ -265,12 +265,12 @@ This function recieves:
 It does:
     - The fight
 Returns:
-    - Nothing
+    - Nothsing
 */
-void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int *game_over) {
+void do_combat(Game *game_state, Enemy *enemies, int number_of_enemies) {
     
     //Initialisation of characters
-    init_fight_characters(character, enemies, number_of_enemies); 
+    init_fight_characters(game_state->character, enemies, number_of_enemies); 
 
     printf("You've started a combat with:\n");
     for (int i=0; i<number_of_enemies; i++) {
@@ -306,17 +306,17 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
     int attacks_done = 0;
 
     // While loop of fight
-    while ((dead_enemies != number_of_enemies && !is_empty_queue(turn_queue)) && character->health>0) {
+    while ((dead_enemies != number_of_enemies && !is_empty_queue(turn_queue)) && game_state->character->health>0) {
 
         // Since the queue has indexes from 0 to player_index, we dequeue once for each turn
         int turn = dequeue(turn_queue);
         if (turn == player_index){
             printf("Your turn to attack! \n");
-            turn_player(character, enemies, attack_stack, number_of_enemies, &attacks_done, &time_strike_done, &dead_enemies);
+            turn_player(game_state->character, enemies, attack_stack, number_of_enemies, &attacks_done, &time_strike_done, &dead_enemies);
         }
         else {
             printf("%s is now attacking!\n", enemies[turn].name);
-            turn_enemy(character, &(enemies[turn]));
+            turn_enemy(game_state->character, &(enemies[turn]));
         }
     }
     // Check end of battle result
@@ -325,9 +325,9 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
     }
     else if (is_empty_queue(turn_queue)){
         printf("You ran out of turns and lost!");
-        (*game_over) = 1;
+        (game_state->state) = DEAD;
     }
-    else if (character->health<=0){
+    else if (game_state->character->health<=0){
         printf("You've died!\n");
     }
 }

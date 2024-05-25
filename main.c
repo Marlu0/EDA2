@@ -104,7 +104,7 @@ void play_scenario_uncompleted(Game *game) {
     printf("%s\n\n", game->current_scenario->name);
     printf("%s\n", game->current_scenario->description);
     printf("%s\n", game->current_scenario->decision.chapa_del_NPC);
-
+    
 
 }
 /*PLAY GAME
