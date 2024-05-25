@@ -235,15 +235,6 @@ Game *play_game(Game *game){
     }
 }
 
-/*
-this funtion receives:
-    -nothing
-it does: 
-    -calls start_menu and uses the option with a switch to direct the user option
-it returns:
-    -nothing
-*/
-
 
 
 /*MAIN_MENU_SELECTION
@@ -314,6 +305,7 @@ void main_menu_selection(Game *game) {
     free(scenario_list);
     free(decision_list);
 }
+
 /*main*/
 int main() {
     srand(time(NULL));

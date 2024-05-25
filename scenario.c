@@ -1,6 +1,6 @@
 #include "scenario.h"
 
-Decision *init_decision_list(){ // silly list like last time you can make a file implementation another time.
+Decision *init_decision_list(){
     Decision *decision_list = (Decision *)calloc(8, sizeof(Decision));
     Decision * temp = decision_list;
 
@@ -102,7 +102,7 @@ void init_scenario_graph(Scenario *first_scenario, Scenario *scenario_list){ // 
     *split_scenario = scenario_list[i];
 }
 
-void free_node(Scenario **pointer){ //first_scneario did not update
+void free_node(Scenario **pointer){
     Scenario *temp_pointer = *pointer;
     if((*pointer)->next != NULL){
         *pointer = (*pointer)->next;

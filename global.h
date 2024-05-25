@@ -84,7 +84,6 @@ typedef struct{
 
 /* SCENARIO DEFINTINITIONS*/
 
-
 typedef struct{
     char response[MAX_STRING_LEN];
     struct Scenario *outcome_on_senario;
