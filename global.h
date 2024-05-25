@@ -104,6 +104,8 @@ typedef struct scenario{
     struct scenario *prev; //INCASE
     struct scenario *other_direction;
     Decision decision;
+    Enemy *enemies; // of the scneario when there is a combat
+    int numEnemies;
     bool completed;
 }Scenario;
 

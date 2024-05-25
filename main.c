@@ -103,8 +103,13 @@ void play_scenario_completed(Game *game){
 void play_scenario_uncompleted(Game *game) {
     printf("%s\n\n", game->current_scenario->name);
     printf("%s\n", game->current_scenario->description);
+    //only if you want to talk to him or not?
     printf("%s\n", game->current_scenario->decision.chapa_del_NPC);
-    
+    //
+    //elejir decision
+    // pick 1 or 2 K
+    //scanfc game->current_scenario->decision.response
+
 
 }
 /*PLAY GAME
@@ -129,10 +134,10 @@ Game *play_game(Game *game){
             play_scenario_completed(game);
         } else{
             play_scenario_uncompleted(game);
+        //DO FIGHT GOES OVER HERE
+
         }
 
-        /* do_fight(we need to have this just take in the game state)*/
-        //DO FIGHT GOES OVER HERE
 
         if(game->state == WIN){
             printf("\n\n\n\n\n\nYOU WIN!!!\n\n\n\n\n");
@@ -249,7 +254,8 @@ void main_menu_selection(Game *game) {
 
     //flags and initializations
     bool first_game = true;
-    bool game_saved = false; //only works if you fix the save_game
+    bool game_saved = false;
+
     Scenario *first_scenario;
     Decision *decision_list = init_decision_list();
     Scenario *scenario_list = init_scenario_list(decision_list);
