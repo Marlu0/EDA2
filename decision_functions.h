@@ -1,8 +1,26 @@
-/*just include the function coded in decision_functions.c over here.
-void health_potion(Character *Character);
+#ifndef DECISION_FUNCTIONS_H
+#define DECISION_FUNCTIONS_H
 
-void poisoned(Character *character);
+#include "global.h"
 
-void secretWeapon(Character *character, Skill skills_list[]);
+void health_gain(Character *Character);
 
-*/
+void health_loss(Character *character);
+
+void attack_gain(Character *character);
+
+void attack_loss(Character *Character);
+
+void defense_gain(Character *character);
+
+void defense_loss(Character *character);
+
+void luck_gain(Character *character);
+
+void luck_loss(Character *character);
+
+void bullet_gain(Character *character);
+
+void bullet_loss(Character *character);
+
+#endif //DECISION_FUNCTIONS_H
