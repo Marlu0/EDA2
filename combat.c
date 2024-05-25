@@ -22,7 +22,7 @@ void init_fight_characters(Character *character, Enemy *enemies, int number_of_e
     character->active_modifiers.templuc = 1;
 
     // Initialize enemies' health
-    for (int i = 0; i < number_of_enemies; ++i) {
+    for (int i = 0; i < number_of_enemies; i++) {
         enemies[i].health = 100+(20*(enemies[i].stats.hp-1));
     }
 }
@@ -40,7 +40,7 @@ int select_enemy(Enemy *enemies, int number_of_enemies) {
 
     // Print available enemies (health>0)
     printf("Available enemies:\n");
-    for (int i = 0; i < number_of_enemies; ++i) {
+    for (int i = 0; i < number_of_enemies; i++) {
         if (enemies[i].health > 0) {
             printf("%d. %s\n", (i + 1), enemies[i].name);
         }
@@ -168,7 +168,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                             past_damage = pop_stack(attack_stack);
                         }
                         else {
-                            for (int i = 0; i < random_number; ++i){
+                            for (int i = 0; i < random_number; i++){
                                 past_damage = pop_stack(attack_stack);
                             }
                         }
@@ -273,7 +273,7 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
     init_fight_characters(character, enemies, number_of_enemies); 
 
     printf("You've started a combat with:\n");
-    for (int i=0; i<number_of_enemies; ++i) {
+    for (int i=0; i<number_of_enemies; i++) {
         printf("%s\n", enemies[i].name);
     }
 
@@ -283,14 +283,14 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
 
     // We initialise the queue and enqueue it with n times 0,1,..., number of enemies. That will let us manage the index of who's turn it is
     Queue *turn_queue = create_queue(n*(number_of_enemies+1));
-    for (int i=0; i<((number_of_enemies+1)*n); ++i) {
+    for (int i=0; i<((number_of_enemies+1)*n); i++) {
         enqueue(turn_queue, i%(number_of_enemies+1));
     }
 
     // Dequeue a random number of turns from 1 to number_of_enemies to randomize who starts attacking
     srand(time(NULL));
     int r = rand() % number_of_enemies + 1;
-    for (int i = 0; i < r; ++i){
+    for (int i = 0; i < r; i++){
         dequeue(turn_queue);
     }
 
