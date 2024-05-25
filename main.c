@@ -140,7 +140,6 @@ Game *play_game(Game *game){
         } else{
             play_scenario_uncompleted(game);
         //DO FIGHT GOES OVER HERE
-
         }
 
 

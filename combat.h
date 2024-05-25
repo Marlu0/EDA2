@@ -18,6 +18,6 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
 
 void turn_enemy(Character *character, Enemy *enemy);
 
-void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int *game_over);
+void do_combat(Game *game_state);
 
 #endif /* COMBAT_H */
