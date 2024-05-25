@@ -306,7 +306,7 @@ void do_combat(Character *character, Enemy *enemies, int number_of_enemies, int 
     int attacks_done = 0;
 
     // While loop of fight
-    while (dead_enemies != number_of_enemies && !is_empty_queue(turn_queue) && character->health>0) {
+    while ((dead_enemies != number_of_enemies && !is_empty_queue(turn_queue)) && character->health>0) {
 
         // Since the queue has indexes from 0 to player_index, we dequeue once for each turn
         int turn = dequeue(turn_queue);

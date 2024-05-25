@@ -3,34 +3,7 @@
 
 #include "game.h"
 
-/*SCENARIO STRUCTURES.*/
-
-// foreward declaration
-
-struct Scenario;
-
-typedef struct{
-    char response[MAX_STRING_LEN];
-    struct Scenario *outcome_on_senario;
-    Character *(*outcome_on_character)(Character *);
-}Response_Outcome;
-
-typedef struct{
-    char chapa_del_NPC[MAX_STRING_LEN];
-    Response_Outcome choices[MAX_CHOICES];
-
-}Decision;
-
-typedef struct scenario{
-    char name[MAX_STRING_LEN];
-    char description[MAX_STRING_LEN];
-    char completed_decription[MAX_STRING_LEN]; //most recent change it means i have to update the list
-    struct scenario *next;
-    struct scenario *prev; //leaving this in incase
-    struct scenario *other_direction;
-    Decision decision;
-    bool completed;
-}Scenario;
+//SCENARIO STRUCTS ARE DEFINED IN GLOBAL
 
 Decision *init_decision_list();
 

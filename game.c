@@ -1,5 +1,20 @@
 #include "game.h"
 
+
+/*INIT GAME STATE
+This function receives:
+    - noting
+Does:
+    - inits the gamestate
+Returns:
+    - pointer to the gamestate
+    */
+Game *init_game_state(){
+    Game *game = (Game *)malloc(sizeof(Game));
+    game->state = PLAYING;
+    return game;
+}
+
 /* Functions for character creation */
 
 /* NAME CHARACTER

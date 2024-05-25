@@ -9,6 +9,10 @@
 #include <string.h>
 #include <stdbool.h>
 
+// foreward declaration
+
+struct Scenario;
+
 /* MACROS */
 
 #define TABLE_SIZE 100
@@ -78,10 +82,45 @@ typedef struct{
     Modifier active_modifiers;
 } Character;
 
-typedef union{
-    bool dead;
-    bool win;
-}Over;
+/* SCENARIO DEFINTINITIONS*/
+
+
+typedef struct{
+    char response[MAX_STRING_LEN];
+    struct Scenario *outcome_on_senario;
+    Character *(*outcome_on_character)(Character *);
+}Response_Outcome;
+
+typedef struct{
+    char chapa_del_NPC[MAX_STRING_LEN];
+    Response_Outcome choices[MAX_CHOICES];
+
+}Decision;
+
+typedef struct scenario{
+    char name[MAX_STRING_LEN];
+    char description[MAX_STRING_LEN];
+    char completed_decription[MAX_STRING_LEN];
+    struct scenario *next;
+    struct scenario *prev; //INCASE
+    struct scenario *other_direction;
+    Decision decision;
+    bool completed;
+}Scenario;
+
+/* GAME STATE DEFINITIONS*/
+
+typedef enum {
+    PLAYING,
+    DEAD,
+    WIN,
+} State;
+
+typedef struct{
+    Character *character;
+    Scenario *current_scenario;
+    State state;
+}Game;
 
 /* STACK DEFINITIONS AND FUNCTIONS */
 

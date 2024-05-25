@@ -4,21 +4,21 @@ Decision *init_decision_list(){ // silly list like last time you can make a file
     Decision *decision_list = (Decision *)calloc(8, sizeof(Decision));
     Decision * temp = decision_list;
 
-    *temp++ = {"desert interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"desert interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
-    *temp++ = {"town interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"town interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
-    *temp++ = {"talking to turtle", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"talking to turtle", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
-    *temp++ = {"talking to bull", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"talking to bull", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
-    *temp++ = {"talking to the bull after turtle interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"talking to the bull after turtle interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
-    *temp++ = {"talking to turtle after bull interaction", {{"repuesta 2"}, {"respueta 2"}}};
+    *temp++ = (Decision){"talking to turtle after bull interaction", {{"repuesta 2"}, {"respueta 2"}}};
 
-    *temp++ = {"final interation1", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"final interation1", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
-    *temp++ = {"final interation2", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"final interation2", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
     return decision_list;
 }
@@ -149,35 +149,3 @@ void free_scenario_graph_if_prev_works(Scenario *current_scenario){
         free_node(&branched_scneario);
     }
 }
-
-void play_scenario(Scenario *scenario, Character *character){
-    printf("%s\n\n", scenario->name);
-    printf("%s\n\n", scenario->description);
-    
-    printf("%s\n\n", scenario->decision.chapa_del_NPC);
-
-    // GET SELECTION WONT WORK FOR VARIABLES, THEY HAVE TO BE CONSTANT STRINGS. MAYBE CREATE ANOTHER FUNCTION THAT PRINTS VARIABLE STRINGS
-    int option = get_selection(scenario->decision.choices[0].response, scenario->decision.choices[1].response, scenario->decision.choices[2].response, scenario->decision.choices[3].response, NULL);
-
-    scenario = scenario->decision.choices[option - 1].outcome_on_senario;
-    // make sure that the option -1 thing works and figure out the function implementation.
-
-}
-
-void change_scenario(Scenario *scenario){
-    printf("where do you want to go?\n");
-    int option = get_selection("", "Right", "Back", NULL);
-
-    switch (option)
-    {
-    case 1:
-        
-        break;
-    
-    default:
-        break;
-    }
-}
-
-void play_scenario(Scenario *cuurent_scenario){ /*this is where you have the fight and everything*/}
-//im etting distracted so im puttin all the scenario implementation in here.

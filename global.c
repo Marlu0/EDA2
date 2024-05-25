@@ -21,12 +21,12 @@ const char *array[] = {
         NULL // NULL terminator to indicate end of array
     };
 */
-int get_selection(const char *strings[]) {
+int get_selection(/*const*/ char *strings[]) {
     int selection;
     int n = 0;
 
     // Count the number of strings until NULL terminator
-    while (strings[n] != NULL) {
+    while (strings[n] != NULL /*prob need to change NULL*/) {
         n++;
     }
     
