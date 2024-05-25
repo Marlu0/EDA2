@@ -108,7 +108,7 @@ void free_node(Scenario **pointer){ //first_scneario did not update
         *pointer = (*pointer)->next;
     }
     free(temp_pointer);
-    pointer == NULL;
+    pointer = NULL;
 }
 
 void free_branched_node(Scenario **pointer, Scenario **branch_pointer){
