@@ -15,70 +15,50 @@ it:
 returns:
     -nothing
     */
-//void save_game(Character *character, Scenario *scenario/*figure this out*/) {
-//
-//    /*||PRINTING CHARACTER INFROMATION||*/
-//
-//    /*checks that the cahracter has been initilized*/
-//    if (character->name[0] == NULL) {
-//        /*at least like this we know a name exists so the character prob inited.*/
-//        printf("Character Does not exist"); /*in order for this to exist we need to have error handling on charcter creation*/
-//        return;
-//    }
-//    printf("Enter save filename: ");
-//    char filename[MAX_STRING_LEN]; /*error proof this later*/
-//
-//    FILE *file_pointer = fopen(filename, "w");
-//    if (file_pointer == NULL) {
-//        printf("Couldn't open file");
-//        return;
-//    }
-//
-//    /*here is where you need to do the actual writing.*/
-//    fprintf(file_pointer, "%s\n", character->name); //this is the save game shit gets weird.
-//
-//    fprintf(file_pointer, "%d\n", character->health); // goes without saying that these should be less than 4 million
-//    fprintf(file_pointer, "%d\n", character->bullets);
-//    fprintf(file_pointer, "%d\n", character->balance);
-//
-//
-//    fprintf(file_pointer, "%d\n", character->stats.hp);
-//    fprintf(file_pointer, "%d\n", character->stats.bp);
-//    fprintf(file_pointer, "%d\n", character->stats.atk);
-//    fprintf(file_pointer, "%d\n", character->stats.def);
-//    fprintf(file_pointer, "%d\n", character->stats.luc);
-//
-//    fprintf(file_pointer, "%s\n", character->active_weapon.name);
-//
-//    fprint(file_pointer, "%d\n", character->inventory.fill);
-//
-//    int temp_fill = character->inventory.fill;
-//    fprintf(file_pointer, "%d\n", temp_fill);
-//    for (int i = 0; i < temp_fill; i++) {
-//        fprintf(file_pointer, "%s\n", character->inventory.weapons_in_inventory[i].name);
-//    } //here you are just printing the names of all the weapons you have
-//
-//    for (int i = 0; i < NUM_MODIFIERS; i++) { /*will this not print all the modifiers tahta re active.*/
-//        fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempatk);
-//        fprintf(file_pointer, "%d\n", character->active_modifiers[i].tempdef);
-//        fprintf(file_pointer, "%d\n", character->active_modifiers[i].templuc);
-//        fpirntf(file_pointer, "\n");
-//    }
-//    fprintf(file_pointer, "%s\n", "END_OF_CHARACTER");
-//
-//    /*||PRINING SCENARIO INFO||*/
-//
-//
-//
-//    // you still need to do this 
-//
-//
-//
-//
-//    /*we can say that when you are printing the scenario that you have passed the scenarios before.*/
-//    //i think it might be better to orgaise the scenarios as a linked list.
-//    fclose(file_pointer);
-//}
+void save_game(Game *game, Scenario *first_scenario){
+    if(game->character == NULL || game->current_scenario == first_scenario){
+        printf("Error, there is nothing to save");
+        return;
+    }
+    printf("Enter a filename: ");
+    char filename[MAX_STRING_LEN];
+
+    int count; //checking for valid name
+    do{
+         count = scanf("%s", filename);
+    }while(count != 1);
+    
+    printf("\n");
+
+    FILE *file_p = fopen(filename, "w");
+    if(file_p == NULL){
+        printf("Failed to open file\n");
+        return;
+    }
+
+    Character *character = game->character;
+    Scenario *scenario = game->current_scenario;
+
+    //SAVING CHARACTER INFO
+    fprintf(file_p, "%s\n", character->name);
+    fprintf(file_p, "%d\n", character->health);
+    fprintf(file_p, "%d\n", character->bullets);
+
+    //printing stats
+    fprintf(file_p, "%d\n", character->stats.hp);
+    fprintf(file_p, "%d\n", character->stats.bp);
+    fprintf(file_p, "%d\n", character->stats.atk);
+    fprintf(file_p, "%d\n", character->stats.def);
+    fprintf(file_p, "%d\n", character->stats.luc);
+
+    //printing modifier
+    fprintf(file_p, "%f\n", character->active_modifiers.tempatk);
+    fprintf(file_p, "%f\n", character->active_modifiers.tempdef);
+    fprintf(file_p, "%f\n", character->active_modifiers.templuc);
+
+    //SAVING SCENARIO INFO
+    fprintf(file_p, "%s", scenario->name); //we will load the scenario from the name
+}
 /*LOAD GAME
 this function receives:
     -   charcater and scenario
@@ -86,15 +66,63 @@ use:
     - loads a pervious save froma  text file.
 returns:
     nothing.*/
-void load_game(Character *character, Scenario *scenario) {} //figure this out.
+void load_game(Game *game){
+    printf("Enter a filename: ");
+    char filename[MAX_STRING_LEN];
 
-/*PLAY GAME
-this function receives: nothing
-it does:
-    - stores runs all the other functions that make the game work
-Returns:
-    - character and scenario for possible later saves.
-*/
+    int count; //checking for valid name (again)
+    do{
+         count = scanf("%s", filename);
+    }while(count != 1);
+    
+    printf("\n");
+
+    FILE *file_p = fopen(filename, "r");
+    if(file_p == NULL){
+        printf("Failed to open file\n");
+        return;
+    }
+    // make the game->current_session real 
+    Character *character = game->character;
+    Scenario *scenario = game->current_scenario;
+
+    char read_name[MAX_STRING_LEN];
+    fscanf(file_p, "%s\n", read_name);
+    strcpy(character->name, read_name);
+
+    fscanf(file_p, "%d\n", &(character->health));
+    fscanf(file_p, "%d\n", &(character->bullets));
+
+    //scaning stats
+    fscanf(file_p, "%d\n", &(character->stats.hp));
+    fscanf(file_p, "%d\n", &(character->stats.bp));
+    fscanf(file_p, "%d\n", &(character->stats.atk));
+    fscanf(file_p, "%d\n", &(character->stats.def));
+    fscanf(file_p, "%d\n", &(character->stats.luc));
+
+    //scaning modifiers
+    fscanf(file_p, "%f\n", &(character->active_modifiers.tempatk));
+    fscanf(file_p, "%f\n", &(character->active_modifiers.tempdef));
+    fscanf(file_p, "%f\n", &(character->active_modifiers.templuc));
+
+    //do an init_scneario thing and then try match the name to the index and then str_copy everything fro taht index.
+    Decision *decision_list = init_decision_list();
+    Scenario *scenario_list = init_scenario_list(decision_list);
+
+    char scenario_name[MAX_STRING_LEN];
+    scanf(file_p, "%s\n", scenario_name);
+
+    for(int i = 0; i < NUM_SCENARIOS; i++){
+        if(strcmp(scenario_list[i].name, scenario_name) == 0){
+            *scenario = scenario_list[i];
+            break;
+        }
+    }
+
+    free(decision_list);
+    free(scenario_list)
+
+}
 
 void play_scenario_completed(Game *game){
     printf("%s\n\n", game->current_scenario->name);
@@ -243,8 +271,6 @@ Game *play_game(Game *game){
     return game;
 }
 
-
-
 /*MAIN_MENU_SELECTION
 This function receives:
     - game pointer
@@ -264,7 +290,7 @@ void main_menu_selection(Game *game) {
     Scenario *scenario_list = init_scenario_list(decision_list);
     int option = 0;
 
-    while(option != 4){
+    while(option != 5){
 
         char strings[5][15] = {"new game", "load game", "print credits", "exit", NULL};
         if(first_game == false){
@@ -284,26 +310,30 @@ void main_menu_selection(Game *game) {
                 first_game = false;
                 break;
 
-            //case 2:
-            //    /*do the filename things here.*/
-            //    Decision *decision_list = init_decision_list();
-            //    Scenario *scenario_list = init_scenario_list(decision_list);
-            //    init_scenario_graph(first_scenario, scenario_list);
-            //
-            //    /*load_game(game //filename is found in here );*/
-            //    play_game(game);
-            //    break;
+            case 2:
+                save_game(game, first_scenario); //code this.
+                break;
+
+            case 3:
+                /*do the filename things here.*/
+                init_scenario_graph(first_scenario, scenario_list);
+      
+                load_game(game); //this loads the game current scenario to whatever it has to be
+                //after that its chill.
+                play_game(game);
+                first_game = false;
+                break;
         
             /*case 3:
                 save_game(character, current_scenario);
                 game_saved = true;
                 break;*/
 
-            case 3:
+            case 4:
                 print_credits();
                 break;
 
-            case 4:
+            case 5:
                 break;
 
             default:

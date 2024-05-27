@@ -18,6 +18,7 @@ struct Scenario;
 #define TABLE_SIZE 100
 #define MAX_STRING_LEN 100
 #define MAX_CHOICES 4
+#define NUM_SCENARIOS 8
 
 /* GENERAL FUNCTION DECLARATIONS */
 
