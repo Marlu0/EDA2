@@ -269,65 +269,67 @@ Returns:
 */
 void do_combat(Game *game_state) {
     
-    //Initialisation of characters
-    init_fight_characters(game_state->character, game_state->current_scenario->enemies, game_state->current_scenario->numEnemies); 
+    if(game_state->current_scenario->numEnemies != 0){
+        //Initialisation of characters
+        init_fight_characters(game_state->character, game_state->current_scenario->enemies, game_state->current_scenario->numEnemies); 
 
-    printf("You've started a combat with:\n");
-    for (int i=0; i<game_state->current_scenario->numEnemies; i++) {
-        printf("%s\n", game_state->current_scenario->enemies[i].name);
-    }
-
-    // We generate a random value from 10 to 20, that will be the number of turns for each fighter
-    srand(time(NULL));
-    int n = rand() % 11 + 10;
-
-    // We initialise the queue and enqueue it with n times 0,1,..., number of enemies. That will let us manage the index of who's turn it is
-    Queue *turn_queue = create_queue(n*(game_state->current_scenario->numEnemies+1));
-    for (int i=0; i<((game_state->current_scenario->numEnemies+1)*n); i++) {
-        enqueue(turn_queue, i%(game_state->current_scenario->numEnemies+1));
-    }
-
-    // Dequeue a random number of turns from 1 to number_of_enemies to randomize who starts attacking
-    srand(time(NULL));
-    int r = rand() % game_state->current_scenario->numEnemies + 1;
-    for (int i = 0; i < r; i++){
-        dequeue(turn_queue);
-    }
-
-    // We initialise the stack of size n turns
-    Stack *attack_stack = create_stack(n);
-
-    // We initialise a flag to limit Time Strike to 1 use per fight
-    int time_strike_done = 0;
-
-    // Here we set the player index for readibility and a counter for number of attacks done by us
-    int player_index = game_state->current_scenario->numEnemies;
-    int dead_enemies = 0;
-    int attacks_done = 0;
-
-    // While loop of fight
-    while ((dead_enemies != game_state->current_scenario->numEnemies && !is_empty_queue(turn_queue)) && game_state->character->health>0) {
-
-        // Since the queue has indexes from 0 to player_index, we dequeue once for each turn
-        int turn = dequeue(turn_queue);
-        if (turn == player_index){
-            printf("Your turn to attack! \n");
-            turn_player(game_state->character, game_state->current_scenario->enemies, attack_stack, game_state->current_scenario->numEnemies, &attacks_done, &time_strike_done, &dead_enemies);
+        printf("You've started a combat with:\n");
+        for (int i=0; i<game_state->current_scenario->numEnemies; i++) {
+            printf("%s\n", game_state->current_scenario->enemies[i].name);
         }
-        else {
-            printf("%s is now attacking!\n", game_state->current_scenario->enemies[turn].name);
-            turn_enemy(game_state->character, &(game_state->current_scenario->enemies[turn]));
+
+        // We generate a random value from 10 to 20, that will be the number of turns for each fighter
+        srand(time(NULL));
+        int n = rand() % 11 + 10;
+
+        // We initialise the queue and enqueue it with n times 0,1,..., number of enemies. That will let us manage the index of who's turn it is
+        Queue *turn_queue = create_queue(n*(game_state->current_scenario->numEnemies+1));
+        for (int i=0; i<((game_state->current_scenario->numEnemies+1)*n); i++) {
+            enqueue(turn_queue, i%(game_state->current_scenario->numEnemies+1));
         }
-    }
-    // Check end of battle result
-    if (dead_enemies == game_state->current_scenario->numEnemies){
-        printf("You've killed all enemies!\n");
-    }
-    else if (is_empty_queue(turn_queue)){
-        printf("You ran out of turns and lost!");
-        (game_state->state) = DEAD;
-    }
-    else if (game_state->character->health<=0){
-        printf("You've died!\n");
+
+        // Dequeue a random number of turns from 1 to number_of_enemies to randomize who starts attacking
+        srand(time(NULL));
+        int r = rand() % game_state->current_scenario->numEnemies + 1;
+        for (int i = 0; i < r; i++){
+            dequeue(turn_queue);
+        }
+
+        // We initialise the stack of size n turns
+        Stack *attack_stack = create_stack(n);
+
+        // We initialise a flag to limit Time Strike to 1 use per fight
+        int time_strike_done = 0;
+
+        // Here we set the player index for readibility and a counter for number of attacks done by us
+        int player_index = game_state->current_scenario->numEnemies;
+        int dead_enemies = 0;
+        int attacks_done = 0;
+
+        // While loop of fight
+        while ((dead_enemies != game_state->current_scenario->numEnemies && !is_empty_queue(turn_queue)) && game_state->character->health>0) {
+
+            // Since the queue has indexes from 0 to player_index, we dequeue once for each turn
+            int turn = dequeue(turn_queue);
+            if (turn == player_index){
+                printf("Your turn to attack! \n");
+                turn_player(game_state->character, game_state->current_scenario->enemies, attack_stack, game_state->current_scenario->numEnemies, &attacks_done, &time_strike_done, &dead_enemies);
+            }
+            else {
+                printf("%s is now attacking!\n", game_state->current_scenario->enemies[turn].name);
+                turn_enemy(game_state->character, &(game_state->current_scenario->enemies[turn]));
+            }
+        }
+        // Check end of battle result
+        if (dead_enemies == game_state->current_scenario->numEnemies){
+            printf("You've killed all enemies!\n");
+        }
+        else if (is_empty_queue(turn_queue)){
+            printf("You ran out of turns and lost!");
+            (game_state->state) = DEAD;
+        }
+        else if (game_state->character->health<=0){
+            printf("You've died!\n");
+        }
     }
 }
