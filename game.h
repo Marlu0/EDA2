@@ -13,4 +13,4 @@ void assign_points(int *stat, int *statpts, const char *stat_name);
 
 Character create_character();
 
-#endif // GAME H 
+#endif // GAME H

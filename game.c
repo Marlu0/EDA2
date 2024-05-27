@@ -195,4 +195,4 @@ Character create_character() {
     character.bullets = 100 + (10 * (character.stats.bp - 1));
 
     return character;
-} 
+}
