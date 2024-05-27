@@ -17,7 +17,7 @@ returns:
     */
 void save_game(Game *game, Scenario *first_scenario){
     if(game->character == NULL || game->current_scenario == first_scenario){
-        printf("Error, there is nothing to save");
+        printf("Error, there is nothing to save\n");
         return;
     }
     printf("Enter a filename: ");
