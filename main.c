@@ -209,14 +209,13 @@ Game *play_game(Game *game){
                         case 1:
                             game->current_scenario = game->current_scenario->next;
                             printf("moving foreward!\n");
+                            break;
 
                         case 2:
                             printf("can't go backwards!\n");
-                            // no break so that it also does the option after.
 
                         default:
                             printf("select a valid option\n");
-                            break;
                     }
                 } while (option != 1);
             } else {
@@ -238,11 +237,13 @@ Game *play_game(Game *game){
                         case 2:
                             game->current_scenario = game->current_scenario->other_direction;
                             printf("moving right!\n");
+                            break;
 
                         case 3:
                             game->current_scenario = game->current_scenario->prev;
                             printf("moving back!\n");
-
+                            break;
+                            
                         default:
                             printf("select a valid option\n");
                             break;

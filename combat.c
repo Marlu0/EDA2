@@ -249,6 +249,7 @@ void turn_enemy(Character *character, Enemy *enemy) {
         int total_damage = (int)(5 * enemy->stats.atk) / (0.25*(character->stats.def * character->active_modifiers.tempdef));    
         character->health -= total_damage;
         printf("%s has done a base attack and caused %d damage\n", enemy->name, total_damage);
+        if(character->health < 0){character->health = 0;}
         printf("%s health: %d\n", character->name, character->health);
     }
     else {
