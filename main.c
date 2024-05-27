@@ -110,7 +110,7 @@ void load_game(Game *game){
     Scenario *scenario_list = init_scenario_list(decision_list);
 
     char scenario_name[MAX_STRING_LEN];
-    scanf(file_p, "%s\n", scenario_name); //check whether you can scanf strings. maybe not.
+    fscanf(file_p, "%s\n", scenario_name); //check whether you can scanf strings. maybe not.
     //ok your name can only be one word long now
     //and you have to add the nulll terminator at the end.
 
@@ -347,7 +347,14 @@ int main() {
     srand(time(NULL));
     print_main_title();
 
-    Game *game = init_game_state();
+    Game *game = (Game *)malloc(sizeof(Game));
+    if(game == NULL){
+        perror("Failed to malloc");
+        return -1;
+    }
+    game->character = NULL;
+    game->current_scenario = NULL;
+    game->state = PLAYING;
     
     main_menu_selection(game);
 

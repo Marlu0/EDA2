@@ -9,12 +9,7 @@ Does:
 Returns:
     - pointer to the gamestate
     */
-Game* init_game_state(){
-    Game *game = (Game *)malloc(sizeof(Game));
-    game->state = PLAYING;
-    return (Game *)game;
-}
-
+//THIS IS WHERE THE INIT_GAME FUCNTION WAS
 /* Functions for character creation */
 
 /* NAME CHARACTER
