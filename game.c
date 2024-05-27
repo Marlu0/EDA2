@@ -160,13 +160,15 @@ Character create_character() {
             printf("- DEF: %d\n", character.stats.def);
             printf("- LUC: %d\n", character.stats.luc);
 
+            
             // Confirmation is asked in case the user wants to change their selection
             printf("Are you sure about your stat selection? (yes/no): ");
+            bool valid = false;
+            while(!valid) {
             char answer[MAX_STRING_LEN];
             fgets(answer, MAX_STRING_LEN, stdin);
             answer[strcspn(answer, "\n")] = '\0'; // Remove the newline character from the end of the input
-            bool valid = false;
-            while(!valid) {
+
                 if (strcmp(answer, "yes") == 0) {
                     done = 1;
                     valid = true;
