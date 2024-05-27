@@ -322,7 +322,6 @@ void main_menu_selection(Game *game) {
                 break;
 
             case 5:
-                printf("Thanks for playing!\n");
                 break;
 
             default:
@@ -356,6 +355,7 @@ int main() {
     //you still need to free everything and do the fights
     free(game);
     print_credits();
+    printf("Thanks for playing!");
     return 0;
 }
 
