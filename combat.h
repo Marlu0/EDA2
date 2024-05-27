@@ -4,10 +4,6 @@
 #include "global.h"
 #include "game.h"
 
-/* Macros for turn-based combat */
-
-#define AGGRESSIVE_MODE_VALUE 2.5
-
 /* Functions for turn-based combat */
 
 void init_fight_characters(Character *character, Enemy *enemies, int number_of_enemies);
