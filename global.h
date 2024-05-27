@@ -16,7 +16,7 @@ struct Scenario;
 /* MACROS */
 
 #define TABLE_SIZE 100
-#define MAX_STRING_LEN 1024
+#define MAX_STRING_LEN 2048
 #define MAX_CHOICES 4
 #define NUM_SCENARIOS 8
 
@@ -93,7 +93,6 @@ typedef struct{
 typedef struct{
     char chapa_del_NPC[MAX_STRING_LEN];
     Response_Outcome choices[MAX_CHOICES];
-
 }Decision;
 
 typedef struct scenario{

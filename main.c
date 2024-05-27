@@ -288,13 +288,13 @@ void main_menu_selection(Game *game) {
 
     while(option != 5){
 
-        const char *strings[] = {"new game", "load game", "print credits", "exit", NULL};
+        const char *strings[] = {"new game","save game", "load game", "print credits", "exit", NULL};
         option = get_selection(strings);
 
         switch (option){
             case 1:
-                /*game_over*/ //put this in a loop in this function
-                /*game_win as well*/
+                Scenario *another_scenario = (Scenario *)malloc(sizeof(Scenario *));
+                free(another_scenario);
                 init_scenario_graph(first_scenario, scenario_list);
 
                 game->current_scenario = first_scenario;
@@ -322,6 +322,7 @@ void main_menu_selection(Game *game) {
                 break;
 
             case 5:
+                printf("Goodbye!");
                 break;
 
             default:
@@ -329,6 +330,7 @@ void main_menu_selection(Game *game) {
                 break;
         }
     }
+    free(first_scenario);
     free(scenario_list);
     free(decision_list);
 }
@@ -338,7 +340,7 @@ int main() {
     srand(time(NULL));
     print_main_title();
 
-    Game *game = (Game *)malloc(sizeof(Game));
+    Game *game = (Game *)malloc(sizeof(Game)); //freed
     if(game == NULL){
         perror("Failed to malloc");
         return -1;
@@ -346,15 +348,14 @@ int main() {
     game->character = NULL;
     game->current_scenario = NULL;
     game->state = PLAYING;
+    Scenario *scenario = (Scenario *)malloc(sizeof(Scenario)); //does it explode?
+    free(scenario);
     
     main_menu_selection(game);
 
-    /*free the array function*/
-    /*free the decisions function*/
-
-    //you still need to free everything and do the fights
     free(game);
-    print_credits();
+    // i am sure that there are memory leaks in places. so i will need to check that later.
+
     return 0;
 }
 
