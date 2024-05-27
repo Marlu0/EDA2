@@ -161,7 +161,9 @@ Game *play_game(Game *game){
     
     // create character if there is none
     if(game->character == NULL){
-        *(game->character) = create_character(); //fitting this in here is somehow an issue
+        Character character;
+        Character character = create_character();
+        game->character = &character;
     }
 
     while(game->state == PLAYING){ //game continues while its state is in "PLAYING"
@@ -357,27 +359,3 @@ int main() {
     printf("Thanks for playing!");
     return 0;
 }
-
-
-
-// these are the things to do:
-//  format it better that includes ddelteding your free graph prev function
-//  for the rest of the ones in the function just use //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
