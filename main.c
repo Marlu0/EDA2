@@ -79,7 +79,7 @@ int load_game(Game *game){
 
     FILE *file_p = fopen(filename, "r");
     if(file_p == NULL){
-        printf("Failed to open file\n\n");
+        printf("Failed to open file\n");
         return -1;
     }
     // make the game->current_session real 
@@ -324,7 +324,7 @@ void main_menu_selection(Game *game) {
       
                 int correctly_loaded = load_game(game);
                 if (correctly_loaded == -1){
-                    printf("Error: File not found\n");
+                    printf("Error: File not found\n\n");
                     break;
                 }
                 else{
