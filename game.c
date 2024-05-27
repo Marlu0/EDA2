@@ -9,10 +9,10 @@ Does:
 Returns:
     - pointer to the gamestate
     */
-Game *init_game_state(){
+Game* init_game_state(){
     Game *game = (Game *)malloc(sizeof(Game));
     game->state = PLAYING;
-    return game;
+    return (Game *)game;
 }
 
 /* Functions for character creation */

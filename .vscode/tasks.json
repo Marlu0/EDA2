@@ -8,7 +8,12 @@
                 "-fdiagnostics-color=always",
                 "-Wall",
                 "-g",
-                "${file}", //organising this better alter is going to be essential
+                "${fileDirname}/global.c",
+                "${fileDirname}/game.c",
+                "${fileDirname}/combat.c",
+                "${fileDirname}/scenario.c",
+                "${fileDirname}/decision_functions.c",
+                "${fileDirname}/main.c",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],

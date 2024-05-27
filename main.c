@@ -110,7 +110,9 @@ void load_game(Game *game){
     Scenario *scenario_list = init_scenario_list(decision_list);
 
     char scenario_name[MAX_STRING_LEN];
-    scanf(file_p, "%s\n", scenario_name);
+    scanf(file_p, "%s\n", scenario_name); //check whether you can scanf strings. maybe not.
+    //ok your name can only be one word long now
+    //and you have to add the nulll terminator at the end.
 
     for(int i = 0; i < NUM_SCENARIOS; i++){
         if(strcmp(scenario_list[i].name, scenario_name) == 0){
@@ -120,7 +122,7 @@ void load_game(Game *game){
     }
 
     free(decision_list);
-    free(scenario_list)
+    free(scenario_list);
 
 }
 
@@ -145,9 +147,7 @@ void play_scenario_uncompleted(Game *game) {
 
     game->current_scenario->decision.choices[option].response;
 
-    game->character = *(game->current_scenario->decision.choices[option].outcome_on_character);
-    //there might be a bug here depending on whether you need to depoint it or not.
-
+    game->current_scenario->decision.choices[option].outcome_on_character(game->character);
 }
 /*PLAY GAME
 This function receives:
@@ -292,10 +292,7 @@ void main_menu_selection(Game *game) {
 
     while(option != 5){
 
-        char strings[5][15] = {"new game", "load game", "print credits", "exit", NULL};
-        if(first_game == false){
-            strcpy(strings[0], "play again");
-        }
+        const char *strings[] = {"new game", "load game", "print credits", "exit", NULL};
         option = get_selection(strings);
 
         switch (option){

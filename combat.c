@@ -60,7 +60,7 @@ int select_enemy(Enemy *enemies, int number_of_enemies) {
 
 /* TURN PLAYER 
 This function recieves:
-    - Pointer to character, array of enemies and stack of attacks. Also an int of number of enemies (size of array) and attacks done for Time Strike implementation
+    - Pointer to character, array of enemies and stack of attacks. Also an int of both the number of enemies (size of array) and dead enemies, pointer to attacks done and pointer to flag for implementation of Time Strike.
 It does:
     - All the turn of the player: Choosing to attack or use skill, use of the skill, special skill Time Strike implementation.
 Returns:
