@@ -288,7 +288,7 @@ void main_menu_selection(Game *game) {
 
     while(option != 5){
 
-        const char *strings[] = {"new game", "load game", "print credits", "exit", NULL};
+        const char *strings[] = {"New Game", "Save Game", "Load Game", "Print Credits", "Exit", NULL};
         option = get_selection(strings);
 
         switch (option){
