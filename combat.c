@@ -58,6 +58,18 @@ int select_enemy(Enemy *enemies, int number_of_enemies) {
     return choice - 1; // Return index of selected enemy
 }
 
+int calculate_damage_player(Character *character, Enemy enemy){
+
+    // Generate a random number between 0 and 100-2*luck to create a chance for a critical hit
+    int crit = rand() % (100-(2*character->stats.luc));
+    int total_damage = 5 * ((character->stats.atk) * (character->active_modifiers.tempatk)) / (0.25*(enemy.stats.def));
+    // 1/crit chance of critical 
+    if (crit == 0) {
+        total_damage *= 2;
+    }
+    return total_damage;
+}
+
 /* TURN PLAYER 
 This function recieves:
     - Pointer to character, array of enemies and stack of attacks. Also an int of both the number of enemies (size of array) and dead enemies, pointer to attacks done and pointer to flag for implementation of Time Strike.
@@ -87,7 +99,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 int enemy_selected = select_enemy(enemies, number_of_enemies);
 
                 // Calculate total damage by simple function that depends on character and enemy stats
-                int total_damage = (5 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (0.25*enemies[enemy_selected].stats.def);
+                int total_damage = calculate_damage_player(character, enemies[enemy_selected]);
                 enemies[enemy_selected].health -= total_damage;
                 
                 // Print output of the attack and/or update for the death of an enemy
@@ -238,8 +250,6 @@ Returns:
     - Nothing
 */
 void turn_enemy(Character *character, Enemy *enemy) {
-    // Seed a random number generator
-    srand(time(NULL));
 
     // Generate a random number between 0 and 10
     int r = rand() % (5 * character->stats.luc);
@@ -270,6 +280,8 @@ Returns:
 */
 void do_combat(Game *game_state) {
     
+    srand(time(NULL));
+
     if(game_state->current_scenario->numEnemies != 0){
         //Initialisation of characters
         init_fight_characters(game_state->character, game_state->current_scenario->enemies, game_state->current_scenario->numEnemies); 
