@@ -39,12 +39,3 @@ void luck_loss(Character *character){
     printf("BROKE A MIRROR!! luck loss!\n");
     character->active_modifiers.templuc *= 0.5;
 }
-
-void bullet_gain(Character *character){
-    printf("BARREL O' BULLETS! fulL barrel\n");
-    character->bullets ;
-}
-void bullet_loss(Character *character){
-    printf("CLIP COLLAPSE! bullet lose\n");
-    character->bullets *= 0.9;
-}

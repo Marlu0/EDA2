@@ -19,8 +19,4 @@ void luck_gain(Character *character);
 
 void luck_loss(Character *character);
 
-void bullet_gain(Character *character);
-                            
-void bullet_loss(Character *character);
-
 #endif //DECISION_FUNCTIONS_H
