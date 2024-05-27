@@ -143,11 +143,14 @@ void play_scenario_uncompleted(Game *game) {
         printf("%d. %s\n", i, game->current_scenario->decision.choices->response);
     }
     int option = 0;
-    scanf(">%d", &option);
+    printf(">");
+    //make this safe!
+    scanf("%d", &option);
 
-    printf("%s\n", game->current_scenario->decision.choices[option].response);
+    printf("%s\n", game->current_scenario->decision.choices[option - 1].response);
 
-    game->current_scenario->decision.choices[option].outcome_on_character(game->character);
+    //someone please init these fuctions and the dialogues.
+    //(game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
 }
 /*PLAY GAME
 This function receives:
@@ -188,17 +191,18 @@ Game *play_game(Game *game){
         if (game->current_scenario->next == NULL && game->current_scenario->completed == true) {
         } else {
             printf("which direction do you want to go?\n"); 
-        }
-        if(game->current_scenario->other_direction != NULL){
+        } //it seperates here
+
+        if(game->current_scenario->other_direction == NULL){
 
             if(game->current_scenario->next == NULL && game->current_scenario->completed == true){ // it is becuase you have won the game
                 game->state = WIN;
-            } else if(game->current_scenario->prev == NULL){
+            } else if(game->current_scenario->prev == NULL){ // up untill here is chill
+
+                int option;
+
+                do {
                     printf("1. forwards\n");
-
-                    int option;
-
-                    do {
                     scanf("%d", &option);
 
                     switch (option) {
@@ -216,11 +220,11 @@ Game *play_game(Game *game){
                     }
                 } while (option != 1);
             } else {
-                printf("1. left\n");
+                printf("1. left\n"); //this is where you need foreward and backwards.
                 printf("2. right\n");
                 printf("3. backwards\n");
-
-                int option;
+                
+		        int option;
 
                 do {
                     scanf("%d", &option);
@@ -244,10 +248,11 @@ Game *play_game(Game *game){
                             break;
                     }
                 } while ((option != 1) || (option != 2) || (option != 3));
+
             }
         } else {
             printf("1. forewards\n");
-            printf("2. backwards\n");
+            printf("2. backwards\n"); //you need the triple here?
 
             int option;
 
@@ -257,12 +262,13 @@ Game *play_game(Game *game){
                 switch (option) {
                     case 1:
                         game->current_scenario = game->current_scenario->next;
-                        printf("moving left!\n");
+                        printf("moving forewards!\n");
                         break;
 
                     case 2:
                         game->current_scenario = game->current_scenario->prev;
-                        printf("moving right!\n");
+                        printf("moving back!\n");
+                        break;
                         
                     default:
                         printf("select a valid option\n");
@@ -273,6 +279,7 @@ Game *play_game(Game *game){
     }
     printf("\n\n\n\n\n\nYOU WIN!!!\n\n\n\n\n");
     return game;
+
 }
 
 /*MAIN_MENU_SELECTION
@@ -361,3 +368,5 @@ int main() {
     printf("Thanks for playing!");
     return 0;
 }
+
+//confirming character name does not have proper user defense.
