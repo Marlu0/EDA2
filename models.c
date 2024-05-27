@@ -1,10 +1,12 @@
-/*Cada vez k hay una \ en el string tienes k pone doble.
-*/
+/* This was a library of ascii art that could have been implemented in the game with more time, but was abandoned */
+
+/* Important:  To print \ the string must be \\ */
+
 #include "global.h"
 
-#define SIZE_Y 1000 //we can change this is we want the drawings bigger,
+#define SIZE_Y 1000 // We can change this is we want the drawings bigger,
 
-//might also want to create a dictionary that stores all models.
+// Might also want to create a dictionary that stores all models.
 
 typedef char Model[SIZE_Y];
 
