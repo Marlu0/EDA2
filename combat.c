@@ -69,7 +69,7 @@ Returns:
 void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done, int *time_strike_done, int *dead_enemies) {
     
     // We initialize the options for the combat, a variable to store the selected option and a flag to track if the turn is done
-    const char *options[] = {"Shoot", "Skill: +DEF (Costs 20 BP)", "Skill: +ATK (Costs 20 BP)", "Skill: +LUC (Costs 20 BP)", "Skill: Time Strike (Costs 100 BP)", "Skill: Heal (Costs 10 BP)", NULL};
+    const char *options[] = {"Shoot", "Skill: +DEF (Costs 40 BP)", "Skill: +ATK (Costs 40 BP)", "Skill: +LUC (Costs 30 BP)", "Skill: Time Strike (Costs 100 BP)", "Skill: Heal (Costs 25 BP)", NULL};
     int atk_type;
     int turn_done = 0;
 
@@ -109,7 +109,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 // SKILL 1: AUGMENTING DEF
 
                 // Check for enough bulletpoints
-                if (character->bullets >= 20) {
+                if (character->bullets >= 40) {
                     // Apply modifier
                     character->active_modifiers.tempdef += 1;
                     printf("You've added +1 to your defense for the next turn\n");
@@ -125,7 +125,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 // SKILL 2: AUGMENTING ATK
 
                 // Check for enough bulletpoints
-                if (character->bullets >= 20) {
+                if (character->bullets >= 40) {
                     // Apply modifier
                     character->active_modifiers.tempatk += 1;
                     printf("You've added +1 to your attack for the next turn\n");
@@ -140,7 +140,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 // SKILL 3: AUGMENTING LUC
 
                 // Check for enough bulletpoints
-                if (character->bullets >= 20) {
+                if (character->bullets >= 30) {
                     // Apply modifier
                     character->active_modifiers.templuc += 1;
                     printf("You've added +1 to your luck for the next turn\n");
@@ -196,7 +196,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                         // Print appropiate response in case Time Strike is not available
                         printf("You've already used Time Strike this fight!\n");
                     }
-                    }
+                }
                 else {
                     if (is_empty_stack(attack_stack)) {
                         printf("You haven't done any previous attacks!\n");
@@ -211,7 +211,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 // SKILL 5: HEAL
 
                 // Check for enough bulletpoints
-                if (character->bullets >= 10) {
+                if (character->bullets >= 25) {
                     // Heal depending on player's stats and print result
                     int healing = (character->stats.hp + character->stats.luc + character->active_modifiers.templuc);
                     character->health += healing;
@@ -242,7 +242,7 @@ void turn_enemy(Character *character, Enemy *enemy) {
     srand(time(NULL));
 
     // Generate a random number between 0 and 10
-    int r = rand() % 10;
+    int r = rand() % (5 * character->stats.luc);
 
     // There's a 10% chance that the enemy heals, otherwise it attacks normally
     if (r!=0) {
