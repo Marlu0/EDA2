@@ -133,7 +133,7 @@ void play_scenario_completed(Game *game){
 
 void play_scenario_uncompleted(Game *game) {
     printf("%s\n\n", game->current_scenario->name);
-    printf("%s\n--------------------\n", game->current_scenario->description);
+    printf("%s\n--------------------\n", game->current_scenario->description); //works
     
     do_combat(game);
 
@@ -162,9 +162,11 @@ Game *play_game(Game *game){
     // create character if there is none
     if(game->character == NULL){
         Character character;
-        Character character = create_character();
+        character = create_character(); //WORKS
         game->character = &character;
     }
+
+    printf("LETS GO!\n\n");
 
     while(game->state == PLAYING){ //game continues while its state is in "PLAYING"
 
@@ -285,17 +287,17 @@ void main_menu_selection(Game *game) {
 
     Scenario *first_scenario = (Scenario *)malloc(sizeof(Scenario));
     Decision *decision_list = init_decision_list();
-    Scenario *scenario_list = init_scenario_list(decision_list);
+    Scenario *scenario_list = init_scenario_list(decision_list); //WORKS
     int option = 0;
 
     while(option != 5){
 
         const char *strings[] = {"New Game", "Save Game", "Load Game", "Print Credits", "Exit", NULL};
-        option = get_selection(strings);
+        option = get_selection(strings); //WORKS
 
         switch (option){
             case 1:
-                init_scenario_graph(first_scenario, scenario_list); //works
+                init_scenario_graph(first_scenario, scenario_list); //WORKS
 
                 game->current_scenario = first_scenario;
 
