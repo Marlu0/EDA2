@@ -2,8 +2,8 @@
 #include "global.h"
 
 void health_gain(Character *character){
-    printf("HEALTH POTION! health boost\n");
-    character->health = 100;
+    printf("HEALTH POTION! health maxed\n");
+    character->health = 100+(20*(character->stats.hp-1));
 }
 void health_loss(Character *character){
     printf("ACK! POISONED! health loss\n");

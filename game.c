@@ -111,7 +111,7 @@ Character create_character() {
 
     // Flag to track validity of input
     int done = 0;
-    int statpts = 20;  // Initialize stat points to 20 outside the loop
+    int statpts = 15;  // Initialize stat points to 15 outside the loop
     
     // Initialize character stats to 1
     printf("Base level of all stats: 1\n");
@@ -174,7 +174,7 @@ Character create_character() {
                     valid = true;
                 } 
                 else if(strcmp(answer, "no") == 0){
-                    statpts = 20;
+                    statpts = 15;
                     reset_character_stats(&character);
                     valid = true;
                 } else {
