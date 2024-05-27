@@ -145,7 +145,7 @@ void play_scenario_uncompleted(Game *game) {
     int option = 0;
     scanf(">%d", &option);
 
-    game->current_scenario->decision.choices[option].response;
+    printf("%s\n", game->current_scenario->decision.choices[option].response);
 
     game->current_scenario->decision.choices[option].outcome_on_character(game->character);
 }
@@ -188,7 +188,7 @@ Game *play_game(Game *game){
         if(game->current_scenario->other_direction != NULL){
 
             if(game->current_scenario->next == NULL && game->current_scenario->completed == true){ // it is becuase you have won the game
-                game->state == WIN;
+                game->state = WIN;
             } else if(game->current_scenario->prev == NULL){
                     printf("1. forwards\n");
 
@@ -281,11 +281,7 @@ returns:
 */
 void main_menu_selection(Game *game) {
 
-    //flags and initializations
-    bool first_game = true;
-    bool game_saved = false;
-
-    Scenario *first_scenario;
+    Scenario *first_scenario = (Scenario *)malloc(sizeof(Scenario *));
     Decision *decision_list = init_decision_list();
     Scenario *scenario_list = init_scenario_list(decision_list);
     int option = 0;
@@ -304,27 +300,22 @@ void main_menu_selection(Game *game) {
                 game->current_scenario = first_scenario;
 
                 play_game(game);
-                first_game = false;
+
+                working_free_scenario_graph(first_scenario);
                 break;
 
             case 2:
-                save_game(game, first_scenario); //code this.
+                save_game(game, first_scenario);
                 break;
 
             case 3:
-                /*do the filename things here.*/
                 init_scenario_graph(first_scenario, scenario_list);
       
-                load_game(game); //this loads the game current scenario to whatever it has to be
-                //after that its chill.
+                load_game(game);
                 play_game(game);
-                first_game = false;
+
+                working_free_scenario_graph(first_scenario);
                 break;
-        
-            /*case 3:
-                save_game(character, current_scenario);
-                game_saved = true;
-                break;*/
 
             case 4:
                 print_credits();
@@ -366,3 +357,27 @@ int main() {
     print_credits();
     return 0;
 }
+
+
+
+// these are the things to do:
+//  format it better that includes ddelteding your free graph prev function
+//  for the rest of the ones in the function just use //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//

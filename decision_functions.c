@@ -16,7 +16,7 @@ void attack_gain(Character *character){
     character->active_modifiers.tempatk *= 2;
 }
 void attack_loss(Character *character){
-    printf("");
+    printf("YOU LOST YOUR BULLETS! attack loss\n");
     character->active_modifiers.tempatk *= 0.5;
 }
 
@@ -42,7 +42,7 @@ void luck_loss(Character *character){
 
 void bullet_gain(Character *character){
     printf("BARREL O' BULLETS! fulL barrel\n");
-    character->bullets = 100;
+    character->bullets ;
 }
 void bullet_loss(Character *character){
     printf("CLIP COLLAPSE! bullet lose\n");
