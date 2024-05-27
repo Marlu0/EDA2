@@ -19,13 +19,8 @@ void free_node(Scenario **pointer);
 
 void free_branched_node(Scenario **pointer, Scenario **branch_pointer);
 
-void working_free_scenario_graph(Scenario *first_scenario);
+void free_scenario_graph(Scenario *first_scenario);
 
-void free_scenario_graph_if_prev_works(Scenario *current_scenario);
-
-void play_scenario(Scenario *scenario, Character *character);
-
-void change_scenario(Scenario *scenario);
 
 //you will need apointer to indicate where you are.
 

@@ -161,7 +161,7 @@ Game *play_game(Game *game){
     
     // create character if there is none
     if(game->character == NULL){
-        *game->character = create_character();
+        *(game->character) = create_character(); //fitting this in here is somehow an issue
     }
 
     while(game->state == PLAYING){ //game continues while its state is in "PLAYING"
@@ -281,7 +281,7 @@ returns:
 */
 void main_menu_selection(Game *game) {
 
-    Scenario *first_scenario = (Scenario *)malloc(sizeof(Scenario *));
+    Scenario *first_scenario = (Scenario *)malloc(sizeof(Scenario));
     Decision *decision_list = init_decision_list();
     Scenario *scenario_list = init_scenario_list(decision_list);
     int option = 0;
@@ -293,15 +293,13 @@ void main_menu_selection(Game *game) {
 
         switch (option){
             case 1:
-                Scenario *another_scenario = (Scenario *)malloc(sizeof(Scenario *));
-                free(another_scenario);
-                init_scenario_graph(first_scenario, scenario_list);
+                init_scenario_graph(first_scenario, scenario_list); //works
 
                 game->current_scenario = first_scenario;
 
                 play_game(game);
 
-                working_free_scenario_graph(first_scenario);
+                free_scenario_graph(first_scenario);
                 break;
 
             case 2:
@@ -314,7 +312,7 @@ void main_menu_selection(Game *game) {
                 load_game(game);
                 play_game(game);
 
-                working_free_scenario_graph(first_scenario);
+                free_scenario_graph(first_scenario);
                 break;
 
             case 4:

@@ -22,10 +22,10 @@ Returns:
 */
 void name_character(Character *character) {
     // Flag to track validity of input
-    int sure = 0;
+    bool sure = false;
 
     // Loop to ensure input and handle errors
-    while (sure != 1) {
+    while (sure != true) {
         printf("Choose a name for your character: ");
         
         // Use fgets to read the entire line, including spaces, for the character's name
@@ -41,9 +41,9 @@ void name_character(Character *character) {
         answer[strcspn(answer, "\n")] = '\0';
 
         if (strcmp(answer, "yes") == 0) {
-            sure = 1;
+            sure = true;
         } else {
-            printf("Please re-enter your character's name.\n");
+            printf("Invalid Character Name. Try Again\n");
         }
     }
 }
@@ -99,7 +99,7 @@ Returns:
     - character of type Character 
 */
 Character create_character() {
-    printf("\nWelcome to Character Creation!\n\nWarning: Previous characters will be erased\n");
+    printf("\nWelcome to Character Creation!\n");
 
     // Character initialization
     Character character;
@@ -165,14 +165,19 @@ Character create_character() {
             char answer[MAX_STRING_LEN];
             fgets(answer, MAX_STRING_LEN, stdin);
             answer[strcspn(answer, "\n")] = '\0'; // Remove the newline character from the end of the input
-
-            if (strcmp(answer, "yes") == 0) {
-                done = 1;  // Set done to 1 to exit the loop
-            } 
-            else {
-                // Reset stat points and stats
-                statpts = 20;
-                reset_character_stats(&character);
+            bool valid = false;
+            while(!valid) {
+                if (strcmp(answer, "yes") == 0) {
+                    done = 1;
+                    valid = true;
+                } 
+                else if(strcmp(answer, "no") == 0){
+                    statpts = 20;
+                    reset_character_stats(&character);
+                    valid = true;
+                } else {
+                    printf("please type 'yes or 'no'\n");
+                }
             }
         }
     }
@@ -184,6 +189,7 @@ Character create_character() {
 
     // We initialise health and mana in function of hp and bp stats
     character.health = 100 + (20 * (character.stats.hp - 1));
+
     character.bullets = 100 + (10 * (character.stats.bp - 1));
 
     return character;

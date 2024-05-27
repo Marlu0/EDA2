@@ -8,7 +8,14 @@ Enemy enemies[10]={
 };
 
 
-
+/*INIT_DECISION_LIST
+this function receives:
+    - nothing
+it does:
+    - intializes the decision list
+it returns:
+    -a pointer to the first Decision element
+*/
 Decision *init_decision_list(){
     Decision *decision_list = (Decision *)calloc(8, sizeof(Decision));
     Decision * temp = decision_list;
@@ -31,8 +38,15 @@ Decision *init_decision_list(){
 
     return decision_list;
 }
-
-Scenario *init_scenario_list(Decision decision_list[]){ //remeber that this is changed.
+/*INIT_SCENARIO_LIST
+this function receives:
+    - the decision list.
+it does:
+    - inits the scenario list.
+it returns:
+    - Scenario pointer to the first element
+*/
+Scenario *init_scenario_list(Decision decision_list[]){ //does not have enemies
 
     Scenario *scenario_list = (Scenario *)calloc(8, sizeof(Scenario));
 
@@ -96,9 +110,9 @@ it does:
 returns:
     - nothing
 */
-void init_scenario_graph(Scenario *first_scenario, Scenario *scenario_list){ // this function is borken as hell raise it frome the ground up
+void init_scenario_graph(Scenario *first_scenario, Scenario *scenario_list) {
 
-    Scenario *temp_scenario = first_scenario; //note that this is not malloced
+    Scenario *temp_scenario = first_scenario;
 
     int i = 0;
 

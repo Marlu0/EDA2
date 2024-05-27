@@ -16,7 +16,7 @@ struct Scenario;
 /* MACROS */
 
 #define TABLE_SIZE 100
-#define MAX_STRING_LEN 2048
+#define MAX_STRING_LEN 2048 //this might be the issue of the bug
 #define MAX_CHOICES 4
 #define NUM_SCENARIOS 8
 
