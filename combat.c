@@ -87,7 +87,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 int enemy_selected = select_enemy(enemies, number_of_enemies);
 
                 // Calculate total damage by simple function that depends on character and enemy stats
-                int total_damage = (10 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (enemies[enemy_selected].stats.def);
+                int total_damage = (5 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (0.25*enemies[enemy_selected].stats.def);
                 enemies[enemy_selected].health -= total_damage;
                 
                 // Print output of the attack and/or update for the death of an enemy
@@ -246,7 +246,7 @@ void turn_enemy(Character *character, Enemy *enemy) {
 
     // There's a 10% chance that the enemy heals, otherwise it attacks normally
     if (r!=0) {
-        int total_damage = (5 * enemy->stats.atk) / (character->stats.def * character->active_modifiers.tempdef);    
+        int total_damage = (int)(5 * enemy->stats.atk) / (0.25*(character->stats.def * character->active_modifiers.tempdef));    
         character->health -= total_damage;
         printf("%s has done a base attack and caused %d damage\n", enemy->name, total_damage);
         printf("%s health: %d\n", character->name, character->health);
