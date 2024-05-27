@@ -79,7 +79,7 @@ int load_game(Game *game){
 
     FILE *file_p = fopen(filename, "r");
     if(file_p == NULL){
-        printf("Failed to open file\n");
+        printf("Failed to open file\n\n");
         return -1;
     }
     // make the game->current_session real 
@@ -339,11 +339,11 @@ void main_menu_selection(Game *game) {
                 break;
 
             case 5:
-                printf("Goodbye!");
+                printf("Goodbye!\n");
                 break;
 
             default:
-                perror("Error finding game option");
+                perror("Error finding game option\n");
                 break;
         }
     }
@@ -359,7 +359,7 @@ int main() {
 
     Game *game = (Game *)malloc(sizeof(Game)); //freed
     if(game == NULL){
-        perror("Failed to malloc");
+        perror("Failed to malloc\n");
         return -1;
     }
     game->character = NULL;
@@ -373,7 +373,7 @@ int main() {
     free(game);
     // i am sure that there are memory leaks in places. so i will need to check that later.
 
-    printf("Thanks for playing!");
+    printf("Thanks for playing!\n");
     return 0;
 }
 
