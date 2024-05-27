@@ -79,6 +79,21 @@ int calculate_damage_player(Character *character, Enemy enemy){
     return total_damage;
 }
 
+/* CALCULATE DAMAGE ENEMY
+This function recieves:
+    - A pointer to character and an Enemy
+It does:
+    - Calculates total damage of enemy depending on stats and randomness
+Returns:
+    - Total damage + n
+*/
+int calculate_damage_enemy(Character *character, Enemy *enemy){
+    int total_damage = (int)(5 * enemy->stats.atk) / (0.25*(character->stats.def * character->active_modifiers.tempdef));
+    // Variate a little the attack to make damage feel more random
+    int n = rand() % 2;
+    return total_damage + n;
+}
+
 /* TURN PLAYER 
 This function recieves:
     - Pointer to character, array of enemies and stack of attacks. Also an int of both the number of enemies (size of array) and dead enemies, pointer to attacks done and pointer to flag for implementation of Time Strike.
@@ -264,7 +279,7 @@ void turn_enemy(Character *character, Enemy *enemy) {
 
     // There's a 10% chance that the enemy heals, otherwise it attacks normally
     if (r!=0) {
-        int total_damage = (int)(5 * enemy->stats.atk) / (0.25*(character->stats.def * character->active_modifiers.tempdef));    
+        int total_damage = calculate_damage_enemy(character, enemy);
         character->health -= total_damage;
         printf("%s has done a base attack and caused %d damage\n", enemy->name, total_damage);
         if(character->health < 0){character->health = 0;}
