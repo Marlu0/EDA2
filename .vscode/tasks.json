@@ -1,5 +1,5 @@
 {
-    "tasks": [ 
+    "tasks": [
         {
             "type": "cppbuild",
             "label": "C/C++: gcc.exe build active file",
