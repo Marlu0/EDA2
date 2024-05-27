@@ -322,6 +322,7 @@ void main_menu_selection(Game *game) {
                 break;
 
             case 5:
+                printf("Thanks for playing!\n");
                 break;
 
             default:
