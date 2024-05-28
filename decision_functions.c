@@ -61,8 +61,15 @@ void black_jack(Character *character){
     character->stats.bp -= 2;
 }
 
-void blind_(Character *character){
-    printf("You gabled too hard and the crupier is menacing to hang you on a post, run or give something of value! you have given all of you bullets!\n");
+void diamond_father(Character *character){
+    printf("You approach a tall man:\n"
+    "%s: Whats happening?"
+    "???: I CAN FEEL THE JACKPOT FALLING"
+    "%s: Who are you?"
+    "Papadiamantis: I'm Papadiamantis"
+    "%s: Whoa, shouldn's you be correcting our projects?"
+    "Papadiamantis: Later, later, I CAN SEE THE 7'S LINING UP"
+    "You walk away feeling better, thanks Papadiamantis");
     character->stats.bp -= 2;
 }
 
