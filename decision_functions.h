@@ -29,6 +29,12 @@ void boring_coffin(Character *character);
 
 void attack_gain_turtle(Character *character);
 
+void watch_luck_loss(Character *character);
+
+void amazing_ceiling(Character *character);
+
+void grab_horns(Character *character);
+
 void nothing();
 
 void print_description1(Game *game);
