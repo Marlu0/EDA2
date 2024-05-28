@@ -56,14 +56,26 @@ void luck_loss(Character *character){
     character->active_modifiers.templuc *= 0.5;
 }
 
+void gipsy_girls(Character *character){
+    printf("You start flirting with them, but seem they were the brides of a gipsy wedding, they spit and curse you!\n");
+    character->stats.luc -= 3;
+}
+
 void black_jack(Character *character){
     printf("You gabled too hard and the crupier is menacing to hang you on a post, run or give something of value! you have given all of you bullets!\n");
     character->stats.bp -= 2;
 }
 
-void blind_(Character *character){
-    printf("You gabled too hard and the crupier is menacing to hang you on a post, run or give something of value! you have given all of you bullets!\n");
-    character->stats.bp -= 2;
+void diamond_father(Character *character){
+    printf("You approach a tall man:\n"
+    "%s: Whats happening?"
+    "???: I CAN FEEL THE JACKPOT FALLING"
+    "%s: Who are you?"
+    "Papadiamantis: I'm Papadiamantis"
+    "%s: Whoa, shouldnt's you be correcting our projects?"
+    "Papadiamantis: Later, later, I CAN SEE THE 7'S LINING UP"
+    "You walk away feeling better, thanks Papadiamantis", character->name, character->name, character->name);
+    character->stats.luc += 2;
 }
 
 void bucket_spit(Character *character){

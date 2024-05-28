@@ -33,9 +33,9 @@ Decision *init_decision_list(Character *character){
 
     *temp++ = (Decision){"talking to turtle after bull interaction", {{"repuesta 2"}, {"respueta 2"}}};
 
-    *temp++ = (Decision){"in the casino good route", {{"You see a group of guys gambling in the roulette, want to join them?", .outcome_on_character = luck_gain_gipsy}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see a blind man gambling", .outcome_on_character = bucket_spit}}};
+    *temp++ = (Decision){"in the casino good route", {{"You see a group of guys gambling in the roulette, want to join them?", .outcome_on_character = luck_gain_gipsy}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = bucket_spit}}};
 
-    *temp++ = (Decision){"in the casino bad route", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"in the casino bad route", {{"You see a group of girls in the bar, wanna go talk to them?", .outcome_on_character = gipsy_girls}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = bucket_spit}}};
 
     return decision_list;
 }
