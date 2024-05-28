@@ -161,7 +161,7 @@ void play_scenario_uncompleted(Game *game) {
             while ((extra = getchar()) != '\n' && extra != EOF);
 
             // Validating input
-            if (option != 1) {
+            if (option < 1 || option > 4) {
                 printf("Invalid selection. Please try again.\n");
                 continue;
             }

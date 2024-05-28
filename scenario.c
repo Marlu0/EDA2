@@ -114,6 +114,7 @@ returns:
 void init_scenario_graph(Scenario *first_scenario, Scenario *scenario_list) {
 
     Scenario *temp_scenario = first_scenario;
+    Scenario *temp_prev;
 
     int i = 0;
 
@@ -121,34 +122,46 @@ void init_scenario_graph(Scenario *first_scenario, Scenario *scenario_list) {
     *temp_scenario = scenario_list[i++];
 
     //second node
-    create_next_node(&temp_scenario); //ok the pointer does not. update after the funcion
+    create_next_node(&temp_scenario);
+    temp_prev = temp_scenario->prev;
     *temp_scenario = scenario_list[i++];
+    temp_scenario->prev = temp_prev;
 
     //branch
     Scenario *split_scenario = temp_scenario;
     create_branch(&temp_scenario, &split_scenario);
+    temp_prev = temp_scenario->prev;
 
     *temp_scenario = scenario_list[i++];
     *split_scenario = scenario_list[i++];
+
+    temp_scenario->prev = temp_prev;
+    split_scenario->prev = temp_prev;
 
     //upper route
     create_next_node(&temp_scenario);
+    temp_prev = temp_scenario->prev;
     *temp_scenario = scenario_list[i++];
+    temp_scenario->prev = temp_prev;
 
     //lower route
     create_next_node(&split_scenario);
+    temp_prev = split_scenario->prev;
     *split_scenario = scenario_list[i++];
+    split_scenario->prev = temp_prev;
+
 
     //last node up
     create_next_node(&temp_scenario);
+    temp_prev = temp_scenario->prev;
     *temp_scenario = scenario_list[i++];
+    temp_scenario->prev = temp_prev;
 
     //last node down
     create_next_node(&split_scenario);
-    *split_scenario = scenario_list[i];
-
-    //it goes first node then in town
-    //then up to the turtle and then down to the bull and then the turtle ending and then the bull ending.
+    temp_prev = split_scenario->prev;
+    *split_scenario = scenario_list[i++];
+    split_scenario->prev = temp_prev;
 }
 /*FREE_NODE
 this function receives:
