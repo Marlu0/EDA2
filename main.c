@@ -145,10 +145,9 @@ void play_scenario_uncompleted(Game *game) {
         for(int i = 1; i <= MAX_CHOICES; i++){
             printf("%d. %s\n", i, game->current_scenario->decision.choices[i-1].response);
         }
-        int option;
+        int option = 0;
 
         while(true){
-            int option = 0;
             printf("Your Response: ");
             scanf("%d", &option);
             if(option == 1 || option == 2 || option == 3 || option == 4) {
@@ -157,10 +156,9 @@ void play_scenario_uncompleted(Game *game) {
                 printf("Please Enter A Valid number.\n");
             }        
         }
+        printf("%s\n", game->current_scenario->decision.choices[option - 1].response);
 
-    printf("%s\n", game->current_scenario->decision.choices[option - 1].response);
-
-    (game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
+        (game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
     } else{
         game->state = DEAD;
     }
@@ -213,8 +211,8 @@ Game *play_game(Game *game){
                 int option;
 
                 do {
-                    printf("1. Forwards\n"); // it lets you go forewrds its so silly. but its becuase the prev thing is not loading.
-                    scanf("Select direction: %d", &option);
+                    printf("1. Forwards\nSelect direction: "); // it lets you go forewrds its so silly. but its becuase the prev thing is not loading.
+                    scanf("%d", &option);
 
                     switch (option) {
                         case 1:
@@ -264,7 +262,8 @@ Game *play_game(Game *game){
 		    int option;
 
             do {
-                scanf("Select direction: %d", &option);
+                printf("Select direction: ");
+                scanf("%d", &option);
 
                 switch (option) {
                     case 1:
