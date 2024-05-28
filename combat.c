@@ -149,7 +149,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     // Apply modifier
                     character->active_modifiers.tempdef += 1;
                     printf("You've added +1 to your defense for the next turn\n");
-                    character->bullets -= 20; // Deduct bullets
+                    character->bullets -= 40; // Update bullets
                     turn_done = 1;
                 }
                 else {
@@ -165,6 +165,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     // Apply modifier
                     character->active_modifiers.tempatk += 1;
                     printf("You've added +1 to your attack for the next turn\n");
+                    character->bullets -= 40; // Update bullets
                     turn_done = 1;
                 }
                 else {
@@ -180,6 +181,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     // Apply modifier
                     character->active_modifiers.templuc += 1;
                     printf("You've added +1 to your luck for the next turn\n");
+                    character->bullets -= 30; // Update bullets
                     turn_done = 1;
                 }
                 else {
@@ -223,7 +225,8 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                             printf("%s's health: %d\n", enemies[enemy_selected].name, enemies[enemy_selected].health);
                         }
 
-                        // Update time_strike_done
+                        // Update time_strike_done and bullets
+                        character->bullets -= 100;
                         (*time_strike_done) = 1;
                         turn_done = 1;
                     }
@@ -251,6 +254,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     int healing = (character->stats.hp + character->stats.luc + character->active_modifiers.templuc);
                     character->health += healing;
                     printf("You've healed yourself by %d points!\n", healing);
+                    character->bullets -= 25;
                     turn_done = 1;
                 }
                 else {

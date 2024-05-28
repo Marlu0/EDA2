@@ -1,1 +1,1 @@
-int game_over = 0;
+Character *character
