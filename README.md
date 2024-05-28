@@ -1,4 +1,4 @@
-# EDA2 Project: Choice and turn combat based RPG
+# EDA2 Project: BUGS ‘N GUNS IN THE WILD WEST
 
 Group members:
 - Marcel Manzano u231726
@@ -7,13 +7,17 @@ Group members:
 - Jan Pol Obrador 
 
 Project design:
-#we are meking a western style open world turn based RPG with a compelling storyline fully written in c.
 
-we need to make sure to update this later as this is the cover for what people see. i will have a loot at other gits to see what the general vibe is.
+BUGS ‘N GUNS IN THE WILD WEST is a text-based video game project we developed as part of our coursework in Data Structures and Algorithms II. The game is set in the Wild West and revolves around gunslinger duels, offering a decision-based experience where player choices impact the storyline and combat encounters.
 
-report:
-   https://docs.google.com/document/d/1S7uqcrvHWaVe3GClY3P9TMedqHKXG_G967SsvjSKLxY/edit
- 
-lucidchart:
-   https://lucid.app/lucidchart/b02d94d5-8685-408b-b457-f65cc14d308e/edit?viewport_loc=-546%2C-7%2C1707%2C805%2C0_0&invitationId=inv_465ce773-80ef-468e-9db1-3e54c52a118c
-   
+The main objectives of the project include creating modular and readable code, implementing a turn-based combat, designing a narrative graph to structure the game's story, and incorporating various game mechanics such as character creation, scenario traversal, and combat functionality.
+
+Key features of the game include:
+
+   - Character Creation: Players can create their own character by assigning ability points to attributes like health, attack, defense, luck, and  bullet points (BP).
+
+   - Narrative Graph: The game's storyline is structured using a graph representation, allowing players to traverse different scenarios based on their decisions.
+
+   - Turn-based Combat: Players engage in turn-based combat with various enemies, each with their own strengths and weaknesses. Combat includes features like critical hits, healing, and special abilities like "Time Strike."
+
+   - Modular Codebase: The project is organized into separate files for different functionalities such as character creation, combat, scenario management, and global utilities, enhancing code maintainability and readability.

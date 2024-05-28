@@ -58,6 +58,42 @@ int select_enemy(Enemy *enemies, int number_of_enemies) {
     return choice - 1; // Return index of selected enemy
 }
 
+/* CALCULATE DAMAGE PLAYER
+This function recieves:
+    - A pointer to character and an Enemy
+It does:
+    - Calculates total damage depending on stats and random critical
+Returns:
+    - Total damage
+*/
+int calculate_damage_player(Character *character, Enemy enemy){
+
+    // Generate a random number between 0 and 100-2*luck to create a chance for a critical hit
+    int crit = rand() % (100-(2*character->stats.luc));
+    int total_damage = 5 * ((character->stats.atk) * (character->active_modifiers.tempatk)) / (0.25*(enemy.stats.def));
+    // 1/crit chance of critical 
+    if (crit == 0) {
+        printf("Critical hit!\n");
+        total_damage *= 2;
+    }
+    return total_damage;
+}
+
+/* CALCULATE DAMAGE ENEMY
+This function recieves:
+    - A pointer to character and an Enemy
+It does:
+    - Calculates total damage of enemy depending on stats and randomness
+Returns:
+    - Total damage + n
+*/
+int calculate_damage_enemy(Character *character, Enemy *enemy){
+    int total_damage = (int)(5 * enemy->stats.atk) / (0.25*(character->stats.def * character->active_modifiers.tempdef));
+    // Variate a little the attack to make damage feel more random
+    int n = rand() % 2;
+    return total_damage + n;
+}
+
 /* TURN PLAYER 
 This function recieves:
     - Pointer to character, array of enemies and stack of attacks. Also an int of both the number of enemies (size of array) and dead enemies, pointer to attacks done and pointer to flag for implementation of Time Strike.
@@ -87,7 +123,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                 int enemy_selected = select_enemy(enemies, number_of_enemies);
 
                 // Calculate total damage by simple function that depends on character and enemy stats
-                int total_damage = (5 * ((character->stats.atk) * (character->active_modifiers.tempatk))) / (0.25*enemies[enemy_selected].stats.def);
+                int total_damage = calculate_damage_player(character, enemies[enemy_selected]);
                 enemies[enemy_selected].health -= total_damage;
                 
                 // Print output of the attack and/or update for the death of an enemy
@@ -97,7 +133,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     (*dead_enemies)++;
                 }
                 else {
-                    printf("%s health: %d\n", enemies[enemy_selected].name, enemies[enemy_selected].health);
+                    printf("%s's health: %d\n", enemies[enemy_selected].name, enemies[enemy_selected].health);
                 }
                 // Push damage done into the attack stack
                 push_stack(attack_stack, total_damage);
@@ -113,7 +149,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     // Apply modifier
                     character->active_modifiers.tempdef += 1;
                     printf("You've added +1 to your defense for the next turn\n");
-                    character->bullets -= 20; // Deduct bullets
+                    character->bullets -= 40; // Update bullets
                     turn_done = 1;
                 }
                 else {
@@ -129,6 +165,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     // Apply modifier
                     character->active_modifiers.tempatk += 1;
                     printf("You've added +1 to your attack for the next turn\n");
+                    character->bullets -= 40; // Update bullets
                     turn_done = 1;
                 }
                 else {
@@ -144,6 +181,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     // Apply modifier
                     character->active_modifiers.templuc += 1;
                     printf("You've added +1 to your luck for the next turn\n");
+                    character->bullets -= 30; // Update bullets
                     turn_done = 1;
                 }
                 else {
@@ -184,11 +222,11 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                             (*dead_enemies)++;
                         }
                         else {
-                            printf("%s health: %d\n", enemies[enemy_selected].name, enemies[enemy_selected].health);
+                            printf("%s's health: %d\n", enemies[enemy_selected].name, enemies[enemy_selected].health);
                         }
 
-                        // Free the stack and update time_strike_done
-                        free_stack(attack_stack);
+                        // Update time_strike_done and bullets
+                        character->bullets -= 100;
                         (*time_strike_done) = 1;
                         turn_done = 1;
                     }
@@ -216,6 +254,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                     int healing = (character->stats.hp + character->stats.luc + character->active_modifiers.templuc);
                     character->health += healing;
                     printf("You've healed yourself by %d points!\n", healing);
+                    character->bullets -= 25;
                     turn_done = 1;
                 }
                 else {
@@ -238,23 +277,22 @@ Returns:
     - Nothing
 */
 void turn_enemy(Character *character, Enemy *enemy) {
-    // Seed a random number generator
-    srand(time(NULL));
 
     // Generate a random number between 0 and 10
     int r = rand() % (5 * character->stats.luc);
 
     // There's a 10% chance that the enemy heals, otherwise it attacks normally
     if (r!=0) {
-        int total_damage = (int)(5 * enemy->stats.atk) / (0.25*(character->stats.def * character->active_modifiers.tempdef));    
+        int total_damage = calculate_damage_enemy(character, enemy);
         character->health -= total_damage;
         printf("%s has done a base attack and caused %d damage\n", enemy->name, total_damage);
+        if(character->health < 0){character->health = 0;}
         printf("%s health: %d\n", character->name, character->health);
     }
     else {
         enemy->health += 5*(enemy->stats.hp);
         printf("%s has missed but healed himself! No damage\n", enemy->name);
-        printf("%s health: %d\n", enemy->name, enemy->health);
+        printf("%s's health: %d\n", enemy->name, enemy->health);
     }
 }
 
@@ -269,6 +307,8 @@ Returns:
 */
 void do_combat(Game *game_state) {
     
+    srand(time(NULL));
+
     if(game_state->current_scenario->numEnemies != 0){
         //Initialisation of characters
         init_fight_characters(game_state->character, game_state->current_scenario->enemies, game_state->current_scenario->numEnemies); 
@@ -320,6 +360,10 @@ void do_combat(Game *game_state) {
                 turn_enemy(game_state->character, &(game_state->current_scenario->enemies[turn]));
             }
         }
+
+        // Free both queue and stack
+        free_stack(attack_stack);
+
         // Check end of battle result
         if (dead_enemies == game_state->current_scenario->numEnemies){
             printf("You've killed all enemies!\n");
