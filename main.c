@@ -221,14 +221,14 @@ Game *play_game(Game *game){
                 game->state = WIN;
             } else if(game->current_scenario->prev == NULL){ // up untill here is chill
 
-                const char *options[] = {"forwards", NULL};
+                const char *options[] = {"Forwards", NULL};
                 get_selection(options);
                 game->current_scenario = game->current_scenario->next;
                 printf("Going forwards");
 
             } else {
                 int option;
-                const char *options[] = {"forewards", "backwards", NULL};
+                const char *options[] = {"Forwards", "Backwards", NULL};
                 option = get_selection(options);
 
                 switch (option) {
@@ -250,7 +250,7 @@ Game *play_game(Game *game){
         else {
                 
 		    int option;
-            const char *options[] = {"left", "right", "backwards", NULL};
+            const char *options[] = {"Left", "Right", "Backwards", NULL};
             option = get_selection(options);
                 
             switch (option) {
