@@ -17,7 +17,7 @@ returns:
     */
 void save_game(Game *game, Scenario *first_scenario){
     if(game->character == NULL || game->current_scenario == first_scenario){
-        printf("Error, there is nothing to save");
+        printf("Error, there is nothing to save\n\n");
         return;
     }
     printf("Enter a filename: ");
@@ -66,7 +66,7 @@ use:
     - loads a pervious save froma  text file.
 returns:
     nothing.*/
-void load_game(Game *game){
+int load_game(Game *game){
     printf("Enter a filename: ");
     char filename[MAX_STRING_LEN];
 
@@ -80,7 +80,7 @@ void load_game(Game *game){
     FILE *file_p = fopen(filename, "r");
     if(file_p == NULL){
         printf("Failed to open file\n");
-        return;
+        return -1;
     }
     // make the game->current_session real 
     Character *character = game->character;
@@ -124,6 +124,7 @@ void load_game(Game *game){
     free(decision_list);
     free(scenario_list);
 
+    return 0;
 }
 
 void play_scenario_completed(Game *game){
@@ -321,22 +322,28 @@ void main_menu_selection(Game *game) {
             case 3:
                 init_scenario_graph(first_scenario, scenario_list);
       
-                load_game(game);
-                play_game(game);
+                int correctly_loaded = load_game(game);
+                if (correctly_loaded == -1){
+                    printf("Error: File not found\n\n");
+                    break;
+                }
+                else{
+                    play_game(game);
 
-                free_scenario_graph(first_scenario);
-                break;
-
+                    free_scenario_graph(first_scenario);
+                    break;
+                }
+                
             case 4:
                 print_credits();
                 break;
 
             case 5:
-                printf("Goodbye!");
+                printf("Goodbye!\n");
                 break;
 
             default:
-                perror("Error finding game option");
+                perror("Error finding game option\n");
                 break;
         }
     }
@@ -352,7 +359,7 @@ int main() {
 
     Game *game = (Game *)malloc(sizeof(Game)); //freed
     if(game == NULL){
-        perror("Failed to malloc");
+        perror("Failed to malloc\n");
         return -1;
     }
     game->character = NULL;
@@ -366,7 +373,7 @@ int main() {
     free(game);
     // i am sure that there are memory leaks in places. so i will need to check that later.
 
-    printf("Thanks for playing!");
+    printf("Thanks for playing!\n");
     return 0;
 }
 

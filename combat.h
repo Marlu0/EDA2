@@ -10,6 +10,10 @@ void init_fight_characters(Character *character, Enemy *enemies, int number_of_e
 
 int select_enemy(Enemy *enemies, int number_of_enemies);
 
+int calculate_damage_player(Character *character, Enemy enemy);
+
+int calculate_damage_enemy(Character *character, Enemy *enemy);
+
 void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int number_of_enemies, int *attacks_done, int *time_strike_done, int *dead_enemies);
 
 void turn_enemy(Character *character, Enemy *enemy);
