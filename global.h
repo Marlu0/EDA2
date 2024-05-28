@@ -9,7 +9,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-// foreward declaration
+// forward declaration
 
 struct Scenario;
 

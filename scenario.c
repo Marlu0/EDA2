@@ -1,10 +1,10 @@
 #include "scenario.h"
 
-Enemy enemies[10]={
-    {"Cockroach Henchman", 100, {10,50,10,20,5}},
-    {"Sheriff Bull", 100, {5,50,10,20,5}},
-    {"The Turtle", 100, {10,50,10,20,5}},
-    {"Fish", 100, {10,50,10,20,5}},
+Enemy enemies[10]={ //fix these back when you are done.
+    {"Cockroach Henchman", 1, {1,1,1,1,1}},
+    {"Sheriff Bull", 1, {1,1,1,1,1}},
+    {"The Turtle", 1, {1,1,1,1,1}},
+    {"Fish", 1, {1,1,1,1,1}},
 };
 
 

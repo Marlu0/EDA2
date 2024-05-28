@@ -138,20 +138,30 @@ void play_scenario_uncompleted(Game *game) {
     
     do_combat(game);
 
-    printf("%s\n\n", game->current_scenario->decision.chapa_del_NPC);
+    if(game->character->health > 0){
+        printf("%s\n\n", game->current_scenario->decision.chapa_del_NPC);
 
-    for(int i = 1; i <= MAX_CHOICES; i++){
-        printf("%d. %s\n", i, game->current_scenario->decision.choices->response);
-    }
-    int option = 0;
-    printf(">");
-    //make this safe!
-    scanf("%d", &option);
+        for(int i = 1; i <= MAX_CHOICES; i++){
+            printf("%d. %s\n", i, game->current_scenario->decision.choices->response);
+        }
+        int option = 0;
+
+        while(true){
+            printf("Your Response: ");
+            scanf("%d", &option);
+            if(option == 1 || option == 2 || option == 3 || option == 4) {
+                break;
+            } else {
+                printf("Please Enter A Valid number.\n");
+            }        
+        }
 
     printf("%s\n", game->current_scenario->decision.choices[option - 1].response);
 
-    //someone please init these fuctions and the dialogues.
     //(game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
+    } else{
+        game->state = DEAD;
+    }
 }
 /*PLAY GAME
 This function receives:
@@ -173,18 +183,18 @@ Game *play_game(Game *game){
     printf("LETS GO!\n\n");
 
     while(game->state == PLAYING){ //game continues while its state is in "PLAYING"
-
+        ///////////////////
+        printf("you did another loop"); //REMEBER TO DELETE THIS LATER!
+        ///////////////////
         //title and description print of new scenario
         if (game->current_scenario->completed == true) {
             play_scenario_completed(game);
         } else{
             play_scenario_uncompleted(game);
-        //DO FIGHT GOES OVER HERE
         }
         
         if(game->state == DEAD){
-            printf("\n\n\n\n\nyou died :(\n");
-            printf("YOU LOSE!!\n\n\n\n\n");
+            printf("\n\n\n\n\nYOU LOSE!!\n\n\n\n\n");
             return game;
         }
 
@@ -203,13 +213,13 @@ Game *play_game(Game *game){
                 int option;
 
                 do {
-                    printf("1. forwards\n");
+                    printf("1. forwards\n"); // it lets you go forewrds its so silly. but its becuase the prev thing is not loading.
                     scanf("%d", &option);
 
                     switch (option) {
                         case 1:
                             game->current_scenario = game->current_scenario->next;
-                            printf("moving foreward!\n");
+                            printf("moving forward!\n");
                             break;
 
                         case 2:
@@ -220,11 +230,10 @@ Game *play_game(Game *game){
                     }
                 } while (option != 1);
             } else {
-                printf("1. left\n"); //this is where you need foreward and backwards.
-                printf("2. right\n");
-                printf("3. backwards\n");
-                
-		        int option;
+                printf("1. forwards\n");
+                printf("2. backwards\n"); //you need the triple here?
+
+                int option;
 
                 do {
                     scanf("%d", &option);
@@ -232,31 +241,26 @@ Game *play_game(Game *game){
                     switch (option) {
                         case 1:
                             game->current_scenario = game->current_scenario->next;
-                            printf("moving left!\n");
+                            printf("moving forwards!\n");
                             break;
 
                         case 2:
-                            game->current_scenario = game->current_scenario->other_direction;
-                            printf("moving right!\n");
-                            break;
-
-                        case 3:
                             game->current_scenario = game->current_scenario->prev;
                             printf("moving back!\n");
                             break;
-                            
+                        
                         default:
                             printf("select a valid option\n");
                             break;
                     }
-                } while ((option != 1) || (option != 2) || (option != 3));
-
+                } while ((option != 1) && (option != 2));
             }
         } else {
-            printf("1. forewards\n");
-            printf("2. backwards\n"); //you need the triple here?
-
-            int option;
+            printf("1. left\n"); //this is where you need forward and backwards.
+            printf("2. right\n");
+            printf("3. backwards\n");
+                
+		    int option;
 
             do {
                 scanf("%d", &option);
@@ -264,19 +268,24 @@ Game *play_game(Game *game){
                 switch (option) {
                     case 1:
                         game->current_scenario = game->current_scenario->next;
-                        printf("moving forewards!\n");
+                        printf("moving left!\n");
                         break;
 
                     case 2:
+                        game->current_scenario = game->current_scenario->other_direction;
+                        printf("moving right!\n");
+                        break;
+
+                    case 3:
                         game->current_scenario = game->current_scenario->prev;
                         printf("moving back!\n");
                         break;
-                        
+                            
                     default:
                         printf("select a valid option\n");
                         break;
                 }
-            } while ((option != 1) || (option != 2));
+            } while ((option != 1) && (option != 2) && (option != 3)); //fixed the broken logic.
         }
     }
     printf("\n\n\n\n\n\nYOU WIN!!!\n\n\n\n\n");
@@ -359,9 +368,10 @@ int main() {
 
     Game *game = (Game *)malloc(sizeof(Game)); //freed
     if(game == NULL){
-        perror("Failed to malloc\n");
+        perror("Failed to create game\n");
         return -1;
     }
+
     game->character = NULL;
     game->current_scenario = NULL;
     game->state = PLAYING;
@@ -378,3 +388,4 @@ int main() {
 }
 
 //confirming character name does not have proper user defense.
+//you need to actually confirm that you can save in some place
