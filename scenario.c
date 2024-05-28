@@ -16,15 +16,15 @@ it does:
 it returns:
     -a pointer to the first Decision element
 */
-Decision *init_decision_list(){
+Decision *init_decision_list(Character *character){
     Decision *decision_list = (Decision *)calloc(8, sizeof(Decision));
     Decision * temp = decision_list;
 
-    *temp++ = (Decision){"desert interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"desert interaction", {{"Look inside the barrel", health_gain(character)}, {"Look behind the wheelbarrow", nothing()}, {"Drink some booze", attack_loss_booze(character)}, {"Light a cigarrete", luck_gain_ciggarette(character)}}};
 
-    *temp++ = (Decision){"town interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"town interaction", {{"Upgrade your weapon", attack_gain(character)}, {"Go have some fun in the Saloon", health_loss_saloon(character)}, {"Buy new clothes", defense_gain_clothes(character)}, {"Throw a coin in the well", defense_loss_well(character)}}};
 
-    *temp++ = (Decision){"talking to turtle", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"talking to turtle", {{"Look inside a coffin", luck_loss_coffin(character)}, {"Talk to Turtle again", attack_gain_turtle(character)}}};
 
     *temp++ = (Decision){"talking to bull", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
