@@ -67,10 +67,10 @@ void diamond_father(Character *character){
     "???: I CAN FEEL THE JACKPOT FALLING"
     "%s: Who are you?"
     "Papadiamantis: I'm Papadiamantis"
-    "%s: Whoa, shouldn's you be correcting our projects?"
+    "%s: Whoa, shouldnt's you be correcting our projects?"
     "Papadiamantis: Later, later, I CAN SEE THE 7'S LINING UP"
-    "You walk away feeling better, thanks Papadiamantis");
-    character->stats.bp -= 2;
+    "You walk away feeling better, thanks Papadiamantis", character->name, character->name, character->name);
+    character->stats.luc += 2;
 }
 
 void bucket_spit(Character *character){
