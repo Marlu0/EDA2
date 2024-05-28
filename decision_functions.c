@@ -50,12 +50,22 @@ void luck_loss(Character *character){
     character->active_modifiers.templuc *= 0.5;
 }
 
-void luck_loss_coffin(Character *character){
-    printf("WHAT WERE YOU THINKING OF, CREEP! luck loss!\n");
+void boring_coffin(Character *character){
+    printf("WHAT WERE YOU THINKING OF CREEP! You've gained 'Nothing', congratulations :)\n");
+}
+
+void watch_luck_loss(Character *character){
+    printf("A lost soul comes out of the watch and will follow you and ensure bad luck. Luck loss :(\n");
     character->stats.luc--;
 }
 
+void amazing_ceiling(Character *character){
+    printf("You look at the ceiling. What did you expect? It is a ceiling\n");
+}
 
+void grab_horns(Character *character){
+    printf("You grab the horns. They were his deceased mother's... QUE BARBARIDAD\n");
+}
 
 void nothing(){
     printf("You found nothing\n");

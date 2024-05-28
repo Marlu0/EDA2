@@ -25,7 +25,7 @@ void health_loss_saloon(Character *character);
 
 void defense_loss_well(Character *character);
 
-void luck_loss_coffin(Character *character);
+void boring_coffin(Character *character);
 
 void attack_gain_turtle(Character *character);
 
