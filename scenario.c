@@ -54,7 +54,7 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
     char story[MAX_STRING_LEN];
     
 
-    *temp++ = (Scenario){"DESERT", .decision = decision_list[0], .completed = false, .enemies = &enemies[0], .numEnemies = 1};
+    *temp = (Scenario){"DESERT", .decision = decision_list[0], .completed = false, .enemies = &enemies[0], .numEnemies = 1};
     snprintf(temp->description, sizeof(story),
              "The story begins with our protagonist, %s, waking up in his house to the sound of a noise coming from outside.\n"
              "He jumps out of bed and rushes to the door, alarmed.\n\n"
