@@ -33,6 +33,8 @@ void watch_luck_loss(Character *character);
 
 void amazing_ceiling(Character *character);
 
+void luck_gain_gipsy(Character *character);
+
 void grab_horns(Character *character);
 
 void nothing();
