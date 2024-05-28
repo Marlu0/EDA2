@@ -34,6 +34,7 @@ void defense_gain_clothes(Character *character){
     printf("Lookin' good! defense boost\n");
     character->stats.def++;
 }
+
 void defense_loss_well(Character *character){
     printf("As you were throwing the coin, a naked man came out of the well and stole your hat! defense loss\n");
     character->stats.def--;

@@ -138,7 +138,7 @@ void play_scenario_uncompleted(Game *game) {
     printf("\n--------------------\n");
     
     do_combat(game);
-
+    
     if(game->character->health > 0){
         printf("%s\n\n", game->current_scenario->decision.chapa_del_NPC);
 
