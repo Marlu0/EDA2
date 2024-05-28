@@ -127,7 +127,7 @@ int load_game(Game *game){
     return 0;
 }
 
-void play_scenario_completed(Game *game){ //update this
+void play_scenario_completed(Game *game){ //you need to make it so that the completed counter goes up when you are done
     printf("%s\n\n", game->current_scenario->name);
     printf("%s\n--------------------\n", game->current_scenario->completed_decription);
 }
@@ -145,17 +145,30 @@ void play_scenario_uncompleted(Game *game) {
         for(int i = 1; i <= MAX_CHOICES; i++){
             printf("%d. %s\n", i, game->current_scenario->decision.choices[i-1].response);
         }
-        int option = 0;
+        int option;
+        bool valid = false;
+        while(!valid){
 
-        while(true){
-            printf("Your Response: ");
-            scanf("%d", &option);
-            if(option == 1 || option == 2 || option == 3 || option == 4) {
-                break;
-            } else {
-                printf("Please Enter A Valid number.\n");
-            }        
+            printf("Enter your slection\n");
+
+            if (scanf(" %d", &option) != 1) {
+                printf("Invalid input. Please enter a number.\n");
+                while (getchar() != '\n'); // Flush the input buffer
+                continue;
+            }
+
+            int extra;
+            while ((extra = getchar()) != '\n' && extra != EOF);
+
+            // Validating input
+            if (option != 1) {
+                printf("Invalid selection. Please try again.\n");
+                continue;
+            }
+
+            valid = true;
         }
+
         printf("%s\n", game->current_scenario->decision.choices[option - 1].response);
 
         (game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
@@ -208,84 +221,58 @@ Game *play_game(Game *game){
                 game->state = WIN;
             } else if(game->current_scenario->prev == NULL){ // up untill here is chill
 
-                int option;
+                const char *options[] = {"forwards", NULL};
+                get_selection(options);
+                game->current_scenario = game->current_scenario->next;
+                printf("Going forwards");
 
-                do {
-                    printf("1. Forwards\nSelect direction: "); // it lets you go forewrds its so silly. but its becuase the prev thing is not loading.
-                    scanf("%d", &option);
-
-                    switch (option) {
-                        case 1:
-                            game->current_scenario = game->current_scenario->next;
-                            printf("Moving forward!\n");
-                            break;
-
-                        case 2:
-                            printf("Can't go backwards!\n");
-
-                        default:
-                            printf("Select a valid option\n");
-                    }
-                } while (option != 1);
             } else {
-                printf("1. Forwards\n");
-                printf("2. Backwards\n"); //you need the triple here?
-
                 int option;
-
-                do {
-                    scanf("Select direction: %d", &option);
-
-                    switch (option) {
-                        case 1:
-                            game->current_scenario = game->current_scenario->next;
-                            printf("Moving forwards!\n");
-                            break;
-
-                        case 2:
-                            game->current_scenario = game->current_scenario->prev;
-                            printf("Moving back!\n");
-                            break;
-                        
-                        default:
-                            printf("Select a valid option\n");
-                            break;
-                    }
-                } while ((option != 1) && (option != 2));
-            }
-        }
-        else {
-            printf("1. Left\n");
-            printf("2. Right\n");
-            printf("3. Backwards\n");
-                
-		    int option;
-
-            do {
-                printf("Select direction: ");
-                scanf("%d", &option);
+                const char *options[] = {"forewards", "backwards", NULL};
+                option = get_selection(options);
 
                 switch (option) {
                     case 1:
                         game->current_scenario = game->current_scenario->next;
-                        printf("Moving left!\n");
+                        printf("Moving forwards!\n");
                         break;
 
                     case 2:
-                        game->current_scenario = game->current_scenario->other_direction;
-                        printf("Moving right!\n");
+                        game->current_scenario = game->current_scenario->prev;
+                        printf("Moving back!\n");                        
                         break;
+                        
+                    default:
+                        break;
+                }
+            }
+        }
+        else {
+                
+		    int option;
+            const char *options[] = {"left", "right", "backwards", NULL};
+            option = get_selection(options);
+                
+            switch (option) {
+                case 1:
+                    game->current_scenario = game->current_scenario->next;
+                    printf("Moving left!\n");
+                    break;
+
+                case 2:
+                    game->current_scenario = game->current_scenario->other_direction;
+                    printf("Moving right!\n");
+                    break;
 
                     case 3:
                         game->current_scenario = game->current_scenario->prev;
                         printf("Moving back!\n");
                         break;
                             
-                    default:
-                        printf("Select a valid option\n");
-                        break;
-                }
-            } while ((option != 1) && (option != 2) && (option != 3));
+                default:
+                    printf("Select a valid option\n");
+                    break;
+            }
         }
     }
     printf("\n\n\n\n\n\nYOU WIN!!!\n\n\n\n\n");
