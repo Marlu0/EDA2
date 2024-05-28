@@ -35,6 +35,10 @@ void amazing_ceiling(Character *character);
 
 void luck_gain_gipsy(Character *character);
 
+void black_jack(Character *character);
+
+void bucket_spit(Character *character);
+
 void grab_horns(Character *character);
 
 void weapon_clean(Character *character);
