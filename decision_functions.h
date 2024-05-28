@@ -37,6 +37,8 @@ void luck_gain_gipsy(Character *character);
 
 void grab_horns(Character *character);
 
+void weapon_clean(Character *character);
+
 void nothing();
 
 void print_description1(Character *character);
