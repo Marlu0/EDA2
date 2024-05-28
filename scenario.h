@@ -5,7 +5,7 @@
 
 //SCENARIO STRUCTS ARE DEFINED IN GLOBAL
 
-Decision *init_decision_list();
+Decision *init_decision_list(Character *character);
 
 Scenario *init_scenario_list(Decision decision_list[], Character *character);
 
