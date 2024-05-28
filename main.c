@@ -107,7 +107,7 @@ int load_game(Game *game){
 
     //do an init_scneario thing and then try match the name to the index and then str_copy everything fro taht index.
     Decision *decision_list = init_decision_list();
-    Scenario *scenario_list = init_scenario_list(decision_list, character);
+    Scenario *scenario_list = init_scenario_list(decision_list, (game->character));
 
     char scenario_name[MAX_STRING_LEN];
     fscanf(file_p, "%s\n", scenario_name); //check whether you can scanf strings. maybe not.
