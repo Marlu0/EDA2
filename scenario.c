@@ -27,7 +27,7 @@ Decision *init_decision_list(Character *character){
 
     *temp++ = (Decision){"talking to turtle", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
 
-    *temp++ = (Decision){"talking to bull", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"talking to bull", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}}};
 
     *temp++ = (Decision){"talking to the bull after turtle interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 

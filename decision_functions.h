@@ -35,6 +35,8 @@ void amazing_ceiling(Character *character);
 
 void grab_horns(Character *character);
 
+void weapon_clean(Character *character);
+
 void nothing();
 
 void print_description1(Game *game);

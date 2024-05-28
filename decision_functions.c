@@ -30,7 +30,6 @@ void attack_loss_booze(Character *character){
     character->stats.atk--;
 }
 
-
 void defense_gain_clothes(Character *character){
     printf("Lookin' good! defense boost\n");
     character->stats.def++;
@@ -39,7 +38,6 @@ void defense_loss_well(Character *character){
     printf("As you were throwing the coin, a naked man came out of the well and stole your hat! defense loss\n");
     character->stats.def--;
 }
-
 
 void luck_gain_ciggarette(Character *character){
     printf("Smoke feels good in your lungs, today is gonna' be a good one. luck boost!\n");
@@ -65,6 +63,10 @@ void amazing_ceiling(Character *character){
 
 void grab_horns(Character *character){
     printf("You grab the horns. They were his deceased mother's... QUE BARBARIDAD\n");
+}
+
+void weapon_clean(Character *character){
+    printf("You clean your")
 }
 
 void nothing(){
