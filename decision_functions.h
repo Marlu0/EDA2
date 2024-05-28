@@ -41,6 +41,8 @@ void bucket_spit(Character *character);
 
 void diamond_father(Character *character);
 
+void gipsy_girls(Character *character);
+
 void grab_horns(Character *character);
 
 void weapon_clean(Character *character);
