@@ -87,7 +87,7 @@ typedef struct{
 
 typedef struct{
     char response[MAX_STRING_LEN];
-    Character *(*outcome_on_character)(Character *);
+    void (*outcome_on_character)(Character *);
 }Response_Outcome;
 
 typedef struct{
