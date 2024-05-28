@@ -149,7 +149,7 @@ void play_scenario_uncompleted(Game *game) {
         bool valid = false;
         while(!valid){
 
-            printf("Enter your slection\n");
+            printf("Enter your selection\n");
 
             if (scanf(" %d", &option) != 1) {
                 printf("Invalid input. Please enter a number.\n");
