@@ -142,7 +142,7 @@ void play_scenario_uncompleted(Game *game) {
         printf("%s\n\n", game->current_scenario->decision.chapa_del_NPC);
 
         for(int i = 1; i <= MAX_CHOICES; i++){
-            printf("%d. %s\n", i, game->current_scenario->decision.choices->response);
+            printf("%d. %s\n", i, game->current_scenario->decision.choices[i].response);
         }
         int option = 0;
 
@@ -305,17 +305,17 @@ void main_menu_selection(Game *game) {
 
     Scenario *first_scenario = (Scenario *)malloc(sizeof(Scenario));
     Decision *decision_list = init_decision_list(game->character);
-    Scenario *scenario_list = init_scenario_list(decision_list, (game->character)); //WORKS
+    Scenario *scenario_list = init_scenario_list(decision_list, (game->character));
     int option = 0;
 
     while(option != 5){
 
         const char *strings[] = {"New Game", "Save Game", "Load Game", "Print Credits", "Exit", NULL};
-        option = get_selection(strings); //WORKS
+        option = get_selection(strings);
 
         switch (option){
             case 1:
-                init_scenario_graph(first_scenario, scenario_list); //WORKS
+                init_scenario_graph(first_scenario, scenario_list);
 
                 game->current_scenario = first_scenario;
 
