@@ -15,11 +15,7 @@ it:
 returns:
     -nothing
     */
-void save_game(Game *game, Scenario *first_scenario){ //you will need to fix this like hell
-    if(game->character == NULL || game->current_scenario == first_scenario){
-        printf("Error, there is nothing to save\n\n");
-        return;
-    }
+void save_game(Game *game){ //you will need to fix this like hell
     printf("Enter a filename: ");
     char filename[MAX_STRING_LEN];
 
@@ -41,8 +37,8 @@ void save_game(Game *game, Scenario *first_scenario){ //you will need to fix thi
 
     //SAVING CHARACTER INFO
     fprintf(file_p, "%s\n", character->name);
-    fprintf(file_p, "%d\n", character->health);
-    fprintf(file_p, "%d\n", character->bullets);
+
+    // no need to save health or bullets as they can be found with hp and bp. reduce file size.
 
     //printing stats
     fprintf(file_p, "%d\n", character->stats.hp);
@@ -57,7 +53,8 @@ void save_game(Game *game, Scenario *first_scenario){ //you will need to fix thi
     fprintf(file_p, "%f\n", character->active_modifiers.templuc);
 
     //SAVING SCENARIO INFO
-    fprintf(file_p, "%s", scenario->name); //we will load the scenario from the name
+    fprintf(file_p, "%s\n", scenario->name); //we will load the scenario from the name
+    fclose(file_p);
 }
 /*LOAD GAME
 this function receives:
@@ -90,9 +87,6 @@ int load_game(Game *game){
     fscanf(file_p, "%s\n", read_name);
     strcpy(character->name, read_name);
 
-    fscanf(file_p, "%d\n", &(character->health));
-    fscanf(file_p, "%d\n", &(character->bullets));
-
     //scaning stats
     fscanf(file_p, "%d\n", &(character->stats.hp));
     fscanf(file_p, "%d\n", &(character->stats.bp));
@@ -110,10 +104,18 @@ int load_game(Game *game){
     Scenario *scenario_list = init_scenario_list(decision_list, (game->character));
 
     char scenario_name[MAX_STRING_LEN];
-    fscanf(file_p, "%s\n", scenario_name); //check whether you can scanf strings. maybe not.
-    //ok your name can only be one word long now
-    //and you have to add the nulll terminator at the end.
+    char *read_scenario_name = fgets(scenario_name, MAX_STRING_LEN, file_p);
 
+    if(read_scenario_name == NULL){
+        printf("Error Loading File\n");
+        return -1;
+    }
+    int length = strlen(scenario_name);
+    
+    scenario_name[length] = '\0';
+
+
+    
     for(int i = 0; i < NUM_SCENARIOS; i++){
         if(strcmp(scenario_list[i].name, scenario_name) == 0){
             *scenario = scenario_list[i];
@@ -124,12 +126,16 @@ int load_game(Game *game){
     free(decision_list);
     free(scenario_list);
 
+    fclose(file_p);
+
     return 0;
 }
 
 void play_scenario_completed(Game *game){ //you need to make it so that the completed counter goes up when you are done
-    printf("%s\n\n", game->current_scenario->name);
+    printf("%s (again)\n", game->current_scenario->name);
     printf("%s\n--------------------\n", game->current_scenario->completed_decription);
+
+    //im not sure if we want anything else happen here really
 }
 
 void play_scenario_uncompleted(Game *game) {
@@ -172,6 +178,7 @@ void play_scenario_uncompleted(Game *game) {
         printf("%s\n", game->current_scenario->decision.choices[option - 1].response);
 
         (game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
+        game->current_scenario->completed = true;
     } else{
         game->state = DEAD;
     }
@@ -200,8 +207,36 @@ Game *play_game(Game *game){
         //title and description print of new scenario
         if (game->current_scenario->completed == true) {
             play_scenario_completed(game);
+
         } else{
             play_scenario_uncompleted(game);
+            printf("Save?\n1. yes\n2. no\n");
+            bool valid = false;
+            int option = 0;
+            while(!valid){
+                printf("Enter your selection\n");
+
+                if (scanf(" %d", &option) != 1) {
+                    printf("Invalid input. Please enter a number.\n");
+                    while (getchar() != '\n'); // Flush the input buffer
+                    continue;
+                }
+
+                int extra;
+                while ((extra = getchar()) != '\n' && extra != EOF);
+
+                // Validating input
+                if (option == 1 || option == 2) {
+                    valid = true;
+                } else{
+                    printf("Invalid selection. Please try again.\n");
+                    continue;
+                }
+            }
+            if(option == 1){
+                save_game(game);
+                printf("back to the game!\n");
+            }
         }
         
         if(game->state == DEAD){
@@ -224,7 +259,7 @@ Game *play_game(Game *game){
                 const char *options[] = {"forwards", NULL};
                 get_selection(options);
                 game->current_scenario = game->current_scenario->next;
-                printf("Going forwards");
+                printf("Moving forwards!\n");
 
             } else {
                 int option;
@@ -289,6 +324,7 @@ returns:
     - nothing
 */
 void main_menu_selection(Game *game) {
+    bool first_game = true;
 
     Scenario *first_scenario = (Scenario *)malloc(sizeof(Scenario));
     Decision *decision_list = init_decision_list(game->character);
@@ -312,7 +348,11 @@ void main_menu_selection(Game *game) {
                 break;
 
             case 2:
-                save_game(game, first_scenario);
+                if(first_game){
+                    printf("You have no game to save");
+                } else {
+                    save_game(game);
+                }
                 break;
 
             case 3:
