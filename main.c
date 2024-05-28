@@ -145,9 +145,10 @@ void play_scenario_uncompleted(Game *game) {
         for(int i = 1; i <= MAX_CHOICES; i++){
             printf("%d. %s\n", i, game->current_scenario->decision.choices[i-1].response);
         }
-        int option = 0;
+        int option;
 
         while(true){
+            int option = 0;
             printf("Your Response: ");
             scanf("%d", &option);
             if(option == 1 || option == 2 || option == 3 || option == 4) {
