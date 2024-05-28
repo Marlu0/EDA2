@@ -50,8 +50,8 @@ it returns:
 Scenario *init_scenario_list(Decision decision_list[], Character *character){ //does not have enemies
 
     Scenario *scenario_list = (Scenario *)calloc(8, sizeof(Scenario));
-
-    Scenario *temp = scenario_list;
+ 
+    Scenario *temp = scenario_list; 
     
     *temp++ = (Scenario){"DESERT", print_description1, "description completed", .decision = decision_list[0], .enemies = &enemies[0], .numEnemies = 1, .completed = false};
     
