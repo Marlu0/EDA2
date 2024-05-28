@@ -7,7 +7,7 @@
 
 Decision *init_decision_list();
 
-Scenario *init_scenario_list(Decision decision_list[]);
+Scenario *init_scenario_list(Decision decision_list[], Character *character);
 
 void create_next_node(Scenario **pointer);
 

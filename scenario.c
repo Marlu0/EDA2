@@ -51,8 +51,11 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
     Scenario *scenario_list = (Scenario *)calloc(8, sizeof(Scenario));
 
     Scenario *temp = scenario_list;
-    char story[2048];
-    snprintf(story, sizeof(story),
+    char story[MAX_STRING_LEN];
+    
+
+    *temp++ = (Scenario){"DESERT", .decision = decision_list[0], .completed = false, .enemies = &enemies[0], .numEnemies = 1};
+    snprintf(temp->description, sizeof(story),
              "The story begins with our protagonist, %s, waking up in his house to the sound of a noise coming from outside.\n"
              "He jumps out of bed and rushes to the door, alarmed.\n\n"
              "%s: (muttering) What the heck is going on?\n\n"
@@ -63,9 +66,8 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
              "%s: Let me tell you something, stinky cockroach. Nobody, and I mean nobody, steals from me and gets away with it\n\n"
              "Bandit Cockroach: Ha! your adventure ends right here in this desert.", character->name, character->name, character->name, character->name, character->name, character->name, character->name);
 
-    *temp++ = (Scenario){"DESERT", story, character->name, .decision = decision_list[0], .completed = false, .enemies = &enemies[0], .numEnemies = 1};
-
-    snprintf(story, sizeof(story),
+    *temp++ = (Scenario){"LOCAL TOWN", .completed_decription = "description completed1", .decision = decision_list[1], .completed = false, .enemies = &enemies[1], .numEnemies = 0};
+    snprintf(temp->description, sizeof(story),
              "%s enters the town, his eyes scanning the surroundings as he takes in the unfamiliar sights and sounds.\n\n"
              "%s: (thinking to himself) Alright, %s, time to gather some intel. I need to find out where that slippery fish is hiding.\n"
              "Looks like I'll need more information if I'm going to track down that slippery fish. Lucky for me, there are a couple of places around here where we might find some leads. \n\n"
@@ -73,9 +75,10 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
              "%s: Now, where should I start? The funeral home might have some... unconventional sources of information, while the police station could have more... official records. Decisions, decisions.",
              character->name, character->name, character->name, character->name);
 
-    *temp++ = (Scenario){"LOCAL TOWN", story, "description completed1", .decision = decision_list[1], .completed = false, .enemies = &enemies[1], .numEnemies = 0};
+    
 
-    snprintf(story, sizeof(story),
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", .completed_decription = "description completed2", .decision = decision_list[2], .completed = false, .numEnemies = 0};
+    snprintf(temp->description, sizeof(story),
              "%s approaches the funeral home, a somber wooden structure with faded paint and a weathered sign. The door creaks open as he steps inside.\n"
              "%s:\n"
              "(noting the atmosphere) \"This place gives off a different vibe...\"\n"
@@ -102,9 +105,10 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
              "(finally) \"Alright. Knowing this, Mr. Scaled, the only way to get the information is for a big guy with two horns to speak through his mouth. You'll have to get past him to know Fishy's whereabouts, and that's enough for me.\"",
              character->name, character->name, character->name, character->name, character->name, character->name, character->name, character->name, character->name);
 
-    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", story, "description completed2", .decision = decision_list[2], .completed = false, .numEnemies = 0};
     
-    snprintf(story, sizeof(story),
+    
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION", .completed_decription = "description_completed3", .decision = decision_list[2], .completed = false, .enemies = &enemies[1], .numEnemies = 1};
+    snprintf(temp->description, sizeof(story),
              "At the Sheriff's Station:\n"
              "%s approaches the sheriff's station, a sturdy-looking building with the sheriff's emblem hung over the main door. The wood creaks under his feet as he steps inside.\n"
              "%s:\n"
@@ -126,10 +130,11 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
              "He looks at you with disdain, preparing for the showdown.\n"
              "\"Ha! You're in way over your head, cowboy. Prepare to face the full force of the law!\"",
              character->name, character->name, character->name, character->name, character->name);
+
     
-    *temp++ = (Scenario){"SHERIFF BULL'S STATION", story, "description_completed3", .decision = decision_list[2], .completed = false, .enemies = &enemies[1], .numEnemies = 1};
-    
-    snprintf(story, sizeof(story),
+
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION",  "description_completed4", .decision = decision_list[4], .completed = false, .numEnemies = 0};
+    snprintf(temp->description, sizeof(story),
              "%s enters the sheriff's station, the door squeaking as it opens. The interior is illuminated by fluorescent lights, and there are several agents busy at their desks.\n\n"
              "%s: (murmuring) Let's see what we can find here. \n\n"
              "He approaches the counter where the sheriff is, an imposing bull wearing a cowboy hat. \n\n"
@@ -142,9 +147,10 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
              "%s thanks the sheriff and heads towards the back alley, ready to confront the turtle and get the information he needs.",
              character->name, character->name, character->name, character->name, character->name, character->name);
 
-    *temp++ = (Scenario){"SHERIFF BULL'S STATION", story, "description_completed4", .decision = decision_list[4], .completed = false, .numEnemies = 0};
+     
 
-     snprintf(story, sizeof(story),
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", "description_completed5", .decision = decision_list[5], .completed = false, .enemies = &enemies[2]};
+    snprintf(temp->description, sizeof(story),
              "%s arrives at the funeral home, a gloomy wooden structure with a rusty sign creaking in the wind. The door opens with an ominous squeak as %s steps inside.\n\n"
              "%s: (surveying the interior cautiously) This place gives me the creeps...\n\n"
              "He walks down the main hallway, passing rows of empty chairs and framed photos of the deceased on the walls. \n\n"
@@ -158,9 +164,10 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
              "Tortuga Mafiosa: Oh, how brave! But Toro doesn't know who he's messing with. Get ready to face the true might of this city's mafia.",
              character->name, character->name, character->name, character->name, character->name, character->name, character->name);
 
-    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", story, "description_completed5", .decision = decision_list[5], .completed = false, .enemies = &enemies[2]};
     
-    snprintf(story, sizeof(story),
+
+    *temp++ = (Scenario){"CASINO1", "description_completed6", .decision = decision_list[6], .completed = false};
+    snprintf(temp->description, sizeof(story),
              "%s approaches the casino, an ostentatious building with flashing neon lights and lively music resonating from within. The entrance is guarded by two burly gorillas.\n"
              "%s:\n"
              "(surveying the scene) \"This looks like a lively place...\"\n"
@@ -178,9 +185,10 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
              "%s steps through the casino entrance, ready to confront the fish and resolve his quest once and for all.",
              character->name, character->name, character->name, character->name, character->name, character->name);
 
-    *temp++ = (Scenario){"CASINO1", story, "description_completed6", .decision = decision_list[6], .completed = false};
+    
 
-    snprintf(story, sizeof(story),
+    *temp++ = (Scenario){"CASINO2",  "description_completed7", .decision = decision_list[6], .completed = false};
+    snprintf(temp->description, sizeof(story),
              "%s approaches the casino, an ostentatious building with flashing neon lights and lively music resonating from within. The entrance is guarded by two burly gorillas.\n"
              "%s:\n"
              "(surveying the scene) \"This looks like a lively place...\"\n"
@@ -197,8 +205,6 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
              "(grateful) \"Thank you, I won't disappoint.\"\n"
              "%s steps through the casino entrance, ready to confront the fish and resolve his quest once and for all.",
              character->name, character->name, character->name, character->name, character->name, character->name);
-
-    *temp++ = (Scenario){"CASINO2", "description 6", "description_completed7", .decision = decision_list[6], .completed = false};
 
     return scenario_list;
 }
