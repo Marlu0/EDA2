@@ -77,7 +77,7 @@ void print_description2(Character *character){
     printf("%s: (thinking to himself) Alright, %s, time to gather some intel. I need to find out where that slippery fish is hiding.\n", character->name, character->name);
     printf("Looks like I'll need more information if I'm going to track down that slippery fish. Lucky for me, there are a couple of places around here where we might find some leads. \n\n");
     printf("He gestures towards two buildings on either side of the street - a funeral home and a police station. \n\n");
-    printf("%s: Now, where should I start? The funeral home might have some... unconventional sources of information, while the police station could have more... official records. Decisions, decisions.", character->name, character->name);
+    printf("%s: Now, where should I start? The funeral home might have some... unconventional sources of information, while the police station could have more... official records. Decisions, decisions.", character->name);
 }
 void print_description3(Character *character){
     printf("%s approaches the coffin shop, a somber wooden structure with faded paint and a weathered sign. The door creaks open as he steps inside.\n", character->name);
@@ -85,7 +85,7 @@ void print_description3(Character *character){
     printf("(noting the atmosphere) \"This place gives off a different vibe...\"\n");
     printf("He proceeds cautiously into the dimly lit interior.\n");
     printf("%s:\n", character->name);
-    printf("(to himself) \"Shelly must be around here somewhere...\"\n", character->name);
+    printf("(to himself) \"Shelly must be around here somewhere...\"\n");
     printf("%s heads towards the main office, ready to confront the mafia turtle and get the information he needs.\n\n", character->name);
     printf("At the Funeral Home:\n");
     printf("%s approaches the door of the main office, a solid wooden door with a brass plaque that reads \"Shelly - Manager.\" He takes a deep breath before knocking.\n", character->name);

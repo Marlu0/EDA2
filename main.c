@@ -15,7 +15,7 @@ it:
 returns:
     -nothing
     */
-void save_game(Game *game, Scenario *first_scenario){
+void save_game(Game *game, Scenario *first_scenario){ //you will need to fix this like hell
     if(game->character == NULL || game->current_scenario == first_scenario){
         printf("Error, there is nothing to save\n\n");
         return;
@@ -127,14 +127,15 @@ int load_game(Game *game){
     return 0;
 }
 
-void play_scenario_completed(Game *game){
+void play_scenario_completed(Game *game){ //update this
     printf("%s\n\n", game->current_scenario->name);
     printf("%s\n--------------------\n", game->current_scenario->completed_decription);
 }
 
 void play_scenario_uncompleted(Game *game) {
     printf("%s\n\n", game->current_scenario->name);
-    printf("%s\n--------------------\n", game->current_scenario->description); //works
+    (game->current_scenario->print_decription)(game->character);
+    printf("\n--------------------\n");
     
     do_combat(game);
 
@@ -183,9 +184,7 @@ Game *play_game(Game *game){
     printf("LETS GO!\n\n");
 
     while(game->state == PLAYING){ //game continues while its state is in "PLAYING"
-        ///////////////////
-        printf("you did another loop"); //REMEBER TO DELETE THIS LATER!
-        ///////////////////
+
         //title and description print of new scenario
         if (game->current_scenario->completed == true) {
             play_scenario_completed(game);
@@ -389,3 +388,7 @@ int main() {
 
 //confirming character name does not have proper user defense.
 //you need to actually confirm that you can save in some place
+//update the save and load functions
+//make sure that the play_completed function thing makes sense
+//only bother that if you are sure that you can fix the going backwards thing.
+//update the print scenarios in the decision_functions.h
