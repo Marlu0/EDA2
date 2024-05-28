@@ -97,7 +97,7 @@ typedef struct{
 
 typedef struct scenario{
     char name[MAX_STRING_LEN];
-    char description[MAX_STRING_LEN];
+    void (*print_decription)(Character *);
     char completed_decription[MAX_STRING_LEN];
     struct scenario *next;
     struct scenario *prev; //INCASE

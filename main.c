@@ -366,7 +366,7 @@ int main() {
     srand(time(NULL));
     print_main_title();
 
-    Game *game = (Game *)malloc(sizeof(Game)); //freed
+    Game *game = (Game *)malloc(sizeof(Game)); //you released it 
     if(game == NULL){
         perror("Failed to create game\n");
         return -1;
