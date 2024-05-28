@@ -43,8 +43,21 @@ void luck_gain_ciggarette(Character *character){
     printf("Smoke feels good in your lungs, today is gonna' be a good one. luck boost!\n");
     character->stats.luc++;
 }
+
+void luck_gain_gipsy(Character *character){
+    printf("Looks like they're a gipsy family celebrating a wedding! You play with them and you like them, they even bless you! attack and defense boost!\n");
+    character->stats.atk += 2;
+    character->stats.def += 2;
+
+}
+
 void luck_loss(Character *character){
     printf("BROKE A MIRROR!! luck loss!\n");
+    character->active_modifiers.templuc *= 0.5;
+}
+
+void black_jack(Character *character){
+    printf("You gabled too hard and the crupier is menacing to hang you on a post, run or give something of value! you have gi!\n");
     character->active_modifiers.templuc *= 0.5;
 }
 
