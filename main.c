@@ -158,7 +158,7 @@ void play_scenario_uncompleted(Game *game) {
 
     printf("%s\n", game->current_scenario->decision.choices[option - 1].response);
 
-    //(game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
+    (game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
     } else{
         game->state = DEAD;
     }
