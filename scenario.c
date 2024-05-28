@@ -29,13 +29,13 @@ Decision *init_decision_list(Character *character){
 
     *temp++ = (Decision){"talking to bull", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}}};
 
-    *temp++ = (Decision){"talking to the bull after turtle interaction", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
+    *temp++ = (Decision){"talking to the bull after turtle interaction", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}}};
 
-    *temp++ = (Decision){"talking to turtle after bull interaction", {{"repuesta 2"}, {"respueta 2"}}};
+    *temp++ = (Decision){"talking to turtle after bull interaction", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
 
     *temp++ = (Decision){"in the casino good route", {{"You see a group of guys gambling in the roulette, want to join them?", .outcome_on_character = luck_gain_gipsy}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = bucket_spit}}};
 
-    *temp++ = (Decision){"in the casino bad route", {{"You see a group of girls in the bar, wanna go talk to them?", .outcome_on_character = gipsy_girls}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = bucket_spit}}};
+    *temp++ = (Decision){"in the casino bad route", {{"You see a group of girls in the bar, wanna go talk to them?", .outcome_on_character = gipsy_girls}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
 
     return decision_list;
 }
