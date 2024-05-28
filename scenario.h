@@ -22,7 +22,7 @@ void free_branched_node(Scenario **pointer, Scenario **branch_pointer);
 void free_scenario_graph(Scenario *first_scenario);
 
 
-//you will need apointer to indicate where you are.
+//you will need a pointer to indicate where you are.
 
 
 // you need a meta function that asks where the player wants to go and then loads that scenario and then moves the current pointer over there.

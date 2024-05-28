@@ -216,7 +216,7 @@ Game *play_game(Game *game){
 
         } else{
             play_scenario_uncompleted(game);
-            printf("Save?\n1. yes\n2. no\n");
+            printf("Save?\n1. Yes\n2. No\n");
             bool valid = false;
             int option = 0;
             while(!valid){
