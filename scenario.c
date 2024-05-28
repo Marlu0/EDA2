@@ -27,9 +27,9 @@ Decision *init_decision_list(Character *character){
 
     *temp++ = (Decision){"talking to turtle", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
 
-    *temp++ = (Decision){"talking to bull", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}}};
+    *temp++ = (Decision){"talking to bull", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}, {"Open a misterious closet", .outcome_on_character = health_loss}, {"Look inside a bin", .outcome_on_character = health_gain}}};
 
-    *temp++ = (Decision){"talking to the bull after turtle interaction", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}}};
+    *temp++ = (Decision){"talking to the bull after turtle interaction", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}, {"Open a misterious closet", .outcome_on_character = health_loss}, {"Look inside a bin", .outcome_on_character = health_gain}}};
 
     *temp++ = (Decision){"talking to turtle after bull interaction", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
 
@@ -65,9 +65,9 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
      
     *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description6, "Turtles body is still on the ground, cold as ice", .decision = decision_list[5], .completed = false, .enemies = &enemies[2]};
 
-    *temp++ = (Scenario){"CASINO1", print_description7, "You got your water", .decision = decision_list[6], .completed = false, .enemies = &enemies[3], .numEnemies = 1};
+    *temp++ = (Scenario){"CASINO", print_description7, "You got your water", .decision = decision_list[6], .completed = false, .enemies = &enemies[3], .numEnemies = 1};
     
-    *temp++ = (Scenario){"CASINO2", print_description8, "You got your water", .decision = decision_list[7], .completed = false, .enemies = &enemies[3], .numEnemies = 1};
+    *temp++ = (Scenario){"CASINO", print_description8, "You got your water", .decision = decision_list[7], .completed = false, .enemies = &enemies[3], .numEnemies = 1};
     
     return scenario_list;
 }

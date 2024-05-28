@@ -137,8 +137,9 @@ void play_scenario_uncompleted(Game *game) {
     (game->current_scenario->print_decription)(game->character);
     printf("\n--------------------\n");
     
-    do_combat(game);
-    
+    if(strcmp(game->current_scenario->name, "CASINO")){
+        do_combat(game);
+    };
     if(game->character->health > 0){
         printf("%s\n\n", game->current_scenario->decision.chapa_del_NPC);
 
@@ -172,6 +173,11 @@ void play_scenario_uncompleted(Game *game) {
         printf("%s\n", game->current_scenario->decision.choices[option - 1].response);
 
         (game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
+
+        if(!strcmp(game->current_scenario->name, "CASINO")){
+            do_combat(game);
+        };
+        
     } else{
         game->state = DEAD;
     }
