@@ -255,9 +255,9 @@ Game *play_game(Game *game){
                 } while ((option != 1) && (option != 2));
             }
         } else {
-            printf("1. left\n"); //this is where you need forward and backwards.
-            printf("2. right\n");
-            printf("3. backwards\n");
+            printf("1. Left\n");
+            printf("2. Right\n");
+            printf("3. Backwards\n");
                 
 		    int option;
 

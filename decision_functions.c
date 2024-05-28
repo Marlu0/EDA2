@@ -89,7 +89,8 @@ void grab_horns(Character *character){
 }
 
 void weapon_clean(Character *character){
-    printf("You clean your")
+    printf("You clean your weapon, augments bullets and attack\n");
+    character->stats.bp++;
 }
 
 void nothing(){
