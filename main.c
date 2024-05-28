@@ -142,7 +142,7 @@ void play_scenario_uncompleted(Game *game) {
         printf("%s\n\n", game->current_scenario->decision.chapa_del_NPC);
 
         for(int i = 1; i <= MAX_CHOICES; i++){
-            printf("%d. %s\n", i, game->current_scenario->decision.choices->response);
+            printf("%d. %s\n", i, game->current_scenario->decision.choices[i].response);
         }
         int option = 0;
 
@@ -158,7 +158,7 @@ void play_scenario_uncompleted(Game *game) {
 
     printf("%s\n", game->current_scenario->decision.choices[option - 1].response);
 
-    //(game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
+    (game->current_scenario->decision.choices[option - 1].outcome_on_character)(game->character);
     } else{
         game->state = DEAD;
     }
