@@ -39,36 +39,36 @@ void grab_horns(Character *character);
 
 void nothing();
 
-void print_description1(Game *game);
+void print_description1(Character *character);
 
-void print_description2(Game *game);
+void print_description2(Character *character);
 
-void print_description3(Game *game);
+void print_description3(Character *character);
 
-void print_description4(Game *game);
+void print_description4(Character *character);
 
-void print_description5(Game *game);
+void print_description5(Character *character);
 
-void print_description6(Game *game);
+void print_description6(Character *character);
 
-void print_description7(Game *game);
+void print_description7(Character *character);
 
-void print_description8(Game *game);
+void print_description8(Character *character);
 
-void print_description1(Game *game);
+void print_description1(Character *character);
 
-void print_description2(Game *game);
+void print_description2(Character *character);
 
-void print_description3(Game *game);
+void print_description3(Character *character);
 
-void print_description4(Game *game);
+void print_description4(Character *character);
 
-void print_description5(Game *game);
+void print_description5(Character *character);
 
-void print_description6(Game *game);
+void print_description6(Character *character);
 
-void print_description7(Game *game);
+void print_description7(Character *character);
 
-void print_description8(Game *game);
+void print_description8(Character *character);
 
 #endif //DECISION_FUNCTIONS_H
