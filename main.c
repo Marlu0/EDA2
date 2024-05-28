@@ -106,7 +106,7 @@ int load_game(Game *game){
     fscanf(file_p, "%f\n", &(character->active_modifiers.templuc));
 
     //do an init_scneario thing and then try match the name to the index and then str_copy everything fro taht index.
-    Decision *decision_list = init_decision_list();
+    Decision *decision_list = init_decision_list(game->character);
     Scenario *scenario_list = init_scenario_list(decision_list, &(game->character));
 
     char scenario_name[MAX_STRING_LEN];
@@ -304,7 +304,7 @@ returns:
 void main_menu_selection(Game *game) {
 
     Scenario *first_scenario = (Scenario *)malloc(sizeof(Scenario));
-    Decision *decision_list = init_decision_list();
+    Decision *decision_list = init_decision_list(game->character);
     Scenario *scenario_list = init_scenario_list(decision_list, &(game->character)); //WORKS
     int option = 0;
 

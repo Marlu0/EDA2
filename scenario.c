@@ -1,4 +1,5 @@
 #include "scenario.h"
+#include "decision_functions.h"
 
 Enemy enemies[10]={ //fix these back when you are done.
     {"Cockroach Henchman", 1, {1,1,1,1,1}},
@@ -20,11 +21,11 @@ Decision *init_decision_list(Character *character){
     Decision *decision_list = (Decision *)calloc(8, sizeof(Decision));
     Decision * temp = decision_list;
 
-    *temp++ = (Decision){"desert interaction", {{"Look inside the barrel", health_gain(character)}, {"Look behind the wheelbarrow", nothing()}, {"Drink some booze", attack_loss_booze(character)}, {"Light a cigarrete", luck_gain_ciggarette(character)}}};
+    *temp++ = (Decision){"desert interaction", {{"Look inside the barrel", .outcome_on_character = health_gain}, {"Look behind the wheelbarrow", .outcome_on_character = nothing}, {"Drink some booze", .outcome_on_character = attack_loss_booze}, {"Light a cigarrete", .outcome_on_character = luck_gain_ciggarette}}};
 
-    *temp++ = (Decision){"town interaction", {{"Upgrade your weapon", attack_gain(character)}, {"Go have some fun in the Saloon", health_loss_saloon(character)}, {"Buy new clothes", defense_gain_clothes(character)}, {"Throw a coin in the well", defense_loss_well(character)}}};
+    *temp++ = (Decision){"town interaction", {{"Upgrade your weapon", .outcome_on_character = attack_gain}, {"Go have some fun in the Saloon", .outcome_on_character = health_loss_saloon}, {"Buy new clothes", .outcome_on_character = defense_gain_clothes}, {"Throw a coin in the well", .outcome_on_character = defense_loss_well}}};
 
-    *temp++ = (Decision){"talking to turtle", {{"Look inside a coffin", luck_loss_coffin(character)}, {"Talk to Turtle again", attack_gain_turtle(character)}}};
+    *temp++ = (Decision){"talking to turtle", {{"Look inside a coffin", .outcome_on_character = luck_loss_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}}};
 
     *temp++ = (Decision){"talking to bull", {{"REPUESTA 1"}, {"RESPUESTA 2"}}};
 
