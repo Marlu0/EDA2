@@ -35,7 +35,7 @@ void amazing_ceiling(Character *character);
 
 void luck_gain_lizard(Character *character);
 
-void black_jack(Character *character);
+void black_jack(Character *character); 
 
 void bucket_spit(Character *character);
 

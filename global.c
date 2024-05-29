@@ -280,7 +280,7 @@ void insert(HashTable *hashTable, const char *key, void *value) {
     unsigned int index = hash(key);
     Node *newNode = malloc(sizeof(Node));
     newNode->key = strdup(key);
-    newNode->value = value;
+    newNode->value = value; 
     newNode->next = hashTable->table[index];
     hashTable->table[index] = newNode;
 }

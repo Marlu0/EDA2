@@ -66,7 +66,7 @@ You see someone standing on your door in the middle of the night...
 
 1. What are you doing here?
 2. Get closer
-
+ 
 (Selects 2)
 
 @@@@@@@*================================================================*@@@@@@@

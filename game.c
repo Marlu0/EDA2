@@ -38,7 +38,7 @@ void name_character(Character *character) {
         char answer[MAX_STRING_LEN];
         fgets(answer, MAX_STRING_LEN, stdin);
         // Remove the newline character from the end of the input
-        answer[strcspn(answer, "\n")] = '\0';
+        answer[strcspn(answer, "\n")] = '\0'; 
 
         if (strcmp(answer, "yes") == 0) {
             sure = true;

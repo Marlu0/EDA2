@@ -72,7 +72,7 @@ typedef struct{
     int health;
     Stats stats;
 } Enemy;
-
+ 
 /* CHARACTER:
     Example:
         - name = "Lizzy"

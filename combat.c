@@ -209,7 +209,7 @@ void turn_player(Character *character, Enemy *enemies, Stack* attack_stack, int 
                             for (int i = 0; i < random_number; i++){
                                 past_damage = pop_stack(attack_stack);
                             }
-                        }
+                        } 
                         // Calculate total damage by doubling past damage and apply it to enemy
                         int enemy_selected = select_enemy(enemies, number_of_enemies);
                         int total_damage = 2 * past_damage;

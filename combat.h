@@ -4,7 +4,7 @@
 #include "global.h"
 #include "game.h"
 
-/* Functions for turn-based combat */
+/* Functions for turn-based combat */ 
 
 void init_fight_characters(Character *character, Enemy *enemies, int number_of_enemies);
 

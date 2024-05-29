@@ -349,7 +349,7 @@ void print_description8(Character *character){
     delay(1);
     printf("%s steps through the casino entrance, ready to confront the fish and resolve his quest once and for all.", character->name);
 }
-void print_description9(Character *character){
+void print_description9(Character *character){ 
     printf("You slowly open the doors of the VIP room...\n");
     delay(1);
     printf("Fishy O'Sullivan is in the center of the VIP room, nervously swimming in his fishbowl.\n");
