@@ -370,11 +370,11 @@ void print_description9(Character *character){
 }
 
 void print_description10(Character *character){
-    printf("Turtles body is still on the ground, cold as ice\n");
+    printf("Turtle's body lays on the ground, cold as ice\n");
 }
 
 void print_description11(Character *character){
-    printf("You can hear the paperwork being done, its quiet and tense\n");
+    printf("You can hear the paperwork being done, its tense in here\n");
 }
 
 void print_description12(Character *character){
@@ -382,15 +382,15 @@ void print_description12(Character *character){
 }
 
 void print_description13(Character *character){
-    printf("This dark old shop smell rotten\n");
+    printf("The shop smells horrible...\n");
 }
 
 void print_description14(Character *character){
-    printf("It's peacefull in town, some old joe is looking at you from his porch\n");
+    printf("The town looks peaceful. Just an old man looking at you from his porch\n");
 }
 
 void print_description15(Character *character){
-    printf("Just a barren wasteland\n");
+    printf("Just a dry wasteland\n");
 }
 
 // you need to copy paste everything in here
