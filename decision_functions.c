@@ -87,13 +87,13 @@ void diamond_father(Character *character){
     "Papadiamantis: I'm Papadiamantis\n"
     "%s: Whoa, shouldnt's you be correcting our projects?\n"
     "Papadiamantis: Later, later, I CAN SEE THE 7 LINING UP\n"
-    "You walk away feeling better, thanks Papadiamantis\n", character->name, character->name, character->name);
+    "You walk away feeling luckier, thanks Papadiamantis\n", character->name, character->name, character->name);
     character->stats.luc += 2;
 }
 
 void bucket_spit(Character *character){
-    printf("Looks like that was the frog's jacuzzi, they beat you up with their froggy legs! health loss\n");
-    character->stats.hp -= 2;
+    printf("Looks like that was the frog's jacuzzi, they beat you up with their froggy legs! Health loss\n");
+    character->stats.hp--;
 }
 
 void boring_coffin(Character *character){
@@ -110,12 +110,13 @@ void amazing_ceiling(Character *character){
 }
 
 void grab_horns(Character *character){
-    printf("You grab the horns. They were his deceased mother's... QUE BARBARIDAD\n");
+    printf("You grab the horns. You forgot that they're attached to the sheriff... Uhhh embarassing. Dignity lost\n");
 }
 
 void weapon_clean(Character *character){
     printf("You clean your weapon, augments bullets and attack\n");
     character->stats.bp++;
+    character->stats.atk++;
 }
 
 void nothing(){
