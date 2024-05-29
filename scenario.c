@@ -27,17 +27,17 @@ Decision *init_decision_list(Character *character){
 
     *temp++ = (Decision){"TOWN", {{"Upgrade your weapon", .outcome_on_character = attack_gain}, {"Go have some fun in the Saloon", .outcome_on_character = health_loss_saloon}, {"Buy new clothes", .outcome_on_character = defense_gain_clothes}, {"Throw a coin in the well", .outcome_on_character = defense_loss_well}}};
 
-    *temp++ = (Decision){"TURTLE.A", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
+    *temp++ = (Decision){"TURTLE", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
 
-    *temp++ = (Decision){"BULL.B", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}, {"Open a misterious closet", .outcome_on_character = health_loss}, {"Look inside a bin", .outcome_on_character = health_gain}}};
+    *temp++ = (Decision){"BULL", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}, {"Open a misterious closet", .outcome_on_character = health_loss}, {"Look inside a bin", .outcome_on_character = health_gain}}};
 
-    *temp++ = (Decision){"BULL.A", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}, {"Open a misterious closet", .outcome_on_character = health_loss}, {"Look inside a bin", .outcome_on_character = health_gain}}};
+    *temp++ = (Decision){"BULL", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}, {"Open a misterious closet", .outcome_on_character = health_loss}, {"Look inside a bin", .outcome_on_character = health_gain}}};
 
-    *temp++ = (Decision){"TURTLE.B", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
+    *temp++ = (Decision){"TURTLE", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
 
-    *temp++ = (Decision){"CASINO.A", {{"You see a group of guys gambling in the roulette, join them", .outcome_on_character = luck_gain_lizard}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
+    *temp++ = (Decision){"CASINO", {{"You see a group of guys gambling in the roulette, join them", .outcome_on_character = luck_gain_lizard}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
 
-    *temp++ = (Decision){"CASINO.B", {{"You see a group of girls in the bar, approach them", .outcome_on_character = lizard_girls}, {"Play blackjack", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
+    *temp++ = (Decision){"CASINO", {{"You see a group of girls in the bar, approach them", .outcome_on_character = lizard_girls}, {"Play blackjack", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
 
     return decision_list;
 }
@@ -57,7 +57,7 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
     
     *temp++ = (Scenario){"DESERT", print_description1, print_description15, .decision = decision_list[0], .enemies = &enemies[0], .numEnemies = 1, .completed = false};
     
-    *temp++ = (Scenario){"LOCAL TOWN", print_description2, print_description14, .decision = decision_list[1], .enemies = &enemies[1], .numEnemies = 0, .completed = false};
+    *temp++ = (Scenario){"TOWN", print_description2, print_description14, .decision = decision_list[1], .enemies = &enemies[1], .numEnemies = 0, .completed = false};
 
     *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description3, print_description13, .decision = decision_list[2], .numEnemies = 0, .completed = false,};
     
