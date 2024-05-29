@@ -309,6 +309,13 @@ void do_combat(Game *game_state) {
     
     srand(time(NULL));
 
+    // Error check for stats
+    if (game_state->character->stats.atk < 1) game_state->character->stats.atk++;
+    if (game_state->character->stats.bp < 1) game_state->character->stats.bp++;
+    if (game_state->character->stats.def < 1) game_state->character->stats.atk++;
+    if (game_state->character->stats.hp < 1) game_state->character->stats.def++;
+    if (game_state->character->stats.luc < 1) game_state->character->stats.luc++;
+
     if(game_state->current_scenario->numEnemies != 0){
         //Initialisation of characters
         init_fight_characters(game_state->character, game_state->current_scenario->enemies, game_state->current_scenario->numEnemies); 
