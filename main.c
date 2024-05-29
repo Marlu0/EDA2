@@ -55,11 +55,11 @@ void save_game(Game *game){ //you will need to fix this like hell
     //SAVING SCENARIO INFO
     fprintf(file_p, "%s\n", scenario->name); //we will load the scenario from the name
     fclose(file_p);
-}
+} 
 /*LOAD GAME
 this function receives:
     -   charcater and scenario
-use:
+use: 
     - loads a pervious save froma  text file.
 returns:
     nothing.*/
