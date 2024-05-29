@@ -149,7 +149,7 @@ void print_description2(Character *character){
     delay(1);
     printf("Looks like I'll need more information if I'm going to track down that slippery fish. Lucky for me, there are a couple of places around here where we might find some leads. \n\n");
     delay(1);
-    printf("He gestures towards two buildings on either side of the street - a funeral home and a police station. \n\n");
+    printf("He gestures towards two buildings on either side of the street. On the left there is a funeral home and on the right a police station. \n\n");
     delay(1);
     printf("%s: Now, where should I start? The funeral home might have some... unconventional sources of information, while the police station could have more... official records. Decisions, decisions.", character->name);
 }
