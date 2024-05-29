@@ -91,7 +91,7 @@ int load_game(Game *game){
         return -1;
     }
     int length1 = strlen(name);
-    name[length1-1] = '\0';
+    name[length1] = '\0';
     strcpy(character->name, name);
 
     //scaning stats
@@ -117,9 +117,9 @@ int load_game(Game *game){
         printf("Error Loading File\n");
         return -1;
     }
-    int length = strlen(scenario_name);
+    int length2 = strlen(scenario_name);
     
-    scenario_name[length] = '\0';
+    scenario_name[length2] = '\0';
 
 
     
@@ -237,35 +237,37 @@ Game *play_game(Game *game){
 
         } else{
             play_scenario_uncompleted(game);
-            printf("Save?\n1. Yes\n2. No\n");
-            bool valid = false;
-            int option = 0;
-            while(!valid){
-                printf("Enter your selection\n");
+            if(game->state == PLAYING){
+                printf("Save?\n1. Yes\n2. No\n");
+                bool valid = false;
+                int option = 0;
+                while(!valid){
+                    printf("Enter your selection\n");
 
-                if (scanf(" %d", &option) != 1) {
-                    printf("Invalid input. Please enter a number.\n");
-                    while (getchar() != '\n'); // Flush the input buffer
-                    continue;
+                    if (scanf(" %d", &option) != 1) {
+                        printf("Invalid input. Please enter a number.\n");
+                        while (getchar() != '\n'); // Flush the input buffer
+                        continue;
+                    }
+
+                    int extra;
+                    while ((extra = getchar()) != '\n' && extra != EOF);
+
+                    // Validating input
+                    if (option == 1 || option == 2) {
+                        valid = true;
+                    } else{
+                        printf("Invalid selection. Please try again.\n");
+                        continue;
+                    }
                 }
-
-                int extra;
-                while ((extra = getchar()) != '\n' && extra != EOF);
-
-                // Validating input
-                if (option == 1 || option == 2) {
-                    valid = true;
-                } else{
-                    printf("Invalid selection. Please try again.\n");
-                    continue;
+                if(option == 1){
+                    save_game(game);
+                    printf("back to the game!\n");
                 }
-            }
-            if(option == 1){
-                save_game(game);
-                printf("back to the game!\n");
             }
         }
-        
+
         if(game->state == DEAD){
             printf("\n\n\n\n\nYOU LOSE!!\n\n\n\n\n");
             return game;
