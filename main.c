@@ -139,7 +139,10 @@ it returns:
     - nothing*/
 void play_scenario_completed(Game *game){ //you need to make it so that the completed counter goes up when you are done
     printf("%s (again)\n", game->current_scenario->name);
-    printf("%s\n--------------------\n", game->current_scenario->completed_decription);
+    (game->current_scenario->print_decription2)(game->character);
+    printf("\n--------------------\n");
+
+    //im not sure if we want anything else happen here really
 }
 /*PLAY_SCENARIO_UNCOMPLETED
 this function takes in:
@@ -192,6 +195,7 @@ void play_scenario_uncompleted(Game *game) {
         
 
         if(!strcmp(game->current_scenario->name, "CASINO")){
+            (game->current_scenario->print_decription2)(game->character);
             do_combat(game);
         };
         game->current_scenario->completed = true;

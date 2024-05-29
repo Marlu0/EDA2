@@ -5,7 +5,9 @@ Enemy enemies[10]={ //fix these back when you are done.
     {"Cockroach Henchman", 1, {1,1,1,1,1}},
     {"Sheriff Bull", 1, {1,1,1,1,1}},
     {"The Turtle", 1, {1,1,1,1,1}},
-    {"Fish", 1, {1,1,1,1,1}},
+    {"Cockroach with a Hat", 1, {1,1,1,1,1}},
+    {"Cockroach with Boots", 1, {1,1,1,1,1}},
+    {"Fishy O'Sullivan", 1, {1,1,1,1,1}}
 };
 
 
@@ -27,15 +29,15 @@ Decision *init_decision_list(Character *character){
 
     *temp++ = (Decision){"TURTLE.A", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
 
-    *temp++ = (Decision){"BULL.A", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}, {"Open a misterious closet", .outcome_on_character = health_loss}, {"Look inside a bin", .outcome_on_character = health_gain}}};
-
     *temp++ = (Decision){"BULL.B", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}, {"Open a misterious closet", .outcome_on_character = health_loss}, {"Look inside a bin", .outcome_on_character = health_gain}}};
+
+    *temp++ = (Decision){"BULL.A", {{"You see some pretty horns, grab them", .outcome_on_character = grab_horns}, {"Clean the weapon", .outcome_on_character = weapon_clean}, {"Open a misterious closet", .outcome_on_character = health_loss}, {"Look inside a bin", .outcome_on_character = health_gain}}};
 
     *temp++ = (Decision){"TURTLE.B", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
 
-    *temp++ = (Decision){"CASINO.A", {{"You see a group of guys gambling in the roulette, want to join them?", .outcome_on_character = luck_gain_gipsy}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
+    *temp++ = (Decision){"CASINO.A", {{"You see a group of guys gambling in the roulette, join them", .outcome_on_character = luck_gain_lizard}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
 
-    *temp++ = (Decision){"CASINO.B", {{"You see a group of girls in the bar, wanna go talk to them?", .outcome_on_character = gipsy_girls}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
+    *temp++ = (Decision){"CASINO.B", {{"You see a group of girls in the bar, approach them", .outcome_on_character = lizard_girls}, {"Play blackjack", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
 
     return decision_list;
 }
@@ -53,21 +55,21 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
  
     Scenario *temp = scenario_list; 
     
-    *temp++ = (Scenario){"DESERT", print_description1, "Just a barren wasteland", .decision = decision_list[0], .enemies = &enemies[0], .numEnemies = 1, .completed = false};
+    *temp++ = (Scenario){"DESERT", print_description1, print_description15, .decision = decision_list[0], .enemies = &enemies[0], .numEnemies = 1, .completed = false};
     
-    *temp++ = (Scenario){"LOCAL TOWN", print_description2, "It's peacefull in town, some old joe is looking at you from his porch", .decision = decision_list[1], .enemies = &enemies[1], .numEnemies = 0, .completed = false};
+    *temp++ = (Scenario){"LOCAL TOWN", print_description2, print_description14, .decision = decision_list[1], .enemies = &enemies[1], .numEnemies = 0, .completed = false};
 
-    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description3, "This dark old shop smell rotten", .decision = decision_list[2], .numEnemies = 0, .completed = false,};
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description3, print_description13, .decision = decision_list[2], .numEnemies = 0, .completed = false,};
     
-    *temp++ = (Scenario){"SHERIFF BULL'S STATION", print_description4, "You shouldn't be here, you just murdered this man", .decision = decision_list[3], .completed = false, .enemies = &enemies[1], .numEnemies = 1};
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION", print_description5, print_description12, .decision = decision_list[3], .completed = false, .numEnemies = 0};
 
-    *temp++ = (Scenario){"SHERIFF BULL'S STATION", print_description4, "You can hear the paperwork being done, its quiet and tense", .decision = decision_list[4], .completed = false, .numEnemies = 0};
-     
-    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description6, "Turtles body is still on the ground, cold as ice", .decision = decision_list[5], .completed = false, .enemies = &enemies[2]};
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION", print_description4, print_description11, .decision = decision_list[4], .completed = false, .enemies = &enemies[1], .numEnemies = 1};
 
-    *temp++ = (Scenario){"CASINO", print_description7, "You got your water", .decision = decision_list[6], .completed = false, .enemies = &enemies[3], .numEnemies = 1};
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description6, print_description10, .decision = decision_list[5], .completed = false, .enemies = &enemies[2], .numEnemies = 1};
+
+    *temp++ = (Scenario){"CASINO", print_description7, print_description9, .decision = decision_list[6], .completed = false, .enemies = &enemies[3], .numEnemies = 3};
     
-    *temp++ = (Scenario){"CASINO", print_description8, "You got your water", .decision = decision_list[7], .completed = false, .enemies = &enemies[3], .numEnemies = 1};
+    *temp++ = (Scenario){"CASINO", print_description8, print_description9, .decision = decision_list[7], .completed = false, .enemies = &enemies[3], .numEnemies = 3};
     
     return scenario_list;
 }

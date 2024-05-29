@@ -57,8 +57,8 @@ void luck_gain_ciggarette(Character *character){
     character->stats.luc++;
 }
 
-void luck_gain_gipsy(Character *character){
-    printf("Looks like they're a gipsy family celebrating a wedding! You play with them and you like them, they even bless you! attack and defense boost!\n");
+void luck_gain_lizard(Character *character){
+    printf("Looks like they're a lizard family celebrating a wedding! You play with them and you like them, they even bless you! attack and defense boost!\n");
     character->stats.atk += 2;
     character->stats.def += 2;
 
@@ -69,8 +69,8 @@ void luck_loss(Character *character){
     character->active_modifiers.templuc *= 0.5;
 }
 
-void gipsy_girls(Character *character){
-    printf("You start flirting with them, but seem they were the brides of a gipsy wedding, they spit and curse you!\n");
+void lizard_girls(Character *character){
+    printf("You start flirting with them, but seem they were the brides of a lizard wedding, they spit and curse you!\n");
     character->stats.luc -= 3;
 }
 
@@ -81,19 +81,19 @@ void black_jack(Character *character){
 
 void diamond_father(Character *character){
     printf("You approach a tall man:\n"
-    "%s: Whats happening?"
-    "???: I CAN FEEL THE JACKPOT FALLING"
-    "%s: Who are you?"
-    "Papadiamantis: I'm Papadiamantis"
-    "%s: Whoa, shouldnt's you be correcting our projects?"
-    "Papadiamantis: Later, later, I CAN SEE THE 7 LINING UP"
-    "You walk away feeling better, thanks Papadiamantis", character->name, character->name, character->name);
+    "%s: Whats happening?\n"
+    "???: I CAN FEEL THE JACKPOT FALLING\n"
+    "%s: Who are you?\n"
+    "Papadiamantis: I'm Papadiamantis\n"
+    "%s: Whoa, shouldnt's you be correcting our projects?\n"
+    "Papadiamantis: Later, later, I CAN SEE THE 7 LINING UP\n"
+    "You walk away feeling luckier, thanks Papadiamantis\n", character->name, character->name, character->name);
     character->stats.luc += 2;
 }
 
 void bucket_spit(Character *character){
-    printf("Looks like that was the frog's jacuzzi, they beat you up with their froggy legs! health loss\n");
-    character->stats.hp -= 2;
+    printf("Looks like that was the frog's jacuzzi, they beat you up with their froggy legs! Health loss\n");
+    character->stats.hp--;
 }
 
 void boring_coffin(Character *character){
@@ -110,12 +110,13 @@ void amazing_ceiling(Character *character){
 }
 
 void grab_horns(Character *character){
-    printf("You grab the horns. They were his deceased mother's... QUE BARBARIDAD\n");
+    printf("You grab the horns. You forgot that they're attached to the sheriff... Uhhh embarassing. Dignity lost\n");
 }
 
 void weapon_clean(Character *character){
     printf("You clean your weapon, augments bullets and attack\n");
     character->stats.bp++;
+    character->stats.atk++;
 }
 
 void nothing(){
@@ -148,7 +149,7 @@ void print_description2(Character *character){
     delay(1);
     printf("Looks like I'll need more information if I'm going to track down that slippery fish. Lucky for me, there are a couple of places around here where we might find some leads. \n\n");
     delay(1);
-    printf("He gestures towards two buildings on either side of the street - a funeral home and a police station. \n\n");
+    printf("He gestures towards two buildings on either side of the street. On the left there is a funeral home and on the right a police station. \n\n");
     delay(1);
     printf("%s: Now, where should I start? The funeral home might have some... unconventional sources of information, while the police station could have more... official records. Decisions, decisions.", character->name);
 }
@@ -348,5 +349,49 @@ void print_description8(Character *character){
     delay(1);
     printf("%s steps through the casino entrance, ready to confront the fish and resolve his quest once and for all.", character->name);
 }
+void print_description9(Character *character){
+    printf("You slowly open the doors of the VIP room...\n");
+    delay(1);
+    printf("FISHY is in the center of the VIP room, nervously swimming in his fishbowl.\n");
+    delay(1);
+    printf("Fishy O'Sullivan: Ah, %s. You've finally arrived. I thought my henchmen would stop you.", character->name);
+    delay(1);
+    printf("%s faces Fishy with determination, his gaze cold and filled with anger.\n", character->name);
+    delay(1);
+    printf("%s: It's over, Fishy. You stole my water and hid behind your henchmen like a coward. It's time to pay for what you've done!\n", character->name);
+    delay(1);
+    printf("Fishy tries to remain calm, though his voice trembles slightly.\n");
+    delay(1);
+    printf("Fishy O'Sullivan: You don't understand, cowboy. But it seems I have no choice but to face you.\n");
+    delay(1);
+    printf("%s takes a step forward, determined.\n", character->name);
+    delay(1);
+    printf("%s: Prepare to face the consequences of your actions!\n", character->name);
+}
+
+void print_description10(Character *character){
+    printf("Turtles body is still on the ground, cold as ice\n");
+}
+
+void print_description11(Character *character){
+    printf("You can hear the paperwork being done, its quiet and tense\n");
+}
+
+void print_description12(Character *character){
+    printf("You shouldn't be here, you just murdered this man\n");
+}
+
+void print_description13(Character *character){
+    printf("This dark old shop smell rotten\n");
+}
+
+void print_description14(Character *character){
+    printf("It's peacefull in town, some old joe is looking at you from his porch\n");
+}
+
+void print_description15(Character *character){
+    printf("Just a barren wasteland\n");
+}
+
 // you need to copy paste everything in here
 // you need to change the scenario list so that it has the names of all the pointers. 

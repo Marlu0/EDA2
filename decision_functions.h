@@ -33,7 +33,7 @@ void watch_luck_loss(Character *character);
 
 void amazing_ceiling(Character *character);
 
-void luck_gain_gipsy(Character *character);
+void luck_gain_lizard(Character *character);
 
 void black_jack(Character *character);
 
@@ -41,7 +41,7 @@ void bucket_spit(Character *character);
 
 void diamond_father(Character *character);
 
-void gipsy_girls(Character *character);
+void lizard_girls(Character *character);
 
 void grab_horns(Character *character);
 
@@ -80,5 +80,14 @@ void print_description6(Character *character);
 void print_description7(Character *character);
 
 void print_description8(Character *character);
+
+void print_description9(Character *character);
+
+void print_description10(Character *character);
+void print_description11(Character *character);
+void print_description12(Character *character);
+void print_description13(Character *character);
+void print_description14(Character *character);
+void print_description15(Character *character);
 
 #endif //DECISION_FUNCTIONS_H
