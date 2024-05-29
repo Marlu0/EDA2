@@ -83,9 +83,9 @@ int load_game(Game *game){
     Character *character = game->character;
     Scenario *scenario = game->current_scenario;
 
-    char read_name[MAX_STRING_LEN];
+    char read_name[MAX_STRING_LEN]; // i fucking knew it was going to be something with the strings like ofc it was!!!!!
     fscanf(file_p, "%s\n", read_name);
-    strcpy(character->name, read_name);
+    strcpy(character->name, read_name); //segfault over here
 
     //scaning stats
     fscanf(file_p, "%d\n", &(character->stats.hp));
