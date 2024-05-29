@@ -5,7 +5,8 @@ Enemy enemies[10]={ //fix these back when you are done.
     {"Cockroach Henchman", 1, {1,1,1,1,1}},
     {"Sheriff Bull", 1, {1,1,1,1,1}},
     {"The Turtle", 1, {1,1,1,1,1}},
-    {"Fish", 1, {1,1,1,1,1}},
+    {"Cockroach with a Hat", 1, {1,1,1,1,1}},
+    {"Fish", 1, {1,1,1,1,1}}
 };
 
 
@@ -65,9 +66,9 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
      
     *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description6, "Turtles body is still on the ground, cold as ice", .decision = decision_list[5], .completed = false, .enemies = &enemies[2]};
 
-    *temp++ = (Scenario){"CASINO", print_description7, "You got your water", .decision = decision_list[6], .completed = false, .enemies = &enemies[3], .numEnemies = 1};
+    *temp++ = (Scenario){"CASINO", print_description7, "You got your water", .decision = decision_list[6], .completed = false, .enemies = &enemies[3], .numEnemies = 2};
     
-    *temp++ = (Scenario){"CASINO", print_description8, "You got your water", .decision = decision_list[7], .completed = false, .enemies = &enemies[3], .numEnemies = 1};
+    *temp++ = (Scenario){"CASINO", print_description8, "You got your water", .decision = decision_list[7], .completed = false, .enemies = &enemies[3], .numEnemies = 2};
     
     return scenario_list;
 }
