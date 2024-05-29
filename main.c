@@ -134,7 +134,7 @@ int load_game(Game *game){
 void play_scenario_completed(Game *game){ //you need to make it so that the completed counter goes up when you are done
     printf("%s (again)\n", game->current_scenario->name);
     (game->current_scenario->print_decription2)(game->character);
-    printf("%s\n--------------------\n");
+    printf("\n--------------------\n");
 
     //im not sure if we want anything else happen here really
 }
