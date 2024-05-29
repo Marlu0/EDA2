@@ -2,12 +2,12 @@
 #include "decision_functions.h"
 
 Enemy enemies[10]={ //fix these back when you are done.
-    {"Cockroach Henchman", 1, {1,1,1,1,1}},
-    {"Sheriff Bull", 1, {1,1,1,1,1}},
-    {"The Turtle", 1, {1,1,1,1,1}},
-    {"Cockroach with a Hat", 1, {1,1,1,1,1}},
-    {"Cockroach with Boots", 1, {1,1,1,1,1}},
-    {"Fishy O'Sullivan", 1, {1,1,1,1,1}}
+    {"Cockroach Henchman", 1, {2,1,3,1,1}},
+    {"Sheriff Bull", 1, {3,1,1,2,1}},
+    {"The Turtle", 1, {2,1,1,3,2}},
+    {"Cockroach with a Hat", 1, {2,1,3,1,3}},
+    {"Cockroach with Boots", 1, {2,1,1,3,3}},
+    {"Fishy O'Sullivan", 1, {5,2,2,3,3}}
 };
 
 
