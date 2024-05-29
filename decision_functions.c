@@ -81,13 +81,13 @@ void black_jack(Character *character){
 
 void diamond_father(Character *character){
     printf("You approach a tall man:\n"
-    "%s: Whats happening?"
-    "???: I CAN FEEL THE JACKPOT FALLING"
-    "%s: Who are you?"
-    "Papadiamantis: I'm Papadiamantis"
-    "%s: Whoa, shouldnt's you be correcting our projects?"
-    "Papadiamantis: Later, later, I CAN SEE THE 7 LINING UP"
-    "You walk away feeling better, thanks Papadiamantis", character->name, character->name, character->name);
+    "%s: Whats happening?\n"
+    "???: I CAN FEEL THE JACKPOT FALLING\n"
+    "%s: Who are you?\n"
+    "Papadiamantis: I'm Papadiamantis\n"
+    "%s: Whoa, shouldnt's you be correcting our projects?\n"
+    "Papadiamantis: Later, later, I CAN SEE THE 7 LINING UP\n"
+    "You walk away feeling better, thanks Papadiamantis\n", character->name, character->name, character->name);
     character->stats.luc += 2;
 }
 
