@@ -21,6 +21,7 @@ struct Scenario;
 #define MAX_STRING_LEN 2048 //this might be the issue of the bug
 #define MAX_CHOICES 4
 #define NUM_SCENARIOS 8
+#define MAX_NAME_LEN 32
 
 /* GENERAL FUNCTION DECLARATIONS */
 
