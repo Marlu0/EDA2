@@ -136,7 +136,7 @@ void print_description1(Character *character){
     delay(1);
     printf("The cockroaches run faster, but one of them, the hatless and weaker one, stops, blocking %s's path.\n\n", character->name);
     delay(1);
-    printf("Bandit Cockroach: Well, well, look who we have here. The famous %s, searching for his lost water, huh? FISHY told me you'd be coming. Too bad you won't get far. \n\n", character->name);
+    printf("Bandit Cockroach: Well, well, look who we have here. The famous %s, searching for his lost water, huh? Fishy O'Sullivan told me you'd be coming. Too bad you won't get far. \n\n", character->name);
     delay(1);
     printf("%s: Let me tell you something, stinky cockroach. Nobody, and I mean nobody, steals from me and gets away with it\n\n", character->name);
     delay(1);
@@ -235,7 +235,7 @@ void print_description4(Character *character){
     delay(1);
     printf("Stands firm in front of the Toro, his determination palpable.\n");
     delay(1);
-    printf("\"I'm not here for pleasantries. I'm here to find FISHY and stop any obstacle in my way, even if it includes the law.\"\n");
+    printf("\"I'm not here for pleasantries. I'm here to find Fishy O'Sullivan and stop any obstacle in my way, even if it includes the law.\"\n");
     delay(1);
     printf("Toro, Chief of Police:\n");
     delay(1);
@@ -352,7 +352,7 @@ void print_description8(Character *character){
 void print_description9(Character *character){
     printf("You slowly open the doors of the VIP room...\n");
     delay(1);
-    printf("FISHY is in the center of the VIP room, nervously swimming in his fishbowl.\n");
+    printf("Fishy O'Sullivan is in the center of the VIP room, nervously swimming in his fishbowl.\n");
     delay(1);
     printf("Fishy O'Sullivan: Ah, %s. You've finally arrived. I thought my henchmen would stop you.", character->name);
     delay(1);
