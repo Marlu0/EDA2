@@ -54,21 +54,21 @@ Scenario *init_scenario_list(Decision decision_list[], Character *character){ //
  
     Scenario *temp = scenario_list; 
     
-    *temp++ = (Scenario){"DESERT", print_description1, "Just a barren wasteland", .decision = decision_list[0], .enemies = &enemies[0], .numEnemies = 1, .completed = false};
+    *temp++ = (Scenario){"DESERT", print_description1, print_description15, .decision = decision_list[0], .enemies = &enemies[0], .numEnemies = 1, .completed = false};
     
-    *temp++ = (Scenario){"LOCAL TOWN", print_description2, "It's peacefull in town, some old joe is looking at you from his porch", .decision = decision_list[1], .enemies = &enemies[1], .numEnemies = 0, .completed = false};
+    *temp++ = (Scenario){"LOCAL TOWN", print_description2, print_description14, .decision = decision_list[1], .enemies = &enemies[1], .numEnemies = 0, .completed = false};
 
-    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description3, "This dark old shop smell rotten", .decision = decision_list[2], .numEnemies = 0, .completed = false,};
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description3, print_description13, .decision = decision_list[2], .numEnemies = 0, .completed = false,};
     
-    *temp++ = (Scenario){"SHERIFF BULL'S STATION", print_description4, "You shouldn't be here, you just murdered this man", .decision = decision_list[4], .completed = false, .numEnemies = 0};
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION", print_description4, print_description12, .decision = decision_list[4], .completed = false, .numEnemies = 0};
 
-    *temp++ = (Scenario){"SHERIFF BULL'S STATION", print_description4, "You can hear the paperwork being done, its quiet and tense", .decision = decision_list[3], .completed = false, .enemies = &enemies[1], .numEnemies = 1};
+    *temp++ = (Scenario){"SHERIFF BULL'S STATION", print_description4, print_description11, .decision = decision_list[3], .completed = false, .enemies = &enemies[1], .numEnemies = 1};
 
-    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description6, "Turtles body is still on the ground, cold as ice", .decision = decision_list[5], .completed = false, .enemies = &enemies[2]};
+    *temp++ = (Scenario){"TURTLE'S TOMBSTONES", print_description6, print_description10, .decision = decision_list[5], .completed = false, .enemies = &enemies[2]};
 
-    *temp++ = (Scenario){"CASINO", print_description7, "You got your water", .decision = decision_list[6], .completed = false, .enemies = &enemies[3], .numEnemies = 2};
+    *temp++ = (Scenario){"CASINO", print_description7, print_description9, .decision = decision_list[6], .completed = false, .enemies = &enemies[3], .numEnemies = 2};
     
-    *temp++ = (Scenario){"CASINO", print_description8, "You got your water", .decision = decision_list[7], .completed = false, .enemies = &enemies[3], .numEnemies = 2};
+    *temp++ = (Scenario){"CASINO", print_description8, print_description9, .decision = decision_list[7], .completed = false, .enemies = &enemies[3], .numEnemies = 2};
     
     return scenario_list;
 }

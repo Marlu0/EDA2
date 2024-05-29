@@ -348,5 +348,49 @@ void print_description8(Character *character){
     delay(1);
     printf("%s steps through the casino entrance, ready to confront the fish and resolve his quest once and for all.", character->name);
 }
+void print_description9(Character *character){
+    printf("You slowly open the doors of the VIP room...\n");
+    delay(1);
+    printf("FISHY is in the center of the VIP room, nervously swimming in his fishbowl.\n");
+    delay(1);
+    printf("Fishy O'Sullivan: Ah, %s. You've finally arrived. I thought my henchmen would stop you.", character->name);
+    delay(1);
+    printf("%s faces Fishy with determination, his gaze cold and filled with anger.\n", character->name);
+    delay(1);
+    printf("%s: It's over, Fishy. You stole my water and hid behind your henchmen like a coward. It's time to pay for what you've done!\n", character->name);
+    delay(1);
+    printf("Fishy tries to remain calm, though his voice trembles slightly.\n");
+    delay(1);
+    printf("Fishy O'Sullivan: You don't understand, cowboy. But it seems I have no choice but to face you.\n");
+    delay(1);
+    printf("%s takes a step forward, determined.\n", character->name);
+    delay(1);
+    printf("%s: Prepare to face the consequences of your actions!\n", character->name);
+}
+
+void print_description10(Character *character){
+    printf("Turtles body is still on the ground, cold as ice\n");
+}
+
+void print_description11(Character *character){
+    printf("You can hear the paperwork being done, its quiet and tense\n");
+}
+
+void print_description12(Character *character){
+    printf("You shouldn't be here, you just murdered this man\n");
+}
+
+void print_description13(Character *character){
+    printf("This dark old shop smell rotten\n");
+}
+
+void print_description14(Character *character){
+    printf("It's peacefull in town, some old joe is looking at you from his porch\n");
+}
+
+void print_description15(Character *character){
+    printf("Just a barren wasteland\n");
+}
+
 // you need to copy paste everything in here
 // you need to change the scenario list so that it has the names of all the pointers. 

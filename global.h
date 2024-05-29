@@ -100,7 +100,7 @@ typedef struct{
 typedef struct scenario{
     char name[MAX_STRING_LEN];
     void (*print_decription)(Character *);
-    char completed_decription[MAX_STRING_LEN];
+    void (*print_decription2)(Character *);
     struct scenario *next;
     struct scenario *prev; //INCASE
     struct scenario *other_direction;

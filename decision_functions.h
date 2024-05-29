@@ -81,4 +81,13 @@ void print_description7(Character *character);
 
 void print_description8(Character *character);
 
+void print_description9(Character *character);
+
+void print_description10(Character *character);
+void print_description11(Character *character);
+void print_description12(Character *character);
+void print_description13(Character *character);
+void print_description14(Character *character);
+void print_description15(Character *character);
+
 #endif //DECISION_FUNCTIONS_H
