@@ -318,7 +318,7 @@ Game *play_game(Game *game){
             }
         }
     }
-    printf("\n\n\n\n\n\nYOU WIN!!!\n\n\n\n\n");
+    printf("\n\n\nYou've successfully recovered the water! You're saved! You win!!\n\n\n\n");
     return game;
 
 }
