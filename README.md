@@ -6,6 +6,9 @@ Group members:
 - Ricardo Antonio Ortega
 - Jan Pol Obrador 
 
+Project showcase video link:
+https://drive.google.com/file/d/1xnvDhypFEeF9YOJpRCtAVF5c5UqGwuEu/view?usp=sharing
+
 Project design:
 
 BUGS ‘N GUNS IN THE WILD WEST is a text-based video game project we developed as part of our coursework in Data Structures and Algorithms II. The game is set in the Wild West and revolves around gunslinger duels, offering a decision-based experience where player choices impact the storyline and combat encounters.
