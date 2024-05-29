@@ -17,7 +17,7 @@ returns:
     */
 void save_game(Game *game){ //you will need to fix this like hell
     printf("Enter a filename: ");
-    char filename[MAX_STRING_LEN];
+    char filename[MAX_NAME_LEN];
 
     int count; //checking for valid name
     do{
@@ -83,9 +83,16 @@ int load_game(Game *game){
     Character *character = game->character;
     Scenario *scenario = game->current_scenario;
 
-    char read_name[MAX_STRING_LEN]; // i fucking knew it was going to be something with the strings like ofc it was!!!!!
-    fscanf(file_p, "%s\n", read_name);
-    strcpy(character->name, read_name); //segfault over here
+    char name[MAX_NAME_LEN];
+    char *read_character_name = fgets(name, MAX_NAME_LEN, file_p);
+
+    if(read_character_name == NULL){
+        printf("Error finding character name");
+        return -1;
+    }
+    int length1 = strlen(name);
+    name[length1-1] = '\0';
+    strcpy(character->name, name);
 
     //scaning stats
     fscanf(file_p, "%d\n", &(character->stats.hp));
