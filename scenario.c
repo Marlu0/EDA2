@@ -33,9 +33,9 @@ Decision *init_decision_list(Character *character){
 
     *temp++ = (Decision){"TURTLE.B", {{"Look inside a coffin", .outcome_on_character = boring_coffin}, {"Talk to Turtle again", .outcome_on_character = attack_gain_turtle}, {"Take a dead man's watch (He won't use it)", .outcome_on_character = watch_luck_loss}, {"Stare at the ceiling", .outcome_on_character = amazing_ceiling}}};
 
-    *temp++ = (Decision){"CASINO.A", {{"You see a group of guys gambling in the roulette, want to join them?", .outcome_on_character = luck_gain_gipsy}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
+    *temp++ = (Decision){"CASINO.A", {{"You see a group of guys gambling in the roulette, join them", .outcome_on_character = luck_gain_lizard}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
 
-    *temp++ = (Decision){"CASINO.B", {{"You see a group of girls in the bar, wanna go talk to them?", .outcome_on_character = gipsy_girls}, {"Want to play Black Jack?", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
+    *temp++ = (Decision){"CASINO.B", {{"You see a group of girls in the bar, approach them", .outcome_on_character = lizard_girls}, {"Play blackjack", .outcome_on_character = black_jack}, {"You spit in a bucket", .outcome_on_character = bucket_spit},{"You see the slots machines on fire, whats happening?", .outcome_on_character = diamond_father}}};
 
     return decision_list;
 }

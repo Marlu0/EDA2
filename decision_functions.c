@@ -57,8 +57,8 @@ void luck_gain_ciggarette(Character *character){
     character->stats.luc++;
 }
 
-void luck_gain_gipsy(Character *character){
-    printf("Looks like they're a gipsy family celebrating a wedding! You play with them and you like them, they even bless you! attack and defense boost!\n");
+void luck_gain_lizard(Character *character){
+    printf("Looks like they're a lizard family celebrating a wedding! You play with them and you like them, they even bless you! attack and defense boost!\n");
     character->stats.atk += 2;
     character->stats.def += 2;
 
@@ -69,8 +69,8 @@ void luck_loss(Character *character){
     character->active_modifiers.templuc *= 0.5;
 }
 
-void gipsy_girls(Character *character){
-    printf("You start flirting with them, but seem they were the brides of a gipsy wedding, they spit and curse you!\n");
+void lizard_girls(Character *character){
+    printf("You start flirting with them, but seem they were the brides of a lizard wedding, they spit and curse you!\n");
     character->stats.luc -= 3;
 }
 
