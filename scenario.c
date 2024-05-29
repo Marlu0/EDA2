@@ -80,7 +80,7 @@ it does:
     - creates a node
 returns:
 -    nothing*/
-void create_next_node(Scenario **pointer){ //pass the address of the scenario
+void create_next_node(Scenario **pointer){
     (*pointer)->next = (Scenario *)malloc(sizeof(Scenario));
     if((*pointer)->next == NULL){
         printf("Pointer failed");

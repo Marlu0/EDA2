@@ -130,7 +130,13 @@ int load_game(Game *game){
 
     return 0;
 }
-
+/*PLAY_SCENARIO_COMPLETED
+this function takes in:
+    - game pointer
+it does:
+    - plays out the scenario you are in and gives a little scenario. (as you've already completed the scenario.)
+it returns:
+    - nothing*/
 void play_scenario_completed(Game *game){ //you need to make it so that the completed counter goes up when you are done
     printf("%s (again)\n", game->current_scenario->name);
     (game->current_scenario->print_decription2)(game->character);
@@ -138,7 +144,13 @@ void play_scenario_completed(Game *game){ //you need to make it so that the comp
 
     //im not sure if we want anything else happen here really
 }
-
+/*PLAY_SCENARIO_UNCOMPLETED
+this function takes in:
+    - game pointer
+it does:
+    - plays out the current scenario that you are in
+it returns:
+    - nothing*/
 void play_scenario_uncompleted(Game *game) {
     printf("%s\n\n", game->current_scenario->name);
     (game->current_scenario->print_decription)(game->character);
@@ -295,22 +307,29 @@ Game *play_game(Game *game){
 		    int option;
             const char *options[] = {"Left", "Right", "Backwards", NULL};
             option = get_selection(options);
+            char name[MAX_STRING_LEN];
                 
             switch (option) {
                 case 1:
+                    strcpy(game->character->name, name);
                     game->current_scenario = game->current_scenario->next;
-                    printf("Moving left!\n");
+                    printf("Moving right!\n");
+                    strcpy(name, game->character->name);                    
                     break;
 
                 case 2:
+                    strcpy(game->character->name, name);
                     game->current_scenario = game->current_scenario->other_direction;
                     printf("Moving right!\n");
+                    strcpy(name, game->character->name);                    
                     break;
 
-                    case 3:
-                        game->current_scenario = game->current_scenario->prev;
-                        printf("Moving back!\n");
-                        break;
+                case 3:
+                    strcpy(game->character->name, name);
+                    game->current_scenario = game->current_scenario->prev;
+                    printf("Moving back!\n");
+                    strcpy(name, game->character->name);
+                    break;
                             
                 default:
                     printf("Select a valid option\n");
@@ -374,9 +393,9 @@ void main_menu_selection(Game *game) {
                 else{
                     play_game(game);
 
-                    free_scenario_graph(first_scenario);
                     break;
                 }
+                free_scenario_graph(first_scenario);
                 
             case 4:
                 print_credits();
@@ -401,7 +420,7 @@ int main() {
     srand(time(NULL));
     print_main_title();
 
-    Game *game = (Game *)malloc(sizeof(Game)); //you released it 
+    Game *game = (Game *)malloc(sizeof(Game));
     if(game == NULL){
         perror("Failed to create game\n");
         return -1;
@@ -410,21 +429,11 @@ int main() {
     game->character = NULL;
     game->current_scenario = NULL;
     game->state = PLAYING;
-    Scenario *scenario = (Scenario *)malloc(sizeof(Scenario)); //does it explode?
-    free(scenario);
     
     main_menu_selection(game);
 
     free(game);
-    // i am sure that there are memory leaks in places. so i will need to check that later.
 
     printf("Thanks for playing!\n");
     return 0;
 }
-
-//confirming character name does not have proper user defense.
-//you need to actually confirm that you can save in some place
-//update the save and load functions
-//make sure that the play_completed function thing makes sense
-//only bother that if you are sure that you can fix the going backwards thing.
-//update the print scenarios in the decision_functions.h

@@ -29,7 +29,7 @@ void name_character(Character *character) {
         printf("Choose a name for your character: ");
         
         // Use fgets to read the entire line, including spaces, for the character's name
-        fgets(character->name, MAX_STRING_LEN, stdin);
+        fgets(character->name, MAX_NAME_LEN, stdin);
 
         // Remove the newline character from the end of the input and add the null terminator
         character->name[strcspn(character->name, "\n")] = '\0';
